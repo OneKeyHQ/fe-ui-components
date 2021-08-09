@@ -26,7 +26,7 @@ const defaultProps = {
   initialValue: false,
 } as const;
 
-const Switch: FC<SwitchProps> = ({ value, onChange, initialValue, label }) => {
+const Switch: FC<SwitchProps> = ({ value, onChange, initialValue }) => {
   const [enabled, setEnabled] = useState(initialValue);
   const active = value ?? enabled;
   return (

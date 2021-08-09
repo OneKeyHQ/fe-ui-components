@@ -1,4 +1,4 @@
-import { Fragment, useState, ReactNode, FC } from "react";
+import React, { Fragment, useState, ReactNode, FC } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import classNames from "classnames";
 

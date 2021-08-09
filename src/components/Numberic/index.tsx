@@ -1,5 +1,5 @@
 /* eslint-disable react/style-prop-object */
-import { FC, ComponentPropsWithoutRef } from "react";
+import React, { FC, ComponentPropsWithoutRef } from "react";
 import { isNil } from "lodash";
 import { FormattedNumber } from "react-intl";
 import BigNumber from "bignumber.js";
