@@ -1,0 +1,6 @@
+!lib/
+
+.storybook
+.github
+public
+config

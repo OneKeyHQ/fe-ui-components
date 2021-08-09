@@ -1,39 +1,17 @@
 {
-  "name": "my-app",
-  "version": "0.1.0",
-  "private": true,
-  "dependencies": {
-    "@download/blockies": "^1.0.3",
-    "@headlessui/react": "^1.4.0",
-    "@tailwindcss/forms": "^0.3.3",
-    "@testing-library/jest-dom": "^5.11.4",
-    "@testing-library/react": "^11.1.0",
-    "@testing-library/user-event": "^12.1.10",
-    "@types/jest": "^26.0.15",
-    "@types/node": "^12.0.0",
-    "@types/react": "^17.0.0",
-    "@types/react-dom": "^17.0.0",
-    "autoprefixer": "^9",
-    "bignumber.js": "^9.0.1",
-    "lodash": "^4.17.21",
-    "postcss": "^7",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2",
-    "react-intl": "^5.20.6",
-    "react-scripts": "4.0.3",
-    "react-svg": "^14.0.7",
-    "react-tooltip": "^4.2.21",
-    "tailwindcss": "npm:@tailwindcss/postcss7-compat",
-    "typescript": "^4.1.2",
-    "web-vitals": "^1.0.1"
-  },
+  "name": "ui-components",
+  "version": "0.0.1",
+  "main": "./index.js",
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
+    "build:components": "tsc && node scripts/build-npm.js",
+    "build:css": "postcss src/components/index.css -o build/components/index.css",
+    "build": "rm -rf build && yarn build:components && yarn build:css",
     "eject": "react-scripts eject",
     "storybook": "TAILWIND_MODE=watch start-storybook -p 6006 -s public",
     "build-storybook": "build-storybook -s public"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
   },
   "eslintConfig": {
     "extends": [
@@ -63,7 +41,19 @@
       "last 1 safari version"
     ]
   },
+  "dependencies": {
+    "@download/blockies": "^1.0.3",
+    "@headlessui/react": "^1.4.0",
+    "bignumber.js": "^9.0.1",
+    "lodash": "^4.17.21",
+    "react-intl": "^5.20.6",
+    "react-svg": "^14.0.7",
+    "react-tooltip": "^4.2.21"
+  },
   "devDependencies": {
+    "@rollup/plugin-commonjs": "^20.0.0",
+    "@rollup/plugin-node-resolve": "^13.0.4",
+    "@rollup/plugin-typescript": "^8.2.5",
     "@storybook/addon-actions": "^6.3.6",
     "@storybook/addon-essentials": "^6.3.6",
     "@storybook/addon-links": "^6.3.6",
@@ -72,6 +62,28 @@
     "@storybook/preset-create-react-app": "^3.2.0",
     "@storybook/react": "^6.3.6",
     "@storybook/theming": "^6.3.6",
-    "@types/lodash": "^4.14.171"
+    "@tailwindcss/forms": "^0.3.3",
+    "@testing-library/jest-dom": "^5.11.4",
+    "@testing-library/react": "^11.1.0",
+    "@testing-library/user-event": "^12.1.10",
+    "@types/jest": "^26.0.15",
+    "@types/lodash": "^4.14.171",
+    "@types/node": "^12.0.0",
+    "@types/react": "^17.0.0",
+    "@types/react-dom": "^17.0.0",
+    "autoprefixer": "^9",
+    "cssnano": "^5.0.7",
+    "postcss": "^8.3.6",
+    "postcss-cli": "^8.3.1",
+    "postcss-import": "^14.0.2",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-scripts": "4.0.3",
+    "tailwindcss": "npm:@tailwindcss/postcss7-compat",
+    "typescript": "^4.1.2"
+  },
+  "peerDependencies": {
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2"
   }
 }
