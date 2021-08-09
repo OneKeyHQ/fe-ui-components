@@ -14,8 +14,9 @@ const Template: ComponentStory<typeof IconComponent> = (args) => (
 
 export const Icon = Template.bind({});
 Icon.args = {
-  name: "GITHUB-OUTLINED",
-  color: "#333",
+  name: "GIFT-OUTLINE",
+  color: "#209e45",
+  size: 100,
 };
 
 export const List: ComponentStory<typeof IconComponent> = () => {
@@ -30,20 +31,6 @@ export const List: ComponentStory<typeof IconComponent> = () => {
               <div className="text-sm font-semibold text-gray-900">{key}</div>
             </div>
           </div>
-          // <div
-          //   className="flex flex-col space-y-3 sm:flex-row text-xs sm:space-y-0 sm:space-x-4"
-          //   key={key + index}
-          // >
-          //   <div className="w-32 flex-shrink-0">
-          //     <div className="h-10 flex flex-col justify-center">
-          //       <div className="text-sm font-semibold text-gray-900">{key}</div>
-          //       <div>
-          //         <code className="text-xs text-gray-500">ICONS.{key}</code>
-          //       </div>
-          //     </div>
-          //   </div>
-
-          // </div>
         );
       })}
     </div>

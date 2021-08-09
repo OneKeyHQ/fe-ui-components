@@ -1,21 +1,46 @@
-import React, { useState, FC } from 'react';
-import cx from 'classnames';
+import React, { useState, FC } from "react";
+import cx from "classnames";
 
 type InputProps = {
+  /**
+   * 是否是错误样式
+   */
   error?: boolean;
+  /**
+   * 错误信息
+   */
   errorMessage?: string;
+  /**
+   * 受控的表单控件的值
+   */
   value?: string;
+  /**
+   * 初始值，仅第一次渲染有效
+   */
   initialValue?: string;
+  /**
+   * 没有内容时的占位符
+   */
   placeholder?: string;
+  /**
+   * 内容更改回调信息
+   */
   onChange?: (content: string) => void;
 };
 
 const defaultProps = {
-  initialValue: '',
+  initialValue: "",
 } as const;
 
-const Input: FC<InputProps> = ({error, value, initialValue, onChange, errorMessage, placeholder}) => {
-  const [defaultValue, setInitialValue] = useState(initialValue ?? '');
+const Input: FC<InputProps> = ({
+  error,
+  value,
+  initialValue,
+  onChange,
+  errorMessage,
+  placeholder,
+}) => {
+  const [defaultValue, setInitialValue] = useState(initialValue ?? "");
   const currentValue = value ?? defaultValue;
   return (
     <div>
@@ -40,13 +65,12 @@ const Input: FC<InputProps> = ({error, value, initialValue, onChange, errorMessa
           className="mt-2 text-sm text-left text-red-600 dark:text-red-300"
           id="email-error"
         >
-          {errorMessage ?? 'error'}
+          {errorMessage ?? "error"}
         </p>
       )}
     </div>
-
   );
-}
+};
 
 Input.defaultProps = defaultProps;
 

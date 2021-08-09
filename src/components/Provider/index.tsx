@@ -1,12 +1,17 @@
-import React, { FC, useEffect, useState, useMemo } from 'react';
-import { Context } from './hooks';
+import React, { FC, useEffect, useState, useMemo } from "react";
+import { IntlProvider } from "react-intl";
 
-import { COLORS } from '../Theme';
+import { Context } from "./hooks";
 
-const deepParseRecord = (obj: Record<string, Record<string, string> | string>, prefix: string = ''): Record<string, string> => {
+import { COLORS } from "../Theme";
+
+const deepParseRecord = (
+  obj: Record<string, Record<string, string> | string>,
+  prefix: string = ""
+): Record<string, string> => {
   return Object.entries(obj).reduce((memo, current) => {
     const [key, value] = current;
-    if (typeof value === 'object') {
+    if (typeof value === "object") {
       return {
         ...memo,
         ...deepParseRecord(value, `${prefix}${key}`),
@@ -17,7 +22,7 @@ const deepParseRecord = (obj: Record<string, Record<string, string> | string>, p
       [`${prefix}-${key}`]: value,
     };
   }, {});
-}
+};
 
 const Provider: FC = ({ children }) => {
   const [theme, setTheme] = useState<Record<string, string>>();
@@ -26,20 +31,24 @@ const Provider: FC = ({ children }) => {
     const theme = deepParseRecord(COLORS);
     setTheme(theme);
     Object.entries(theme).forEach(([key, value]) => {
-      if (typeof document === 'undefined') return;
+      if (typeof document === "undefined") return;
       document.documentElement.style.setProperty(`--${key}`, value);
     });
   }, []);
 
   const providerValue = useMemo(() => {
     return {
-      theme
+      theme,
     };
   }, [theme]);
 
   return (
-    <Context.Provider value={providerValue}>{children}</Context.Provider>
+    <Context.Provider value={providerValue}>
+      <IntlProvider locale="en" defaultLocale="en">
+        {children}
+      </IntlProvider>
+    </Context.Provider>
   );
-}
+};
 
 export default Provider;

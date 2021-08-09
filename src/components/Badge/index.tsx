@@ -1,17 +1,22 @@
 import React, { FC } from "react";
 import classNames from "classnames";
 
-type BadgeProps = {
-  className: string;
-  type: 'default' | 'primary' | 'important' | 'removed' | 'added';
-}
+export type BadgeProps = {
+  /**
+   * 传入 badge 组件的样式名称
+   */
+  className?: string;
+  /**
+   * badge 类型
+   */
+  type?: "default" | "primary" | "important" | "removed" | "added";
+};
 
 const defaultProps = {
-  type: 'default',
+  type: "default",
 } as const;
 
 const Badge: FC<BadgeProps> = ({ className, children, type, ...rest }) => {
-
   const badgeClass = classNames(
     "inline-block font-medium text-xs py-0.5 px-1.5 rounded",
     {
@@ -33,7 +38,7 @@ const Badge: FC<BadgeProps> = ({ className, children, type, ...rest }) => {
       {children}
     </div>
   );
-}
+};
 
 Badge.defaultProps = defaultProps;
 

@@ -20,7 +20,7 @@ type SwitchProps = {
    * 表单 value 改变回调函数，参数为变化后表单 value 结果
    */
   onChange?: (val: boolean) => void;
-}
+};
 
 const defaultProps = {
   initialValue: false,
@@ -53,7 +53,7 @@ const Switch: FC<SwitchProps> = ({ value, onChange, initialValue, label }) => {
       />
     </BaseSwitch>
   );
-}
+};
 
 Switch.defaultProps = defaultProps;
 

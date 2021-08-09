@@ -7,7 +7,7 @@ const subItems = dirs.map(dir => {
   const files = fs.readdirSync(path.resolve(__dirname, `./files/${dir}`));
   const template = `
     ${files.map(file => {
-      return `"${`${file.replace('.svg', '')}-${dir}`.toUpperCase()}": require('./files/${dir}/${file}').default,`
+      return `"${`${file.replace('.svg', '')}-${dir}`.toUpperCase()}": require<{ default: string }>('./files/${dir}/${file}').default,`
     }).join('\n')}
   `;
   return template;
