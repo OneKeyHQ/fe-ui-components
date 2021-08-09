@@ -28,13 +28,14 @@ module.exports = {
           options: {
             ident: 'postcss',
             plugins: [
+              require("tailwindcss/nesting"),
               require('tailwindcss'),
               require('autoprefixer'),
             ],
           },
         },
       ],
-      include: path.resolve(__dirname, '../'),
+      include: path.resolve(__dirname, '../src'),
     })
     return config
   },

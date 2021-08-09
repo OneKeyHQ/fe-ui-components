@@ -6,10 +6,19 @@ type TooltipProps = {
   /**
    * 弹出内容
    */
-  content?: ReactNode;
+  content: ReactNode;
+  /**
+   * className 样式
+   */
+  className?: string;
 };
 
-const Tooltip: FC<TooltipProps> = ({ children, content }) => {
+const Tooltip: FC<TooltipProps> = ({
+  children,
+  content,
+  className,
+  ...rest
+}) => {
   const [timestamp] = useState(new Date().getTime());
   const flag = `tooltip-${timestamp}`;
   useEffect(() => {
@@ -17,7 +26,7 @@ const Tooltip: FC<TooltipProps> = ({ children, content }) => {
   });
   return (
     <>
-      <BaseTooltip id={flag}>
+      <BaseTooltip id={flag} className={`tooltip ${className}`} {...rest}>
         <span>{content}</span>
       </BaseTooltip>
       <p data-for={flag}>{children}</p>

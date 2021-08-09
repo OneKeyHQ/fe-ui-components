@@ -334,7 +334,7 @@ const Sidebar: FC<SidebarProps> = ({
       </Transition.Root>
       {/* Mobile Sidebar End */}
       {/* Desktop Sidebar */}
-      <div className="relative lg:inline-block hidden h-full">
+      <div className="relative lg:inline-block hidden h-full onekey-ui-sidebar">
         <div
           className={classNames(
             "flex flex-col py-5 border-r border-gray-100 bg-gray-50 dark:bg-gray-800 dark:border-gray-700 h-full",
@@ -527,7 +527,7 @@ const Sidebar: FC<SidebarProps> = ({
             onClick={() => setIsCollapsed((isCollapsed) => !isCollapsed)}
           >
             <div className="w-0.5 h-full transition bg-transparent group-hover:bg-brand-500" />
-            <div className="absolute p-1.5 bg-white border border-gray-200 rounded-full top-4 shadow-sm dark:bg-gray-900 dark:border-gray-700 transition scale-75 collapse-indicate opacity-0 group-hover:opacity-100">
+            <div className="absolute p-1.5 bg-white border border-gray-200 rounded-full top-4 shadow-sm dark:bg-gray-900 dark:border-gray-700 transition scale-75 collapse-indicate opacity-0">
               <Icon
                 name="CHEVRON-LEFT-OUTLINE"
                 size={16}
