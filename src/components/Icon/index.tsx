@@ -7,7 +7,7 @@ import { useConfig } from "../Provider/hooks";
 export type ICONS = typeof ICON_NAME;
 export type ICON_TYPES = keyof ICONS;
 
-type IconProps = {
+export type IconProps = {
   /**
    * 传入组件中的 class 样式名字
    */

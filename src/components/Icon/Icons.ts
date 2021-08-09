@@ -181,6 +181,8 @@ export default {
   "COLOR-SWATCH-OUTLINE": require<{
     default: string;
   }>("./files/outline/color-swatch.svg").default,
+  "COMPASS-OUTLINE": require<{ default: string }>("./files/outline/compass.svg")
+    .default,
   "CREDIT-CARD-OUTLINE": require<{
     default: string;
   }>("./files/outline/credit-card.svg").default,
@@ -696,6 +698,9 @@ export default {
   }>("./files/solid/bookmark-alt.svg").default,
   "BOOKMARK-SOLID": require<{ default: string }>("./files/solid/bookmark.svg")
     .default,
+  "BRAND-LOGO-SOLID": require<{
+    default: string;
+  }>("./files/solid/brand-logo.svg").default,
   "BRIEFCASE-SOLID": require<{ default: string }>("./files/solid/briefcase.svg")
     .default,
   "CAKE-SOLID": require<{ default: string }>("./files/solid/cake.svg").default,

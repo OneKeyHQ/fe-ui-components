@@ -37,19 +37,19 @@ const DEFAULT_TRADE_NAVIGATION: ActionTab[] = [
   {
     name: "Portfolio",
     href: "https://portfolio.onekey.so/",
-    icon: "TRENDING-UP-OUTLINED",
+    icon: "TRENDING-UP-OUTLINE",
     blank: false,
   },
   {
     name: "Swap",
     href: "https://swap.onekey.so/",
-    icon: "SWITCH-HORIZONTAL-OUTLINED",
+    icon: "SWITCH-HORIZONTAL-OUTLINE",
     blank: false,
   },
   {
     name: "Explore",
     href: "https://discover.onekey.so/",
-    icon: "COMPASS-OUTLINED",
+    icon: "COMPASS-OUTLINE",
     badgeType: "added",
     badgeContent: "BETA",
     blank: true,
@@ -89,7 +89,7 @@ const Sidebar: FC<SidebarProps> = ({
         <div className="flex items-center flex-shrink-0 pl-4">
           <Icon
             className="w-7 h-7 text-brand-500 dark:text-brand-400"
-            name="BRAND-LOGO-FILLED"
+            name="BRAND-LOGO-SOLID"
             aria-label="The Brand Logo – OneKey"
           />
         </div>
@@ -104,7 +104,7 @@ const Sidebar: FC<SidebarProps> = ({
           <span className="w-6 h-6" aria-hidden="true">
             <Icon
               onClick={() => setSidebarOpen(!sidebarOpen)}
-              name="MENU-OUTLINED"
+              name="MENU-OUTLINE"
               className="w-6 h-6 text-gray-500 dark:text-gray-400"
             />
           </span>
@@ -159,7 +159,7 @@ const Sidebar: FC<SidebarProps> = ({
                     <span className="sr-only">Close sidebar</span>
                     <Icon
                       className="w-6 h-6 text-white"
-                      src="/icons/outline-x.svg"
+                      name="x-outline"
                       aria-hidden="true"
                     />
                   </button>
@@ -170,7 +170,7 @@ const Sidebar: FC<SidebarProps> = ({
               <div className="flex items-center flex-shrink-0 pl-[22px]">
                 <Icon
                   className="w-7 h-7 text-brand-500 dark:text-brand-400"
-                  name="BRAND-LOGO-FILLED"
+                  name="BRAND-LOGO-SOLID"
                   aria-label="The Brand Logo – OneKey"
                 />
               </div>
@@ -236,7 +236,6 @@ const Sidebar: FC<SidebarProps> = ({
                     </div>
                     <div className="space-y-1">
                       {tradeNavigation.map((item) => (
-                        // <Link key={item.name} href={item.href}>
                         <a
                           key={item.name}
                           href={item.href}
@@ -273,7 +272,6 @@ const Sidebar: FC<SidebarProps> = ({
                             </Badge>
                           )}
                         </a>
-                        // </Link>
                       ))}
                     </div>
                   </div>
@@ -335,10 +333,10 @@ const Sidebar: FC<SidebarProps> = ({
       </Transition.Root>
       {/* Mobile Sidebar End */}
       {/* Desktop Sidebar */}
-      <div className="relative hidden lg:flex lg:flex-shrink-0 sidebar h-full">
+      <div className="relative lg:inline-block hidden h-full">
         <div
           className={classNames(
-            "flex flex-col py-5 border-r border-gray-100 bg-gray-50 dark:bg-gray-800 dark:border-gray-700",
+            "flex flex-col py-5 border-r border-gray-100 bg-gray-50 dark:bg-gray-800 dark:border-gray-700 h-full",
             isCollapsed ? "w-auto" : "w-64"
           )}
         >
@@ -346,7 +344,7 @@ const Sidebar: FC<SidebarProps> = ({
           <div className="flex items-center flex-shrink-0 pl-[22px]">
             <Icon
               className="w-7 h-7 text-brand-500 dark:text-brand-400"
-              name="BRAND-LOGO-FILLED"
+              name="BRAND-LOGO-SOLID"
               aria-label="The Brand Logo – OneKey"
             />
           </div>
@@ -370,7 +368,6 @@ const Sidebar: FC<SidebarProps> = ({
                   </div>
                   <div className="space-y-1">
                     {walletNavigation.map((item) => (
-                      // <Link key={item.name} href={item.href}>
                       <a
                         href={item.href}
                         key={item.name}
@@ -385,16 +382,18 @@ const Sidebar: FC<SidebarProps> = ({
                         }
                       >
                         <div className="flex items-center">
-                          <Icon
-                            className={classNames(
-                              "flex-shrink-0 h-6 w-6",
-                              item.href === router.pathname
-                                ? "text-gray-500 dark:text-gray-400"
-                                : "text-gray-400 group-hover:text-gray-500 dark:text-gray-500 dark:group-hover:text-gray-400"
-                            )}
-                            src={item.iconUrl}
-                            aria-hidden="true"
-                          />
+                          {
+                            item.icon && <Icon
+                              className={classNames(
+                                "flex-shrink-0 h-6 w-6",
+                                item.href === router.pathname
+                                  ? "text-gray-500 dark:text-gray-400"
+                                  : "text-gray-400 group-hover:text-gray-500 dark:text-gray-500 dark:group-hover:text-gray-400"
+                              )}
+                              name={item.icon}
+                              aria-hidden="true"
+                            />
+                          }
                           {!isCollapsed && (
                             <span className="ml-3">{item.name}</span>
                           )}
@@ -406,7 +405,6 @@ const Sidebar: FC<SidebarProps> = ({
                           </Badge>
                         )}
                       </a>
-                      // </Link>
                     ))}
                   </div>
                 </div>
@@ -425,7 +423,6 @@ const Sidebar: FC<SidebarProps> = ({
                 </div>
                 <div className="space-y-1">
                   {tradeNavigation.map((item) => (
-                    // <Link key={item.name} href={item.href}>
                     <a
                       key={item.name}
                       href={item.href}
@@ -468,7 +465,6 @@ const Sidebar: FC<SidebarProps> = ({
                         </Badge>
                       )}
                     </a>
-                    // </Link>
                   ))}
                 </div>
               </div>
@@ -479,7 +475,6 @@ const Sidebar: FC<SidebarProps> = ({
             <div className="mt-auto">
               <div className="space-y-1">
                 {extraActions.map((item) => (
-                  // <Link key={item.name} href={item.href}>
                   <a
                     href={item.href}
                     key={item.name}
@@ -516,7 +511,6 @@ const Sidebar: FC<SidebarProps> = ({
                       <Badge type={item.badgeType}>{item.badgeContent}</Badge>
                     )}
                   </a>
-                  // </Link>
                 ))}
               </div>
             </div>
@@ -531,21 +525,14 @@ const Sidebar: FC<SidebarProps> = ({
             onClick={() => setIsCollapsed((isCollapsed) => !isCollapsed)}
           >
             <div className="w-0.5 h-full transition bg-transparent group-hover:bg-brand-500" />
-            <div className="absolute p-1.5 bg-white border border-gray-200 rounded-full top-4 shadow-sm dark:bg-gray-900 dark:border-gray-700 opacity-0 transition scale-75 collapse-indicate">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 20 20"
-                fill="currentColor"
-                className={classNames("w-5 h-5 text-gray-400", {
+            <div className="absolute p-1.5 bg-white border border-gray-200 rounded-full top-4 shadow-sm dark:bg-gray-900 dark:border-gray-700 transition scale-75 collapse-indicate opacity-0 group-hover:opacity-100">
+              <Icon
+                name="CHEVRON-LEFT-OUTLINE"
+                size={16}
+                className={classNames("text-gray-400", {
                   "rotate-180 translate-x-px": isCollapsed,
                 })}
-              >
-                <path
-                  fillRule="evenodd"
-                  d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z"
-                  clipRule="evenodd"
-                />
-              </svg>
+              />
             </div>
           </button>
         </div>

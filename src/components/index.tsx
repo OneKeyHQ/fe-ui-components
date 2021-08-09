@@ -3,6 +3,7 @@ import "./index.css";
 export { COLORS } from "./Theme";
 export { default as Icon } from "./Icon";
 export { default as ICONS } from "./Icon/Icons";
+export { default as IconGroup } from "./Icon/IconGroup";
 
 export { default as Button } from "./Button";
 export { default as Skeleton } from "./Skeleton";
