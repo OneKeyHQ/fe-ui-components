@@ -1,5 +1,5 @@
 import React, { FC, ReactNode, Ref, Fragment, useCallback } from "react";
-import { Popover, Dialog, Transition } from "@headlessui/react";
+import { Popover, Transition } from "@headlessui/react";
 import classNames from "classnames";
 
 import Icon from "../Icon";

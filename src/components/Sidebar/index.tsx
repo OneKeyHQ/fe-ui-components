@@ -237,6 +237,7 @@ const Sidebar: FC<SidebarProps> = ({
                     <div className="space-y-1">
                       {tradeNavigation.map((item) => (
                         <a
+                          rel="noreferrer"
                           key={item.name}
                           href={item.href}
                           target={item.blank ? "_blank" : "_self"}
@@ -382,8 +383,8 @@ const Sidebar: FC<SidebarProps> = ({
                         }
                       >
                         <div className="flex items-center">
-                          {
-                            item.icon && <Icon
+                          {item.icon && (
+                            <Icon
                               className={classNames(
                                 "flex-shrink-0 h-6 w-6",
                                 item.href === router.pathname
@@ -393,7 +394,7 @@ const Sidebar: FC<SidebarProps> = ({
                               name={item.icon}
                               aria-hidden="true"
                             />
-                          }
+                          )}
                           {!isCollapsed && (
                             <span className="ml-3">{item.name}</span>
                           )}
@@ -424,6 +425,7 @@ const Sidebar: FC<SidebarProps> = ({
                 <div className="space-y-1">
                   {tradeNavigation.map((item) => (
                     <a
+                      rel="noreferrer"
                       key={item.name}
                       href={item.href}
                       target={item.blank ? "_blank" : "_self"}
