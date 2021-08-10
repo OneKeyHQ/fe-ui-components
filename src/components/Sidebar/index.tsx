@@ -90,12 +90,13 @@ const Sidebar: FC<SidebarProps> = ({
   return (
     <>
       {/* Mobile Header */}
-      <div className="flex justify-between py-1 bg-white border-b border-gray-100 lg:hidden dark:bg-gray-800 dark:border-gray-700">
+      <div className="flex justify-between py-1 bg-white border-b border-gray-100 lg:hidden dark:bg-gray-800 dark:border-gray-700 z-[1]">
         {/* Brand */}
         <div className="flex items-center flex-shrink-0 pl-4">
           <Icon
             className="w-7 h-7 text-brand-500 dark:text-brand-400"
             name="BRAND-LOGO-SOLID"
+            size={28}
             aria-label="The Brand Logo – OneKey"
           />
         </div>
@@ -177,6 +178,7 @@ const Sidebar: FC<SidebarProps> = ({
                 <Icon
                   className="w-7 h-7 text-brand-500 dark:text-brand-400"
                   name="BRAND-LOGO-SOLID"
+                  size={28}
                   aria-label="The Brand Logo – OneKey"
                 />
               </div>
@@ -354,6 +356,7 @@ const Sidebar: FC<SidebarProps> = ({
             <Icon
               className="w-7 h-7 text-brand-500 dark:text-brand-400"
               name="BRAND-LOGO-SOLID"
+              size={28}
               aria-label="The Brand Logo – OneKey"
             />
           </div>
