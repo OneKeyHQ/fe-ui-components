@@ -37,8 +37,8 @@ const Switch: FC<SwitchProps> = ({ value, onChange, initialValue }) => {
         setEnabled(val);
       }}
       className={classNames(
-        active ? "bg-brand-500" : "bg-gray-200 dark:bg-gray-600",
-        "relative inline-flex flex-shrink-0 h-5 w-10 border-4 border-transparent rounded-full cursor-pointer transition-colors ease-in-out duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand-500 dark:focus:ring-offset-gray-900"
+        active ? "okd-bg-brand-500" : "okd-bg-gray-200 dark:okd-bg-gray-600",
+        "okd-relative okd-inline-flex okd-flex-shrink-0 okd-h-5 okd-w-10 okd-border-4 okd-border-transparent okd-rounded-full okd-cursor-pointer okd-transition-colors okd-ease-in-out okd-duration-200 focus:okd-outline-none focus:okd-ring-2 focus:okd-ring-offset-2 focus:okd-ring-brand-500 dark:focus:okd-ring-offset-gray-900"
       )}
     >
       <span className="sr-only">Use setting</span>
@@ -46,9 +46,9 @@ const Switch: FC<SwitchProps> = ({ value, onChange, initialValue }) => {
         aria-hidden="true"
         className={classNames(
           active
-            ? "translate-x-5 dark:bg-white"
-            : "translate-x-0 dark:bg-gray-900",
-          "pointer-events-none bg-white inline-block h-3 w-3 rounded-full shadow transform ring-0 transition ease-in-out duration-200"
+            ? "okd-translate-x-5 dark:okd-bg-white"
+            : "okd-translate-x-0 dark:okd-bg-gray-900",
+          "okd-pointer-events-none okd-bg-white okd-inline-block okd-h-3 okd-w-3 okd-rounded-full okd-shadow okd-transform okd-ring-0 okd-transition okd-ease-in-out okd-duration-200"
         )}
       />
     </BaseSwitch>

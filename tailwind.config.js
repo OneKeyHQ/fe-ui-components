@@ -2,6 +2,7 @@ const defaultTheme = require("tailwindcss/defaultTheme");
 
 module.exports = {
   mode: "jit",
+  prefix: 'okd-',
   purge: {
     mode: 'all',
     content: ["./src/**/*.{js,jsx,ts,tsx}"]

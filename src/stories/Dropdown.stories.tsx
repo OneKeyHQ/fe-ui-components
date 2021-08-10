@@ -9,7 +9,9 @@ export default {
 } as ComponentMeta<typeof DropdownComponent>;
 
 const Paint: FC = ({ children }) => {
-  return <div className="h-[150px] flex justify-center">{children}</div>;
+  return (
+    <div className="okd-h-[150px] okd-flex okd-justify-center">{children}</div>
+  );
 };
 
 export const Dropdown: ComponentStory<typeof DropdownComponent> = () => (
@@ -18,9 +20,7 @@ export const Dropdown: ComponentStory<typeof DropdownComponent> = () => (
   </Paint>
 );
 
-export const CustomTrigger: ComponentStory<
-  typeof DropdownComponent
-> = () => (
+export const CustomTrigger: ComponentStory<typeof DropdownComponent> = () => (
   <Paint>
     <DropdownComponent trigger={<Button type="primary">Click Me!!</Button>}>
       hello dropdown

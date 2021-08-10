@@ -1,4 +1,3 @@
-/* eslint-disable react/style-prop-object */
 import React, { FC, ComponentPropsWithoutRef } from "react";
 import { isNil } from "lodash";
 import { FormattedNumber } from "react-intl";

@@ -90,11 +90,11 @@ const Sidebar: FC<SidebarProps> = ({
   return (
     <>
       {/* Mobile Header */}
-      <div className="flex justify-between py-1 bg-white border-b border-gray-100 lg:hidden dark:bg-gray-800 dark:border-gray-700 z-[1]">
+      <div className="okd-flex okd-justify-between okd-py-1 okd-bg-white okd-border-b okd-border-gray-100 lg:okd-hidden dark:okd-bg-gray-800 dark:okd-border-gray-700 okd-z-[1]">
         {/* Brand */}
-        <div className="flex items-center flex-shrink-0 pl-4">
+        <div className="okd-flex okd-items-center okd-flex-shrink-0 okd-pl-4">
           <Icon
-            className="w-7 h-7 text-brand-500 dark:text-brand-400"
+            className="okd-w-7 okd-h-7 okd-text-brand-500 dark:okd-text-brand-400"
             name="BRAND-LOGO-SOLID"
             size={28}
             aria-label="The Brand Logo – OneKey"
@@ -102,17 +102,17 @@ const Sidebar: FC<SidebarProps> = ({
         </div>
         {/* Menu Button */}
         <button
-          className="p-4 text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-brand lg:hidden"
+          className="okd-p-4 okd-text-gray-500 focus:okd-outline-none focus:okd-ring-2 focus:okd-ring-inset focus:okd-ring-brand lg:okd-hidden"
           onClick={() => setSidebarOpen(true)}
           type="button"
         >
           {/* TODO i18n */}
           <span className="sr-only">Open sidebar</span>
-          <span className="w-6 h-6" aria-hidden="true">
+          <span className="okd-w-6 okd-h-6" aria-hidden="true">
             <Icon
               onClick={() => setSidebarOpen(!sidebarOpen)}
               name="MENU-OUTLINE"
-              className="w-6 h-6 text-gray-500 dark:text-gray-400"
+              className="okd-w-6 okd-h-6 okd-text-gray-500 dark:okd-text-gray-400"
             />
           </span>
         </button>
@@ -123,49 +123,49 @@ const Sidebar: FC<SidebarProps> = ({
         <Dialog
           as="div"
           static
-          className="fixed inset-0 z-40 flex lg:hidden"
+          className="okd-fixed okd-inset-0 okd-z-40 okd-flex lg:okd-hidden"
           open={sidebarOpen}
           onClose={setSidebarOpen}
         >
           <Transition.Child
             as={Fragment}
-            enter="transition-opacity ease-linear duration-300"
-            enterFrom="opacity-0"
-            enterTo="opacity-100"
-            leave="transition-opacity ease-linear duration-300"
-            leaveFrom="opacity-100"
-            leaveTo="opacity-0"
+            enter="okd-transition-opacity okd-ease-linear okd-duration-300"
+            enterFrom="okd-opacity-0"
+            enterTo="okd-opacity-100"
+            leave="okd-transition-opacity okd-ease-linear okd-duration-300"
+            leaveFrom="okd-opacity-100"
+            leaveTo="okd-opacity-0"
           >
-            <Dialog.Overlay className="fixed inset-0 bg-gray-600 bg-opacity-75" />
+            <Dialog.Overlay className="okd-fixed okd-inset-0 okd-bg-gray-600 okd-bg-opacity-75" />
           </Transition.Child>
           <Transition.Child
             as={Fragment}
-            enter="transition ease-in-out duration-300 transform"
-            enterFrom="-translate-x-full"
-            enterTo="translate-x-0"
-            leave="transition ease-in-out duration-300 transform"
-            leaveFrom="translate-x-0"
-            leaveTo="-translate-x-full"
+            enter="okd-transition okd-ease-in-out okd-duration-300 okd-transform"
+            enterFrom="okd--translate-x-full"
+            enterTo="okd-translate-x-0"
+            leave="okd-transition okd-ease-in-out okd-duration-300 okd-transform"
+            leaveFrom="okd-translate-x-0"
+            leaveTo="okd--translate-x-full"
           >
-            <div className="relative flex flex-col flex-1 w-full max-w-xs py-5 bg-gray-50 dark:bg-gray-800 dark:border-gray-700">
+            <div className="okd-relative okd-flex okd-flex-col okd-flex-1 okd-w-full okd-max-w-xs okd-py-5 okd-bg-gray-50 dark:okd-bg-gray-800 dark:okd-border-gray-700">
               <Transition.Child
                 as={Fragment}
-                enter="ease-in-out duration-300"
-                enterFrom="opacity-0"
-                enterTo="opacity-100"
-                leave="ease-in-out duration-300"
-                leaveFrom="opacity-100"
-                leaveTo="opacity-0"
+                enter="okd-ease-in-out okd-duration-300"
+                enterFrom="okd-opacity-0"
+                enterTo="okd-opacity-100"
+                leave="okd-ease-in-out okd-duration-300"
+                leaveFrom="okd-opacity-100"
+                leaveTo="okd-opacity-0"
               >
                 {/* Close Button */}
-                <div className="absolute top-0 right-0 pt-2 -mr-12">
+                <div className="okd-absolute okd-top-0 okd-right-0 okd-pt-2 okd--mr-12">
                   <button
-                    className="flex items-center justify-center w-10 h-10 ml-1 rounded-full focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
+                    className="okd-flex okd-items-center okd-justify-center okd-w-10 okd-h-10 okd-ml-1 okd-rounded-full focus:okd-outline-none focus:okd-ring-2 focus:okd-ring-inset focus:okd-ring-white"
                     onClick={() => setSidebarOpen(false)}
                   >
                     <span className="sr-only">Close sidebar</span>
                     <Icon
-                      className="w-6 h-6 text-white"
+                      className="okd-w-6 okd-h-6 okd-text-white"
                       name="x-outline"
                       aria-hidden="true"
                     />
@@ -174,22 +174,22 @@ const Sidebar: FC<SidebarProps> = ({
                 {/* Close Button End */}
               </Transition.Child>
               {/* Brand */}
-              <div className="flex items-center flex-shrink-0 pl-[22px]">
+              <div className="okd-flex okd-items-center okd-flex-shrink-0 okd-pl-[22px]">
                 <Icon
-                  className="w-7 h-7 text-brand-500 dark:text-brand-400"
+                  className="okd-w-7 okd-h-7 okd-text-brand-500 dark:okd-text-brand-400"
                   name="BRAND-LOGO-SOLID"
                   size={28}
                   aria-label="The Brand Logo – OneKey"
                 />
               </div>
-              <div className="flex flex-col flex-1 h-0 px-4 overflow-y-auto">
+              <div className="okd-flex okd-flex-col okd-flex-1 okd-h-0 okd-px-4 okd-overflow-y-auto">
                 {/* Navigation */}
-                <nav className="mt-6 space-y-6">
+                <nav className="okd-mt-6 okd-space-y-6">
                   {/* Wallet */}
                   {!!walletNavigation?.length && (
                     <div>
                       {/* Group Title */}
-                      <div className="pl-2 mb-2 text-xs font-medium tracking-wider text-gray-500 uppercase dark:text-gray-400">
+                      <div className="okd-pl-2 okd-mb-2 okd-text-xs okd-font-medium okd-tracking-wider okd-text-gray-500 okd-uppercase dark:okd-text-gray-400">
                         Wallet
                       </div>
                       <div className="space-y-1">
@@ -201,20 +201,20 @@ const Sidebar: FC<SidebarProps> = ({
                               key={item.name}
                               className={classNames(
                                 isActive
-                                  ? "bg-gray-200 text-gray-900 dark:bg-gray-600 dark:text-white"
-                                  : "text-gray-600 hover:text-gray-900 hover:bg-gray-100 dark:hover:bg-gray-700 dark:text-gray-300 dark:hover:text-white",
-                                "group justify-between flex items-center px-2 py-2 text-sm font-medium rounded-md"
+                                  ? "okd-bg-gray-200 okd-text-gray-900 dark:okd-bg-gray-600 dark:okd-text-white"
+                                  : "okd-text-gray-600 hover:okd-text-gray-900 hover:okd-bg-gray-100 dark:hover:okd-bg-gray-700 dark:okd-text-gray-300 dark:hover:okd-text-white",
+                                "okd-group okd-justify-between okd-flex okd-items-center okd-px-2 okd-py-2 okd-text-sm okd-font-medium okd-rounded-md"
                               )}
                               aria-current={isActive ? "page" : undefined}
                             >
-                              <div className="flex items-center">
+                              <div className="okd-flex okd-items-center">
                                 {!!item.icon && (
                                   <Icon
                                     className={classNames(
-                                      "mr-3 flex-shrink-0 h-6 w-6",
+                                      "okd-mr-3 okd-flex-shrink-0 okd-h-6 okd-w-6",
                                       isActive
-                                        ? "text-gray-500 dark:text-gray-400"
-                                        : "text-gray-400 group-hover:text-gray-500 dark:text-gray-500 dark:group-hover:text-gray-400"
+                                        ? "okd-text-gray-500 dark:okd-text-gray-400"
+                                        : "okd-text-gray-400 group-hover:okd-text-gray-500 dark:okd-text-gray-500 dark:grouokd-p-hover:okd-text-gray-400"
                                     )}
                                     name={item.icon}
                                     aria-hidden="true"
@@ -238,10 +238,10 @@ const Sidebar: FC<SidebarProps> = ({
                   {/* Trade */}
                   <div>
                     {/* Group Title */}
-                    <div className="pl-2 mb-2 text-xs font-medium tracking-wider text-gray-500 uppercase dark:text-gray-400">
+                    <div className="okd-pl-2 okd-mb-2 okd-text-xs okd-font-medium okd-tracking-wider okd-text-gray-500 okd-uppercase dark:okd-text-gray-400">
                       Trade
                     </div>
-                    <div className="space-y-1">
+                    <div className="okd-space-y-1">
                       {tradeNavigation.map((item) => {
                         const isActive = item.id === active;
                         return (
@@ -252,20 +252,20 @@ const Sidebar: FC<SidebarProps> = ({
                             target={item.blank ? "_blank" : "_self"}
                             className={classNames(
                               isActive
-                                ? "bg-gray-200 text-gray-900 dark:bg-gray-600 dark:text-white"
-                                : "text-gray-600 hover:text-gray-900 hover:bg-gray-100 dark:hover:bg-gray-700 dark:text-gray-300 dark:hover:text-white",
-                              "group justify-between flex items-center px-2 py-2 text-sm font-medium rounded-md"
+                                ? "okd-bg-gray-200 okd-text-gray-900 dark:okd-bg-gray-600 dark:okd-text-white"
+                                : "okd-text-gray-600 hover:okd-text-gray-900 hover:okd-bg-gray-100 dark:hover:okd-bg-gray-700 dark:okd-text-gray-300 dark:hover:okd-text-white",
+                              "okd-group okd-justify-between okd-flex okd-items-center okd-px-2 okd-py-2 okd-text-sm okd-font-medium okd-rounded-md"
                             )}
                             aria-current={isActive ? "page" : undefined}
                           >
-                            <div className="flex items-center">
+                            <div className="okd-flex okd-items-center">
                               {!!item.icon && (
                                 <Icon
                                   className={classNames(
-                                    "mr-3 flex-shrink-0 h-6 w-6",
+                                    "okd-mr-3 okd-flex-shrink-0 okd-h-6 okd-w-6",
                                     isActive
-                                      ? "text-gray-500 dark:text-gray-400"
-                                      : "text-gray-400 group-hover:text-gray-500 dark:text-gray-500 dark:group-hover:text-gray-400"
+                                      ? "okd-text-gray-500 dark:okd-text-gray-400"
+                                      : "okd-text-gray-400 group-hover:okd-text-gray-500 dark:okd-text-gray-500 dark:group-hover:okd-text-gray-400"
                                   )}
                                   name={item.icon}
                                   aria-hidden="true"
@@ -288,8 +288,8 @@ const Sidebar: FC<SidebarProps> = ({
                 </nav>
                 {/* Navigation End */}
                 {/* Extra Actions */}
-                <div className="mt-auto">
-                  <div className="space-y-1">
+                <div className="okd-mt-auto">
+                  <div className="okd-space-y-1">
                     {extraActions.map((item) => {
                       const isActive = item.id === active;
                       return (
@@ -298,20 +298,20 @@ const Sidebar: FC<SidebarProps> = ({
                           key={item.name}
                           className={classNames(
                             isActive
-                              ? "bg-gray-200 text-gray-900 dark:bg-gray-600 dark:text-white"
-                              : "text-gray-600 hover:text-gray-900 hover:bg-gray-100 dark:hover:bg-gray-700 dark:text-gray-300 dark:hover:text-white",
-                            "group justify-between flex items-center px-2 py-2 text-sm font-medium rounded-md"
+                              ? "okd-bg-gray-200 okd-text-gray-900 dark:okd-bg-gray-600 dark:okd-text-white"
+                              : "okd-text-gray-600 hover:okd-text-gray-900 hover:okd-bg-gray-100 dark:hover:okd-bg-gray-700 dark:okd-text-gray-300 dark:hover:okd-text-white",
+                            "group justify-between flex okd-items-center okd-px-2 okd-py-2 okd-text-sm okd-font-medium okd-rounded-md"
                           )}
                           aria-current={isActive ? "page" : undefined}
                         >
-                          <div className="flex items-center">
+                          <div className="flex okd-items-center">
                             {!!item.icon && (
                               <Icon
                                 className={classNames(
-                                  "mr-3 flex-shrink-0 h-6 w-6",
+                                  "okd-mr-3 okd-flex-shrink-0 okd-h-6 okd-w-6",
                                   isActive
-                                    ? "text-gray-500 dark:text-gray-400"
-                                    : "text-gray-400 group-hover:text-gray-500 dark:text-gray-500 dark:group-hover:text-gray-400"
+                                    ? "okd-text-gray-500 dark:okd-text-gray-400"
+                                    : "okd-text-gray-400 group-hover:okd-text-gray-500 dark:okd-text-gray-500 dark:group-hover:okd-text-gray-400"
                                 )}
                                 name={item.icon}
                                 aria-hidden="true"
@@ -334,51 +334,51 @@ const Sidebar: FC<SidebarProps> = ({
               </div>
             </div>
           </Transition.Child>
-          <div className="flex-shrink-0 w-14" aria-hidden="true">
+          <div className="okd-flex-shrink-0 okd-w-14" aria-hidden="true">
             {/* Dummy element to force sidebar to shrink to fit close icon */}
           </div>
         </Dialog>
       </Transition.Root>
       {/* Mobile Sidebar End */}
       {/* Desktop Sidebar */}
-      <div className="relative lg:inline-block hidden h-full onekey-ui-sidebar">
+      <div className="okd-relative lg:okd-inline-block okd-hidden okd-h-full okd-sidebar">
         <div
           className={classNames(
-            "flex flex-col py-5 border-r border-gray-100 bg-gray-50 dark:bg-gray-800 dark:border-gray-700 h-full",
-            isCollapsed ? "w-auto" : "w-64"
+            "okd-flex okd-flex-col okd-py-5 okd-border-r okd-border-gray-100 okd-bg-gray-50 dark:okd-bg-gray-800 dark:okd-border-gray-700 okd-h-full",
+            isCollapsed ? "okd-w-auto" : "okd-w-64"
           )}
         >
           {/* Brand */}
           <div
-            className="flex items-center flex-shrink-0 pl-[22px] cursor-pointer"
+            className="okd-flex okd-items-center okd-flex-shrink-0 okd-pl-[22px] okd-cursor-pointer"
             onClick={() => window.location.reload()}
           >
             <Icon
-              className="w-7 h-7 text-brand-500 dark:text-brand-400"
+              className="okd-w-7 okd-h-7 okd-text-brand-500 dark:okd-text-brand-400"
               name="BRAND-LOGO-SOLID"
               size={28}
               aria-label="The Brand Logo – OneKey"
             />
           </div>
           {/* Brand End */}
-          <div className="flex flex-col flex-1 h-0 px-4 overflow-y-auto">
+          <div className="okd-flex okd-flex-col okd-flex-1 okd-h-0 okd-px-4 okd-overflow-y-auto">
             {/* Device Selector */}
             {/* <DeviceSelector /> */}
             {/* Navigation */}
-            <nav className="mt-6 space-y-6">
+            <nav className="okd-mt-6 okd-space-y-6">
               {/* Wallet */}
               {!!walletNavigation?.length && (
                 <div>
                   {/* Group Title */}
                   <div
                     className={classNames(
-                      "pl-2 mb-2 text-xs font-medium tracking-wider text-gray-500 uppercase dark:text-gray-400",
+                      "okd-pl-2 okd-mb-2 okd-text-xs okd-font-medium okd-tracking-wider okd-text-gray-500 okd-uppercase dark:okd-text-gray-400",
                       { hidden: isCollapsed }
                     )}
                   >
                     Wallet
                   </div>
-                  <div className="space-y-1">
+                  <div className="okd-space-y-1">
                     {walletNavigation.map((item) => {
                       const isActive = item.id === active;
                       return (
@@ -387,27 +387,27 @@ const Sidebar: FC<SidebarProps> = ({
                           key={item.name}
                           className={classNames(
                             isActive
-                              ? "bg-gray-200 text-gray-900 dark:bg-gray-600 dark:text-white"
-                              : "text-gray-600 hover:text-gray-900 hover:bg-gray-100 dark:hover:bg-gray-700 dark:text-gray-300 dark:hover:text-white",
-                            "group justify-between flex items-center px-2 py-2 text-sm font-medium rounded-md"
+                              ? "okd-bg-gray-200 okd-text-gray-900 dark:okd-bg-gray-600 dark:okd-text-white"
+                              : "okd-text-gray-600 hover:okd-text-gray-900 hover:okd-bg-gray-100 dark:hover:okd-bg-gray-700 dark:okd-text-gray-300 dark:hover:okd-text-white",
+                            "group okd-justify-between flex okd-items-center okd-px-2 okd-py-2 okd-text-sm okd-font-medium okd-rounded-md"
                           )}
                           aria-current={isActive ? "page" : undefined}
                         >
-                          <div className="flex items-center">
+                          <div className="okd-flex okd-items-center">
                             {item.icon && (
                               <Icon
                                 className={classNames(
-                                  "flex-shrink-0 h-6 w-6",
+                                  "okd-flex-shrink-0 okd-h-6 okd-w-6",
                                   isActive
-                                    ? "text-gray-500 dark:text-gray-400"
-                                    : "text-gray-400 group-hover:text-gray-500 dark:text-gray-500 dark:group-hover:text-gray-400"
+                                    ? "okd-text-gray-500 dark:okd-text-gray-400"
+                                    : "okd-text-gray-400 group-hover:okd-text-gray-500 dark:okd-text-gray-500 dark:group-hover:okd-text-gray-400"
                                 )}
                                 name={item.icon}
                                 aria-hidden="true"
                               />
                             )}
                             {!isCollapsed && (
-                              <span className="ml-3">{item.name}</span>
+                              <span className="okd-ml-3">{item.name}</span>
                             )}
                           </div>
                           {/* Show badge if badgeType exist. */}
@@ -428,7 +428,7 @@ const Sidebar: FC<SidebarProps> = ({
                 {/* Group Title */}
                 <div
                   className={classNames(
-                    "pl-2 mb-2 text-xs font-medium tracking-wider text-gray-500 uppercase dark:text-gray-400",
+                    "okd-pl-2 okd-mb-2 okd-text-xs okd-font-medium okd-tracking-wider okd-text-gray-500 okd-uppercase dark:okd-text-gray-400",
                     { hidden: isCollapsed }
                   )}
                 >
@@ -445,20 +445,20 @@ const Sidebar: FC<SidebarProps> = ({
                         target={item.blank ? "_blank" : "_self"}
                         className={classNames(
                           isActive
-                            ? "bg-gray-200 text-gray-900 dark:bg-gray-600 dark:text-white"
-                            : "text-gray-600 hover:text-gray-900 hover:bg-gray-100 dark:hover:bg-gray-700 dark:text-gray-300 dark:hover:text-white",
-                          "group justify-between flex items-center px-2 py-2 text-sm font-medium rounded-md"
+                            ? "okd-bg-gray-200 okd-text-gray-900 dark:okd-bg-gray-600 dark:okd-text-white"
+                            : "okd-text-gray-600 hover:okd-text-gray-900 hover:okd-bg-gray-100 dark:hover:okd-bg-gray-700 dark:okd-text-gray-300 dark:hover:okd-text-white",
+                          "okd-group okd-justify-between okd-flex okd-items-center okd-px-2 okd-py-2 okd-text-sm okd-font-medium okd-rounded-md"
                         )}
                         aria-current={isActive ? "page" : undefined}
                       >
-                        <div className="flex items-center">
+                        <div className="okd-flex okd-items-center">
                           {!!item.icon && (
                             <Icon
                               className={classNames(
-                                "flex-shrink-0 h-6 w-6",
+                                "okd-flex-shrink-0 okd-h-6 okd-w-6",
                                 isActive
-                                  ? "text-gray-500 dark:text-gray-400"
-                                  : "text-gray-400 group-hover:text-gray-500 dark:text-gray-500 dark:group-hover:text-gray-400"
+                                  ? "okd-text-gray-500 dark:okd-text-gray-400"
+                                  : "okd-text-gray-400 group-hover:okd-text-gray-500 dark:okd-text-gray-500 dark:group-hover:okd-text-gray-400"
                               )}
                               name={item.icon}
                               aria-hidden="true"
@@ -466,7 +466,7 @@ const Sidebar: FC<SidebarProps> = ({
                           )}
 
                           {!isCollapsed && (
-                            <span className="ml-3">{item.name}</span>
+                            <span className="okd-ml-3">{item.name}</span>
                           )}
                         </div>
                         {/* Show badge if badgeType exist. */}
@@ -487,8 +487,8 @@ const Sidebar: FC<SidebarProps> = ({
             </nav>
             {/* Navigation End */}
             {/* Extra Actions */}
-            <div className="mt-auto">
-              <div className="space-y-1">
+            <div className="okd-mt-auto">
+              <div className="okd-space-y-1">
                 {extraActions.map((item) => {
                   const isActive = item.id === active;
                   return (
@@ -497,20 +497,20 @@ const Sidebar: FC<SidebarProps> = ({
                       key={item.name}
                       className={classNames(
                         isActive
-                          ? "bg-gray-200 text-gray-900 dark:bg-gray-600 dark:text-white"
-                          : "text-gray-600 hover:text-gray-900 hover:bg-gray-100 dark:hover:bg-gray-700 dark:text-gray-300 dark:hover:text-white",
-                        "group justify-between flex items-center px-2 py-2 text-sm font-medium rounded-md"
+                          ? "okd-bg-gray-200 okd-text-gray-900 dark:okd-bg-gray-600 dark:okd-text-white"
+                          : "okd-text-gray-600 hover:okd-text-gray-900 hover:okd-bg-gray-100 dark:hover:okd-bg-gray-700 dark:okd-text-gray-300 dark:hover:okd-text-white",
+                        "okd-group okd-justify-between okd-flex okd-items-center okd-px-2 okd-py-2 okd-text-sm okd-font-medium okd-rounded-md"
                       )}
                       aria-current={isActive ? "page" : undefined}
                     >
-                      <div className="flex items-center">
+                      <div className="okd-flex okd-items-center">
                         {!!item.icon && (
                           <Icon
                             className={classNames(
-                              "flex-shrink-0 h-6 w-6",
+                              "okd-flex-shrink-0 okd-h-6 okd-w-6",
                               isActive
-                                ? "text-gray-500 dark:text-gray-400"
-                                : "text-gray-400 group-hover:text-gray-500 dark:text-gray-500 dark:group-hover:text-gray-400"
+                                ? "okd-text-gray-500 dark:okd-text-gray-400"
+                                : "okd-text-gray-400 group-hover:okd-text-gray-500 dark:okd-text-gray-500 dark:group-hover:okd-text-gray-400"
                             )}
                             name={item.icon}
                             aria-hidden="true"
@@ -518,7 +518,7 @@ const Sidebar: FC<SidebarProps> = ({
                         )}
 
                         {!isCollapsed && (
-                          <span className="ml-3">{item.name}</span>
+                          <span className="okd-ml-3">{item.name}</span>
                         )}
                       </div>
                       {/* Show badge if badgeType exist. */}
@@ -534,19 +534,19 @@ const Sidebar: FC<SidebarProps> = ({
           </div>
         </div>
         {/* Toggle Button */}
-        <div className="absolute top-0 bottom-0 right-0 z-10 translate-x-1/2">
+        <div className="okd-absolute okd-top-0 okd-bottom-0 okd-right-0 okd-z-10 okd-translate-x-1/2">
           <button
-            className="flex justify-center w-6 h-full group"
+            className="okd-flex okd-justify-center okd-w-6 okd-h-full okd-group"
             type="button"
             onClick={() => setIsCollapsed((isCollapsed) => !isCollapsed)}
           >
-            <div className="w-0.5 h-full transition bg-transparent group-hover:bg-brand-500" />
-            <div className="absolute p-1.5 bg-white border border-gray-200 rounded-full top-4 shadow-sm dark:bg-gray-900 dark:border-gray-700 transition scale-75 collapse-indicate opacity-0">
+            <div className="okd-w-0.5 okd-h-full okd-transition okd-bg-transparent group-hover:okd-bg-brand-500" />
+            <div className="okd-absolute okd-p-1.5 okd-bg-white okd-border okd-border-gray-200 okd-rounded-full okd-top-4 okd-shadow-sm dark:okd-bg-gray-900 dark:okd-border-gray-700 okd-transition okd-scale-75 okd-collapse-indicate okd-opacity-0">
               <Icon
                 name="CHEVRON-LEFT-OUTLINE"
                 size={16}
-                className={classNames("text-gray-400", {
-                  "rotate-180 translate-x-px": isCollapsed,
+                className={classNames("okd-text-gray-400", {
+                  "okd-rotate-180 okd-translate-x-px": isCollapsed,
                 })}
               />
             </div>

@@ -25,14 +25,19 @@ Icon.args = {
 
 export const List: ComponentStory<typeof IconComponent> = () => {
   return (
-    <div className="grid lg:grid-cols-3 gap-8 pt-8">
+    <div className="okd-grid lg:okd-grid-cols-3 okd-gap-8 okd-pt-8">
       {Object.entries(ICONS).map((item, index) => {
         const [key] = item;
         return (
-          <div key={key} className="min-w-0 flex-1 flex flex-col items-center">
+          <div
+            key={key}
+            className="okd-min-w-0 okd-flex-1 okd-flex okd-flex-col okd-items-center"
+          >
             <IconComponent name={key as any} />
-            <div className="h-10 flex justify-center">
-              <div className="text-sm font-semibold text-gray-900">{key}</div>
+            <div className="okd-h-10 okd-flex okd-justify-center">
+              <div className="okd-text-sm okd-font-semibold okd-text-gray-900">
+                {key}
+              </div>
             </div>
           </div>
         );

@@ -54,13 +54,13 @@ const Button: FC<ButtonProps> = ({ children, block, disabled, type }) => {
     <button
       type="button"
       className={cx(
-        "inline-flex items-center justify-center px-4 py-2 text-sm font-medium border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2 dark:ring-offset-gray-900",
+        "okd-inline-flex okd-items-center okd-justify-center okd-px-4 okd-py-2 okd-text-sm okd-font-medium border okd-rounded-md okd-shadow-sm focus:okd-outline-none focus:okd-ring-2 focus:okd-ring-offset-2 dark:okd-ring-offset-gray-900",
         {
-          "hover:border-brand-500 hover:text-brand-500 focus:ring-brand-500 dark:hover:bg-brand-500":
+          "hover:okd-border-brand-500 hover:okd-text-brand-500 focus:okd-ring-brand-500 dark:hover:okd-bg-brand-500":
             type === "default",
-          "bg-brand-500 hover:bg-brand-600 focus:ring-brand-500 dark:bg-brand-600 dark:hover:bg-brand-500 border-transparent text-white":
+          "okd-bg-brand-500 hover:okd-bg-brand-600 focus:okd-ring-brand-500 dark:okd-bg-brand-600 dark:hover:okd-bg-brand-500 okd-border-transparent okd-text-white":
             type === "primary",
-          "w-full": block,
+          "okd-w-full": block,
         }
       )}
       disabled={!!disabled}

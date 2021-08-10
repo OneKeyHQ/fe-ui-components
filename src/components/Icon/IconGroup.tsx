@@ -14,11 +14,11 @@ const IconGroup: FC<IconGroupProps> = ({ icons, ...rest }) => {
         return (
           <div
             key={config.name + index}
-            className="relative justify-center items-center inline-flex overflow-hidden bg-white border border-gray-200 rounded-full shadow-sm dark:border-gray-700"
+            className="okd-relative okd-justify-center okd-items-center okd-inline-flex okd-overflow-hidden okd-bg-white okd-border okd-border-gray-200 okd-rounded-full okd-shadow-sm dark:okd-border-gray-700"
           >
             <Icon
               className={classNames(
-                "p-2 text-gray-300 dark:text-gray-400",
+                "okd-p-2 okd-text-gray-300 dark:okd-text-gray-400",
                 config.className
               )}
               {...config}

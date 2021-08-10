@@ -24,10 +24,10 @@ const Dropdown: FC<DropdownProps> = ({
     return (
       <Icon
         className={classNames(
-          "w-5 h-5 transition flex items-center justify-center",
+          "okd-w-5 okd-h-5 okd-transition okd-flex okd-items-center okd-justify-center",
           open
-            ? "text-gray-500 -rotate-180 dark:text-gray-400"
-            : "text-gray-400 dark:text-gray-500"
+            ? "okd-text-gray-500 okd--rotate-180  dark:okd-text-gray-400"
+            : "okd-text-gray-400 dark:okd-text-gray-500"
         )}
         size={14}
         name="CHEVRON-DOWN-OUTLINE"
@@ -35,16 +35,16 @@ const Dropdown: FC<DropdownProps> = ({
     );
   }, []);
   return (
-    <Popover className="relative inline-block">
+    <Popover className="relative okd-inline-block">
       {({ open }) => (
         <>
           <Popover.Button
             ref={triggerButtonRef}
             className={classNames(
-              "inline-flex items-center p-2 text-sm font-medium rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand-500 dark:ring-offset-gray-900",
+              "okd-inline-flex okd-items-center okd-p-2 okd-text-sm okd-font-medium okd-rounded-md focus:okd-outline-none focus:okd-ring-2 focus:okd-ring-offset-2 focus:okd-ring-brand-500 dark:okd-ring-offset-gray-900",
               open
-                ? "bg-gray-100 text-gray-900 dark:bg-gray-700 dark:text-gray-50 focus:ring-0 focus:ring-transparent"
-                : "text-gray-700 hover:bg-gray-50 dark:hover:bg-gray-800 dark:text-gray-200"
+                ? "okd-bg-gray-100 okd-text-gray-900 dark:okd-bg-gray-700 dark:okd-text-gray-50 focus:okd-ring-0 focus:okd-ring-transparent"
+                : "okd-text-gray-700 hover:okd-bg-gray-50 dark:hover:okd-bg-gray-800 dark:okd-text-gray-200"
             )}
           >
             {typeof trigger === "function"
@@ -54,15 +54,15 @@ const Dropdown: FC<DropdownProps> = ({
           <Transition
             show={open}
             as={Fragment}
-            enter="transition ease-out duration-100"
-            enterFrom="transform opacity-0 scale-95"
-            enterTo="transform opacity-100 scale-100"
-            leave="transition ease-in duration-75"
-            leaveFrom="transform opacity-100 scale-100"
-            leaveTo="transform opacity-0 scale-95"
+            enter="okd-transition okd-ease-out okd-duration-100"
+            enterFrom="okd-transform okd-opacity-0 okd-scale-95"
+            enterTo="okd-transform okd-opacity-100 okd-scale-100"
+            leave="okd-transition okd-ease-in okd-duration-75"
+            leaveFrom="okd-transform okd-opacity-100 okd-scale-100"
+            leaveTo="okd-transform okd-opacity-0 okd-scale-95"
           >
-            <Popover.Panel className="absolute z-10 w-64 mt-2 origin-top -translate-x-1/2 left-1/2 sm:origin-top-right sm:left-auto sm:translate-x-0 sm:-right-1">
-              <div className="overflow-hidden bg-white rounded-lg shadow-lg ring-1 ring-black/5 dark:bg-gray-900 dark:ring-white/20">
+            <Popover.Panel className="okd-absolute okd-z-10 okd-w-64 okd-mt-2 okd-origin-top okd--translate-x-1/2 left-1/2 sm:origin-tookd-p-right sm:left-auto sm:translate-x-0 sm:-right-1">
+              <div className="okd-overflow-hidden bg-white okd-rounded-lg okd-shadow-lg okd-ring-1 okd-ring-black/5 dark:okd-bg-gray-900 dark:okd-ring-white/20">
                 {children}
               </div>
             </Popover.Panel>

@@ -1,6 +1,6 @@
-import React, { FC } from 'react';
-import { isNil } from 'lodash';
-import cx from 'classnames';
+import React, { FC } from "react";
+import { isNil } from "lodash";
+import cx from "classnames";
 
 type SkeletonProps = {
   /**
@@ -18,46 +18,50 @@ type SkeletonProps = {
   /**
    * 设置占位图的大小
    */
-  size?: 'large' | 'middle' | 'small';
+  size?: "large" | "middle" | "small";
   /**
    * 为 true 时，显示占位图。反之则直接展示子组件
    */
   loading?: boolean;
-}
+};
 
 const defaultProps = {
   animate: true,
-  size: 'middle',
+  size: "middle",
   loading: true,
   avatar: true,
   paragraph: true,
 } as const;
 
-const Skeleton: FC<SkeletonProps> = ({animate, loading, children, avatar, paragraph}) => {
+const Skeleton: FC<SkeletonProps> = ({
+  animate,
+  loading,
+  children,
+  avatar,
+  paragraph,
+}) => {
   if (!isNil(loading) && !loading) return <>{children}</>;
 
   return (
-    <div className={cx("flex items-center px-6 py-4")}>
-      <div className={cx("flex items-center", {
-        'animate-pulse': animate,
-      })}>
-        {
-          !!avatar && (
-            <div className="w-10 h-10 bg-gray-300 rounded-full dark:bg-gray-600" />
-          )
-        }
-        {
-          !!paragraph && (
-            <div className="ml-3">
-              <div className="h-3 mt-2 mb-2.5 bg-gray-300 rounded-full w-28 dark:bg-gray-600" />
-              <div className="h-3.5 mb-2 bg-gray-300 rounded-full w-36 dark:bg-gray-600" />
-            </div>
-          )
-        }
+    <div className={cx("okd-flex okd-items-center okd-px-6 okd-py-4")}>
+      <div
+        className={cx("okd-flex okd-items-center", {
+          "okd-animate-pulse": animate,
+        })}
+      >
+        {!!avatar && (
+          <div className="okd-w-10 okd-h-10 okd-bg-gray-300 okd-rounded-full dark:okd-bg-gray-600" />
+        )}
+        {!!paragraph && (
+          <div className="okd-ml-3">
+            <div className="okd-h-3 okd-mt-2 okd-mb-2.5 okd-bg-gray-300 okd-rounded-full okd-w-28 dark:okd-bg-gray-600" />
+            <div className="okd-h-3.5 okd-mb-2 okd-bg-gray-300 okd-rounded-full okd-w-36 dark:okd-bg-gray-600" />
+          </div>
+        )}
       </div>
     </div>
   );
-}
+};
 
 Skeleton.defaultProps = defaultProps;
 

@@ -42,8 +42,8 @@ const Avatar: FC<AvatarProps> = ({ address, diameter, alt, round }) => {
 
   return (
     <div
-      className={cx("overflow-hidden inline-block", {
-        "rounded-full": round,
+      className={cx("okd-overflow-hidden okd-inline-block", {
+        "okd-rounded-full": round,
       })}
     >
       <canvas ref={canvasRef} style={{ display: "none" }} />

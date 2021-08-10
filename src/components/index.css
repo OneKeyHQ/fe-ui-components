@@ -5,11 +5,11 @@
 @layer base {
   html,
   body {
-    @apply w-full h-full;
+    @apply okd-w-full okd-h-full;
   }
 
   body {
-    @apply m-0 antialiased bg-white dark:bg-gray-900;
+    @apply okd-m-0 okd-antialiased okd-bg-white dark:okd-bg-gray-900;
   }
 
   code {
@@ -21,25 +21,25 @@
 @layer components {
   .tooltip {
     /* the !important is must-have, go to https://github.com/wwayne/react-tooltip for more info */
-    @apply px-2 py-1 text-xs rounded-md shadow transition !important;
+    @apply okd-px-2 okd-py-1 okd-text-xs okd-rounded-md okd-shadow okd-transition !important;
 
     &.type-dark {
-      @apply bg-gray-700 text-gray-50 !important;
+      @apply okd-bg-gray-700 okd-text-gray-50 !important;
 
       &.place-top::after {
-        @apply border-t-gray-700 !important;
+        @apply okd-border-t-gray-700 !important;
       }
     }
 
     &.show {
-      @apply opacity-100 !important;
+      @apply okd-opacity-100 !important;
     }
   }
 
-  .onekey-ui-sidebar {
+  .okd-sidebar {
     &:hover {
-      .collapse-indicate {
-        @apply scale-100 opacity-100;
+      .okd-collapse-indicate {
+        @apply okd-scale-100 okd-opacity-100;
       }
     }
   }

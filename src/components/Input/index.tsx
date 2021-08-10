@@ -53,16 +53,16 @@ const Input: FC<InputProps> = ({
         }}
         type="text"
         className={cx(
-          "block w-full pr-10 bg-gray-50 form-input sm:text-sm rounded-md dark:bg-black/50",
+          "okd-block okd-w-full okd-pr-10 okd-bg-gray-50 okd-form-input sm:okd-text-sm okd-rounded-md dark:okd-bg-black/50",
           error
-            ? "border-red-300 text-red-900 placeholder-red-300 focus:outline-none focus:ring-red-500 focus:border-red-500 dark:text-red-300"
-            : "text-gray-700 placeholder-gray-400 focus:ring-brand-500 focus:border-brand-500 border-gray-200 dark:border-gray-600 dark:placeholder-gray-500 dark:text-gray-200"
+            ? "okd-border-red-300 okd-text-red-900 okd-placeholder-red-300 focus:okd-outline-none focus:okd-ring-red-500 focus:okd-border-red-500 dark:okd-text-red-300"
+            : "okd-text-gray-700 okd-placeholder-gray-400 focus:okd-ring-brand-500 focus:okd-border-brand-500 okd-border-gray-200 dark:okd-border-gray-600 dark:okd-placeholder-gray-500 dark:okd-text-gray-200"
         )}
         placeholder={placeholder}
       />
       {error && (
         <p
-          className="mt-2 text-sm text-left text-red-600 dark:text-red-300"
+          className="okd-mt-2 okd-text-sm okd-text-left okd-text-red-600 dark:okd-text-red-300"
           id="email-error"
         >
           {errorMessage ?? "error"}
