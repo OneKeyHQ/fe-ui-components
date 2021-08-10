@@ -1,11 +1,7 @@
 import React, { FC, HTMLAttributes } from "react";
-import { ReactSVG } from "react-svg";
+import { omit } from 'lodash';
 
-import ICON_NAME from "./Icons";
-import { useConfig } from "../Provider/hooks";
-
-export type ICONS = typeof ICON_NAME;
-export type ICON_TYPES = keyof ICONS;
+import ICON_CONFIG, { ICON_NAMES } from "./Icons";
 
 export type IconProps = {
   /**
@@ -15,7 +11,7 @@ export type IconProps = {
   /**
    * 图标名称，大小写均可
    */
-  name: Lowercase<ICON_TYPES> | ICON_TYPES;
+  name: Lowercase<ICON_NAMES> | ICON_NAMES;
   /**
    * 图标大小
    */
@@ -30,24 +26,13 @@ const defaultProps = {
   size: 24,
 } as const;
 
-const Icon: FC<IconProps> = ({ className, name, color, size, ...rest }) => {
-  const { theme } = useConfig();
+const Icon: FC<IconProps> = (props) => {
+  const SVGComponent = ICON_CONFIG[props?.name?.toUpperCase() as ICON_NAMES];
+  if (!SVGComponent) return null;
 
   return (
-    // @ts-expect-error
-    <ReactSVG
-      className={className}
-      wrapper="div"
-      // toUpperCase 会丢掉 ICON_TYPES 类型
-      src={ICON_NAME[name.toUpperCase() as ICON_TYPES]}
-      beforeInjection={(svg) => {
-        svg.setAttribute("width", `${size}px`);
-        svg.setAttribute("height", `${size}px`);
-        if (color) {
-          svg.setAttribute("color", theme?.[color] || color);
-        }
-      }}
-      {...rest}
+    <SVGComponent
+      {...omit(props, 'name')}
     />
   );
 };

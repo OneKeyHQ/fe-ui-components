@@ -3,7 +3,8 @@ import { Dialog, Transition } from "@headlessui/react";
 import classNames from "classnames";
 
 import Badge, { BadgeProps } from "../Badge";
-import Icon, { ICON_TYPES } from "../Icon";
+import Icon from "../Icon";
+import type { ICON_NAMES } from '../Icon/Icons';
 
 type ActionTab = {
   /**
@@ -17,7 +18,7 @@ type ActionTab = {
   /**
    * ICON 名称
    */
-  icon?: ICON_TYPES;
+  icon?: ICON_NAMES;
   /**
    * 是否新页面打开
    */
