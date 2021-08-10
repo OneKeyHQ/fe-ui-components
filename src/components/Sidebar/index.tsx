@@ -65,9 +65,9 @@ const DEFAULT_SIDEBAR_CONFIG = {
 } as const;
 
 type SidebarProps = {
-  walletNavigation: ActionTab[];
-  tradeNavigation: ActionTab[];
-  extraActions: ActionTab[];
+  walletNavigation?: ActionTab[];
+  tradeNavigation?: ActionTab[];
+  extraActions?: ActionTab[];
 };
 
 const Sidebar: FC<SidebarProps> = ({
