@@ -4,13 +4,17 @@ import classNames from "classnames";
 
 import Badge, { BadgeProps } from "../Badge";
 import Icon from "../Icon";
-import type { ICON_NAMES } from '../Icon/Icons';
+import type { ICON_NAMES } from "../Icon/Icons";
 
 type ActionTab = {
   /**
    * 名称
    */
   name: string;
+  /**
+   * 标识符
+   */
+  id: string;
   /**
    * 链接 URL
    */
@@ -37,18 +41,21 @@ const DEFAULT_SIDEBAR_WALLET_NAVIGATION: ActionTab[] = [];
 const DEFAULT_TRADE_NAVIGATION: ActionTab[] = [
   {
     name: "Portfolio",
+    id: "portfolio",
     href: "https://portfolio.onekey.so/",
     icon: "TRENDING-UP-OUTLINE",
     blank: false,
   },
   {
     name: "Swap",
+    id: "swap",
     href: "https://swap.onekey.so/",
     icon: "SWITCH-HORIZONTAL-OUTLINE",
     blank: false,
   },
   {
     name: "Explore",
+    id: "explore",
     href: "https://discover.onekey.so/",
     icon: "COMPASS-OUTLINE",
     badgeType: "added",
@@ -68,18 +75,16 @@ type SidebarProps = {
   walletNavigation?: ActionTab[];
   tradeNavigation?: ActionTab[];
   extraActions?: ActionTab[];
+  active?: string;
 };
 
 const Sidebar: FC<SidebarProps> = ({
   walletNavigation,
   tradeNavigation,
   extraActions,
+  active,
 }) => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
-  const router = {
-    pathname: "https://portfolio.onekey.so/",
-  };
-
   const [isCollapsed, setIsCollapsed] = useState(false);
 
   return (
@@ -186,27 +191,77 @@ const Sidebar: FC<SidebarProps> = ({
                         Wallet
                       </div>
                       <div className="space-y-1">
-                        {walletNavigation.map((item) => (
-                          // <Link key={item.name} href={item.href}>
+                        {walletNavigation.map((item) => {
+                          const isActive = item.id === active;
+                          return (
+                            <a
+                              href={item.href}
+                              key={item.name}
+                              className={classNames(
+                                isActive
+                                  ? "bg-gray-200 text-gray-900 dark:bg-gray-600 dark:text-white"
+                                  : "text-gray-600 hover:text-gray-900 hover:bg-gray-100 dark:hover:bg-gray-700 dark:text-gray-300 dark:hover:text-white",
+                                "group justify-between flex items-center px-2 py-2 text-sm font-medium rounded-md"
+                              )}
+                              aria-current={isActive ? "page" : undefined}
+                            >
+                              <div className="flex items-center">
+                                {!!item.icon && (
+                                  <Icon
+                                    className={classNames(
+                                      "mr-3 flex-shrink-0 h-6 w-6",
+                                      isActive
+                                        ? "text-gray-500 dark:text-gray-400"
+                                        : "text-gray-400 group-hover:text-gray-500 dark:text-gray-500 dark:group-hover:text-gray-400"
+                                    )}
+                                    name={item.icon}
+                                    aria-hidden="true"
+                                  />
+                                )}
+                                {item.name}
+                              </div>
+                              {/* Show badge if badgeType exist. */}
+                              {item.badgeType && (
+                                <Badge type={item.badgeType}>
+                                  {item.badgeContent}
+                                </Badge>
+                              )}
+                            </a>
+                          );
+                        })}
+                      </div>
+                    </div>
+                  )}
+                  {/* Wallet End */}
+                  {/* Trade */}
+                  <div>
+                    {/* Group Title */}
+                    <div className="pl-2 mb-2 text-xs font-medium tracking-wider text-gray-500 uppercase dark:text-gray-400">
+                      Trade
+                    </div>
+                    <div className="space-y-1">
+                      {tradeNavigation.map((item) => {
+                        const isActive = item.id === active;
+                        return (
                           <a
-                            href={item.href}
+                            rel="noreferrer"
                             key={item.name}
+                            href={item.href}
+                            target={item.blank ? "_blank" : "_self"}
                             className={classNames(
-                              item.href === router.pathname
+                              isActive
                                 ? "bg-gray-200 text-gray-900 dark:bg-gray-600 dark:text-white"
                                 : "text-gray-600 hover:text-gray-900 hover:bg-gray-100 dark:hover:bg-gray-700 dark:text-gray-300 dark:hover:text-white",
                               "group justify-between flex items-center px-2 py-2 text-sm font-medium rounded-md"
                             )}
-                            aria-current={
-                              item.href === router.pathname ? "page" : undefined
-                            }
+                            aria-current={isActive ? "page" : undefined}
                           >
                             <div className="flex items-center">
                               {!!item.icon && (
                                 <Icon
                                   className={classNames(
                                     "mr-3 flex-shrink-0 h-6 w-6",
-                                    item.href === router.pathname
+                                    isActive
                                       ? "text-gray-500 dark:text-gray-400"
                                       : "text-gray-400 group-hover:text-gray-500 dark:text-gray-500 dark:group-hover:text-gray-400"
                                   )}
@@ -223,41 +278,36 @@ const Sidebar: FC<SidebarProps> = ({
                               </Badge>
                             )}
                           </a>
-                          // </Link>
-                        ))}
-                      </div>
+                        );
+                      })}
                     </div>
-                  )}
-                  {/* Wallet End */}
-                  {/* Trade */}
-                  <div>
-                    {/* Group Title */}
-                    <div className="pl-2 mb-2 text-xs font-medium tracking-wider text-gray-500 uppercase dark:text-gray-400">
-                      Trade
-                    </div>
-                    <div className="space-y-1">
-                      {tradeNavigation.map((item) => (
+                  </div>
+                  {/* Trade End */}
+                </nav>
+                {/* Navigation End */}
+                {/* Extra Actions */}
+                <div className="mt-auto">
+                  <div className="space-y-1">
+                    {extraActions.map((item) => {
+                      const isActive = item.id === active;
+                      return (
                         <a
-                          rel="noreferrer"
-                          key={item.name}
                           href={item.href}
-                          target={item.blank ? "_blank" : "_self"}
+                          key={item.name}
                           className={classNames(
-                            item.href === router.pathname
+                            isActive
                               ? "bg-gray-200 text-gray-900 dark:bg-gray-600 dark:text-white"
                               : "text-gray-600 hover:text-gray-900 hover:bg-gray-100 dark:hover:bg-gray-700 dark:text-gray-300 dark:hover:text-white",
                             "group justify-between flex items-center px-2 py-2 text-sm font-medium rounded-md"
                           )}
-                          aria-current={
-                            item.href === router.pathname ? "page" : undefined
-                          }
+                          aria-current={isActive ? "page" : undefined}
                         >
                           <div className="flex items-center">
                             {!!item.icon && (
                               <Icon
                                 className={classNames(
                                   "mr-3 flex-shrink-0 h-6 w-6",
-                                  item.href === router.pathname
+                                  isActive
                                     ? "text-gray-500 dark:text-gray-400"
                                     : "text-gray-400 group-hover:text-gray-500 dark:text-gray-500 dark:group-hover:text-gray-400"
                                 )}
@@ -274,54 +324,8 @@ const Sidebar: FC<SidebarProps> = ({
                             </Badge>
                           )}
                         </a>
-                      ))}
-                    </div>
-                  </div>
-                  {/* Trade End */}
-                </nav>
-                {/* Navigation End */}
-                {/* Extra Actions */}
-                <div className="mt-auto">
-                  <div className="space-y-1">
-                    {extraActions.map((item) => (
-                      // <Link key={item.name} href={item.href}>
-                      <a
-                        href={item.href}
-                        key={item.name}
-                        className={classNames(
-                          item.href === router.pathname
-                            ? "bg-gray-200 text-gray-900 dark:bg-gray-600 dark:text-white"
-                            : "text-gray-600 hover:text-gray-900 hover:bg-gray-100 dark:hover:bg-gray-700 dark:text-gray-300 dark:hover:text-white",
-                          "group justify-between flex items-center px-2 py-2 text-sm font-medium rounded-md"
-                        )}
-                        aria-current={
-                          item.href === router.pathname ? "page" : undefined
-                        }
-                      >
-                        <div className="flex items-center">
-                          {!!item.icon && (
-                            <Icon
-                              className={classNames(
-                                "mr-3 flex-shrink-0 h-6 w-6",
-                                item.href === router.pathname
-                                  ? "text-gray-500 dark:text-gray-400"
-                                  : "text-gray-400 group-hover:text-gray-500 dark:text-gray-500 dark:group-hover:text-gray-400"
-                              )}
-                              name={item.icon}
-                              aria-hidden="true"
-                            />
-                          )}
-                          {item.name}
-                        </div>
-                        {/* Show badge if badgeType exist. */}
-                        {item.badgeType && (
-                          <Badge type={item.badgeType}>
-                            {item.badgeContent}
-                          </Badge>
-                        )}
-                      </a>
-                      // </Link>
-                    ))}
+                      );
+                    })}
                   </div>
                 </div>
                 {/* Extra Actions End */}
@@ -343,7 +347,10 @@ const Sidebar: FC<SidebarProps> = ({
           )}
         >
           {/* Brand */}
-          <div className="flex items-center flex-shrink-0 pl-[22px]">
+          <div
+            className="flex items-center flex-shrink-0 pl-[22px] cursor-pointer"
+            onClick={() => window.location.reload()}
+          >
             <Icon
               className="w-7 h-7 text-brand-500 dark:text-brand-400"
               name="BRAND-LOGO-SOLID"
@@ -369,45 +376,46 @@ const Sidebar: FC<SidebarProps> = ({
                     Wallet
                   </div>
                   <div className="space-y-1">
-                    {walletNavigation.map((item) => (
-                      <a
-                        href={item.href}
-                        key={item.name}
-                        className={classNames(
-                          item.href === router.pathname
-                            ? "bg-gray-200 text-gray-900 dark:bg-gray-600 dark:text-white"
-                            : "text-gray-600 hover:text-gray-900 hover:bg-gray-100 dark:hover:bg-gray-700 dark:text-gray-300 dark:hover:text-white",
-                          "group justify-between flex items-center px-2 py-2 text-sm font-medium rounded-md"
-                        )}
-                        aria-current={
-                          item.href === router.pathname ? "page" : undefined
-                        }
-                      >
-                        <div className="flex items-center">
-                          {item.icon && (
-                            <Icon
-                              className={classNames(
-                                "flex-shrink-0 h-6 w-6",
-                                item.href === router.pathname
-                                  ? "text-gray-500 dark:text-gray-400"
-                                  : "text-gray-400 group-hover:text-gray-500 dark:text-gray-500 dark:group-hover:text-gray-400"
-                              )}
-                              name={item.icon}
-                              aria-hidden="true"
-                            />
+                    {walletNavigation.map((item) => {
+                      const isActive = item.id === active;
+                      return (
+                        <a
+                          href={item.href}
+                          key={item.name}
+                          className={classNames(
+                            isActive
+                              ? "bg-gray-200 text-gray-900 dark:bg-gray-600 dark:text-white"
+                              : "text-gray-600 hover:text-gray-900 hover:bg-gray-100 dark:hover:bg-gray-700 dark:text-gray-300 dark:hover:text-white",
+                            "group justify-between flex items-center px-2 py-2 text-sm font-medium rounded-md"
                           )}
-                          {!isCollapsed && (
-                            <span className="ml-3">{item.name}</span>
+                          aria-current={isActive ? "page" : undefined}
+                        >
+                          <div className="flex items-center">
+                            {item.icon && (
+                              <Icon
+                                className={classNames(
+                                  "flex-shrink-0 h-6 w-6",
+                                  isActive
+                                    ? "text-gray-500 dark:text-gray-400"
+                                    : "text-gray-400 group-hover:text-gray-500 dark:text-gray-500 dark:group-hover:text-gray-400"
+                                )}
+                                name={item.icon}
+                                aria-hidden="true"
+                              />
+                            )}
+                            {!isCollapsed && (
+                              <span className="ml-3">{item.name}</span>
+                            )}
+                          </div>
+                          {/* Show badge if badgeType exist. */}
+                          {item.badgeType && (
+                            <Badge type={item.badgeType}>
+                              {item.badgeContent}
+                            </Badge>
                           )}
-                        </div>
-                        {/* Show badge if badgeType exist. */}
-                        {item.badgeType && (
-                          <Badge type={item.badgeType}>
-                            {item.badgeContent}
-                          </Badge>
-                        )}
-                      </a>
-                    ))}
+                        </a>
+                      );
+                    })}
                   </div>
                 </div>
               )}
@@ -424,28 +432,80 @@ const Sidebar: FC<SidebarProps> = ({
                   Trade
                 </div>
                 <div className="space-y-1">
-                  {tradeNavigation.map((item) => (
+                  {tradeNavigation.map((item) => {
+                    const isActive = item.id === active;
+                    return (
+                      <a
+                        rel="noreferrer"
+                        key={item.name}
+                        href={item.href}
+                        target={item.blank ? "_blank" : "_self"}
+                        className={classNames(
+                          isActive
+                            ? "bg-gray-200 text-gray-900 dark:bg-gray-600 dark:text-white"
+                            : "text-gray-600 hover:text-gray-900 hover:bg-gray-100 dark:hover:bg-gray-700 dark:text-gray-300 dark:hover:text-white",
+                          "group justify-between flex items-center px-2 py-2 text-sm font-medium rounded-md"
+                        )}
+                        aria-current={isActive ? "page" : undefined}
+                      >
+                        <div className="flex items-center">
+                          {!!item.icon && (
+                            <Icon
+                              className={classNames(
+                                "flex-shrink-0 h-6 w-6",
+                                isActive
+                                  ? "text-gray-500 dark:text-gray-400"
+                                  : "text-gray-400 group-hover:text-gray-500 dark:text-gray-500 dark:group-hover:text-gray-400"
+                              )}
+                              name={item.icon}
+                              aria-hidden="true"
+                            />
+                          )}
+
+                          {!isCollapsed && (
+                            <span className="ml-3">{item.name}</span>
+                          )}
+                        </div>
+                        {/* Show badge if badgeType exist. */}
+                        {item.badgeType && (
+                          <Badge
+                            className={classNames({ hidden: isCollapsed })}
+                            type={item.badgeType}
+                          >
+                            {item.badgeContent}
+                          </Badge>
+                        )}
+                      </a>
+                    );
+                  })}
+                </div>
+              </div>
+              {/* Trade End */}
+            </nav>
+            {/* Navigation End */}
+            {/* Extra Actions */}
+            <div className="mt-auto">
+              <div className="space-y-1">
+                {extraActions.map((item) => {
+                  const isActive = item.id === active;
+                  return (
                     <a
-                      rel="noreferrer"
-                      key={item.name}
                       href={item.href}
-                      target={item.blank ? "_blank" : "_self"}
+                      key={item.name}
                       className={classNames(
-                        item.href === router.pathname
+                        isActive
                           ? "bg-gray-200 text-gray-900 dark:bg-gray-600 dark:text-white"
                           : "text-gray-600 hover:text-gray-900 hover:bg-gray-100 dark:hover:bg-gray-700 dark:text-gray-300 dark:hover:text-white",
                         "group justify-between flex items-center px-2 py-2 text-sm font-medium rounded-md"
                       )}
-                      aria-current={
-                        item.href === router.pathname ? "page" : undefined
-                      }
+                      aria-current={isActive ? "page" : undefined}
                     >
                       <div className="flex items-center">
                         {!!item.icon && (
                           <Icon
                             className={classNames(
                               "flex-shrink-0 h-6 w-6",
-                              item.href === router.pathname
+                              isActive
                                 ? "text-gray-500 dark:text-gray-400"
                                 : "text-gray-400 group-hover:text-gray-500 dark:text-gray-500 dark:group-hover:text-gray-400"
                             )}
@@ -460,61 +520,11 @@ const Sidebar: FC<SidebarProps> = ({
                       </div>
                       {/* Show badge if badgeType exist. */}
                       {item.badgeType && (
-                        <Badge
-                          className={classNames({ hidden: isCollapsed })}
-                          type={item.badgeType}
-                        >
-                          {item.badgeContent}
-                        </Badge>
+                        <Badge type={item.badgeType}>{item.badgeContent}</Badge>
                       )}
                     </a>
-                  ))}
-                </div>
-              </div>
-              {/* Trade End */}
-            </nav>
-            {/* Navigation End */}
-            {/* Extra Actions */}
-            <div className="mt-auto">
-              <div className="space-y-1">
-                {extraActions.map((item) => (
-                  <a
-                    href={item.href}
-                    key={item.name}
-                    className={classNames(
-                      item.href === router.pathname
-                        ? "bg-gray-200 text-gray-900 dark:bg-gray-600 dark:text-white"
-                        : "text-gray-600 hover:text-gray-900 hover:bg-gray-100 dark:hover:bg-gray-700 dark:text-gray-300 dark:hover:text-white",
-                      "group justify-between flex items-center px-2 py-2 text-sm font-medium rounded-md"
-                    )}
-                    aria-current={
-                      item.href === router.pathname ? "page" : undefined
-                    }
-                  >
-                    <div className="flex items-center">
-                      {!!item.icon && (
-                        <Icon
-                          className={classNames(
-                            "flex-shrink-0 h-6 w-6",
-                            item.href === router.pathname
-                              ? "text-gray-500 dark:text-gray-400"
-                              : "text-gray-400 group-hover:text-gray-500 dark:text-gray-500 dark:group-hover:text-gray-400"
-                          )}
-                          name={item.icon}
-                          aria-hidden="true"
-                        />
-                      )}
-
-                      {!isCollapsed && (
-                        <span className="ml-3">{item.name}</span>
-                      )}
-                    </div>
-                    {/* Show badge if badgeType exist. */}
-                    {item.badgeType && (
-                      <Badge type={item.badgeType}>{item.badgeContent}</Badge>
-                    )}
-                  </a>
-                ))}
+                  );
+                })}
               </div>
             </div>
             {/* Extra Actions End */}
