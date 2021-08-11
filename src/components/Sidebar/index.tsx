@@ -214,7 +214,7 @@ const Sidebar: FC<SidebarProps> = ({
                                       "okd-mr-3 okd-flex-shrink-0 okd-h-6 okd-w-6",
                                       isActive
                                         ? "okd-text-gray-500 dark:okd-text-gray-400"
-                                        : "okd-text-gray-400 group-hover:okd-text-gray-500 dark:okd-text-gray-500 dark:grouokd-p-hover:okd-text-gray-400"
+                                        : "okd-text-gray-400 group-hover:okd-text-gray-500 dark:okd-text-gray-500 dark:group-hover:okd-text-gray-400"
                                     )}
                                     name={item.icon}
                                     aria-hidden="true"
@@ -254,7 +254,7 @@ const Sidebar: FC<SidebarProps> = ({
                               isActive
                                 ? "okd-bg-gray-200 okd-text-gray-900 dark:okd-bg-gray-600 dark:okd-text-white"
                                 : "okd-text-gray-600 hover:okd-text-gray-900 hover:okd-bg-gray-100 dark:hover:okd-bg-gray-700 dark:okd-text-gray-300 dark:hover:okd-text-white",
-                              "okd-group okd-justify-between okd-flex okd-items-center okd-px-2 okd-py-2 okd-text-sm okd-font-medium okd-rounded-md"
+                              "group okd-justify-between okd-flex okd-items-center okd-px-2 okd-py-2 okd-text-sm okd-font-medium okd-rounded-md"
                             )}
                             aria-current={isActive ? "page" : undefined}
                           >
@@ -373,7 +373,7 @@ const Sidebar: FC<SidebarProps> = ({
                   <div
                     className={classNames(
                       "okd-pl-2 okd-mb-2 okd-text-xs okd-font-medium okd-tracking-wider okd-text-gray-500 okd-uppercase dark:okd-text-gray-400",
-                      { hidden: isCollapsed }
+                      { "okd-hidden": isCollapsed }
                     )}
                   >
                     Wallet
@@ -389,7 +389,7 @@ const Sidebar: FC<SidebarProps> = ({
                             isActive
                               ? "okd-bg-gray-200 okd-text-gray-900 dark:okd-bg-gray-600 dark:okd-text-white"
                               : "okd-text-gray-600 hover:okd-text-gray-900 hover:okd-bg-gray-100 dark:hover:okd-bg-gray-700 dark:okd-text-gray-300 dark:hover:okd-text-white",
-                            "group okd-justify-between flex okd-items-center okd-px-2 okd-py-2 okd-text-sm okd-font-medium okd-rounded-md"
+                            "okd-group okd-justify-between okd-flex okd-items-center okd-px-2 okd-py-2 okd-text-sm okd-font-medium okd-rounded-md"
                           )}
                           aria-current={isActive ? "page" : undefined}
                         >
@@ -412,7 +412,12 @@ const Sidebar: FC<SidebarProps> = ({
                           </div>
                           {/* Show badge if badgeType exist. */}
                           {item.badgeType && (
-                            <Badge type={item.badgeType}>
+                            <Badge
+                              className={classNames({
+                                "okd-hidden": isCollapsed,
+                              })}
+                              type={item.badgeType}
+                            >
                               {item.badgeContent}
                             </Badge>
                           )}
@@ -429,12 +434,12 @@ const Sidebar: FC<SidebarProps> = ({
                 <div
                   className={classNames(
                     "okd-pl-2 okd-mb-2 okd-text-xs okd-font-medium okd-tracking-wider okd-text-gray-500 okd-uppercase dark:okd-text-gray-400",
-                    { hidden: isCollapsed }
+                    { "okd-hidden": isCollapsed }
                   )}
                 >
                   Trade
                 </div>
-                <div className="space-y-1">
+                <div className="okd-space-y-1">
                   {tradeNavigation.map((item) => {
                     const isActive = item.id === active;
                     return (
@@ -472,7 +477,9 @@ const Sidebar: FC<SidebarProps> = ({
                         {/* Show badge if badgeType exist. */}
                         {item.badgeType && (
                           <Badge
-                            className={classNames({ hidden: isCollapsed })}
+                            className={classNames({
+                              "okd-hidden": isCollapsed,
+                            })}
                             type={item.badgeType}
                           >
                             {item.badgeContent}
