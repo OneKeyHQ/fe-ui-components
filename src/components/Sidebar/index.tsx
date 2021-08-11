@@ -60,7 +60,7 @@ const DEFAULT_TRADE_NAVIGATION: ActionTab[] = [
     icon: "COMPASS-OUTLINE",
     badgeType: "added",
     badgeContent: "BETA",
-    blank: true,
+    blank: false,
   },
 ];
 const DEFAULT_SIDEBAR_EXTRA_ACTIONS: ActionTab[] = [];
