@@ -41,7 +41,7 @@ const Switch: FC<SwitchProps> = ({ value, onChange, initialValue }) => {
         "okd-relative okd-inline-flex okd-flex-shrink-0 okd-h-5 okd-w-10 okd-border-4 okd-border-transparent okd-rounded-full okd-cursor-pointer okd-transition-colors okd-ease-in-out okd-duration-200 focus:okd-outline-none focus:okd-ring-2 focus:okd-ring-offset-2 focus:okd-ring-brand-500 dark:focus:okd-ring-offset-gray-900"
       )}
     >
-      <span className="sr-only">Use setting</span>
+      <span className="okd-sr-only">Use setting</span>
       <span
         aria-hidden="true"
         className={classNames(

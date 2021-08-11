@@ -107,7 +107,7 @@ const Sidebar: FC<SidebarProps> = ({
           type="button"
         >
           {/* TODO i18n */}
-          <span className="sr-only">Open sidebar</span>
+          <span className="okd-sr-only">Open sidebar</span>
           <span className="okd-w-6 okd-h-6" aria-hidden="true">
             <Icon
               onClick={() => setSidebarOpen(!sidebarOpen)}
@@ -163,7 +163,7 @@ const Sidebar: FC<SidebarProps> = ({
                     className="okd-flex okd-items-center okd-justify-center okd-w-10 okd-h-10 okd-ml-1 okd-rounded-full focus:okd-outline-none focus:okd-ring-2 focus:okd-ring-inset focus:okd-ring-white"
                     onClick={() => setSidebarOpen(false)}
                   >
-                    <span className="sr-only">Close sidebar</span>
+                    <span className="okd-sr-only">Close sidebar</span>
                     <Icon
                       className="okd-w-6 okd-h-6 okd-text-white"
                       name="x-outline"
