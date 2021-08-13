@@ -1,6 +1,7 @@
 import React, { Fragment, useState, ReactNode, FC } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import classNames from "classnames";
+import { FormattedMessage, useIntl } from "react-intl";
 
 import Badge, { BadgeProps } from "../Badge";
 import Icon from "../Icon";
@@ -35,6 +36,10 @@ type ActionTab = {
    * badge 角标内容
    */
   badgeContent?: ReactNode;
+  /**
+   * react-intl i18n id
+   */
+  translationId?: string;
 };
 
 const DEFAULT_SIDEBAR_WALLET_NAVIGATION: ActionTab[] = [];
@@ -42,6 +47,7 @@ const DEFAULT_TRADE_NAVIGATION: ActionTab[] = [
   {
     name: "Portfolio",
     id: "portfolio",
+    translationId: "ui-components__sidebar_portfolio",
     href: "https://portfolio.onekey.so/",
     icon: "TRENDING-UP-OUTLINE",
     blank: false,
@@ -50,6 +56,7 @@ const DEFAULT_TRADE_NAVIGATION: ActionTab[] = [
     name: "Swap",
     id: "swap",
     href: "https://swap.onekey.so/",
+    translationId: "ui-components__sidebar_swap",
     icon: "SWITCH-HORIZONTAL-OUTLINE",
     blank: false,
   },
@@ -58,6 +65,7 @@ const DEFAULT_TRADE_NAVIGATION: ActionTab[] = [
     id: "explore",
     href: "https://discover.onekey.so/",
     icon: "COMPASS-OUTLINE",
+    translationId: "ui-components__sidebar_discover",
     badgeType: "added",
     badgeContent: "BETA",
     blank: false,
@@ -86,7 +94,7 @@ const Sidebar: FC<SidebarProps> = ({
 }) => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [isCollapsed, setIsCollapsed] = useState(false);
-
+  const intl = useIntl();
   return (
     <>
       {/* Mobile Header */}
@@ -190,7 +198,7 @@ const Sidebar: FC<SidebarProps> = ({
                     <div>
                       {/* Group Title */}
                       <div className="okd-pl-2 okd-mb-2 okd-text-xs okd-font-medium okd-tracking-wider okd-text-gray-500 okd-uppercase dark:okd-text-gray-400">
-                        Wallet
+                        <FormattedMessage id="ui-components__sidebar_wallet" />
                       </div>
                       <div className="space-y-1">
                         {walletNavigation.map((item) => {
@@ -220,7 +228,11 @@ const Sidebar: FC<SidebarProps> = ({
                                     aria-hidden="true"
                                   />
                                 )}
-                                {item.name}
+                                {item.translationId
+                                  ? intl.formatMessage({
+                                      id: `${item.translationId}`,
+                                    })
+                                  : item.name}
                               </div>
                               {/* Show badge if badgeType exist. */}
                               {item.badgeType && (
@@ -239,7 +251,7 @@ const Sidebar: FC<SidebarProps> = ({
                   <div>
                     {/* Group Title */}
                     <div className="okd-pl-2 okd-mb-2 okd-text-xs okd-font-medium okd-tracking-wider okd-text-gray-500 okd-uppercase dark:okd-text-gray-400">
-                      Trade
+                      <FormattedMessage id="ui-components__sidebar_trade" />
                     </div>
                     <div className="okd-space-y-1">
                       {tradeNavigation.map((item) => {
@@ -271,7 +283,11 @@ const Sidebar: FC<SidebarProps> = ({
                                   aria-hidden="true"
                                 />
                               )}
-                              {item.name}
+                              {item.translationId
+                                ? intl.formatMessage({
+                                    id: `${item.translationId}`,
+                                  })
+                                : item.name}
                             </div>
                             {/* Show badge if badgeType exist. */}
                             {item.badgeType && (
@@ -317,7 +333,11 @@ const Sidebar: FC<SidebarProps> = ({
                                 aria-hidden="true"
                               />
                             )}
-                            {item.name}
+                            {item.translationId
+                              ? intl.formatMessage({
+                                  id: `${item.translationId}`,
+                                })
+                              : item.name}
                           </div>
                           {/* Show badge if badgeType exist. */}
                           {item.badgeType && (
@@ -376,7 +396,7 @@ const Sidebar: FC<SidebarProps> = ({
                       { "okd-hidden": isCollapsed }
                     )}
                   >
-                    Wallet
+                    <FormattedMessage id="ui-components__sidebar_wallet" />
                   </div>
                   <div className="okd-space-y-1">
                     {walletNavigation.map((item) => {
@@ -407,7 +427,13 @@ const Sidebar: FC<SidebarProps> = ({
                               />
                             )}
                             {!isCollapsed && (
-                              <span className="okd-ml-3">{item.name}</span>
+                              <span className="okd-ml-3">
+                                {item.translationId
+                                  ? intl.formatMessage({
+                                      id: `${item.translationId}`,
+                                    })
+                                  : item.name}
+                              </span>
                             )}
                           </div>
                           {/* Show badge if badgeType exist. */}
@@ -437,7 +463,7 @@ const Sidebar: FC<SidebarProps> = ({
                     { "okd-hidden": isCollapsed }
                   )}
                 >
-                  Trade
+                  <FormattedMessage id="ui-components__sidebar_trade" />
                 </div>
                 <div className="okd-space-y-1">
                   {tradeNavigation.map((item) => {
@@ -471,7 +497,13 @@ const Sidebar: FC<SidebarProps> = ({
                           )}
 
                           {!isCollapsed && (
-                            <span className="okd-ml-3">{item.name}</span>
+                            <span className="okd-ml-3">
+                              {item.translationId
+                                ? intl.formatMessage({
+                                    id: `${item.translationId}`,
+                                  })
+                                : item.name}
+                            </span>
                           )}
                         </div>
                         {/* Show badge if badgeType exist. */}
@@ -525,7 +557,13 @@ const Sidebar: FC<SidebarProps> = ({
                         )}
 
                         {!isCollapsed && (
-                          <span className="okd-ml-3">{item.name}</span>
+                          <span className="okd-ml-3">
+                            {item.translationId
+                              ? intl.formatMessage({
+                                  id: `${item.translationId}`,
+                                })
+                              : item.name}
+                          </span>
                         )}
                       </div>
                       {/* Show badge if badgeType exist. */}
