@@ -1,17 +1,17 @@
-import React, { FC, useEffect, useState, useMemo } from "react";
+import React, { FC, useEffect, useState, useMemo, useCallback } from "react";
 import {
   createIntl,
   createIntlCache,
   RawIntlProvider,
   IntlConfig,
 } from "react-intl";
+import cookie from "js-cookie";
 
 import { Context } from "./hooks";
+
 import { COLORS } from "../Theme";
 import locales from "../locales";
-import { getLocaleSymbol } from "../utils";
-
-export type localeType = IntlConfig["locale"];
+import { getLocaleSymbol, LocaleSymbol, OK_LOCALE_CACHE_KEY } from "../utils";
 
 const deepParseRecord = (
   obj: Record<string, Record<string, string> | string>,
@@ -34,7 +34,10 @@ const deepParseRecord = (
 
 const cache = createIntlCache();
 
-const Provider: FC<{ locale: localeType }> = ({ children, locale }) => {
+const Provider: FC<{
+  intl: IntlConfig;
+  messagesMap: Record<LocaleSymbol, Record<string, string>>;
+}> = ({ children, intl, messagesMap }) => {
   const [theme, setTheme] = useState<Record<string, string>>();
 
   useEffect(() => {
@@ -46,27 +49,57 @@ const Provider: FC<{ locale: localeType }> = ({ children, locale }) => {
     });
   }, []);
 
-  const validLocaleSymbol = getLocaleSymbol(locale);
-  const messages = locales[validLocaleSymbol];
+  const validLocaleSymbol = getLocaleSymbol(intl?.locale);
+  const getMessage = useCallback(
+    (activeLocale) => ({
+      ...locales[activeLocale],
+      ...(messagesMap?.[activeLocale] ?? intl?.messages ?? {}),
+    }),
+    [intl?.messages, messagesMap]
+  );
 
-  const [intl, setIntl] = useState(
-    createIntl({ locale: validLocaleSymbol, messages }, cache)
+  const [globalIntl, setGlobalIntl] = useState(
+    createIntl(
+      { locale: validLocaleSymbol, messages: getMessage(validLocaleSymbol) },
+      cache
+    )
   );
 
   useEffect(() => {
-    setIntl(createIntl({ locale: validLocaleSymbol, messages }, cache));
-  }, [validLocaleSymbol, messages]);
+    setGlobalIntl(
+      createIntl(
+        { locale: validLocaleSymbol, messages: getMessage(validLocaleSymbol) },
+        cache
+      )
+    );
+  }, [validLocaleSymbol, getMessage]);
 
   const providerValue = useMemo(() => {
+    const setLocale = (nextLocale: LocaleSymbol) => {
+      const validNextLocaleSymbol = getLocaleSymbol(nextLocale);
+      const nextMessages = getMessage(validNextLocaleSymbol);
+      setGlobalIntl(
+        createIntl(
+          { locale: validNextLocaleSymbol, messages: nextMessages },
+          cache
+        )
+      );
+      cookie.set(OK_LOCALE_CACHE_KEY, validNextLocaleSymbol, {
+        expires: 365,
+        domain: ".onekey.so",
+      });
+    };
+
     return {
       theme,
-      locale: intl.locale,
+      setLocale,
+      locale: globalIntl.locale,
     };
-  }, [theme, intl.locale]);
+  }, [theme, globalIntl.locale, getMessage]);
 
   return (
     <Context.Provider value={providerValue}>
-      <RawIntlProvider value={intl}>{children}</RawIntlProvider>
+      <RawIntlProvider value={globalIntl}>{children}</RawIntlProvider>
     </Context.Provider>
   );
 };

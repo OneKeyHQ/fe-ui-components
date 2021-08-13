@@ -12,9 +12,11 @@ export const parameters = {
 }
 
 export const decorators = [
-  (Story) => (
-    <Provider>
-      <Story />
-    </Provider>
-  ),
+  (Story) => {
+    return (
+      <Provider>
+        <Story />
+      </Provider>
+    );
+  }
 ];
