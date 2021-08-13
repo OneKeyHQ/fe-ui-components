@@ -1,9 +1,17 @@
 import React, { FC, useEffect, useState, useMemo } from "react";
-import { IntlProvider } from "react-intl";
+import {
+  createIntl,
+  createIntlCache,
+  RawIntlProvider,
+  IntlConfig,
+} from "react-intl";
 
 import { Context } from "./hooks";
-
 import { COLORS } from "../Theme";
+import locales from "../locales";
+import { getLocaleSymbol } from "../utils";
+
+export type localeType = IntlConfig["locale"];
 
 const deepParseRecord = (
   obj: Record<string, Record<string, string> | string>,
@@ -24,7 +32,9 @@ const deepParseRecord = (
   }, {});
 };
 
-const Provider: FC = ({ children }) => {
+const cache = createIntlCache();
+
+const Provider: FC<{ locale: localeType }> = ({ children, locale }) => {
   const [theme, setTheme] = useState<Record<string, string>>();
 
   useEffect(() => {
@@ -36,17 +46,27 @@ const Provider: FC = ({ children }) => {
     });
   }, []);
 
+  const validLocaleSymbol = getLocaleSymbol(locale);
+  const messages = locales[validLocaleSymbol];
+
+  const [intl, setIntl] = useState(
+    createIntl({ locale: validLocaleSymbol, messages }, cache)
+  );
+
+  useEffect(() => {
+    setIntl(createIntl({ locale: validLocaleSymbol, messages }, cache));
+  }, [validLocaleSymbol, messages]);
+
   const providerValue = useMemo(() => {
     return {
       theme,
+      locale: intl.locale,
     };
-  }, [theme]);
+  }, [theme, intl.locale]);
 
   return (
     <Context.Provider value={providerValue}>
-      <IntlProvider locale="en" defaultLocale="en">
-        {children}
-      </IntlProvider>
+      <RawIntlProvider value={intl}>{children}</RawIntlProvider>
     </Context.Provider>
   );
 };
