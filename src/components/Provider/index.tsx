@@ -34,10 +34,27 @@ const deepParseRecord = (
 
 const cache = createIntlCache();
 
-const Provider: FC<{
-  intl: IntlConfig;
-  messagesMap: Record<LocaleSymbol, Record<string, string>>;
-}> = ({ children, intl, messagesMap }) => {
+export type UIProviderProps = {
+  /**
+   * react-intl config
+   */
+  intl?: IntlConfig;
+  /**
+   * message map for locale config
+   */
+  messagesMap?: Record<LocaleSymbol, Record<string, string>>;
+  /**
+   * fallback locale symbol
+   */
+  defaultLocale?: LocaleSymbol;
+};
+
+const Provider: FC<UIProviderProps> = ({
+  children,
+  intl,
+  messagesMap,
+  defaultLocale,
+}) => {
   const [theme, setTheme] = useState<Record<string, string>>();
 
   useEffect(() => {
@@ -50,22 +67,30 @@ const Provider: FC<{
   }, []);
 
   const validLocaleSymbol = getLocaleSymbol(intl?.locale);
+
   const getMessage = useCallback(
     (activeLocale) => ({
       ...locales[activeLocale],
-      ...(messagesMap?.[activeLocale] ?? intl?.messages ?? {}),
+      ...(messagesMap?.[activeLocale] ??
+        messagesMap?.[defaultLocale] ??
+        intl?.messages ??
+        {}),
     }),
-    [intl?.messages, messagesMap]
+    [intl?.messages, messagesMap, defaultLocale]
   );
 
   const [globalIntl, setGlobalIntl] = useState(
     createIntl(
-      { locale: validLocaleSymbol, messages: getMessage(validLocaleSymbol) },
+      {
+        locale: validLocaleSymbol,
+        messages: getMessage(validLocaleSymbol),
+      },
       cache
     )
   );
 
   useEffect(() => {
+    console.log(validLocaleSymbol, getMessage(validLocaleSymbol));
     setGlobalIntl(
       createIntl(
         { locale: validLocaleSymbol, messages: getMessage(validLocaleSymbol) },
@@ -80,7 +105,10 @@ const Provider: FC<{
       const nextMessages = getMessage(validNextLocaleSymbol);
       setGlobalIntl(
         createIntl(
-          { locale: validNextLocaleSymbol, messages: nextMessages },
+          {
+            locale: validNextLocaleSymbol,
+            messages: nextMessages,
+          },
           cache
         )
       );
