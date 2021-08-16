@@ -11,7 +11,7 @@ import { Context } from "./hooks";
 
 import { COLORS } from "../Theme";
 import locales from "../locales";
-import { getLocaleSymbol, LocaleSymbol, OK_LOCALE_CACHE_KEY } from "../utils";
+import { getLocaleSymbol, LocaleSymbol, OK_LOCALE_CACHE_KEY, TranslationMap } from "../utils";
 
 const deepParseRecord = (
   obj: Record<string, Record<string, string> | string>,
@@ -40,9 +40,9 @@ export type UIProviderProps = {
    */
   intl?: IntlConfig;
   /**
-   * message map for locale config
+   * message map for locale config, using partial for non required translation projects
    */
-  messagesMap?: Record<LocaleSymbol, Record<string, string>>;
+  messagesMap?: Partial<TranslationMap>;
   /**
    * fallback locale symbol
    */

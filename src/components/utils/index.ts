@@ -4,6 +4,8 @@ import localMap from '../locales';
 export const OK_LOCALE_CACHE_KEY = '_onekey_locale_';
 
 export type LocaleSymbol = keyof typeof localMap;
+export type TranslationMap = Record<LocaleSymbol, Record<string, string>>
+
 export const localeSymbols = Object.keys(localMap) as LocaleSymbol[];
 
 /**
