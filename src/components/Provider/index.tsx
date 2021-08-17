@@ -71,8 +71,7 @@ const Provider: FC<UIProviderProps> = ({
   const getMessage = useCallback(
     (activeLocale) => ({
       ...locales[activeLocale],
-      ...(messagesMap?.[activeLocale] ??
-        messagesMap?.[defaultLocale] ??
+      ...({...(messagesMap?.[defaultLocale] ?? {}), ...(messagesMap?.[activeLocale] ?? {})} ??
         intl?.messages ??
         {}),
     }),
@@ -90,7 +89,6 @@ const Provider: FC<UIProviderProps> = ({
   );
 
   useEffect(() => {
-    console.log(validLocaleSymbol, getMessage(validLocaleSymbol));
     setGlobalIntl(
       createIntl(
         { locale: validLocaleSymbol, messages: getMessage(validLocaleSymbol) },
