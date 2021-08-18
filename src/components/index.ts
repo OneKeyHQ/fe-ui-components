@@ -1,5 +1,3 @@
-import "./index.css";
-
 export { COLORS } from "./Theme";
 export { default as Icon } from "./Icon";
 export { default as ICONS } from "./Icon/Icons";
@@ -17,4 +15,4 @@ export { default as Numberic } from "./Numberic";
 export { default as Dropdown } from "./Dropdown";
 export { default as UIProvider } from './Provider';
 
-export { useConfig, useLocale } from './Provider/hooks';
+export { useConfig, useLocale, useTheme, useColors } from './Provider/hooks';

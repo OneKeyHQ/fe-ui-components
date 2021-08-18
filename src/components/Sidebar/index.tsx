@@ -98,11 +98,11 @@ const Sidebar: FC<SidebarProps> = ({
   return (
     <>
       {/* Mobile Header */}
-      <div className="okd-flex okd-justify-between okd-py-1 okd-bg-white okd-border-b okd-border-gray-100 lg:okd-hidden dark:okd-bg-gray-800 dark:okd-border-gray-700 okd-z-[1]">
+      <div className="okd-flex okd-justify-between okd-py-1 okd-bg-white okd-border-b okd-border-gray-100 lg:okd-hidden okd-z-[1]">
         {/* Brand */}
         <div className="okd-flex okd-items-center okd-flex-shrink-0 okd-pl-4">
           <Icon
-            className="okd-w-7 okd-h-7 okd-text-brand-500 dark:okd-text-brand-400"
+            className="okd-w-7 okd-h-7 okd-text-brand-500"
             name="BRAND-LOGO-SOLID"
             size={28}
             aria-label="The Brand Logo – OneKey"
@@ -120,7 +120,7 @@ const Sidebar: FC<SidebarProps> = ({
             <Icon
               onClick={() => setSidebarOpen(!sidebarOpen)}
               name="MENU-OUTLINE"
-              className="okd-w-6 okd-h-6 okd-text-gray-500 dark:okd-text-gray-400"
+              className="okd-w-6 okd-h-6 okd-text-gray-500"
             />
           </span>
         </button>
@@ -155,7 +155,7 @@ const Sidebar: FC<SidebarProps> = ({
             leaveFrom="okd-translate-x-0"
             leaveTo="okd--translate-x-full"
           >
-            <div className="okd-relative okd-flex okd-flex-col okd-flex-1 okd-w-full okd-max-w-xs okd-py-5 okd-bg-gray-50 dark:okd-bg-gray-800 dark:okd-border-gray-700">
+            <div className="okd-relative okd-flex okd-flex-col okd-flex-1 okd-w-full okd-max-w-xs okd-py-5 okd-bg-gray-50">
               <Transition.Child
                 as={Fragment}
                 enter="okd-ease-in-out okd-duration-300"
@@ -184,7 +184,7 @@ const Sidebar: FC<SidebarProps> = ({
               {/* Brand */}
               <div className="okd-flex okd-items-center okd-flex-shrink-0 okd-pl-[22px]">
                 <Icon
-                  className="okd-w-7 okd-h-7 okd-text-brand-500 dark:okd-text-brand-400"
+                  className="okd-w-7 okd-h-7 okd-text-brand-500 "
                   name="BRAND-LOGO-SOLID"
                   size={28}
                   aria-label="The Brand Logo – OneKey"
@@ -197,7 +197,7 @@ const Sidebar: FC<SidebarProps> = ({
                   {!!walletNavigation?.length && (
                     <div>
                       {/* Group Title */}
-                      <div className="okd-pl-2 okd-mb-2 okd-text-xs okd-font-medium okd-tracking-wider okd-text-gray-500 okd-uppercase dark:okd-text-gray-400">
+                      <div className="okd-pl-2 okd-mb-2 okd-text-xs okd-font-medium okd-tracking-wider okd-text-gray-500 okd-uppercase">
                         <FormattedMessage id="ui-components__sidebar_wallet" />
                       </div>
                       <div className="space-y-1">
@@ -209,8 +209,8 @@ const Sidebar: FC<SidebarProps> = ({
                               key={item.name}
                               className={classNames(
                                 isActive
-                                  ? "okd-bg-gray-200 okd-text-gray-900 dark:okd-bg-gray-600 dark:okd-text-white"
-                                  : "okd-text-gray-600 hover:okd-text-gray-900 hover:okd-bg-gray-100 dark:hover:okd-bg-gray-700 dark:okd-text-gray-300 dark:hover:okd-text-white",
+                                  ? "okd-bg-gray-200 okd-text-gray-900"
+                                  : "okd-text-gray-600 hover:okd-text-gray-900 hover:okd-bg-gray-100",
                                 "okd-group okd-justify-between okd-flex okd-items-center okd-px-2 okd-py-2 okd-text-sm okd-font-medium okd-rounded-md"
                               )}
                               aria-current={isActive ? "page" : undefined}
@@ -221,8 +221,8 @@ const Sidebar: FC<SidebarProps> = ({
                                     className={classNames(
                                       "okd-mr-3 okd-flex-shrink-0 okd-h-6 okd-w-6",
                                       isActive
-                                        ? "okd-text-gray-500 dark:okd-text-gray-400"
-                                        : "okd-text-gray-400 group-hover:okd-text-gray-500 dark:okd-text-gray-500 dark:group-hover:okd-text-gray-400"
+                                        ? "okd-text-gray-500"
+                                        : "okd-text-gray-400 group-hover:okd-text-gray-500"
                                     )}
                                     name={item.icon}
                                     aria-hidden="true"
@@ -250,7 +250,7 @@ const Sidebar: FC<SidebarProps> = ({
                   {/* Trade */}
                   <div>
                     {/* Group Title */}
-                    <div className="okd-pl-2 okd-mb-2 okd-text-xs okd-font-medium okd-tracking-wider okd-text-gray-500 okd-uppercase dark:okd-text-gray-400">
+                    <div className="okd-pl-2 okd-mb-2 okd-text-xs okd-font-medium okd-tracking-wider okd-text-gray-500 okd-uppercase">
                       <FormattedMessage id="ui-components__sidebar_trade" />
                     </div>
                     <div className="okd-space-y-1">
@@ -264,8 +264,8 @@ const Sidebar: FC<SidebarProps> = ({
                             target={item.blank ? "_blank" : "_self"}
                             className={classNames(
                               isActive
-                                ? "okd-bg-gray-200 okd-text-gray-900 dark:okd-bg-gray-600 dark:okd-text-white"
-                                : "okd-text-gray-600 hover:okd-text-gray-900 hover:okd-bg-gray-100 dark:hover:okd-bg-gray-700 dark:okd-text-gray-300 dark:hover:okd-text-white",
+                                ? "okd-bg-gray-200 okd-text-gray-900"
+                                : "okd-text-gray-600 hover:okd-text-gray-900 hover:okd-bg-gray-100",
                               "group okd-justify-between okd-flex okd-items-center okd-px-2 okd-py-2 okd-text-sm okd-font-medium okd-rounded-md"
                             )}
                             aria-current={isActive ? "page" : undefined}
@@ -276,8 +276,8 @@ const Sidebar: FC<SidebarProps> = ({
                                   className={classNames(
                                     "okd-mr-3 okd-flex-shrink-0 okd-h-6 okd-w-6",
                                     isActive
-                                      ? "okd-text-gray-500 dark:okd-text-gray-400"
-                                      : "okd-text-gray-400 group-hover:okd-text-gray-500 dark:okd-text-gray-500 dark:group-hover:okd-text-gray-400"
+                                      ? "okd-text-gray-500"
+                                      : "okd-text-gray-400 group-hover:okd-text-gray-500"
                                   )}
                                   name={item.icon}
                                   aria-hidden="true"
@@ -314,8 +314,8 @@ const Sidebar: FC<SidebarProps> = ({
                           key={item.name}
                           className={classNames(
                             isActive
-                              ? "okd-bg-gray-200 okd-text-gray-900 dark:okd-bg-gray-600 dark:okd-text-white"
-                              : "okd-text-gray-600 hover:okd-text-gray-900 hover:okd-bg-gray-100 dark:hover:okd-bg-gray-700 dark:okd-text-gray-300 dark:hover:okd-text-white",
+                              ? "okd-bg-gray-200 okd-text-gray-900"
+                              : "okd-text-gray-600 hover:okd-text-gray-900 hover:okd-bg-gray-100",
                             "group justify-between flex okd-items-center okd-px-2 okd-py-2 okd-text-sm okd-font-medium okd-rounded-md"
                           )}
                           aria-current={isActive ? "page" : undefined}
@@ -326,8 +326,8 @@ const Sidebar: FC<SidebarProps> = ({
                                 className={classNames(
                                   "okd-mr-3 okd-flex-shrink-0 okd-h-6 okd-w-6",
                                   isActive
-                                    ? "okd-text-gray-500 dark:okd-text-gray-400"
-                                    : "okd-text-gray-400 group-hover:okd-text-gray-500 dark:okd-text-gray-500 dark:group-hover:okd-text-gray-400"
+                                    ? "okd-text-gray-500"
+                                    : "okd-text-gray-400 group-hover:okd-text-gray-500"
                                 )}
                                 name={item.icon}
                                 aria-hidden="true"
@@ -364,7 +364,7 @@ const Sidebar: FC<SidebarProps> = ({
       <div className="okd-relative lg:okd-inline-block okd-hidden okd-h-full okd-sidebar">
         <div
           className={classNames(
-            "okd-flex okd-flex-col okd-py-5 okd-border-r okd-border-gray-100 okd-bg-gray-50 dark:okd-bg-gray-800 dark:okd-border-gray-700 okd-h-full",
+            "okd-flex okd-flex-col okd-py-5 okd-border-r okd-border-gray-100 okd-bg-gray-50 okd-h-full",
             isCollapsed ? "okd-w-auto" : "okd-w-64"
           )}
         >
@@ -374,7 +374,7 @@ const Sidebar: FC<SidebarProps> = ({
             onClick={() => window.location.reload()}
           >
             <Icon
-              className="okd-w-7 okd-h-7 okd-text-brand-500 dark:okd-text-brand-400"
+              className="okd-w-7 okd-h-7 okd-text-brand-500 "
               name="BRAND-LOGO-SOLID"
               size={28}
               aria-label="The Brand Logo – OneKey"
@@ -392,7 +392,7 @@ const Sidebar: FC<SidebarProps> = ({
                   {/* Group Title */}
                   <div
                     className={classNames(
-                      "okd-pl-2 okd-mb-2 okd-text-xs okd-font-medium okd-tracking-wider okd-text-gray-500 okd-uppercase dark:okd-text-gray-400",
+                      "okd-pl-2 okd-mb-2 okd-text-xs okd-font-medium okd-tracking-wider okd-text-gray-500 okd-uppercase",
                       { "okd-hidden": isCollapsed }
                     )}
                   >
@@ -407,8 +407,8 @@ const Sidebar: FC<SidebarProps> = ({
                           key={item.name}
                           className={classNames(
                             isActive
-                              ? "okd-bg-gray-200 okd-text-gray-900 dark:okd-bg-gray-600 dark:okd-text-white"
-                              : "okd-text-gray-600 hover:okd-text-gray-900 hover:okd-bg-gray-100 dark:hover:okd-bg-gray-700 dark:okd-text-gray-300 dark:hover:okd-text-white",
+                              ? "okd-bg-gray-200 okd-text-gray-900"
+                              : "okd-text-gray-600 hover:okd-text-gray-900 hover:okd-bg-gray-100",
                             "okd-group okd-justify-between okd-flex okd-items-center okd-px-2 okd-py-2 okd-text-sm okd-font-medium okd-rounded-md"
                           )}
                           aria-current={isActive ? "page" : undefined}
@@ -419,8 +419,8 @@ const Sidebar: FC<SidebarProps> = ({
                                 className={classNames(
                                   "okd-flex-shrink-0 okd-h-6 okd-w-6",
                                   isActive
-                                    ? "okd-text-gray-500 dark:okd-text-gray-400"
-                                    : "okd-text-gray-400 group-hover:okd-text-gray-500 dark:okd-text-gray-500 dark:group-hover:okd-text-gray-400"
+                                    ? "okd-text-gray-500"
+                                    : "okd-text-gray-400 group-hover:okd-text-gray-500"
                                 )}
                                 name={item.icon}
                                 aria-hidden="true"
@@ -459,7 +459,7 @@ const Sidebar: FC<SidebarProps> = ({
                 {/* Group Title */}
                 <div
                   className={classNames(
-                    "okd-pl-2 okd-mb-2 okd-text-xs okd-font-medium okd-tracking-wider okd-text-gray-500 okd-uppercase dark:okd-text-gray-400",
+                    "okd-pl-2 okd-mb-2 okd-text-xs okd-font-medium okd-tracking-wider okd-text-gray-500 okd-uppercase",
                     { "okd-hidden": isCollapsed }
                   )}
                 >
@@ -476,8 +476,8 @@ const Sidebar: FC<SidebarProps> = ({
                         target={item.blank ? "_blank" : "_self"}
                         className={classNames(
                           isActive
-                            ? "okd-bg-gray-200 okd-text-gray-900 dark:okd-bg-gray-600 dark:okd-text-white"
-                            : "okd-text-gray-600 hover:okd-text-gray-900 hover:okd-bg-gray-100 dark:hover:okd-bg-gray-700 dark:okd-text-gray-300 dark:hover:okd-text-white",
+                            ? "okd-bg-gray-200 okd-text-gray-900"
+                            : "okd-text-gray-600 hover:okd-text-gray-900 hover:okd-bg-gray-100",
                           "okd-group okd-justify-between okd-flex okd-items-center okd-px-2 okd-py-2 okd-text-sm okd-font-medium okd-rounded-md"
                         )}
                         aria-current={isActive ? "page" : undefined}
@@ -488,8 +488,8 @@ const Sidebar: FC<SidebarProps> = ({
                               className={classNames(
                                 "okd-flex-shrink-0 okd-h-6 okd-w-6",
                                 isActive
-                                  ? "okd-text-gray-500 dark:okd-text-gray-400"
-                                  : "okd-text-gray-400 group-hover:okd-text-gray-500 dark:okd-text-gray-500 dark:group-hover:okd-text-gray-400"
+                                  ? "okd-text-gray-500"
+                                  : "okd-text-gray-400 group-hover:okd-text-gray-500"
                               )}
                               name={item.icon}
                               aria-hidden="true"
@@ -536,8 +536,8 @@ const Sidebar: FC<SidebarProps> = ({
                       key={item.name}
                       className={classNames(
                         isActive
-                          ? "okd-bg-gray-200 okd-text-gray-900 dark:okd-bg-gray-600 dark:okd-text-white"
-                          : "okd-text-gray-600 hover:okd-text-gray-900 hover:okd-bg-gray-100 dark:hover:okd-bg-gray-700 dark:okd-text-gray-300 dark:hover:okd-text-white",
+                          ? "okd-bg-gray-200 okd-text-gray-900"
+                          : "okd-text-gray-600 hover:okd-text-gray-900 hover:okd-bg-gray-100",
                         "okd-group okd-justify-between okd-flex okd-items-center okd-px-2 okd-py-2 okd-text-sm okd-font-medium okd-rounded-md"
                       )}
                       aria-current={isActive ? "page" : undefined}
@@ -548,8 +548,8 @@ const Sidebar: FC<SidebarProps> = ({
                             className={classNames(
                               "okd-flex-shrink-0 okd-h-6 okd-w-6",
                               isActive
-                                ? "okd-text-gray-500 dark:okd-text-gray-400"
-                                : "okd-text-gray-400 group-hover:okd-text-gray-500 dark:okd-text-gray-500 dark:group-hover:okd-text-gray-400"
+                                ? "okd-text-gray-500"
+                                : "okd-text-gray-400 group-hover:okd-text-gray-500"
                             )}
                             name={item.icon}
                             aria-hidden="true"
@@ -586,7 +586,7 @@ const Sidebar: FC<SidebarProps> = ({
             onClick={() => setIsCollapsed((isCollapsed) => !isCollapsed)}
           >
             <div className="okd-w-0.5 okd-h-full okd-transition okd-bg-transparent group-hover:okd-bg-brand-500" />
-            <div className="okd-absolute okd-p-1.5 okd-bg-white okd-border okd-border-gray-200 okd-rounded-full okd-top-4 okd-shadow-sm dark:okd-bg-gray-900 dark:okd-border-gray-700 okd-transition okd-scale-75 okd-collapse-indicate okd-opacity-0">
+            <div className="okd-absolute okd-p-1.5 okd-bg-white okd-border okd-border-gray-200 okd-rounded-full okd-top-4 okd-shadow-sm okd-transition okd-scale-75 okd-collapse-indicate okd-opacity-0">
               <Icon
                 name="CHEVRON-LEFT-OUTLINE"
                 size={16}

@@ -24,4 +24,7 @@ const locales = {
   "zh-TW": zhTW,
 } as const;
 
+export type LocaleSymbol = keyof typeof locales;
+export type LocaleMessages = typeof locales[LocaleSymbol];
+
 export default locales;
