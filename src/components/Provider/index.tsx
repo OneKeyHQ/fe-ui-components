@@ -9,28 +9,11 @@ import cookie from "js-cookie";
 
 import { Context } from "./hooks";
 
-import { COLORS } from "../Theme";
-import locales from "../locales";
-import { getLocaleSymbol, LocaleSymbol, OK_LOCALE_CACHE_KEY, TranslationMap } from "../utils";
+import { COLORS, getDefaultTheme } from "../Theme";
+import type { ThemeValues } from '../Theme/colors'
 
-const deepParseRecord = (
-  obj: Record<string, Record<string, string> | string>,
-  prefix: string = ""
-): Record<string, string> => {
-  return Object.entries(obj).reduce((memo, current) => {
-    const [key, value] = current;
-    if (typeof value === "object") {
-      return {
-        ...memo,
-        ...deepParseRecord(value, `${prefix}${key}`),
-      };
-    }
-    return {
-      ...memo,
-      [`${prefix}-${key}`]: value,
-    };
-  }, {});
-};
+import locales from '../locales';
+import { getLocaleSymbol, LocaleSymbol, OK_LOCALE_CACHE_KEY, TranslationMap } from "../utils";
 
 const cache = createIntlCache();
 
@@ -55,16 +38,16 @@ const Provider: FC<UIProviderProps> = ({
   messagesMap,
   defaultLocale,
 }) => {
-  const [theme, setTheme] = useState<Record<string, string>>();
-
+  const [theme, setTheme] = useState<ThemeValues>();
+  const [themeVariant, setThemeVariant] = useState<keyof typeof COLORS>(getDefaultTheme());
   useEffect(() => {
-    const theme = deepParseRecord(COLORS);
-    setTheme(theme);
-    Object.entries(theme).forEach(([key, value]) => {
+    const currentTheme = COLORS[themeVariant] ?? COLORS[getDefaultTheme()];
+    Object.entries(currentTheme).forEach(([key, value]) => {
       if (typeof document === "undefined") return;
       document.documentElement.style.setProperty(`--${key}`, value);
     });
-  }, []);
+    setTheme(currentTheme);
+  }, [themeVariant]);
 
   const validLocaleSymbol = getLocaleSymbol(intl?.locale);
 
@@ -118,10 +101,12 @@ const Provider: FC<UIProviderProps> = ({
 
     return {
       theme,
+      themeVariant,
+      setThemeVariant,
       setLocale,
-      locale: globalIntl.locale,
+      locale: globalIntl.locale as LocaleSymbol,
     };
-  }, [theme, globalIntl.locale, getMessage]);
+  }, [theme, globalIntl.locale, getMessage, themeVariant, setThemeVariant]);
 
   return (
     <Context.Provider value={providerValue}>
