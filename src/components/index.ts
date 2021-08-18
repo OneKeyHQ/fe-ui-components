@@ -1,5 +1,3 @@
-import "./index.css";
-
 export { COLORS } from "./Theme";
 export { default as Icon } from "./Icon";
 export { default as ICONS } from "./Icon/Icons";
