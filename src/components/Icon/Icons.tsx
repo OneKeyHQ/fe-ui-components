@@ -231,6 +231,7 @@ import VolumeUpOutline from "./react/outline/VolumeUp";
 import WifiOutline from "./react/outline/Wifi";
 import ZoomInOutline from "./react/outline/ZoomIn";
 import ZoomOutOutline from "./react/outline/ZoomOut";
+import LoadingOutline from "./react/outline/LoadingOutline";
 import AcademicCapSolid from "./react/solid/AcademicCap";
 import AdjustmentsSolid from "./react/solid/Adjustments";
 import AnnotationSolid from "./react/solid/Annotation";
@@ -695,6 +696,7 @@ export type ICON_NAMES =
   | "WifiOutline"
   | "ZoomInOutline"
   | "ZoomOutOutline"
+  | "LoadingOutline"
   | "AcademicCapSolid"
   | "AdjustmentsSolid"
   | "AnnotationSolid"
@@ -1159,6 +1161,7 @@ export default {
   WifiOutline: WifiOutline,
   ZoomInOutline: ZoomInOutline,
   ZoomOutOutline: ZoomOutOutline,
+  LoadingOutline: LoadingOutline,
   AcademicCapSolid: AcademicCapSolid,
   AdjustmentsSolid: AdjustmentsSolid,
   AnnotationSolid: AnnotationSolid,

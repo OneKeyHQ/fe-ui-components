@@ -29,6 +29,7 @@ module.exports = {
       DEFAULT: "0.75rem",
       lg: "1.5rem",
       full: "9999px",
+      circle: "50%",
     },
     boxShadow: boxShadow,
   },
