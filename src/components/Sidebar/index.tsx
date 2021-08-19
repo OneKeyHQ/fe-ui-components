@@ -29,9 +29,13 @@ type ActionTab = {
    */
   blank?: boolean;
   /**
-   * badge 角标类型
+   * badge 徽章类型
    */
   badgeType?: BadgeProps["type"];
+  /**
+   * badge 徽章主题
+   */
+  badgeTheme?: BadgeProps["theme"];
   /**
    * badge 角标内容
    */
@@ -66,7 +70,8 @@ const DEFAULT_TRADE_NAVIGATION: ActionTab[] = [
     href: "https://discover.onekey.so/",
     icon: "COMPASS-OUTLINE",
     translationId: "ui-components__sidebar_discover",
-    badgeType: "added",
+    badgeType: "default",
+    badgeTheme: "ongray",
     badgeContent: "BETA",
     blank: false,
   },
@@ -236,7 +241,7 @@ const Sidebar: FC<SidebarProps> = ({
                               </div>
                               {/* Show badge if badgeType exist. */}
                               {item.badgeType && (
-                                <Badge type={item.badgeType}>
+                                <Badge type={item.badgeType} theme={item.badgeTheme}>
                                   {item.badgeContent}
                                 </Badge>
                               )}
@@ -291,7 +296,7 @@ const Sidebar: FC<SidebarProps> = ({
                             </div>
                             {/* Show badge if badgeType exist. */}
                             {item.badgeType && (
-                              <Badge type={item.badgeType}>
+                              <Badge type={item.badgeType} theme={item.badgeTheme}>
                                 {item.badgeContent}
                               </Badge>
                             )}
@@ -341,7 +346,7 @@ const Sidebar: FC<SidebarProps> = ({
                           </div>
                           {/* Show badge if badgeType exist. */}
                           {item.badgeType && (
-                            <Badge type={item.badgeType}>
+                            <Badge type={item.badgeType} theme={item.badgeTheme}>
                               {item.badgeContent}
                             </Badge>
                           )}
@@ -443,6 +448,7 @@ const Sidebar: FC<SidebarProps> = ({
                                 "okd-hidden": isCollapsed,
                               })}
                               type={item.badgeType}
+                              theme={item.badgeTheme}
                             >
                               {item.badgeContent}
                             </Badge>
@@ -513,6 +519,7 @@ const Sidebar: FC<SidebarProps> = ({
                               "okd-hidden": isCollapsed,
                             })}
                             type={item.badgeType}
+                            theme={item.badgeTheme}
                           >
                             {item.badgeContent}
                           </Badge>
@@ -568,7 +575,7 @@ const Sidebar: FC<SidebarProps> = ({
                       </div>
                       {/* Show badge if badgeType exist. */}
                       {item.badgeType && (
-                        <Badge type={item.badgeType}>{item.badgeContent}</Badge>
+                        <Badge type={item.badgeType} theme={item.badgeTheme}>{item.badgeContent}</Badge>
                       )}
                     </a>
                   );
