@@ -10,18 +10,18 @@ export type BadgeProps = {
   /**
    * 是否坐落在灰色的背景上，默认所处环境是白色
    */
-  onGray?: boolean;
+  theme?: "default" | "ongray";
 
   /**
    * 类型
    */
   type?: "default" | "success" | "info" | "warning" | "critical";
 
-  /*
+  /**
    * 圆点 – 装饰性元素，默认不显示，通常用来强调状态，如 pending, success, warning
    */
   dot?: boolean;
-  
+
   /**
    * 传入 badge 组件的样式名称
    */
@@ -31,7 +31,7 @@ export type BadgeProps = {
 const defaultProps = {
   size: "sm",
   type: "default",
-  onGray: false,
+  theme: "default",
   dot: false,
 } as const;
 
@@ -40,7 +40,7 @@ const Badge: FC<BadgeProps> = ({
   children,
   type,
   size,
-  onGray,
+  theme,
   dot,
   ...rest
 }) => {
@@ -53,21 +53,20 @@ const Badge: FC<BadgeProps> = ({
           "okd-px-1.5 okd-text-xs": size === "sm",
           "okd-px-2 okd-text-sm": size === "lg",
         },
-        onGray
-          ? {
-              "okd-bg-gray-200 okd-text-gray-600": type === "default",
-              "okd-bg-green-200 okd-text-green-700": type === "success",
-              "okd-bg-blue-100 okd-text-blue-600": type === "info",
-              "okd-bg-yellow-200 okd-text-yellow-800": type === "warning",
-              "okd-bg-red-100 okd-text-red-500": type === "critical",
-            }
-          : {
-              "okd-bg-gray-100 okd-text-gray-500": type === "default",
-              "okd-bg-green-100 okd-text-green-600": type === "success",
-              "okd-bg-blue-100 okd-text-blue-600": type === "info",
-              "okd-bg-yellow-100 okd-text-yellow-700": type === "warning",
-              "okd-bg-red-100 okd-text-red-500": type === "critical",
-            }
+        {
+          "okd-bg-gray-100 okd-text-gray-500": type === "default",
+          "okd-bg-green-100 okd-text-green-600": type === "success",
+          "okd-bg-blue-100 okd-text-blue-600": type === "info",
+          "okd-bg-yellow-100 okd-text-yellow-700": type === "warning",
+          "okd-bg-red-100 okd-text-red-500": type === "critical",
+        },
+        {
+          "okd-bg-gray-200 okd-text-gray-600": type === "default" && theme === "ongray",
+          "okd-bg-green-200 okd-text-green-700": type === "success" && theme === "ongray",
+          "okd-bg-blue-100 okd-text-blue-600": type === "info" && theme === "ongray",
+          "okd-bg-yellow-200 okd-text-yellow-800": type === "warning" && theme === "ongray",
+          "okd-bg-red-100 okd-text-red-500": type === "critical" && theme === "ongray",
+        }
       )}
       {...rest}
     >

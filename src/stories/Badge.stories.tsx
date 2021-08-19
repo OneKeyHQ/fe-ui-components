@@ -23,26 +23,26 @@ Default.args = {
   children: "Badge",
 };
 
-export const Primary = Template.bind({});
-Primary.args = {
-  type: "primary",
+export const Success = Template.bind({});
+Success.args = {
+  type: "success",
   children: "Badge",
 };
 
-export const Important = Template.bind({});
-Important.args = {
-  type: "important",
+export const Info = Template.bind({});
+Info.args = {
+  type: "info",
   children: "Badge",
 };
 
-export const Removed = Template.bind({});
-Removed.args = {
-  type: "removed",
+export const Warning = Template.bind({});
+Warning.args = {
+  type: "warning",
   children: "Badge",
 };
 
-export const Added = Template.bind({});
-Added.args = {
-  type: "added",
+export const Critical = Template.bind({});
+Critical.args = {
+  type: "critical",
   children: "Badge",
 };
