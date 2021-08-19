@@ -81,6 +81,7 @@ module.exports = {
           '"Noto Sans CJK SC"',
           "WenQuanYi Micro Hei",
         ],
+        mono: ["SF Mono", ...defaultTheme.fontFamily.sans],
       },
     },
   },
