@@ -20,7 +20,7 @@ const ThemeComponent = () => {
                 </div>
                 <div>
                   <code className="okd-text-xs okd-text-gray-500">
-                    colors.{key}
+                    variant: {key}
                   </code>
                 </div>
               </div>

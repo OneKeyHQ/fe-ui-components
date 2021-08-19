@@ -2,6 +2,7 @@ import React, { FC } from "react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 
 import { Sidebar as SidebarComponent } from "../components";
+import ConfigBar from './Base';
 
 export default {
   title: "CUSTOM/Sidebar",
@@ -14,6 +15,7 @@ const Page: FC = ({ children }) => {
 
 export const Sidebar: ComponentStory<typeof SidebarComponent> = (args) => (
   <Page>
+    <ConfigBar />
     <SidebarComponent {...args} />
   </Page>
 );

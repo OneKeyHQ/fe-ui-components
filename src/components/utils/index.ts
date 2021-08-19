@@ -1,9 +1,12 @@
 import cookie from 'js-cookie';
+import localMap from '../locales';
 
 export const OK_LOCALE_CACHE_KEY = '_onekey_locale_';
 
-export const localeSymbols = ['zh-CN', 'en-US'] as const;
-export type LocaleSymbol = (typeof localeSymbols)[number];
+export type LocaleSymbol = keyof typeof localMap;
+export type TranslationMap = Record<LocaleSymbol, Record<string, string>>
+
+export const localeSymbols = Object.keys(localMap) as LocaleSymbol[];
 
 /**
  * isomorphic get user current locale

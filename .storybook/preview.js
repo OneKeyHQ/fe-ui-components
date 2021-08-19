@@ -1,5 +1,6 @@
 import React from 'react';
 import Provider from '../src/components/Provider';
+import "../src/components/index.css";
 
 export const parameters = {
   actions: { argTypesRegex: "^on[A-Z].*" },
