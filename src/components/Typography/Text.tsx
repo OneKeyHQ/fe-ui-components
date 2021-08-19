@@ -13,6 +13,18 @@ export const textWeights = {
   semibold: 'okd-font-semibold',
   bold: 'okd-font-bold'
 }
+
+export const textColors = {
+  brand: "okd-text-brand-500",
+  gray: "okd-text-gray-500",
+  green: "okd-text-green-500",
+  blue: "okd-text-blue-500",
+  yellow: "okd-text-yellow-500",
+  red: "okd-text-red-500",
+  white: "okd-text-gray-50",
+  black: "okd-text-gray-900",
+}
+
 export interface BlockProps {
   // decorations
   code?: boolean;
@@ -45,7 +57,7 @@ export interface TextProps
   /**
    * Controls the color of the text
    */
-  color?: string
+  color?: keyof typeof textColors
 
   /** The HTML element to be used */
   as?: 'a' | 'span' | 'p'
@@ -77,7 +89,8 @@ function wrapperDecorations(
 const defaultProps = {
   as: 'span',
   size: 'sm',
-  weight: 'normal'
+  weight: 'normal',
+  color: 'black'
 } as const
 
 /**
@@ -92,19 +105,20 @@ const defaultProps = {
  */
 export const Text = React.forwardRef<HTMLElement, TextProps>((props, ref) => {
   const {
-    size, weight, as: Component, color,
+    size, weight, color, as: Component,
     children,
     ...restProps
   } = props
 
   const finalProps = {
+    ...restProps,
     className: cx(
-      'okd-typography okd-text-gray-900',
-      props.className,
+      'okd-typography',
       textSizes[size],
       textWeights[weight],
+      textColors[color],
+      props.className,
     ),
-    ...restProps,
   }
 
   let textContent: ReactElement = (

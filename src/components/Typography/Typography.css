@@ -75,11 +75,6 @@
         pointer-events: none;
       }
     }
-
-    & span {
-      color: inherit;
-      font-weight: inherit;
-    }
   }
 
   code {
