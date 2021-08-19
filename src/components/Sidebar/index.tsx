@@ -29,9 +29,13 @@ type ActionTab = {
    */
   blank?: boolean;
   /**
-   * badge 角标类型
+   * badge 徽章类型
    */
   badgeType?: BadgeProps["type"];
+  /**
+   * badge 徽章主题
+   */
+  badgeTheme?: BadgeProps["theme"];
   /**
    * badge 角标内容
    */
@@ -66,7 +70,8 @@ const DEFAULT_TRADE_NAVIGATION: ActionTab[] = [
     href: "https://discover.onekey.so/",
     icon: "COMPASS-OUTLINE",
     translationId: "ui-components__sidebar_discover",
-    badgeType: "added",
+    badgeType: "default",
+    badgeTheme: "ongray",
     badgeContent: "BETA",
     blank: false,
   },
@@ -211,7 +216,7 @@ const Sidebar: FC<SidebarProps> = ({
                                 isActive
                                   ? "okd-bg-gray-200 okd-text-gray-900"
                                   : "okd-text-gray-600 hover:okd-text-gray-900 hover:okd-bg-gray-100",
-                                "okd-group okd-justify-between okd-flex okd-items-center okd-px-2 okd-py-2 okd-text-sm okd-font-medium okd-rounded-md"
+                                "okd-group okd-justify-between okd-flex okd-items-center okd-px-2 okd-py-2 okd-text-sm okd-font-medium okd-rounded"
                               )}
                               aria-current={isActive ? "page" : undefined}
                             >
@@ -236,7 +241,7 @@ const Sidebar: FC<SidebarProps> = ({
                               </div>
                               {/* Show badge if badgeType exist. */}
                               {item.badgeType && (
-                                <Badge type={item.badgeType}>
+                                <Badge type={item.badgeType} theme={item.badgeTheme}>
                                   {item.badgeContent}
                                 </Badge>
                               )}
@@ -266,7 +271,7 @@ const Sidebar: FC<SidebarProps> = ({
                               isActive
                                 ? "okd-bg-gray-200 okd-text-gray-900"
                                 : "okd-text-gray-600 hover:okd-text-gray-900 hover:okd-bg-gray-100",
-                              "group okd-justify-between okd-flex okd-items-center okd-px-2 okd-py-2 okd-text-sm okd-font-medium okd-rounded-md"
+                              "group okd-justify-between okd-flex okd-items-center okd-px-2 okd-py-2 okd-text-sm okd-font-medium okd-rounded"
                             )}
                             aria-current={isActive ? "page" : undefined}
                           >
@@ -291,7 +296,7 @@ const Sidebar: FC<SidebarProps> = ({
                             </div>
                             {/* Show badge if badgeType exist. */}
                             {item.badgeType && (
-                              <Badge type={item.badgeType}>
+                              <Badge type={item.badgeType} theme={item.badgeTheme}>
                                 {item.badgeContent}
                               </Badge>
                             )}
@@ -316,7 +321,7 @@ const Sidebar: FC<SidebarProps> = ({
                             isActive
                               ? "okd-bg-gray-200 okd-text-gray-900"
                               : "okd-text-gray-600 hover:okd-text-gray-900 hover:okd-bg-gray-100",
-                            "group justify-between flex okd-items-center okd-px-2 okd-py-2 okd-text-sm okd-font-medium okd-rounded-md"
+                            "group justify-between flex okd-items-center okd-px-2 okd-py-2 okd-text-sm okd-font-medium okd-rounded"
                           )}
                           aria-current={isActive ? "page" : undefined}
                         >
@@ -341,7 +346,7 @@ const Sidebar: FC<SidebarProps> = ({
                           </div>
                           {/* Show badge if badgeType exist. */}
                           {item.badgeType && (
-                            <Badge type={item.badgeType}>
+                            <Badge type={item.badgeType} theme={item.badgeTheme}>
                               {item.badgeContent}
                             </Badge>
                           )}
@@ -409,7 +414,7 @@ const Sidebar: FC<SidebarProps> = ({
                             isActive
                               ? "okd-bg-gray-200 okd-text-gray-900"
                               : "okd-text-gray-600 hover:okd-text-gray-900 hover:okd-bg-gray-100",
-                            "okd-group okd-justify-between okd-flex okd-items-center okd-px-2 okd-py-2 okd-text-sm okd-font-medium okd-rounded-md"
+                            "okd-group okd-justify-between okd-flex okd-items-center okd-px-2 okd-py-2 okd-text-sm okd-font-medium okd-rounded"
                           )}
                           aria-current={isActive ? "page" : undefined}
                         >
@@ -443,6 +448,7 @@ const Sidebar: FC<SidebarProps> = ({
                                 "okd-hidden": isCollapsed,
                               })}
                               type={item.badgeType}
+                              theme={item.badgeTheme}
                             >
                               {item.badgeContent}
                             </Badge>
@@ -478,7 +484,7 @@ const Sidebar: FC<SidebarProps> = ({
                           isActive
                             ? "okd-bg-gray-200 okd-text-gray-900"
                             : "okd-text-gray-600 hover:okd-text-gray-900 hover:okd-bg-gray-100",
-                          "okd-group okd-justify-between okd-flex okd-items-center okd-px-2 okd-py-2 okd-text-sm okd-font-medium okd-rounded-md"
+                          "okd-group okd-justify-between okd-flex okd-items-center okd-px-2 okd-py-2 okd-text-sm okd-font-medium okd-rounded"
                         )}
                         aria-current={isActive ? "page" : undefined}
                       >
@@ -513,6 +519,7 @@ const Sidebar: FC<SidebarProps> = ({
                               "okd-hidden": isCollapsed,
                             })}
                             type={item.badgeType}
+                            theme={item.badgeTheme}
                           >
                             {item.badgeContent}
                           </Badge>
@@ -538,7 +545,7 @@ const Sidebar: FC<SidebarProps> = ({
                         isActive
                           ? "okd-bg-gray-200 okd-text-gray-900"
                           : "okd-text-gray-600 hover:okd-text-gray-900 hover:okd-bg-gray-100",
-                        "okd-group okd-justify-between okd-flex okd-items-center okd-px-2 okd-py-2 okd-text-sm okd-font-medium okd-rounded-md"
+                        "okd-group okd-justify-between okd-flex okd-items-center okd-px-2 okd-py-2 okd-text-sm okd-font-medium okd-rounded"
                       )}
                       aria-current={isActive ? "page" : undefined}
                     >
@@ -568,7 +575,7 @@ const Sidebar: FC<SidebarProps> = ({
                       </div>
                       {/* Show badge if badgeType exist. */}
                       {item.badgeType && (
-                        <Badge type={item.badgeType}>{item.badgeContent}</Badge>
+                        <Badge type={item.badgeType} theme={item.badgeTheme}>{item.badgeContent}</Badge>
                       )}
                     </a>
                   );

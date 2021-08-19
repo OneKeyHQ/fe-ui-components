@@ -41,7 +41,7 @@ const Dropdown: FC<DropdownProps> = ({
           <Popover.Button
             ref={triggerButtonRef}
             className={classNames(
-              "okd-inline-flex okd-items-center okd-p-2 okd-text-sm okd-font-medium okd-rounded-md focus:okd-outline-none focus:okd-ring-2 focus:okd-ring-offset-2 focus:okd-ring-brand-500 dark:okd-ring-offset-gray-900",
+              "okd-inline-flex okd-items-center okd-p-2 okd-text-sm okd-font-medium okd-rounded focus:okd-outline-none focus:okd-ring-2 focus:okd-ring-offset-2 focus:okd-ring-brand-500 dark:okd-ring-offset-gray-900",
               open
                 ? "okd-bg-gray-100 okd-text-gray-900 dark:okd-bg-gray-700 dark:okd-text-gray-50 focus:okd-ring-0 focus:okd-ring-transparent"
                 : "okd-text-gray-700 hover:okd-bg-gray-50 dark:hover:okd-bg-gray-800 dark:okd-text-gray-200"
@@ -62,7 +62,7 @@ const Dropdown: FC<DropdownProps> = ({
             leaveTo="okd-transform okd-opacity-0 okd-scale-95"
           >
             <Popover.Panel className="okd-absolute okd-z-10 okd-w-64 okd-mt-2 okd-origin-top okd--translate-x-1/2 left-1/2 sm:origin-tookd-p-right sm:left-auto sm:translate-x-0 sm:-right-1">
-              <div className="okd-overflow-hidden bg-white okd-rounded-lg okd-shadow-lg okd-ring-1 okd-ring-black/5 dark:okd-bg-gray-900 dark:okd-ring-white/20">
+              <div className="bg-white okd-overflow-hidden okd-rounded-lg okd-shadow-lg okd-ring-1 okd-ring-black/5 dark:okd-bg-gray-900 dark:okd-ring-white/20">
                 {children}
               </div>
             </Popover.Panel>
