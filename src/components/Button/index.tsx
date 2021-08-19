@@ -7,7 +7,7 @@ type ButtonProps = {
    */
   block?: boolean | null;
   /**
-   * 设置危险按钮
+   * 设置危险按钮（danger与type destructive是冲突的，所以暂不使用danger props）
    */
   danger?: boolean | null;
   /**
@@ -29,11 +29,11 @@ type ButtonProps = {
   /**
    * 设置按钮大小
    */
-  size?: "large" | "middle" | "small";
+  size?: "xsmall" | "small" | "base" | "large" | "xlarge";
   /**
    * 设置按钮类型
    */
-  type?: "primary" | "ghost" | "dashed" | "link" | "text" | "default";
+  type?: "primary" | "basic" | "plain" | "destructive";
   /**
    * 点击按钮时的回调，默认情况下，会同时注册键盘事件 onKeyEnter 点击回车
    */
@@ -45,25 +45,51 @@ const defaultProps = {
   danger: false,
   disabled: false,
   shape: "circle",
-  size: "middle",
-  type: "default",
+  size: "base",
+  type: "basic",
 } as const;
 
-const Button: FC<ButtonProps> = ({ children, block, disabled, type }) => {
+const Button: FC<ButtonProps> = (props) => {
+  const { children, block, disabled, type, size } = props;
+
+  const handleClick = (
+    e: React.MouseEvent<HTMLButtonElement | HTMLAnchorElement, MouseEvent>
+  ) => {
+    const { onClick } = props;
+    if (disabled) {
+      e.preventDefault();
+      return;
+    }
+    (onClick as React.MouseEventHandler<
+      HTMLButtonElement | HTMLAnchorElement
+    >)?.(e);
+  };
+
   return (
     <button
       type="button"
       className={cx(
-        "okd-inline-flex okd-items-center okd-justify-center okd-px-4 okd-py-2 okd-text-sm okd-font-medium border okd-rounded okd-shadow-sm focus:okd-outline-none focus:okd-ring-2 focus:okd-ring-offset-2 dark:okd-ring-offset-gray-900",
+        "okd-inline-flex okd-items-center okd-justify-center okd-text-xs okd-font-medium okd-rounded okd-shadow-sm focus:okd-outline-none focus:okd-ring-2 focus:okd-ring-offset-2 dark:okd-ring-offset-gray-900",
         {
-          "hover:okd-border-brand-500 hover:okd-text-brand-500 focus:okd-ring-brand-500 dark:hover:okd-bg-brand-500":
-            type === "default",
+          "okd-px-4 okd-py-2": size === "base",
+        },
+        {
+          "okd-bg-white okd-text-gray-700 okd-border okd-border-solid okd-border-gray-300 hover:okd-bg-gray-50 focus:okd-ring-brand-500 dark:hover:okd-bg-brand-500":
+            type === "basic",
           "okd-bg-brand-500 hover:okd-bg-brand-600 focus:okd-ring-brand-500 dark:okd-bg-brand-600 dark:hover:okd-bg-brand-500 okd-border-transparent okd-text-white":
             type === "primary",
           "okd-w-full": block,
+        },
+        {
+          "okd-bg-white okd-text-gray-300 okd-cursor-not-allowed":
+            type === "basic" && !!disabled,
+          "okd-text-gray-100 okd-bg-gray-100": type === "primary" && !!disabled,
+          "okd-text-gray-300": type === "plain" && !!disabled,
+          "okd-bg-white okd-text-red-200": type === "destructive" && !!disabled,
         }
       )}
-      disabled={!!disabled}
+      // disabled={!!disabled}
+      onClick={handleClick}
     >
       {children}
     </button>
