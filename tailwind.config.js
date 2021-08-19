@@ -1,12 +1,12 @@
 const defaultTheme = require("tailwindcss/defaultTheme");
-const { colors } = require('./src/components/utils/tailwind');
+const { colors } = require("./src/components/utils/tailwind");
 
 module.exports = {
   mode: "jit",
-  prefix: 'okd-',
+  prefix: "okd-",
   purge: {
-    mode: 'all',
-    content: ["./src/**/*.{js,jsx,ts,tsx}"]
+    mode: "all",
+    content: ["./src/**/*.{js,jsx,ts,tsx}"],
   },
   darkMode: "media", // or 'media' or 'class'
   theme: {
@@ -22,6 +22,13 @@ module.exports = {
           "WenQuanYi Micro Hei",
         ],
       },
+    },
+    borderRadius: {
+      none: "0",
+      sm: "0.375rem",
+      DEFAULT: "0.75rem",
+      lg: "1.5rem",
+      full: "9999px",
     },
   },
   variants: {
