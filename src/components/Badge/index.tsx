@@ -48,7 +48,7 @@ const Badge: FC<BadgeProps> = ({
     <div
       className={cx(
         className,
-        "okd-inline-flex okd-items-center okd-py-0.5 okd-font-medium okd-rounded",
+        "okd-inline-flex okd-items-center okd-py-0.5 okd-font-medium okd-rounded-sm",
         {
           "okd-px-1.5 okd-text-xs": size === "sm",
           "okd-px-2 okd-text-sm": size === "lg",

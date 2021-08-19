@@ -53,7 +53,7 @@ const Input: FC<InputProps> = ({
         }}
         type="text"
         className={cx(
-          "okd-block okd-w-full okd-pr-10 okd-bg-gray-50 okd-form-input sm:okd-text-sm okd-rounded-md dark:okd-bg-black/50",
+          "okd-block okd-w-full okd-pr-10 okd-bg-gray-50 okd-form-input sm:okd-text-sm okd-rounded dark:okd-bg-black/50",
           error
             ? "okd-border-red-300 okd-text-red-900 okd-placeholder-red-300 focus:okd-outline-none focus:okd-ring-red-500 focus:okd-border-red-500 dark:okd-text-red-300"
             : "okd-text-gray-700 okd-placeholder-gray-400 focus:okd-ring-brand-500 focus:okd-border-brand-500 okd-border-gray-200 dark:okd-border-gray-600 dark:okd-placeholder-gray-500 dark:okd-text-gray-200"

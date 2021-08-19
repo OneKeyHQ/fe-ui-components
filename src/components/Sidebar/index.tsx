@@ -216,7 +216,7 @@ const Sidebar: FC<SidebarProps> = ({
                                 isActive
                                   ? "okd-bg-gray-200 okd-text-gray-900"
                                   : "okd-text-gray-600 hover:okd-text-gray-900 hover:okd-bg-gray-100",
-                                "okd-group okd-justify-between okd-flex okd-items-center okd-px-2 okd-py-2 okd-text-sm okd-font-medium okd-rounded-md"
+                                "okd-group okd-justify-between okd-flex okd-items-center okd-px-2 okd-py-2 okd-text-sm okd-font-medium okd-rounded"
                               )}
                               aria-current={isActive ? "page" : undefined}
                             >
@@ -271,7 +271,7 @@ const Sidebar: FC<SidebarProps> = ({
                               isActive
                                 ? "okd-bg-gray-200 okd-text-gray-900"
                                 : "okd-text-gray-600 hover:okd-text-gray-900 hover:okd-bg-gray-100",
-                              "group okd-justify-between okd-flex okd-items-center okd-px-2 okd-py-2 okd-text-sm okd-font-medium okd-rounded-md"
+                              "group okd-justify-between okd-flex okd-items-center okd-px-2 okd-py-2 okd-text-sm okd-font-medium okd-rounded"
                             )}
                             aria-current={isActive ? "page" : undefined}
                           >
@@ -321,7 +321,7 @@ const Sidebar: FC<SidebarProps> = ({
                             isActive
                               ? "okd-bg-gray-200 okd-text-gray-900"
                               : "okd-text-gray-600 hover:okd-text-gray-900 hover:okd-bg-gray-100",
-                            "group justify-between flex okd-items-center okd-px-2 okd-py-2 okd-text-sm okd-font-medium okd-rounded-md"
+                            "group justify-between flex okd-items-center okd-px-2 okd-py-2 okd-text-sm okd-font-medium okd-rounded"
                           )}
                           aria-current={isActive ? "page" : undefined}
                         >
@@ -414,7 +414,7 @@ const Sidebar: FC<SidebarProps> = ({
                             isActive
                               ? "okd-bg-gray-200 okd-text-gray-900"
                               : "okd-text-gray-600 hover:okd-text-gray-900 hover:okd-bg-gray-100",
-                            "okd-group okd-justify-between okd-flex okd-items-center okd-px-2 okd-py-2 okd-text-sm okd-font-medium okd-rounded-md"
+                            "okd-group okd-justify-between okd-flex okd-items-center okd-px-2 okd-py-2 okd-text-sm okd-font-medium okd-rounded"
                           )}
                           aria-current={isActive ? "page" : undefined}
                         >
@@ -484,7 +484,7 @@ const Sidebar: FC<SidebarProps> = ({
                           isActive
                             ? "okd-bg-gray-200 okd-text-gray-900"
                             : "okd-text-gray-600 hover:okd-text-gray-900 hover:okd-bg-gray-100",
-                          "okd-group okd-justify-between okd-flex okd-items-center okd-px-2 okd-py-2 okd-text-sm okd-font-medium okd-rounded-md"
+                          "okd-group okd-justify-between okd-flex okd-items-center okd-px-2 okd-py-2 okd-text-sm okd-font-medium okd-rounded"
                         )}
                         aria-current={isActive ? "page" : undefined}
                       >
@@ -545,7 +545,7 @@ const Sidebar: FC<SidebarProps> = ({
                         isActive
                           ? "okd-bg-gray-200 okd-text-gray-900"
                           : "okd-text-gray-600 hover:okd-text-gray-900 hover:okd-bg-gray-100",
-                        "okd-group okd-justify-between okd-flex okd-items-center okd-px-2 okd-py-2 okd-text-sm okd-font-medium okd-rounded-md"
+                        "okd-group okd-justify-between okd-flex okd-items-center okd-px-2 okd-py-2 okd-text-sm okd-font-medium okd-rounded"
                       )}
                       aria-current={isActive ? "page" : undefined}
                     >
