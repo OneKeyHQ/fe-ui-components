@@ -1,0 +1,21 @@
+.okd-divider {
+  @apply okd-border-t;
+
+  &--horizontal {
+    display: flex;
+    clear: both;
+    width: 100%;
+    min-width: 100%;
+    @apply okd-my-4 okd-mx-0;
+  }
+
+  &--vertical {
+    position: relative;
+    top: -0.06em;
+    display: inline-block;
+    height: 0.9em;
+    margin: 0 8px;
+    vertical-align: middle;
+    @apply okd-border-l okd-border-t-0;
+  }
+}
