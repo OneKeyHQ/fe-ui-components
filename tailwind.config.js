@@ -1,5 +1,5 @@
 const defaultTheme = require("tailwindcss/defaultTheme");
-const { colors } = require("./src/components/utils/tailwind");
+const { colors, boxShadow } = require("./src/components/utils/tailwind");
 
 module.exports = {
   mode: "jit",
@@ -30,6 +30,7 @@ module.exports = {
       lg: "1.5rem",
       full: "9999px",
     },
+    boxShadow: boxShadow,
   },
   variants: {
     extend: {},

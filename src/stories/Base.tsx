@@ -6,16 +6,13 @@ export const LocaleSwitch = () => {
 
   return (
     <div className="okd-flex okd-items-center">
-      <div className="okd-font-bold okd-w-24">LOCALE:</div>
+      <div className="okd-text-gray-500 okd-font-bold okd-text-xs okd-uppercase okd-tracking-wider okd-mr-4">LOCALE:</div>
       <div className="okd-flex okd-my-2 okd-items-center">
-        <div className="okd-mx-5 okd-w-24 okd-font-bold okd-text-right">
-          en-US
-        </div>
         <Switch
           value={locale === "zh-CN"}
           onChange={(val) => setLocale(val ? "zh-CN" : "en-US")}
+          label="zh-CN"
         />
-        <div className="okd-mx-5 okd-w-24 okd-font-bold">zh-CN</div>
       </div>
     </div>
   );
@@ -26,16 +23,13 @@ export const ThemeSwitch = () => {
 
   return (
     <div className="okd-flex okd-items-center">
-      <div className="okd-font-bold okd-w-24">THEME:</div>
+      <div className="okd-text-gray-500 okd-font-bold okd-text-xs okd-uppercase okd-tracking-wider okd-mr-4">THEME:</div>
       <div className="okd-flex okd-my-2 okd-items-center">
-        <div className="okd-mx-5 okd-w-24 okd-font-bold okd-text-right">
-          dark
-        </div>
         <Switch
           value={!!(themeVariant === "light")}
           onChange={(val) => setThemeVariant(val ? "light" : "dark")}
+          label="light"
         />
-        <div className="okd-mx-5 okd-w-24 okd-font-bold">light</div>
       </div>
     </div>
   );
