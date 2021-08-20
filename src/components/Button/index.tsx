@@ -1,4 +1,4 @@
-import React, { FC, useEffect } from "react";
+import React, { FC } from "react";
 import cx from "classnames";
 import Icon from "../Icon/index";
 
@@ -65,7 +65,7 @@ const defaultProps = {
   shape: "circle",
   size: "xs",
   type: "basic",
-  // icon: <Icon name="LoadingOutline" size={16}></Icon>,
+  // icon: <Icon name="AcademicCapOutline" size={16}></Icon>,
 } as const;
 
 const Button: FC<ButtonProps> = (props) => {
@@ -99,52 +99,61 @@ const Button: FC<ButtonProps> = (props) => {
   const classes = cx(
     "okd-inline-flex okd-items-center okd-justify-center okd-font-medium okd-rounded okd-shadow-sm focus:okd-outline-none focus:okd-ring-2 focus:okd-ring-offset-2 dark:okd-ring-offset-gray-900",
     {
-      "okd-px-2.5 okd-py-1.5 okd-text-xs okd-w-22": size === "xs",
-      "okd-px-3.5 okd-py-1.5 okd-text-sm": size === "sm",
-      "okd-px-4 okd-py-2 okd-text-base": size === "base" || size === "lg",
-      "okd-px-6 okd-py-3  okd-text-base": size === "xl",
-    },
-    {
-      "okd-px-9": size === "xs" && !!loading,
-      "okd-px-10": size === "sm" && !!loading,
-      "okd-px-11": size === "base" && !!loading,
-      "okd-px-12": size === "lg" && !!loading,
-      "okd-px-14": size === "xl" && !!loading,
-    },
-    {
-      "okd-bg-brand-500 hover:okd-bg-brand-600 focus:okd-ring-brand-500 dark:okd-bg-brand-600 dark:hover:okd-bg-brand-500 okd-border-transparent okd-text-white":
-        type === "primary",
-      "okd-bg-white okd-text-gray-700 okd-border okd-border-solid okd-border-gray-300 hover:okd-bg-gray-50 focus:okd-ring-brand-500 dark:hover:okd-bg-brand-500":
-        type === "basic",
-      "okd-bg-white okd-text-gray-700 hover:okd-bg-gray-50 focus:okd-ring-brand-500 dark:hover:okd-bg-brand-500":
-        type === "plain",
-      "okd-bg-white okd-text-red-600 okd-border okd-border-solid okd-border-red-300 hover:okd-bg-red-50 focus:okd-ring-red-500 dark:hover:okd-bg-red-500":
-        type === "destructive",
       "okd-w-full": block,
     },
-    // {
-    //   "okd-bg-gray-100": type === "primary" && !!loading,
-    // },
-    {
-      "okd-bg-white okd-text-gray-300 okd-cursor-not-allowed":
-        type === "basic" && !!disabled,
-      "okd-text-gray-100 okd-bg-gray-100":
-        type === "primary" && (!!disabled || !!loading),
-      "okd-text-gray-300": type === "plain" && !!disabled,
-      "okd-bg-white okd-text-red-200": type === "destructive" && !!disabled,
+    type === "primary" && {
+      "okd-bg-brand-500 hover:okd-bg-brand-600 focus:okd-ring-brand-500 dark:okd-bg-brand-600 dark:hover:okd-bg-brand-500 okd-border-transparent okd-text-white":
+        !loading && !disabled,
+      "okd-bg-gray-100 okd-cursor-not-allowed hover:okd-bg-gray-200 focus:okd-ring-brand-500 dark:okd-bg-brand-600 dark:hover:okd-bg-brand-500 okd-border-transparent okd-text-gray-300":
+        !!disabled || !!loading,
+    },
+    type === "basic" && {
+      "okd-bg-white okd-text-gray-700 okd-border okd-border-solid okd-border-gray-300 hover:okd-bg-gray-50 focus:okd-ring-brand-500 dark:hover:okd-bg-brand-500": !disabled,
+      "okd-bg-white okd-text-gray-300 okd-cursor-not-allowed okd-border okd-border-solid okd-border-gray-300 hover:okd-bg-gray-50 focus:okd-ring-brand-500 dark:hover:okd-bg-brand-500": !!disabled,
+    },
+    type === "plain" && {
+      "okd-bg-white okd-text-gray-700 hover:okd-bg-gray-50 focus:okd-ring-brand-500 dark:hover:okd-bg-brand-500": !disabled,
+      "okd-bg-white okd-text-gray-300 okd-cursor-not-allowed hover:okd-bg-gray-50 focus:okd-ring-brand-500 dark:hover:okd-bg-brand-500": !!disabled,
+    },
+    type === "destructive" && {
+      "okd-bg-white okd-text-red-600 okd-border okd-border-solid okd-border-red-300 hover:okd-bg-red-50 focus:okd-ring-red-500 dark:hover:okd-bg-red-500": !disabled,
+      "okd-bg-white okd-text-red-200 okd-cursor-not-allowed okd-border okd-border-solid okd-border-red-300 hover:okd-bg-red-50 focus:okd-ring-red-500 dark:hover:okd-bg-red-500": !!disabled,
+    },
+    size === "xs" && {
+      "okd-px-2.5 okd-py-1.5 okd-text-xs okd-w-22":
+        !loading && !(shape === "circle" && icon),
+      "okd-px-9 okd-py-1.5 okd-text-xs": !!loading,
+      "okd-rounded-full okd-px-0 okd-py-0 okd-w-7 okd-h-7 okd-text-xs":
+        shape === "circle" && icon,
+    },
+    size === "sm" && {
+      "okd-px-3.5 okd-py-1.5 okd-text-sm":
+        !loading || !(shape === "circle" && icon),
+      "okd-px-10 okd-py-1.5 okd-text-sm": !!loading,
+      "okd-text-sm okd-rounded-full okd-px-0 okd-py-0 okd-w-8.5 okd-h-8.5":
+        shape === "circle" && icon,
+    },
+    size === "base" && {
+      "okd-px-4 okd-py-2 okd-text-base":
+        !loading || !(shape === "circle" && icon),
+      "okd-px-11 okd-py-2 okd-text-base": !!loading,
+      "okd-text-base okd-rounded-full okd-px-0 okd-py-0 okd-w-9.5 okd-h-9.5":
+        shape === "circle" && icon,
+    },
+    size === "lg" && {
+      "okd-px-4 okd-py-2 okd-text-base":
+        !loading || !(shape === "circle" && icon),
+      "okd-px-12 okd-py-2 okd-text-base": !!loading,
+      "okd-text-base okd-rounded-full okd-px-0 okd-py-0 okd-w-10.5 okd-h-10.5":
+        shape === "circle" && icon,
+    },
+    size === "xl" && {
+      "okd-px-6 okd-py-3 okd-text-base":
+        !loading || !(shape === "circle" && icon),
+      "okd-px-14 okd-py-3 okd-text-base": !!loading,
+      "okd-text-base okd-rounded-full okd-px-0 okd-py-0 okd-w-12.5 okd-h-12.5":
+        shape === "circle" && icon,
     }
-    // {
-    //   "okd-rounded-circle okd-px-0 okd-py-0 w-7.5 h-7.5":
-    //     shape === "circle" && size === "xs" && icon,
-    //   "okd-rounded-circle okd-px-0 okd-py-0 w-8.5 h-8.5":
-    //     shape === "circle" && size === "sm" && icon,
-    //   "okd-rounded-circle okd-px-0 okd-py-0 w-9.5 h-9.5":
-    //     shape === "circle" && size === "base" && icon,
-    //   "okd-rounded-circle okd-px-0 okd-py-0 w-10.5 h-10.5":
-    //     shape === "circle" && size === "lg" && icon,
-    //   "okd-rounded-circle okd-px-0 okd-py-0 w-12.5 h-12.5":
-    //     shape === "circle" && size === "xl" && icon,
-    // }
   );
 
   if (href) {
@@ -163,7 +172,6 @@ const Button: FC<ButtonProps> = (props) => {
       // disabled={!!disabled}
       onClick={handleClick}
     >
-      {/* {children} */}
       {loading ? (
         <Icon name="LoadingOutline" size={loadingIconSize}></Icon>
       ) : shape === "circle" && !!icon ? (
