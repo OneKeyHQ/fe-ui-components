@@ -1,4 +1,6 @@
 const colors = {
+  "white": "var(--white)",
+  "white-ground": "var(--white-ground)",
   "gray-50": "var(--gray-50)",
   "gray-100": "var(--gray-100)",
   "gray-200": "var(--gray-200)",
@@ -61,6 +63,19 @@ const colors = {
   "red-900": "var(--red-900)",
 };
 
+const boxShadow = {
+  sm: '0 1px 2px 0 rgba(var(--shadowRGB), 0.05)',
+   DEFAULT: '0 1px 3px 0 rgba(var(--shadowRGB), 0.1), 0 1px 2px 0 rgba(var(--shadowRGB), 0.06)',
+   md: '0 4px 6px -1px rgba(var(--shadowRGB), 0.1), 0 2px 4px -1px rgba(var(--shadowRGB), 0.06)',
+   lg: '0 10px 15px -3px rgba(var(--shadowRGB), 0.1), 0 4px 6px -2px rgba(var(--shadowRGB), 0.05)',
+   xl: '0 20px 25px -5px rgba(var(--shadowRGB), 0.1), 0 10px 10px -5px rgba(var(--shadowRGB), 0.04)',
+   '2xl': '0 25px 50px -12px rgba(var(--shadowRGB), 0.25)',
+  '3xl': '0 35px 60px -15px rgba(var(--shadowRGB), 0.3)',
+   inner: 'inset 0 2px 4px 0 rgba(var(--shadowRGB), 0.06)',
+   none: 'none',
+};
+
 module.exports = {
-  colors
+  colors,
+  boxShadow
 };

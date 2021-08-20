@@ -63,6 +63,7 @@ const theme1 = {
   "white-ground": "#FFFFFF",
   "white": "#FFFFFF",
   "black": "#000000",
+  "shadowRGB": "0,0,0",
 } as const;
 
 /** dark theme */
@@ -130,6 +131,7 @@ const theme2 = {
   "white-ground": "#0D0D12",
   "white": "#12121E",
   "black": "#FFFFFF",
+  "shadowRGB": "255,255,255",
 } as const;
 
 const theme = {
