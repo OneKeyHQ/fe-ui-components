@@ -1,11 +1,11 @@
 import React, { FC, ReactNode } from 'react';
 import cx from 'classnames'
 
-import CheckCircleSolid from '../Icon/react/CheckCircleSolid'
-import ExclamationSolid from '../Icon/react/ExclamationSolid';
-import InformationCircleSolid from '../Icon/react/InformationCircleSolid';
-import XCircleSolid from '../Icon/react/XCircleSolid';
-import XSolid from '../Icon/react/XSolid';
+import CheckCircleSolid from '../Icon/react/solid/CheckCircle'
+import ExclamationSolid from '../Icon/react/solid/Exclamation';
+import InformationCircleSolid from '../Icon/react/solid/InformationCircle';
+import XCircleSolid from '../Icon/react/solid/CloseCircle';
+import XSolid from '../Icon/react/solid/Close';
 
 
 export const alertIcons = {
