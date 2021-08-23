@@ -31,6 +31,11 @@ module.exports = {
       full: "9999px",
     },
     boxShadow: boxShadow,
+    listStyleType: {
+      none: "none",
+      disc: "disc",
+      decimal: "decimal",
+    },
   },
   variants: {
     extend: {},
