@@ -34,7 +34,7 @@ export const Default = () => {
         onClick={() => showModal()}>
         Open Modal
       </button>
-      <Modal title="Basic Modal" visible={isModalVisible} onOk={handleOk} onCancel={handleCancel} type="success">
+      <Modal title={<div> Aha </div>} visible={isModalVisible} onOk={handleOk} onCancel={handleCancel} type="success">
         <div className="okd-text-gray-500">
           <p>Some contents...</p>
           <p>Some contents...</p>

@@ -1,4 +1,4 @@
-import React, { FC, Fragment } from 'react'
+import React, { FC, Fragment, ReactNode } from 'react'
 import cx from 'classnames/dedupe'
 import { Dialog, Transition } from '@headlessui/react'
 import CheckIcon from '../Icon/react/CheckOutline'
@@ -13,7 +13,7 @@ export type ConfirmDialogProps = {
   /**
    * Modal 标题
    */
-  title?: string
+  title?: ReactNode;
   /**
    * 是否可见
    */

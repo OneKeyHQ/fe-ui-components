@@ -1,4 +1,4 @@
-import React, { FC, Fragment } from 'react'
+import React, { FC, Fragment, ReactNode } from 'react'
 import cx from 'classnames/dedupe'
 import { Dialog, Transition } from '@headlessui/react'
 import CheckIcon from '../Icon/react/CheckOutline'
@@ -15,7 +15,7 @@ export type ModalProps = {
   /**
    * Modal 标题
    */
-  title?: string
+  title?: ReactNode
   /**
    * 是否可见
    */
@@ -79,14 +79,14 @@ const Modal: FC<ModalProps> = (props) => {
         <div className="okd-flex okd-items-end okd-justify-center okd-min-h-screen okd-pt-4 okd-px-4 okd-pb-20 okd-text-center sm:okd-block sm:okd-p-0">
           <Transition.Child
             as={Fragment}
-            enter="ease-out duration-300"
-            enterFrom="opacity-0"
-            enterTo="opacity-100"
-            leave="ease-in duration-200"
-            leaveFrom="opacity-100"
-            leaveTo="opacity-0"
+            enter="okd-ease-out okd-duration-300"
+            enterFrom="okd-opacity-0"
+            enterTo="okd-opacity-100"
+            leave="okd-ease-in okd-duration-200"
+            leaveFrom="okd-opacity-100"
+            leaveTo="okd-opacity-0"
           >
-            <Dialog.Overlay className="okd-fixed okd-inset-0 okd-bg-opacity-75 okd-transition-opacity" />
+            <Dialog.Overlay className="okd-fixed okd-inset-0 okd-bg-gray-500 okd-bg-opacity-75 okd-transition-opacity" />
           </Transition.Child>
 
           {/* This element is to trick the browser into centering the modal contents. */}
@@ -95,12 +95,12 @@ const Modal: FC<ModalProps> = (props) => {
           </span>
           <Transition.Child
             as={Fragment}
-            enter="ease-out duration-300"
-            enterFrom="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
-            enterTo="opacity-100 translate-y-0 sm:scale-100"
-            leave="ease-in duration-200"
-            leaveFrom="opacity-100 translate-y-0 sm:scale-100"
-            leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+            enter="okd-ease-out okd-duration-300"
+            enterFrom="okd-opacity-0 okd-translate-y-4 sm:okd-translate-y-0 sm:okd-scale-95"
+            enterTo="okd-opacity-100 okd-translate-y-0 sm:okd-scale-100"
+            leave="okd-ease-in okd-duration-200"
+            leaveFrom="okd-opacity-100 okd-translate-y-0 sm:okd-scale-100"
+            leaveTo="okd-opacity-0 okd-translate-y-4 sm:okd-translate-y-0 sm:okd-scale-95"
           >
             <div className="okd-inline-block okd-align-bottom okd-bg-white okd-rounded-lg okd-px-4 okd-pt-5 okd-pb-4 okd-text-left okd-overflow-hidden okd-ring-1 okd-ring-black okd-ring-opacity-5 okd-shadow-xl okd-rounded-lg okd-transform okd-transition-all sm:okd-my-8 sm:okd-align-middle sm:okd-max-w-lg sm:okd-w-full sm:okd-p-6">
               <div>
