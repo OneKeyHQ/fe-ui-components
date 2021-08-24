@@ -53,7 +53,7 @@ const DEFAULT_TRADE_NAVIGATION: ActionTab[] = [
     id: "portfolio",
     translationId: "ui-components__sidebar_portfolio",
     href: "https://portfolio.onekey.so/",
-    icon: "TRENDING-UP-OUTLINE",
+    icon: "TrendingUpOutline",
     blank: false,
   },
   {
@@ -61,14 +61,14 @@ const DEFAULT_TRADE_NAVIGATION: ActionTab[] = [
     id: "swap",
     href: "https://swap.onekey.so/",
     translationId: "ui-components__sidebar_swap",
-    icon: "SWITCH-HORIZONTAL-OUTLINE",
+    icon: "SwitchHorizontalOutline",
     blank: false,
   },
   {
     name: "Explore",
     id: "explore",
     href: "https://discover.onekey.so/",
-    icon: "COMPASS-OUTLINE",
+    icon: "CompassOutline",
     translationId: "ui-components__sidebar_discover",
     badgeType: "default",
     badgeTheme: "ongray",
@@ -108,7 +108,7 @@ const Sidebar: FC<SidebarProps> = ({
         <div className="okd-flex okd-items-center okd-flex-shrink-0 okd-pl-4">
           <Icon
             className="okd-w-7 okd-h-7 okd-text-brand-500"
-            name="BRAND-LOGO-SOLID"
+            name="BrandLogoSolid"
             size={28}
             aria-label="The Brand Logo – OneKey"
           />
@@ -124,7 +124,7 @@ const Sidebar: FC<SidebarProps> = ({
           <span className="okd-w-6 okd-h-6" aria-hidden="true">
             <Icon
               onClick={() => setSidebarOpen(!sidebarOpen)}
-              name="MENU-OUTLINE"
+              name="MenuOutline"
               className="okd-w-6 okd-h-6 okd-text-gray-500"
             />
           </span>
@@ -179,7 +179,7 @@ const Sidebar: FC<SidebarProps> = ({
                     <span className="okd-sr-only">Close sidebar</span>
                     <Icon
                       className="okd-w-6 okd-h-6 okd-text-white"
-                      name="x-outline"
+                      name="CloseOutline"
                       aria-hidden="true"
                     />
                   </button>
@@ -190,7 +190,7 @@ const Sidebar: FC<SidebarProps> = ({
               <div className="okd-flex okd-items-center okd-flex-shrink-0 okd-pl-[22px]">
                 <Icon
                   className="okd-w-7 okd-h-7 okd-text-brand-500 "
-                  name="BRAND-LOGO-SOLID"
+                  name="BrandLogoSolid"
                   size={28}
                   aria-label="The Brand Logo – OneKey"
                 />
@@ -241,7 +241,10 @@ const Sidebar: FC<SidebarProps> = ({
                               </div>
                               {/* Show badge if badgeType exist. */}
                               {item.badgeType && (
-                                <Badge type={item.badgeType} theme={item.badgeTheme}>
+                                <Badge
+                                  type={item.badgeType}
+                                  theme={item.badgeTheme}
+                                >
                                   {item.badgeContent}
                                 </Badge>
                               )}
@@ -296,7 +299,10 @@ const Sidebar: FC<SidebarProps> = ({
                             </div>
                             {/* Show badge if badgeType exist. */}
                             {item.badgeType && (
-                              <Badge type={item.badgeType} theme={item.badgeTheme}>
+                              <Badge
+                                type={item.badgeType}
+                                theme={item.badgeTheme}
+                              >
                                 {item.badgeContent}
                               </Badge>
                             )}
@@ -346,7 +352,10 @@ const Sidebar: FC<SidebarProps> = ({
                           </div>
                           {/* Show badge if badgeType exist. */}
                           {item.badgeType && (
-                            <Badge type={item.badgeType} theme={item.badgeTheme}>
+                            <Badge
+                              type={item.badgeType}
+                              theme={item.badgeTheme}
+                            >
                               {item.badgeContent}
                             </Badge>
                           )}
@@ -380,7 +389,7 @@ const Sidebar: FC<SidebarProps> = ({
           >
             <Icon
               className="okd-w-7 okd-h-7 okd-text-brand-500 "
-              name="BRAND-LOGO-SOLID"
+              name="BrandLogoSolid"
               size={28}
               aria-label="The Brand Logo – OneKey"
             />
@@ -575,7 +584,9 @@ const Sidebar: FC<SidebarProps> = ({
                       </div>
                       {/* Show badge if badgeType exist. */}
                       {item.badgeType && (
-                        <Badge type={item.badgeType} theme={item.badgeTheme}>{item.badgeContent}</Badge>
+                        <Badge type={item.badgeType} theme={item.badgeTheme}>
+                          {item.badgeContent}
+                        </Badge>
                       )}
                     </a>
                   );
@@ -595,7 +606,7 @@ const Sidebar: FC<SidebarProps> = ({
             <div className="okd-w-0.5 okd-h-full okd-transition okd-bg-transparent group-hover:okd-bg-brand-500" />
             <div className="okd-absolute okd-p-1.5 okd-bg-white okd-border okd-border-gray-200 okd-rounded-full okd-top-4 okd-shadow-sm okd-transition okd-scale-75 okd-collapse-indicate okd-opacity-0">
               <Icon
-                name="CHEVRON-LEFT-OUTLINE"
+                name="ChevronLeftOutline"
                 size={16}
                 className={classNames("okd-text-gray-400", {
                   "okd-rotate-180 okd-translate-x-px": isCollapsed,

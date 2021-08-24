@@ -1,6 +1,6 @@
 {
   "name": "@onekeyhq/ui-components",
-  "version": "0.0.13",
+  "version": "0.0.14",
   "main": "./index.js",
   "author": "OneKey <hi@onekey.so>",
   "homepage": "https://github.com/onekeyhq/fe-ui-components",
@@ -20,6 +20,7 @@
     "javascript"
   ],
   "scripts": {
+    "build:icons": "rm -rf src/components/Icon/react && svgr -d src/components/Icon/react src/svg && node src/components/Icon/script.js",
     "build:components": "tsc && node job/build-npm.js",
     "build:css": "postcss src/components/index.css -o build/components/index.css",
     "build": "rm -rf build && yarn build:components && yarn build:css",
@@ -80,6 +81,7 @@
     "@storybook/preset-create-react-app": "^3.2.0",
     "@storybook/react": "^6.3.6",
     "@storybook/theming": "^6.3.6",
+    "@svgr/cli": "^5.5.0",
     "@tailwindcss/forms": "^0.3.3",
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
