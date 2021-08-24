@@ -19,6 +19,9 @@ const Template: ComponentStory<typeof TabsComponent> = (args) => (
     <TabPane tab="Company" key="company">
       second tab: Company
     </TabPane>
+    <TabPane tab="Third" key="third">
+      Third tab: Bitcoin
+    </TabPane>
   </TabsComponent>
 );
 
