@@ -1,4 +1,4 @@
-import React, { FC, Fragment, ReactNode } from 'react'
+import React, { FC, Fragment, ReactNode, useCallback, useMemo } from 'react'
 import cx from 'classnames/dedupe'
 import { Dialog, Transition } from '@headlessui/react'
 import CheckIcon from '../Icon/react/CheckOutline'
@@ -55,27 +55,30 @@ const iconBgColors: Record<ModalType, string> = {
 const ConfirmDialog: FC<ConfirmDialogProps> = (props) => {
   const { icon, onOk, close, onCancel, okText, okCancel, cancelText, visible, title, content, type, children } = props
 
-  const handleCancel = () => {
+  const handleCancel = useCallback(() => {
     if (!onCancel || !onCancel()) {
       close({ triggerCancel: true })
       return
     }
-  }
+  }, [close, onCancel])
 
-  const handleOkClick = () => {
+  const handleOkClick = useCallback(() => {
     if (!onOk || !onOk()) {
       close({ triggerCancel: true })
       return
     }
-  }
+  }, [close, onOk])
 
-  const cancelActionNode = okCancel && <button
-    type="button"
-    className="okd-mt-3 okd-w-full okd-inline-flex okd-justify-center okd-rounded okd-border okd-border-gray-300 okd-shadow-sm okd-px-4 okd-py-2 okd-bg-white okd-text-base okd-font-medium okd-text-gray-700 hover:okd-bg-gray-50 focus:okd-outline-none focus:okd-ring-2 focus:okd-ring-offset-2 focus:okd-ring-brand-500 sm:okd-mt-0 sm:okd-text-sm"
-    onClick={handleCancel}
-  >
-    {cancelText}
-  </button>
+  const cancelActionNode = useMemo(() =>
+    okCancel && <button
+      type="button"
+      className="okd-mt-3 okd-w-full okd-inline-flex okd-justify-center okd-rounded okd-border okd-border-gray-300 okd-shadow-sm okd-px-4 okd-py-2 okd-bg-white okd-text-base okd-font-medium okd-text-gray-700 hover:okd-bg-gray-50 focus:okd-outline-none focus:okd-ring-2 focus:okd-ring-offset-2 focus:okd-ring-brand-500 sm:okd-mt-0 sm:okd-text-sm"
+      onClick={handleCancel}
+    >
+      {cancelText}
+    </button>,
+    [cancelText, handleCancel, okCancel]
+  )
 
 
   return (
@@ -89,14 +92,14 @@ const ConfirmDialog: FC<ConfirmDialogProps> = (props) => {
         <div className="okd-flex okd-items-end okd-justify-center okd-min-h-screen okd-pt-4 okd-px-4 okd-pb-20 okd-text-center sm:okd-block sm:okd-p-0">
           <Transition.Child
             as={Fragment}
-            enter="ease-out duration-300"
-            enterFrom="opacity-0"
-            enterTo="opacity-100"
-            leave="ease-in duration-200"
-            leaveFrom="opacity-100"
-            leaveTo="opacity-0"
+            enter="okd-ease-out okd-duration-300"
+            enterFrom="okd-opacity-0"
+            enterTo="okd-opacity-100"
+            leave="okd-ease-in okd-duration-200"
+            leaveFrom="okd-opacity-100"
+            leaveTo="okd-opacity-0"
           >
-            <Dialog.Overlay className="okd-fixed okd-inset-0 okd-bg-opacity-75 okd-transition-opacity" />
+            <Dialog.Overlay className="okd-fixed okd-inset-0 okd-bg-gray-500 okd-bg-opacity-75 okd-transition-opacity" />
           </Transition.Child>
 
           {/* This element is to trick the browser into centering the modal contents. */}
@@ -105,12 +108,12 @@ const ConfirmDialog: FC<ConfirmDialogProps> = (props) => {
           </span>
           <Transition.Child
             as={Fragment}
-            enter="ease-out duration-300"
-            enterFrom="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
-            enterTo="opacity-100 translate-y-0 sm:scale-100"
-            leave="ease-in duration-200"
-            leaveFrom="opacity-100 translate-y-0 sm:scale-100"
-            leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+            enter="okd-ease-out okd-duration-300"
+            enterFrom="okd-opacity-0 okd-translate-y-4 sm:okd-translate-y-0 sm:okd-scale-95"
+            enterTo="okd-opacity-100 okd-translate-y-0 sm:okd-scale-100"
+            leave="okd-ease-in okd-duration-200"
+            leaveFrom="okd-opacity-100 okd-translate-y-0 sm:okd-scale-100"
+            leaveTo="okd-opacity-0 okd-translate-y-4 sm:okd-translate-y-0 sm:okd-scale-95"
           >
             <div className="okd-inline-block okd-align-bottom okd-bg-white okd-rounded-lg okd-px-4 okd-pt-5 okd-pb-4 okd-text-left okd-overflow-hidden okd-ring-1 okd-ring-black okd-ring-opacity-5 okd-shadow-xl okd-rounded-lg okd-transform okd-transition-all sm:okd-my-8 sm:okd-align-middle sm:okd-max-w-lg sm:okd-w-full sm:okd-p-6">
               <div>
