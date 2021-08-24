@@ -8,6 +8,7 @@ import confirm, {
   withConfirm,
   ModalStaticFunctions,
 } from './confirm';
+import useModal from './useModal'
 
 function modalWarn(props: ModalProps) {
   return confirm(withWarn(props));
@@ -16,13 +17,13 @@ function modalWarn(props: ModalProps) {
 type ModalType = typeof OriginModal &
   ModalStaticFunctions & {
     destroyAll: () => void;
-    // useModal: typeof useModal;
+    useModal: typeof useModal;
     // config: typeof modalGlobalConfig;
   };
 
 const Modal = OriginModal as ModalType;
 
-// Modal.useModal = useModal;
+Modal.useModal = useModal;
 
 Modal.info = function infoFn(props: ModalProps) {
   return confirm(withInfo(props));
