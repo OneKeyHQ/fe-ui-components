@@ -124,7 +124,7 @@ const Sidebar: FC<SidebarProps> = ({
           <span className="okd-w-6 okd-h-6" aria-hidden="true">
             <Icon
               onClick={() => setSidebarOpen(!sidebarOpen)}
-              name="MENU-OUTLINE"
+              name="MenuOutline"
               className="okd-w-6 okd-h-6 okd-text-gray-500"
             />
           </span>
@@ -179,7 +179,7 @@ const Sidebar: FC<SidebarProps> = ({
                     <span className="okd-sr-only">Close sidebar</span>
                     <Icon
                       className="okd-w-6 okd-h-6 okd-text-white"
-                      name="XOutline"
+                      name="CloseOutline"
                       aria-hidden="true"
                     />
                   </button>
@@ -606,7 +606,7 @@ const Sidebar: FC<SidebarProps> = ({
             <div className="okd-w-0.5 okd-h-full okd-transition okd-bg-transparent group-hover:okd-bg-brand-500" />
             <div className="okd-absolute okd-p-1.5 okd-bg-white okd-border okd-border-gray-200 okd-rounded-full okd-top-4 okd-shadow-sm okd-transition okd-scale-75 okd-collapse-indicate okd-opacity-0">
               <Icon
-                name="CHEVRON-LEFT-OUTLINE"
+                name="ChevronLeftOutline"
                 size={16}
                 className={classNames("okd-text-gray-400", {
                   "okd-rotate-180 okd-translate-x-px": isCollapsed,

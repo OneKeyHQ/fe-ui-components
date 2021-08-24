@@ -20,7 +20,7 @@
     "javascript"
   ],
   "scripts": {
-    "build:icons": "svgr -d src/components/Icon/react src/svg && node src/components/Icon/script.js",
+    "build:icons": "rm -rf src/components/Icon/react && svgr -d src/components/Icon/react src/svg && node src/components/Icon/script.js",
     "build:components": "tsc && node job/build-npm.js",
     "build:css": "postcss src/components/index.css -o build/components/index.css",
     "build": "rm -rf build && yarn build:components && yarn build:css",

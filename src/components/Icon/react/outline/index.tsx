@@ -114,6 +114,10 @@ export { default as ClipboardOutlineIcon } from './Clipboard';
 
 export { default as ClockOutlineIcon } from './Clock';
 
+export { default as CloseCircleOutlineIcon } from './CloseCircle';
+
+export { default as CloseOutlineIcon } from './Close';
+
 export { default as CloudDownloadOutlineIcon } from './CloudDownload';
 
 export { default as CloudUploadOutlineIcon } from './CloudUpload';
@@ -451,10 +455,6 @@ export { default as VolumeOffOutlineIcon } from './VolumeOff';
 export { default as VolumeUpOutlineIcon } from './VolumeUp';
 
 export { default as WifiOutlineIcon } from './Wifi';
-
-export { default as XCircleOutlineIcon } from './XCircle';
-
-export { default as XOutlineIcon } from './X';
 
 export { default as ZoomInOutlineIcon } from './ZoomIn';
 

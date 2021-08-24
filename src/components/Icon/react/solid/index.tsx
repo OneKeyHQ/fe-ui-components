@@ -116,6 +116,10 @@ export { default as ClipboardSolidIcon } from './Clipboard';
 
 export { default as ClockSolidIcon } from './Clock';
 
+export { default as CloseCircleSolidIcon } from './CloseCircle';
+
+export { default as CloseSolidIcon } from './Close';
+
 export { default as CloudDownloadSolidIcon } from './CloudDownload';
 
 export { default as CloudUploadSolidIcon } from './CloudUpload';
@@ -451,10 +455,6 @@ export { default as VolumeOffSolidIcon } from './VolumeOff';
 export { default as VolumeUpSolidIcon } from './VolumeUp';
 
 export { default as WifiSolidIcon } from './Wifi';
-
-export { default as XCircleSolidIcon } from './XCircle';
-
-export { default as XSolidIcon } from './X';
 
 export { default as ZoomInSolidIcon } from './ZoomIn';
 

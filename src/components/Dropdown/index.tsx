@@ -30,7 +30,7 @@ const Dropdown: FC<DropdownProps> = ({
             : "okd-text-gray-400 dark:okd-text-gray-500"
         )}
         size={14}
-        name="CHEVRON-DOWN-OUTLINE"
+        name="ChevronDownOutline"
       />
     );
   }, []);

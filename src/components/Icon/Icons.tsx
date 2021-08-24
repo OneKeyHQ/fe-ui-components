@@ -58,6 +58,8 @@ import ClipboardCheckOutline from "./react/outline/ClipboardCheck";
 import ClipboardCopyOutline from "./react/outline/ClipboardCopy";
 import ClipboardListOutline from "./react/outline/ClipboardList";
 import ClockOutline from "./react/outline/Clock";
+import CloseOutline from "./react/outline/Close";
+import CloseCircleOutline from "./react/outline/CloseCircle";
 import CloudOutline from "./react/outline/Cloud";
 import CloudDownloadOutline from "./react/outline/CloudDownload";
 import CloudUploadOutline from "./react/outline/CloudUpload";
@@ -227,8 +229,6 @@ import ViewListOutline from "./react/outline/ViewList";
 import VolumeOffOutline from "./react/outline/VolumeOff";
 import VolumeUpOutline from "./react/outline/VolumeUp";
 import WifiOutline from "./react/outline/Wifi";
-import Xoutline from "./react/outline/X";
-import XCircleOutline from "./react/outline/XCircle";
 import ZoomInOutline from "./react/outline/ZoomIn";
 import ZoomOutOutline from "./react/outline/ZoomOut";
 import AcademicCapSolid from "./react/solid/AcademicCap";
@@ -290,6 +290,8 @@ import ClipboardCheckSolid from "./react/solid/ClipboardCheck";
 import ClipboardCopySolid from "./react/solid/ClipboardCopy";
 import ClipboardListSolid from "./react/solid/ClipboardList";
 import ClockSolid from "./react/solid/Clock";
+import CloseSolid from "./react/solid/Close";
+import CloseCircleSolid from "./react/solid/CloseCircle";
 import CloudSolid from "./react/solid/Cloud";
 import CloudDownloadSolid from "./react/solid/CloudDownload";
 import CloudUploadSolid from "./react/solid/CloudUpload";
@@ -458,8 +460,6 @@ import ViewListSolid from "./react/solid/ViewList";
 import VolumeOffSolid from "./react/solid/VolumeOff";
 import VolumeUpSolid from "./react/solid/VolumeUp";
 import WifiSolid from "./react/solid/Wifi";
-import Xsolid from "./react/solid/X";
-import XCircleSolid from "./react/solid/XCircle";
 import ZoomInSolid from "./react/solid/ZoomIn";
 import ZoomOutSolid from "./react/solid/ZoomOut";
 
@@ -522,6 +522,8 @@ export type ICON_NAMES =
   | "ClipboardCopyOutline"
   | "ClipboardListOutline"
   | "ClockOutline"
+  | "CloseOutline"
+  | "CloseCircleOutline"
   | "CloudOutline"
   | "CloudDownloadOutline"
   | "CloudUploadOutline"
@@ -691,8 +693,6 @@ export type ICON_NAMES =
   | "VolumeOffOutline"
   | "VolumeUpOutline"
   | "WifiOutline"
-  | "Xoutline"
-  | "XCircleOutline"
   | "ZoomInOutline"
   | "ZoomOutOutline"
   | "AcademicCapSolid"
@@ -754,6 +754,8 @@ export type ICON_NAMES =
   | "ClipboardCopySolid"
   | "ClipboardListSolid"
   | "ClockSolid"
+  | "CloseSolid"
+  | "CloseCircleSolid"
   | "CloudSolid"
   | "CloudDownloadSolid"
   | "CloudUploadSolid"
@@ -922,8 +924,6 @@ export type ICON_NAMES =
   | "VolumeOffSolid"
   | "VolumeUpSolid"
   | "WifiSolid"
-  | "Xsolid"
-  | "XCircleSolid"
   | "ZoomInSolid"
   | "ZoomOutSolid";
 
@@ -986,6 +986,8 @@ export default {
   ClipboardCopyOutline: ClipboardCopyOutline,
   ClipboardListOutline: ClipboardListOutline,
   ClockOutline: ClockOutline,
+  CloseOutline: CloseOutline,
+  CloseCircleOutline: CloseCircleOutline,
   CloudOutline: CloudOutline,
   CloudDownloadOutline: CloudDownloadOutline,
   CloudUploadOutline: CloudUploadOutline,
@@ -1155,8 +1157,6 @@ export default {
   VolumeOffOutline: VolumeOffOutline,
   VolumeUpOutline: VolumeUpOutline,
   WifiOutline: WifiOutline,
-  Xoutline: Xoutline,
-  XCircleOutline: XCircleOutline,
   ZoomInOutline: ZoomInOutline,
   ZoomOutOutline: ZoomOutOutline,
   AcademicCapSolid: AcademicCapSolid,
@@ -1218,6 +1218,8 @@ export default {
   ClipboardCopySolid: ClipboardCopySolid,
   ClipboardListSolid: ClipboardListSolid,
   ClockSolid: ClockSolid,
+  CloseSolid: CloseSolid,
+  CloseCircleSolid: CloseCircleSolid,
   CloudSolid: CloudSolid,
   CloudDownloadSolid: CloudDownloadSolid,
   CloudUploadSolid: CloudUploadSolid,
@@ -1386,8 +1388,6 @@ export default {
   VolumeOffSolid: VolumeOffSolid,
   VolumeUpSolid: VolumeUpSolid,
   WifiSolid: WifiSolid,
-  Xsolid: Xsolid,
-  XCircleSolid: XCircleSolid,
   ZoomInSolid: ZoomInSolid,
   ZoomOutSolid: ZoomOutSolid,
 };

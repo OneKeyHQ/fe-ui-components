@@ -17,8 +17,6 @@ dirs.forEach(dir => {
   .filter(item => !item.includes('index'))
   .forEach(file => {
     const basicName = path.basename(file, path.extname(file));
-    const name = `${file.replace('.svg', '')}-${dir}`.toUpperCase();
-    console.log(name)
     items.push({
       symbol: pascalCase(`${basicName}${dir.toUpperCase()}`),
       path: `${dir}/${basicName}`,

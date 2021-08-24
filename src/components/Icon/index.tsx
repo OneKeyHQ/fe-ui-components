@@ -2,14 +2,17 @@ import React, { FC } from "react";
 import { omit } from "lodash";
 
 import ICON_CONFIG, { ICON_NAMES } from "./Icons";
-console.log(ICON_CONFIG);
-export type IconProps = {
+
+export type IconProps = Omit<
+  React.SVGProps<SVGSVGElement>,
+  "className" | "name" | "size" | "color"
+> & {
   /**
    * 传入组件中的 class 样式名字
    */
   className?: string;
   /**
-   * 图标名称，pascal case
+   * 图标名称
    */
   name: ICON_NAMES;
   /**
@@ -20,7 +23,7 @@ export type IconProps = {
    * 图标填充颜色（注：未设置时同时继承自父元素 color 属性）
    */
   color?: string;
-} & React.SVGProps<SVGSVGElement>;
+};
 
 const defaultProps = {
   size: 24,
