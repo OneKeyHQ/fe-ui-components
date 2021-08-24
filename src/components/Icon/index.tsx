@@ -1,17 +1,17 @@
-import React, { FC, HTMLAttributes } from "react";
-import { omit } from 'lodash';
+import React, { FC } from "react";
+import { omit } from "lodash";
 
 import ICON_CONFIG, { ICON_NAMES } from "./Icons";
-
+console.log(ICON_CONFIG);
 export type IconProps = {
   /**
    * 传入组件中的 class 样式名字
    */
   className?: string;
   /**
-   * 图标名称，大小写均可
+   * 图标名称，pascal case
    */
-  name: Lowercase<ICON_NAMES> | ICON_NAMES;
+  name: ICON_NAMES;
   /**
    * 图标大小
    */
@@ -20,19 +20,21 @@ export type IconProps = {
    * 图标填充颜色（注：未设置时同时继承自父元素 color 属性）
    */
   color?: string;
-} & Pick<HTMLAttributes<HTMLDivElement>, "onClick">;
+} & React.SVGProps<SVGSVGElement>;
 
 const defaultProps = {
   size: 24,
 } as const;
 
 const Icon: FC<IconProps> = (props) => {
-  const SVGComponent = ICON_CONFIG[props?.name?.toUpperCase() as ICON_NAMES];
+  const SVGComponent = ICON_CONFIG[props.name];
   if (!SVGComponent) return null;
 
   return (
     <SVGComponent
-      {...omit(props, 'name')}
+      width={props.size ?? "auto"}
+      height={props.size ?? "auto"}
+      {...omit(props, "name")}
     />
   );
 };

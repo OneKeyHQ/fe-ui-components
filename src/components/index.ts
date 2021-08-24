@@ -14,5 +14,6 @@ export { default as Sidebar } from "./Sidebar";
 export { default as Numberic } from "./Numberic";
 export { default as Dropdown } from "./Dropdown";
 export { default as UIProvider } from './Provider';
+export { default as Image } from './Image';
 
 export { useConfig, useLocale, useTheme, useColors } from './Provider/hooks';

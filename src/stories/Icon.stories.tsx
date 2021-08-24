@@ -6,6 +6,7 @@ import {
   IconGroup as IconGroupComponent,
   ICONS,
 } from "../components";
+// import SvgAcademicCap from "../components/Icon/react/outline/ZoomIn";
 
 export default {
   title: "UI/Icon",
@@ -18,9 +19,9 @@ const Template: ComponentStory<typeof IconComponent> = (args) => (
 
 export const Icon = Template.bind({});
 Icon.args = {
-  name: "BRAND-LOGO-SOLID",
+  name: "BrandLogoSolid",
   color: "#00b812",
-  size: 100,
+  size: 128,
 };
 
 export const List: ComponentStory<typeof IconComponent> = () => {
@@ -50,9 +51,9 @@ export const IconGroup: ComponentStory<typeof IconGroupComponent> = () => {
   return (
     <IconGroupComponent
       icons={[
-        { name: "BRAND-LOGO-SOLID" },
-        { name: "AT-SYMBOL-OUTLINE" },
-        { name: "BACKSPACE-OUTLINE" },
+        { name: "BrandLogoSolid" },
+        { name: "AtSymbolOutline" },
+        { name: "BackspaceOutline" },
       ]}
       size={36}
       color="#00b812"
