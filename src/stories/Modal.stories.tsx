@@ -119,3 +119,119 @@ export const UsingStaticMethods = () => {
     <button onClick={confirm} className="okd-inline-flex okd-items-center okd-justify-center okd-px-4 okd-py-2 okd-text-sm okd-font-medium border okd-rounded okd-shadow-sm focus:okd-outline-none focus:okd-ring-2 focus:okd-ring-offset-2 dark:okd-ring-offset-gray-900 okd-bg-brand-500 hover:okd-bg-brand-600 focus:okd-ring-brand-500 dark:okd-bg-brand-600 dark:hover:okd-bg-brand-500 okd-border-transparent okd-text-white">Confirm</button>
   </div>
 }
+
+export const UsingWithHooksInContexts = () => {
+  const ReachableContext = React.createContext({});
+  const UnreachableContext = React.createContext({});
+
+  const config = {
+    title: 'Use Hook!',
+    content: (
+      <>
+        <ReachableContext.Consumer>{name => `Reachable: ${name}!`}</ReachableContext.Consumer>
+        <br />
+        <UnreachableContext.Consumer>{name => `Unreachable: ${name}!`}</UnreachableContext.Consumer>
+      </>
+    ),
+  };
+
+  const [modal, contextHolder] = Modal.useModal();
+
+  return (
+    <ReachableContext.Provider value="Light">
+      <div className="okd-space-x-2">
+        <button
+          className="okd-inline-flex okd-items-center okd-justify-center okd-px-4 okd-py-2 okd-text-sm okd-font-medium border okd-rounded okd-shadow-sm focus:okd-outline-none focus:okd-ring-2 focus:okd-ring-offset-2 dark:okd-ring-offset-gray-900 okd-bg-brand-500 hover:okd-bg-brand-600 focus:okd-ring-brand-500 dark:okd-bg-brand-600 dark:hover:okd-bg-brand-500 okd-border-transparent okd-text-white"
+          onClick={() => {
+            modal.confirm(config);
+          }}
+        >
+          Confirm
+        </button>
+        <button
+          className="okd-inline-flex okd-items-center okd-justify-center okd-px-4 okd-py-2 okd-text-sm okd-font-medium border okd-rounded okd-shadow-sm focus:okd-outline-none focus:okd-ring-2 focus:okd-ring-offset-2 dark:okd-ring-offset-gray-900 okd-bg-brand-500 hover:okd-bg-brand-600 focus:okd-ring-brand-500 dark:okd-bg-brand-600 dark:hover:okd-bg-brand-500 okd-border-transparent okd-text-white"
+          onClick={() => {
+            modal.warning(config);
+          }}
+        >
+          Warning
+        </button>
+        <button
+          className="okd-inline-flex okd-items-center okd-justify-center okd-px-4 okd-py-2 okd-text-sm okd-font-medium border okd-rounded okd-shadow-sm focus:okd-outline-none focus:okd-ring-2 focus:okd-ring-offset-2 dark:okd-ring-offset-gray-900 okd-bg-brand-500 hover:okd-bg-brand-600 focus:okd-ring-brand-500 dark:okd-bg-brand-600 dark:hover:okd-bg-brand-500 okd-border-transparent okd-text-white"
+          onClick={() => {
+            modal.info(config);
+          }}
+        >
+          Info
+        </button>
+        <button
+          className="okd-inline-flex okd-items-center okd-justify-center okd-px-4 okd-py-2 okd-text-sm okd-font-medium border okd-rounded okd-shadow-sm focus:okd-outline-none focus:okd-ring-2 focus:okd-ring-offset-2 dark:okd-ring-offset-gray-900 okd-bg-brand-500 hover:okd-bg-brand-600 focus:okd-ring-brand-500 dark:okd-bg-brand-600 dark:hover:okd-bg-brand-500 okd-border-transparent okd-text-white"
+          onClick={() => {
+            modal.error(config);
+          }}
+        >
+          Error
+        </button>
+      </div>
+      {/* `contextHolder` 需要始终放在你要访问的 context 里 */}
+      {/* `contextHolder` should always under the context you want to access */}
+      {contextHolder}
+
+      {/* 无法获取到 UnreachableContext 的值 */}
+      {/* Can not access this context since `contextHolder` is not in it */}
+      <UnreachableContext.Provider value="Bamboo" />
+    </ReachableContext.Provider>
+  );
+}
+
+export const UsingWithHooksWithoutContexts = () => {
+  const config = {
+    title: 'Use Hook!',
+    content: (
+      <>
+        balablabalba
+        <br />
+      </>
+    ),
+  };
+
+  const [modal, contextHolder] = Modal.useModal();
+
+  return (
+    <div className="okd-space-x-2">
+      <button
+        className="okd-inline-flex okd-items-center okd-justify-center okd-px-4 okd-py-2 okd-text-sm okd-font-medium border okd-rounded okd-shadow-sm focus:okd-outline-none focus:okd-ring-2 focus:okd-ring-offset-2 dark:okd-ring-offset-gray-900 okd-bg-brand-500 hover:okd-bg-brand-600 focus:okd-ring-brand-500 dark:okd-bg-brand-600 dark:hover:okd-bg-brand-500 okd-border-transparent okd-text-white"
+        onClick={() => {
+          modal.confirm(config);
+        }}
+      >
+        Confirm
+      </button>
+      <button
+        className="okd-inline-flex okd-items-center okd-justify-center okd-px-4 okd-py-2 okd-text-sm okd-font-medium border okd-rounded okd-shadow-sm focus:okd-outline-none focus:okd-ring-2 focus:okd-ring-offset-2 dark:okd-ring-offset-gray-900 okd-bg-brand-500 hover:okd-bg-brand-600 focus:okd-ring-brand-500 dark:okd-bg-brand-600 dark:hover:okd-bg-brand-500 okd-border-transparent okd-text-white"
+        onClick={() => {
+          modal.warning(config);
+        }}
+      >
+        Warning
+      </button>
+      <button
+        className="okd-inline-flex okd-items-center okd-justify-center okd-px-4 okd-py-2 okd-text-sm okd-font-medium border okd-rounded okd-shadow-sm focus:okd-outline-none focus:okd-ring-2 focus:okd-ring-offset-2 dark:okd-ring-offset-gray-900 okd-bg-brand-500 hover:okd-bg-brand-600 focus:okd-ring-brand-500 dark:okd-bg-brand-600 dark:hover:okd-bg-brand-500 okd-border-transparent okd-text-white"
+        onClick={() => {
+          modal.info(config);
+        }}
+      >
+        Info
+      </button>
+      <button
+        className="okd-inline-flex okd-items-center okd-justify-center okd-px-4 okd-py-2 okd-text-sm okd-font-medium border okd-rounded okd-shadow-sm focus:okd-outline-none focus:okd-ring-2 focus:okd-ring-offset-2 dark:okd-ring-offset-gray-900 okd-bg-brand-500 hover:okd-bg-brand-600 focus:okd-ring-brand-500 dark:okd-bg-brand-600 dark:hover:okd-bg-brand-500 okd-border-transparent okd-text-white"
+        onClick={() => {
+          modal.error(config);
+        }}
+      >
+        Error
+      </button>
+      {contextHolder}
+    </div>
+  );
+}
