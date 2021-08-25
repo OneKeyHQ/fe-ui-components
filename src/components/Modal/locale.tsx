@@ -1,41 +1,11 @@
-import { getLocaleSymbol } from "../utils";
-
-export const defaultLocale = {
-  'zh-CN': {
-    okText: '确认',
-    justOkText: '没问题',
-    cancelText: '取消'
-  },
-  'en-US': {
-    okText: 'Confirm',
-    justOkText: 'Ok',
-    cancelText: 'Cancel'
-  }
-}
+export const modalLocaleKeys = {
+  okText: 'ui-compnoents__modal__ok_text',
+  justOkText: 'ui-compnoents__modal__just_ok_text',
+  cancelText: 'ui-compnoents__modal__cancel_text'
+} as const
 
 export interface ModalLocale {
   okText: string;
   cancelText: string;
   justOkText: string;
-}
-
-let runtimeLocale: ModalLocale = {
-  ...defaultLocale[getLocaleSymbol()]
-};
-
-export function changeConfirmLocale(newLocale?: ModalLocale) {
-  if (newLocale) {
-    runtimeLocale = {
-      ...runtimeLocale,
-      ...newLocale,
-    };
-  } else {
-    runtimeLocale = {
-      ...defaultLocale[getLocaleSymbol()]
-    };
-  }
-}
-
-export function getConfirmLocale() {
-  return runtimeLocale;
 }
