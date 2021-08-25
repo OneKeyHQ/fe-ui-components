@@ -26,6 +26,9 @@ export const Primary = Template.bind({});
 Primary.args = {
   children: "Button",
   type: "primary",
+  onClick: (e) => {
+    console.log("e: ", e?.target);
+  },
 };
 
 export const PrimaryDisabled = Template.bind({});
@@ -86,4 +89,11 @@ export const Destructive = Template.bind({});
 Destructive.args = {
   children: "Button",
   type: "destructive",
+};
+
+export const ButtonLink = Template.bind({});
+ButtonLink.args = {
+  children: "Button Link",
+  type: "link",
+  href: "https://crowdfund.onekey.so/shop",
 };

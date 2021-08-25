@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import React, { FC, useCallback } from "react";
 import cx from "classnames";
 import Icon from "../Icon/index";
 
@@ -42,7 +42,7 @@ type ButtonProps = {
   /**
    * 设置按钮类型
    */
-  type?: "primary" | "basic" | "plain" | "destructive";
+  type?: "primary" | "basic" | "plain" | "destructive" | "link";
   /**
    * 点击按钮时的回调，默认情况下，会同时注册键盘事件 onKeyEnter 点击回车
    */
@@ -81,18 +81,21 @@ const Button: FC<ButtonProps> = (props) => {
     href,
   } = props;
 
-  const handleClick = (
-    e: React.MouseEvent<HTMLButtonElement | HTMLAnchorElement, MouseEvent>
-  ) => {
-    const { onClick } = props;
-    if (loading || disabled) {
-      e.preventDefault();
-      return;
-    }
-    (onClick as React.MouseEventHandler<
-      HTMLButtonElement | HTMLAnchorElement
-    >)?.(e);
-  };
+  const handleClick = useCallback(
+    (
+      e: React.MouseEvent<HTMLButtonElement | HTMLAnchorElement, MouseEvent>
+    ) => {
+      const { onClick, loading, disabled } = props;
+      if (loading || disabled) {
+        e.preventDefault();
+        return;
+      }
+      (onClick as React.MouseEventHandler<
+        HTMLButtonElement | HTMLAnchorElement
+      >)?.(e);
+    },
+    [props]
+  );
 
   const loadingIconSize = loadingIconSizeMap[size];
 
@@ -111,9 +114,10 @@ const Button: FC<ButtonProps> = (props) => {
       "okd-bg-white okd-text-gray-700 okd-border okd-border-solid okd-border-gray-300 hover:okd-bg-gray-50 focus:okd-ring-brand-500 dark:hover:okd-bg-brand-500": !disabled,
       "okd-bg-white okd-text-gray-300 okd-cursor-not-allowed okd-border okd-border-solid okd-border-gray-300 hover:okd-bg-gray-50 focus:okd-ring-brand-500 dark:hover:okd-bg-brand-500": !!disabled,
     },
-    type === "plain" && {
+    ["plain", "link"].includes(type) && {
       "okd-shadow-none okd-bg-white okd-text-gray-700 hover:okd-bg-gray-50 focus:okd-ring-brand-500 dark:hover:okd-bg-brand-500": !disabled,
       "okd-shadow-none okd-bg-white okd-text-gray-300 okd-cursor-not-allowed hover:okd-bg-gray-50 focus:okd-ring-brand-500 dark:hover:okd-bg-brand-500": !!disabled,
+      "hover:okd-bg-white hover:okd-text-gray-500": type === "link",
     },
     type === "destructive" && {
       "okd-bg-white okd-text-red-600 okd-border okd-border-solid okd-border-red-300 hover:okd-bg-red-50 focus:okd-ring-red-500 dark:hover:okd-bg-red-500": !disabled,
@@ -156,10 +160,10 @@ const Button: FC<ButtonProps> = (props) => {
     }
   );
 
-  if (href) {
+  if (type === "link" && href) {
     return (
       <a className={classes} href={href}>
-        {icon}
+        {React.isValidElement(icon) && icon}
         {children}
       </a>
     );
@@ -182,7 +186,7 @@ const Button: FC<ButtonProps> = (props) => {
         icon
       ) : (
         <>
-          {!!icon && <div>{icon}</div>}
+          {React.isValidElement(icon) && icon}
           {children}
         </>
       )}

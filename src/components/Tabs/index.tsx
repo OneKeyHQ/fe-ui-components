@@ -105,7 +105,7 @@ const TabItem = ({
         )
       }
     >
-      {icon && <div className="okd-mr-2.5">{icon}</div>}
+      {React.isValidElement(icon) && <div className="okd-mr-2.5">{icon}</div>}
       {children}
       {tabBadge && <Badge className="okd-ml-3">{badgeContent}</Badge>}
     </Tab>

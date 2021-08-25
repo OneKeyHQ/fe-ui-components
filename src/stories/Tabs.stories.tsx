@@ -13,6 +13,7 @@ const Template: ComponentStory<typeof TabsComponent> = (args) => (
   <TabsComponent {...args}>
     {(props) => {
       const { tabLayout, tabIcon, tabBadge } = props;
+
       return (
         <>
           <TabList tabLayout={tabLayout}>
