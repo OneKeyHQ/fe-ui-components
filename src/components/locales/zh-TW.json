@@ -3,5 +3,8 @@
   "ui-components__sidebar_portfolio": "投资组合",
   "ui-components__sidebar_swap": "闪兑",
   "ui-components__sidebar_trade": "交易",
-  "ui-components__sidebar_wallet": "钱包"
+  "ui-components__sidebar_wallet": "钱包",
+  "ui-compnoents__modal__ok_text": "确认",
+  "ui-compnoents__modal__just_ok_text": "没问题",
+  "ui-compnoents__modal__cancel_text": "取消"
 }
