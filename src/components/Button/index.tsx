@@ -32,7 +32,7 @@ type ButtonProps = {
    */
   htmlType?: string | null;
   /**
-   * 设置按钮形状，默认为 circle 圆角，round 为圆形
+   * 设置按钮形状，默认为 circle 圆形，round 为圆角
    */
   shape?: "circle" | "round";
   /**
@@ -62,7 +62,7 @@ const defaultProps = {
   danger: false,
   disabled: false,
   loading: false,
-  shape: "circle",
+  shape: "round",
   size: "xs",
   type: "basic",
   // icon: <Icon name="AcademicCapOutline" size={16}></Icon>,
@@ -112,47 +112,47 @@ const Button: FC<ButtonProps> = (props) => {
       "okd-bg-white okd-text-gray-300 okd-cursor-not-allowed okd-border okd-border-solid okd-border-gray-300 hover:okd-bg-gray-50 focus:okd-ring-brand-500 dark:hover:okd-bg-brand-500": !!disabled,
     },
     type === "plain" && {
-      "okd-bg-white okd-text-gray-700 hover:okd-bg-gray-50 focus:okd-ring-brand-500 dark:hover:okd-bg-brand-500": !disabled,
-      "okd-bg-white okd-text-gray-300 okd-cursor-not-allowed hover:okd-bg-gray-50 focus:okd-ring-brand-500 dark:hover:okd-bg-brand-500": !!disabled,
+      "okd-shadow-none okd-bg-white okd-text-gray-700 hover:okd-bg-gray-50 focus:okd-ring-brand-500 dark:hover:okd-bg-brand-500": !disabled,
+      "okd-shadow-none okd-bg-white okd-text-gray-300 okd-cursor-not-allowed hover:okd-bg-gray-50 focus:okd-ring-brand-500 dark:hover:okd-bg-brand-500": !!disabled,
     },
     type === "destructive" && {
       "okd-bg-white okd-text-red-600 okd-border okd-border-solid okd-border-red-300 hover:okd-bg-red-50 focus:okd-ring-red-500 dark:hover:okd-bg-red-500": !disabled,
       "okd-bg-white okd-text-red-200 okd-cursor-not-allowed okd-border okd-border-solid okd-border-red-300 hover:okd-bg-red-50 focus:okd-ring-red-500 dark:hover:okd-bg-red-500": !!disabled,
     },
     size === "xs" && {
-      "okd-px-2.5 okd-py-1.5 okd-text-xs okd-w-22":
+      "okd-px-2.5 okd-py-2 okd-text-xs okd-w-22":
         !loading && !(shape === "circle" && icon),
-      "okd-px-9 okd-py-1.5 okd-text-xs": !!loading,
+      "okd-px-9 okd-py-1.5 okd-text-xs": !!loading && shape !== "circle",
       "okd-rounded-full okd-px-0 okd-py-0 okd-w-7 okd-h-7 okd-text-xs":
-        shape === "circle" && icon,
+        shape === "circle" && (icon || !!loading),
     },
     size === "sm" && {
-      "okd-px-3.5 okd-py-1.5 okd-text-sm":
+      "okd-px-3.5 okd-py-2 okd-text-sm":
         !loading || !(shape === "circle" && icon),
-      "okd-px-10 okd-py-1.5 okd-text-sm": !!loading,
+      "okd-px-10 okd-py-1.5 okd-text-sm": !!loading && shape !== "circle",
       "okd-text-sm okd-rounded-full okd-px-0 okd-py-0 okd-w-8.5 okd-h-8.5":
-        shape === "circle" && icon,
+        shape === "circle" && (icon || !!loading),
     },
     size === "base" && {
       "okd-px-4 okd-py-2 okd-text-base":
         !loading || !(shape === "circle" && icon),
-      "okd-px-11 okd-py-2 okd-text-base": !!loading,
+      "okd-px-11 okd-py-2 okd-text-base": !!loading && shape !== "circle",
       "okd-text-base okd-rounded-full okd-px-0 okd-py-0 okd-w-9.5 okd-h-9.5":
-        shape === "circle" && icon,
+        shape === "circle" && (icon || !!loading),
     },
     size === "lg" && {
       "okd-px-4 okd-py-2 okd-text-base":
         !loading || !(shape === "circle" && icon),
-      "okd-px-12 okd-py-2 okd-text-base": !!loading,
+      "okd-px-12 okd-py-2 okd-text-base": !!loading && shape !== "circle",
       "okd-text-base okd-rounded-full okd-px-0 okd-py-0 okd-w-10.5 okd-h-10.5":
-        shape === "circle" && icon,
+        shape === "circle" && (icon || !!loading),
     },
     size === "xl" && {
       "okd-px-6 okd-py-3 okd-text-base":
         !loading || !(shape === "circle" && icon),
-      "okd-px-14 okd-py-3 okd-text-base": !!loading,
+      "okd-px-14 okd-py-3 okd-text-base": !!loading && shape !== "circle",
       "okd-text-base okd-rounded-full okd-px-0 okd-py-0 okd-w-12.5 okd-h-12.5":
-        shape === "circle" && icon,
+        shape === "circle" && (icon || !!loading),
     }
   );
 
@@ -173,12 +173,16 @@ const Button: FC<ButtonProps> = (props) => {
       onClick={handleClick}
     >
       {loading ? (
-        <Icon name="LoadingOutline" size={loadingIconSize}></Icon>
+        <Icon
+          name="LoadingOutline"
+          size={loadingIconSize}
+          className="okd-text-xs"
+        ></Icon>
       ) : shape === "circle" && !!icon ? (
         icon
       ) : (
         <>
-          {icon}
+          {!!icon && <div>{icon}</div>}
           {children}
         </>
       )}
