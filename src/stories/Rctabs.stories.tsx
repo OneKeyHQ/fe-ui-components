@@ -3,7 +3,6 @@ import { ComponentStory, ComponentMeta } from "@storybook/react";
 
 import { Rctabs as TabsComponent } from "../components";
 const { TabPane } = TabsComponent;
-// import { TabPane } from "rc-tabs";
 
 export default {
   title: "UI/Rctabs",
