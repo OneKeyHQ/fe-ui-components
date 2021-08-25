@@ -1,6 +1,7 @@
 import React, { FC, Fragment, ReactNode, useCallback, useMemo } from 'react'
-import cx from 'classnames/dedupe'
+import cx from 'classnames'
 import { Dialog, Transition } from '@headlessui/react'
+
 import CheckIcon from '../Icon/react/outline/Check'
 
 type ModalType = 'info' | 'success' | 'error' | 'warn' | 'warning' | 'confirm'
