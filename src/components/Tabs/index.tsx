@@ -18,9 +18,9 @@ type TabsProps = {
    */
   tabIcon?: React.ReactNode;
   /**
-   * tabCount 设置tab下的计数/徽章
+   * tabBadge 是否设置tab下的计数/徽章
    */
-  tabCount?: number;
+  tabBadge?: boolean;
   /**
    * children render props。
    */
@@ -71,16 +71,27 @@ interface TabItemProps {
    */
   icon?: React.ReactNode;
   /**
-   * count 设置tab下的计数/徽章
+   * tabBadge 是否设置tab下的计数/徽章
    */
-  count?: number;
+  tabBadge?: boolean;
+  /**
+   * badgeContent 是否设置tab下的计数/徽章
+   */
+  badgeContent?: React.ReactNode;
   /**
    * children 子元素。
    */
   children?: React.ReactNode;
 }
 
-const TabItem = ({ first, tabLayout, children, icon, count }: TabItemProps) => {
+const TabItem = ({
+  first,
+  tabLayout,
+  children,
+  icon,
+  tabBadge,
+  badgeContent,
+}: TabItemProps) => {
   return (
     <Tab
       className={({ selected }) =>
@@ -96,7 +107,7 @@ const TabItem = ({ first, tabLayout, children, icon, count }: TabItemProps) => {
     >
       {icon && <div className="okd-mr-2.5">{icon}</div>}
       {children}
-      {count && <Badge className="okd-ml-3">{count}</Badge>}
+      {tabBadge && <Badge className="okd-ml-3">{badgeContent}</Badge>}
     </Tab>
   );
 };

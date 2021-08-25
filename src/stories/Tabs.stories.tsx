@@ -12,22 +12,27 @@ export default {
 const Template: ComponentStory<typeof TabsComponent> = (args) => (
   <TabsComponent {...args}>
     {(props) => {
-      const { tabLayout, tabIcon, tabCount } = props;
+      const { tabLayout, tabIcon, tabBadge } = props;
       return (
         <>
           <TabList tabLayout={tabLayout}>
-            <TabItem
-              first
-              tabLayout={tabLayout}
-              icon={tabIcon}
-              count={tabCount}
-            >
+            <TabItem first tabLayout={tabLayout} icon={tabIcon}>
               Tab1
             </TabItem>
-            <TabItem tabLayout={tabLayout} icon={tabIcon} count={tabCount}>
+            <TabItem
+              tabLayout={tabLayout}
+              icon={tabIcon}
+              tabBadge={tabBadge}
+              badgeContent={6}
+            >
               Tab2222
             </TabItem>
-            <TabItem tabLayout={tabLayout} icon={tabIcon} count={tabCount}>
+            <TabItem
+              tabLayout={tabLayout}
+              icon={tabIcon}
+              tabBadge={tabBadge}
+              badgeContent={10}
+            >
               Tab3
             </TabItem>
           </TabList>
@@ -81,5 +86,5 @@ TabBadge.args = {
     console.log("index: ", index);
   },
   tabLayout: "normal",
-  tabCount: 6,
+  tabBadge: true,
 };
