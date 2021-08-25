@@ -80,3 +80,10 @@ Loading.args = {
   type: "primary",
   loading: true,
 };
+
+export const ButtonLink = Template.bind({});
+ButtonLink.args = {
+  children: "Button Link",
+  type: "link",
+  href: "https://crowdfund.onekey.so/shop",
+};
