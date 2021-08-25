@@ -65,7 +65,6 @@
     "bignumber.js": "^9.0.1",
     "js-cookie": "^3.0.0",
     "lodash": "^4.17.21",
-    "rc-tabs": "^11.10.1",
     "react-intl": "^5.20.6",
     "react-svg": "^14.0.7",
     "react-tooltip": "^4.2.21"
