@@ -1,8 +1,9 @@
-import React, { useMemo } from 'react';
+import React from 'react';
 import { ModalProps } from '../Modal';
 import { modalLocaleKeys } from '../locale';
 import ConfirmDialog from '../ConfirmDialog';
-import { useLocale } from '../../Provider/hooks';
+import { useIntl } from 'react-intl';
+import { UIProvider } from '../..';
 
 export interface HookModalProps {
   afterClose: () => void;
@@ -14,20 +15,13 @@ export interface HookModalRef {
   update: (config: ModalProps) => void;
 }
 
-interface ModalLocale {
-  okText: string;
-  cancelText: string;
-  justOkText: string;
-}
-
 const HookModal: React.ForwardRefRenderFunction<HookModalRef, HookModalProps> = (
   { afterClose, config },
   ref,
 ) => {
   const [visible, setVisible] = React.useState(true);
   const [innerConfig, setInnerConfig] = React.useState(config);
-  const { locale } = useLocale()
-  const modalLocale: ModalLocale = useMemo(() => modalLocaleKeys[locale], [locale])
+  const { formatMessage } = useIntl()
 
   function close(...args: any[]) {
     setVisible(false);
@@ -48,17 +42,19 @@ const HookModal: React.ForwardRefRenderFunction<HookModalRef, HookModalProps> = 
   }));
 
   return (
-    <ConfirmDialog
-      {...innerConfig}
-      close={close}
-      visible={visible}
-      afterClose={afterClose}
-      okText={
-        innerConfig.okText ||
-        (innerConfig.okCancel ? modalLocale.okText : modalLocale.justOkText)
-      }
-      cancelText={innerConfig.cancelText || modalLocale.cancelText}
-    />
+    <UIProvider>
+      <ConfirmDialog
+        {...innerConfig}
+        close={close}
+        visible={visible}
+        afterClose={afterClose}
+        okText={
+          innerConfig.okText ||
+          (innerConfig.okCancel ? formatMessage({ id: modalLocaleKeys.okText }) : formatMessage({ id: modalLocaleKeys.justOkText }))
+        }
+        cancelText={innerConfig.cancelText || formatMessage({ id: modalLocaleKeys.cancelText })}
+      />
+    </UIProvider>
   );
 };
 
