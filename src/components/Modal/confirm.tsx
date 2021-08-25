@@ -1,12 +1,15 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
-import InfoCircleOutlined from '../Icon/react/InformationCircleOutline';
-import CheckOutlined from '../Icon/react/CheckOutline';
-import CloseCircleOutlined from '../Icon/react/XCircleOutline';
-import ExclamationCircleOutlined from '../Icon/react/ExclamationCircleOutline';
+
+import { modalLocaleKeys } from './locale'
+import defaultLocaleMessages from '../locales'
+import { getLocaleSymbol } from '../utils'
+import InfoCircleOutlined from '../Icon/react/outline/InformationCircle';
+import CheckOutlined from '../Icon/react/outline/Check';
+import CloseCircleOutlined from '../Icon/react/outline/CloseCircle';
+import ExclamationCircleOutlined from '../Icon/react/outline/ExclamationCircle';
 import ConfirmDialog, { iconColors } from './ConfirmDialog';
 import type { ConfirmDialogProps } from './ConfirmDialog';
-import { getConfirmLocale } from './locale';
 
 
 type ConfigUpdate = ConfirmDialogProps | ((prevConfig: ConfirmDialogProps) => ConfirmDialogProps);
@@ -51,13 +54,16 @@ export default function confirm(config: ConfirmDialogProps) {
      * Sync render blocks React event. Let's make this async.
      */
     setTimeout(() => {
-      const runtimeLocale = getConfirmLocale();
-      // because Modal.config  set rootPrefixCls, which is different from other components
+      const messages = defaultLocaleMessages[getLocaleSymbol()]
+      const okText = messages[modalLocaleKeys.okText]
+      const justOkText = messages[modalLocaleKeys.justOkText]
+      const cancelText = messages[modalLocaleKeys.cancelText]
+
       ReactDOM.render(
         <ConfirmDialog
           {...props}
-          okText={okText || (props.okCancel ? runtimeLocale.okText : runtimeLocale.justOkText)}
-          cancelText={cancelText || runtimeLocale.cancelText}
+          okText={okText || (props.okCancel ? okText : justOkText)}
+          cancelText={cancelText || cancelText}
         />,
         div,
       );

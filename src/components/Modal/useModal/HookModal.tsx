@@ -1,7 +1,7 @@
 import React, { useMemo } from 'react';
 import { ModalProps } from '../Modal';
+import { modalLocaleKeys } from '../locale';
 import ConfirmDialog from '../ConfirmDialog';
-import { defaultLocale } from '../locale';
 import { useLocale } from '../../Provider/hooks';
 
 export interface HookModalProps {
@@ -27,7 +27,7 @@ const HookModal: React.ForwardRefRenderFunction<HookModalRef, HookModalProps> = 
   const [visible, setVisible] = React.useState(true);
   const [innerConfig, setInnerConfig] = React.useState(config);
   const { locale } = useLocale()
-  const modalLocale: ModalLocale = useMemo(() => defaultLocale[locale], [locale])
+  const modalLocale: ModalLocale = useMemo(() => modalLocaleKeys[locale], [locale])
 
   function close(...args: any[]) {
     setVisible(false);

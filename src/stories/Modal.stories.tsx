@@ -3,7 +3,7 @@ import { ComponentMeta } from '@storybook/react';
 
 import { Modal } from '../components';
 import { iconColors } from '../components/Modal/ConfirmDialog';
-import ExclamationOutlined from '../components/Icon/react/ExclamationOutline'
+import ExclamationOutlined from '../components/Icon/react/outline/Exclamation'
 import ConfigBar from './Base'
 
 export default {
