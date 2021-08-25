@@ -28,7 +28,7 @@ type TabsProps = {
 
 const defaultProps = {
   defaultIndex: 1,
-  tabIcon: <Icon name="ACADEMIC-CAP-OUTLINE" size={16}></Icon>,
+  tabIcon: <Icon name="AcademicCapOutline" size={16}></Icon>,
 } as const;
 
 const TabsGroup = ({ children }) => {
