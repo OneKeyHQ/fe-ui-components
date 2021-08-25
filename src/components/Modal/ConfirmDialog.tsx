@@ -7,22 +7,16 @@ import CheckIcon from '../Icon/react/outline/Check'
 type ModalType = 'info' | 'success' | 'error' | 'warn' | 'warning' | 'confirm'
 
 export type ConfirmDialogProps = {
-  /**
-   * 传入 Modal 组件的 class
-   */
+  /** 传入 Modal 组件的 class */
   className?: string;
-  /**
-   * Modal 标题
-   */
+  /** Modal 标题 */
   title?: ReactNode;
-  /**
-   * 是否可见
-   */
+  /** 是否可见 */
   visible?: boolean
-  /** 点击确定回调 */
-  onOk?: (...args: any[]) => any;
+  /** 点击确定回调，使用 any 来使 */
+  onOk?: () => void;
   /** 点击模态框右上角叉、取消按钮、Props.maskClosable 值为 true 时的遮罩层或键盘按下 Esc 时的回调 */
-  onCancel?: (...args: any[]) => any;
+  onCancel?: () => void;
   /** 确认按钮文字 */
   okText?: React.ReactNode;
   /** 取消按钮文字 */

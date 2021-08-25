@@ -36,7 +36,7 @@ export default function confirm(config: ConfirmDialogProps) {
     }
     const triggerCancel = args.some(param => param && param.triggerCancel);
     if (config.onCancel && triggerCancel) {
-      config.onCancel(...args);
+      config.onCancel();
     }
     for (let i = 0; i < destroyFns.length; i++) {
       const fn = destroyFns[i];
