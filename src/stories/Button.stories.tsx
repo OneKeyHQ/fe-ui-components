@@ -3,6 +3,14 @@ import { ComponentStory, ComponentMeta } from "@storybook/react";
 import { Button as ButtonComponent } from "../components";
 import ConfigBar from "./Base";
 
+const iconSizeMap = {
+  xs: 16,
+  sm: 20,
+  base: 20,
+  lg: 24,
+  xl: 24,
+};
+
 export default {
   title: "UI/Button",
   component: ButtonComponent,
