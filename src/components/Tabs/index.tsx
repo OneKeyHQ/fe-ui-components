@@ -2,6 +2,7 @@ import React, { FC } from "react";
 import cx from "classnames";
 import { Tab } from "@headlessui/react";
 import Icon from "../Icon/index";
+import Badge from "../Badge";
 
 type TabsProps = {
   /**
@@ -17,6 +18,10 @@ type TabsProps = {
    */
   tabIcon?: React.ReactNode;
   /**
+   * tabCount 设置tab下的计数/徽章
+   */
+  tabCount?: number;
+  /**
    * children render props。
    */
   children?: (props: any) => React.ReactNode;
@@ -28,16 +33,8 @@ type TabsProps = {
 
 const defaultProps = {
   defaultIndex: 1,
-  tabIcon: <Icon name="AcademicCapOutline" size={16}></Icon>,
+  //   tabIcon: <Icon name="AcademicCapOutline" size={16}></Icon>,
 } as const;
-
-const TabsGroup = ({ children }) => {
-  return (
-    <div className="okd-w-full">
-      <Tab.Group>{children}</Tab.Group>
-    </div>
-  );
-};
 
 interface TabListProps {
   /**
@@ -51,7 +48,6 @@ interface TabListProps {
 }
 
 const TabList = ({ tabLayout, children }: TabListProps) => {
-  console.log("tabLayout: ", tabLayout);
   const classes = cx(
     "okd-flex okd-flex-none okd-items-center okd-relative okd-border-b okd-border-gray-200 okd-mb-4",
     // "before:okd-border-b okd-border-gray-50 okd-absolute okd-left-0 okd-right-0 okd-bottom-0",
@@ -75,27 +71,32 @@ interface TabItemProps {
    */
   icon?: React.ReactNode;
   /**
+   * count 设置tab下的计数/徽章
+   */
+  count?: number;
+  /**
    * children 子元素。
    */
   children?: React.ReactNode;
 }
 
-const TabItem = ({ first, tabLayout, children, icon }: TabItemProps) => {
+const TabItem = ({ first, tabLayout, children, icon, count }: TabItemProps) => {
   return (
     <Tab
       className={({ selected }) =>
         cx(
-          "okd-inline-flex okd-items-center okd-py-4 okd-px-1 okd-font-medium okd-text-sm okd-leading-4 okd-text-gray-500 focus:okd-outline-none",
+          "okd-inline-flex okd-items-center okd-py-4 okd-px-1 okd-font-medium okd-text-sm okd-text-gray-500 focus:okd-outline-none",
           "okd-cursor-pointer okd-border-b-2 okd-border-transparent okd-duration-300 okd-transition-colors",
           !first && tabLayout !== "between" && "okd-ml-9",
-          tabLayout === "between" && "okd-flex-grow",
+          tabLayout === "between" && "okd-flex-grow okd-justify-center",
           !selected && "hover:okd-text-gray-700 hover:okd-border-gray-500",
           selected && "okd-text-brand-500 okd-border-brand-500"
         )
       }
     >
-      <div className="okd-mr-2.5">{icon}</div>
+      {icon && <div className="okd-mr-2.5">{icon}</div>}
       {children}
+      {count && <Badge className="okd-ml-3">{count}</Badge>}
     </Tab>
   );
 };

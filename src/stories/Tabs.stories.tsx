@@ -1,5 +1,6 @@
 import React from "react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
+import Icon from "../components/Icon/index";
 import { Tabs as TabsComponent } from "../components";
 const { TabList, TabItem, TabPanels, TabPanel } = TabsComponent;
 
@@ -11,17 +12,22 @@ export default {
 const Template: ComponentStory<typeof TabsComponent> = (args) => (
   <TabsComponent {...args}>
     {(props) => {
-      const { tabLayout, tabIcon } = props;
+      const { tabLayout, tabIcon, tabCount } = props;
       return (
         <>
           <TabList tabLayout={tabLayout}>
-            <TabItem first tabLayout={tabLayout} icon={tabIcon}>
+            <TabItem
+              first
+              tabLayout={tabLayout}
+              icon={tabIcon}
+              count={tabCount}
+            >
               Tab1
             </TabItem>
-            <TabItem tabLayout={tabLayout} icon={tabIcon}>
+            <TabItem tabLayout={tabLayout} icon={tabIcon} count={tabCount}>
               Tab2222
             </TabItem>
-            <TabItem tabLayout={tabLayout} icon={tabIcon}>
+            <TabItem tabLayout={tabLayout} icon={tabIcon} count={tabCount}>
               Tab3
             </TabItem>
           </TabList>
@@ -36,12 +42,44 @@ const Template: ComponentStory<typeof TabsComponent> = (args) => (
   </TabsComponent>
 );
 
-export const Tabs = Template.bind({});
+export const Default = Template.bind({});
 
-Tabs.args = {
+Default.args = {
+  defaultIndex: 0,
+  onChange: (index) => {
+    console.log("index: ", index);
+  },
+  tabLayout: "normal",
+};
+
+export const TabIcon = Template.bind({});
+
+TabIcon.args = {
+  defaultIndex: 0,
+  onChange: (index) => {
+    console.log("index: ", index);
+  },
+  tabLayout: "normal",
+  tabIcon: <Icon name="AcademicCapOutline" size={16}></Icon>,
+};
+
+export const TabBetween = Template.bind({});
+
+TabBetween.args = {
+  defaultIndex: 0,
+  onChange: (index) => {
+    console.log("index: ", index);
+  },
+  tabLayout: "between",
+};
+
+export const TabBadge = Template.bind({});
+
+TabBadge.args = {
   defaultIndex: 1,
   onChange: (index) => {
     console.log("index: ", index);
   },
   tabLayout: "normal",
+  tabCount: 6,
 };
