@@ -17,7 +17,12 @@ const Template: ComponentStory<typeof TabsComponent> = (args) => (
       return (
         <>
           <TabList tabLayout={tabLayout}>
-            <TabItem first tabLayout={tabLayout} icon={tabIcon}>
+            <TabItem
+              first
+              tabLayout={tabLayout}
+              icon={tabIcon}
+              count={tabCount}
+            >
               Tab1
             </TabItem>
             <TabItem
