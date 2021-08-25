@@ -22,16 +22,22 @@ export type ConfirmDialogProps = {
   onOk?: (...args: any[]) => any;
   /** 点击模态框右上角叉、取消按钮、Props.maskClosable 值为 true 时的遮罩层或键盘按下 Esc 时的回调 */
   onCancel?: (...args: any[]) => any;
-
-  // TODO: Update docs
+  /** 确认按钮文字 */
   okText?: React.ReactNode;
+  /** 取消按钮文字 */
   cancelText?: React.ReactNode;
+  /** 类型 */
   type?: ModalType;
+  /** Icon */
   icon?: React.ReactNode;
-  okCancel?: boolean;
-  close?: (...args: any[]) => void;
-  afterClose?: () => void;
+  /** 内容 */
   content?: React.ReactNode;
+  /** 是否显示 取消按钮 */
+  okCancel?: boolean;
+  /** 点击取消时调用 */
+  close?: (...args: any[]) => void;
+  /** 取消之后的函数 */
+  afterClose?: () => void;
 };
 
 export const iconColors: Record<ModalType, string> = {

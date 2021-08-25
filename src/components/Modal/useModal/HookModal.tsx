@@ -1,18 +1,20 @@
 import React from 'react';
-import { ModalProps } from '../Modal';
-import { modalLocaleKeys } from '../locale';
-import ConfirmDialog from '../ConfirmDialog';
 import { useIntl } from 'react-intl';
-import { UIProvider } from '../..';
+
+import { modalLocaleKeys } from '../locale';
+import ConfirmDialog, { ConfirmDialogProps } from '../ConfirmDialog';
+import UIProvider from '../../Provider';
 
 export interface HookModalProps {
-  afterClose: () => void;
-  config: ModalProps;
+  /** 取消之后的函数 */
+  afterClose?: () => void;
+  /** ConfirmDialog Props */
+  config: ConfirmDialogProps;
 }
 
 export interface HookModalRef {
   destroy: () => void;
-  update: (config: ModalProps) => void;
+  update: (config: ConfirmDialogProps) => void;
 }
 
 const HookModal: React.ForwardRefRenderFunction<HookModalRef, HookModalProps> = (
@@ -33,7 +35,7 @@ const HookModal: React.ForwardRefRenderFunction<HookModalRef, HookModalProps> = 
 
   React.useImperativeHandle(ref, () => ({
     destroy: close,
-    update: (newConfig: ModalProps) => {
+    update: (newConfig: ConfirmDialogProps) => {
       setInnerConfig(originConfig => ({
         ...originConfig,
         ...newConfig,
