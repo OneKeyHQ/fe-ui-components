@@ -1,6 +1,7 @@
 import React, { FC, useCallback } from "react";
 import cx from "classnames";
 import Icon from "../Icon/index";
+import { ICON_NAMES } from "../Icon/Icons";
 
 type ButtonProps = {
   /**
@@ -18,7 +19,7 @@ type ButtonProps = {
   /**
    * 设置按钮的图标组件，如果想控制Icon具体的位置，只能直接使用Icon组件，而非icon属性
    */
-  icon?: React.ReactNode;
+  iconName?: ICON_NAMES;
   /**
    * 设置按钮的载入状态
    */
@@ -49,7 +50,7 @@ type ButtonProps = {
   onClick?: () => void;
 };
 
-const loadingIconSizeMap = {
+export const iconSizeMap = {
   xs: 16,
   sm: 20,
   base: 20,
@@ -63,7 +64,7 @@ const defaultProps = {
   disabled: false,
   loading: false,
   shape: "round",
-  size: "xs",
+  size: "sm",
   type: "basic",
   // icon: <Icon name="AcademicCapOutline" size={16}></Icon>,
 } as const;
@@ -77,7 +78,7 @@ const Button: FC<ButtonProps> = (props) => {
     size,
     loading,
     shape,
-    icon,
+    iconName,
     href,
   } = props;
 
@@ -97,7 +98,7 @@ const Button: FC<ButtonProps> = (props) => {
     [props]
   );
 
-  const loadingIconSize = loadingIconSizeMap[size];
+  const iconSize = iconSizeMap[size];
 
   const classes = cx(
     "okd-inline-flex okd-items-center okd-justify-center okd-font-medium okd-rounded okd-shadow-sm focus:okd-outline-none focus:okd-ring-2 focus:okd-ring-offset-2 dark:okd-ring-offset-gray-900",
@@ -125,45 +126,47 @@ const Button: FC<ButtonProps> = (props) => {
     },
     size === "xs" && {
       "okd-px-2.5 okd-py-2 okd-text-xs okd-w-22":
-        !loading && !(shape === "circle" && icon),
+        !loading && !(shape === "circle" && iconName),
       "okd-px-9 okd-py-1.5 okd-text-xs": !!loading && shape !== "circle",
       "okd-rounded-full okd-px-0 okd-py-0 okd-w-7 okd-h-7 okd-text-xs":
-        shape === "circle" && (icon || !!loading),
+        shape === "circle" && (iconName || !!loading),
     },
     size === "sm" && {
       "okd-px-3.5 okd-py-2 okd-text-sm":
-        !loading || !(shape === "circle" && icon),
+        !loading && !(shape === "circle" && iconName),
       "okd-px-10 okd-py-1.5 okd-text-sm": !!loading && shape !== "circle",
-      "okd-text-sm okd-rounded-full okd-px-0 okd-py-0 okd-w-8.5 okd-h-8.5":
-        shape === "circle" && (icon || !!loading),
+      "okd-rounded-full okd-px-0 okd-py-0 okd-w-8.5 okd-h-8.5 okd-text-sm":
+        shape === "circle" && (iconName || !!loading),
     },
     size === "base" && {
       "okd-px-4 okd-py-2 okd-text-base":
-        !loading || !(shape === "circle" && icon),
+        !loading && !(shape === "circle" && iconName),
       "okd-px-11 okd-py-2 okd-text-base": !!loading && shape !== "circle",
       "okd-text-base okd-rounded-full okd-px-0 okd-py-0 okd-w-9.5 okd-h-9.5":
-        shape === "circle" && (icon || !!loading),
+        shape === "circle" && (iconName || !!loading),
     },
     size === "lg" && {
       "okd-px-4 okd-py-2 okd-text-base":
-        !loading || !(shape === "circle" && icon),
+        !loading && !(shape === "circle" && iconName),
       "okd-px-12 okd-py-2 okd-text-base": !!loading && shape !== "circle",
       "okd-text-base okd-rounded-full okd-px-0 okd-py-0 okd-w-10.5 okd-h-10.5":
-        shape === "circle" && (icon || !!loading),
+        shape === "circle" && (iconName || !!loading),
     },
     size === "xl" && {
       "okd-px-6 okd-py-3 okd-text-base":
-        !loading || !(shape === "circle" && icon),
+        !loading && !(shape === "circle" && iconName),
       "okd-px-14 okd-py-3 okd-text-base": !!loading && shape !== "circle",
       "okd-text-base okd-rounded-full okd-px-0 okd-py-0 okd-w-12.5 okd-h-12.5":
-        shape === "circle" && (icon || !!loading),
+        shape === "circle" && (iconName || !!loading),
     }
   );
 
   if (type === "link" && href) {
     return (
       <a className={classes} href={href}>
-        {React.isValidElement(icon) && icon}
+        {React.isValidElement(<Icon name={iconName} />) && (
+          <Icon name={iconName} size={iconSize} />
+        )}
         {children}
       </a>
     );
@@ -179,14 +182,18 @@ const Button: FC<ButtonProps> = (props) => {
       {loading ? (
         <Icon
           name="LoadingOutline"
-          size={loadingIconSize}
+          size={iconSize}
           className="okd-text-xs"
         ></Icon>
-      ) : shape === "circle" && !!icon ? (
-        icon
+      ) : shape === "circle" && !!iconName ? (
+        React.isValidElement(<Icon name={iconName} />) && (
+          <Icon name={iconName} size={iconSize}></Icon>
+        )
       ) : (
         <>
-          {React.isValidElement(icon) && icon}
+          {React.isValidElement(<Icon name={iconName} />) && (
+            <Icon className="okd-mr-2.5" name={iconName} size={iconSize}></Icon>
+          )}
           {children}
         </>
       )}

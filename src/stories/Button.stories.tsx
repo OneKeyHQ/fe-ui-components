@@ -3,24 +3,36 @@ import { ComponentStory, ComponentMeta } from "@storybook/react";
 import Icon from "../components/Icon/index";
 import { Button as ButtonComponent } from "../components";
 
+const iconSizeMap = {
+  xs: 16,
+  sm: 20,
+  base: 20,
+  lg: 24,
+  xl: 24,
+};
+
 export default {
   title: "UI/Button",
   component: ButtonComponent,
-  // argTypes: {
-  //   backgroundColor: { control: 'color' },
-  // },
 } as ComponentMeta<typeof ButtonComponent>;
 
 const Template: ComponentStory<typeof ButtonComponent> = (args) => (
   <ButtonComponent {...args} />
 );
 
-const TemplateIcon: ComponentStory<typeof ButtonComponent> = (args) => (
-  <ButtonComponent {...args}>
-    Button
-    <Icon name="AcademicCapOutline" className="okd-ml-2.5" size={16}></Icon>
-  </ButtonComponent>
-);
+const TemplateIcon: ComponentStory<typeof ButtonComponent> = (args) => {
+  const { size } = args;
+  return (
+    <ButtonComponent {...args}>
+      Button
+      <Icon
+        name="AcademicCapOutline"
+        className="okd-ml-2.5"
+        size={iconSizeMap[size]}
+      ></Icon>
+    </ButtonComponent>
+  );
+};
 
 export const Primary = Template.bind({});
 Primary.args = {
@@ -42,7 +54,7 @@ export const PrimaryIcon = Template.bind({});
 PrimaryIcon.args = {
   children: "Button",
   type: "primary",
-  icon: <Icon name="AcademicCapOutline" size={16}></Icon>,
+  iconName: "AcademicCapOutline",
 };
 
 export const ChildrenIcon = TemplateIcon.bind({});
@@ -55,7 +67,7 @@ PrimaryCircle.args = {
   children: "Button",
   type: "primary",
   shape: "circle",
-  icon: <Icon name="AcademicCapOutline" size={16}></Icon>,
+  iconName: "AcademicCapOutline",
 };
 
 export const PrimaryLoading = Template.bind({});
