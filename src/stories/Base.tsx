@@ -37,10 +37,10 @@ export const ThemeSwitch = () => {
 
 const ConfigBar = () => {
   return (
-    <>
+    <div className="okd-flex okd-mb-4 okd-space-x-8">
       <LocaleSwitch />
       <ThemeSwitch />
-    </>
+    </div>
   );
 };
 
