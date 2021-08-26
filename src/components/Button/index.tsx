@@ -2,6 +2,7 @@ import React, { FC, useCallback } from "react";
 import cx from "classnames";
 import Icon from "../Icon/index";
 import { ICON_NAMES } from "../Icon/Icons";
+import Spinner from "./Spinner";
 
 type ButtonProps = {
   /**
@@ -33,9 +34,9 @@ type ButtonProps = {
    */
   htmlType?: string | null;
   /**
-   * 设置按钮形状，默认为 circle 圆形，round 为圆角
+   * 设置按钮形状为圆形
    */
-  shape?: "circle" | "round";
+  circular?: boolean | null;
   /**
    * 设置按钮大小
    */
@@ -45,17 +46,13 @@ type ButtonProps = {
    */
   type?: "primary" | "basic" | "plain" | "destructive" | "link";
   /**
+   * 设置额外的 class
+   */
+  className?: string | null;
+  /**
    * 点击按钮时的回调，默认情况下，会同时注册键盘事件 onKeyEnter 点击回车
    */
   onClick?: (e: React.MouseEventHandler<HTMLElement>) => void;
-};
-
-export const iconSizeMap = {
-  xs: 16,
-  sm: 20,
-  base: 20,
-  lg: 24,
-  xl: 24,
 };
 
 const defaultProps = {
@@ -63,8 +60,8 @@ const defaultProps = {
   danger: false,
   disabled: false,
   loading: false,
-  shape: "round",
-  size: "sm",
+  circular: false,
+  size: "base",
   type: "basic",
   // icon: <Icon name="AcademicCapOutline" size={16}></Icon>,
 } as const;
@@ -77,9 +74,10 @@ const Button: FC<ButtonProps> = (props) => {
     type,
     size,
     loading,
-    shape,
+    circular,
     iconName,
     href,
+    className,
   } = props;
 
   const handleClick = useCallback(
@@ -94,74 +92,92 @@ const Button: FC<ButtonProps> = (props) => {
     [props]
   );
 
-  const iconSize = iconSizeMap[size];
-
-  const classes = cx(
-    "okd-inline-flex okd-items-center okd-justify-center okd-font-medium okd-rounded okd-shadow-sm focus:okd-outline-none focus:okd-ring-2 focus:okd-ring-offset-2 dark:okd-ring-offset-gray-900",
-    {
-      "okd-w-full": block,
-    },
+  const btnClasses = cx(
+    // Shared styles
+    "okd-inline-flex okd-items-center okd-justify-center okd-font-medium okd-rounded focus:okd-outline-none",
+    // Full width
+    { "okd-w-full": block },
+    // Add border
+    { "okd-border": !(type === "plain" || type === "link") },
+    // The width and offset of ring
+    { "focus:okd-ring-2 focus:okd-ring-offset-2": !loading },
+    // Text's color, background's color, border's color and ring's color
     type === "primary" && {
-      "okd-bg-brand-500 hover:okd-bg-brand-600 focus:okd-ring-brand-500 dark:okd-bg-brand-600 dark:hover:okd-bg-brand-500 okd-border-transparent okd-text-white":
+      "okd-text-white okd-bg-brand-500 okd-border-brand-500 okd-shadow-sm hover:okd-bg-brand-600 hover:okd-border-brand-600 focus:okd-ring-brand-500":
         !loading && !disabled,
-      "okd-bg-gray-100 okd-cursor-not-allowed hover:okd-bg-gray-200 focus:okd-ring-brand-500 dark:okd-bg-brand-600 dark:hover:okd-bg-brand-500 okd-border-transparent okd-text-gray-300":
+      "okd-text-gray-300 okd-bg-gray-100 okd-border-gray-100":
         !!disabled || !!loading,
     },
     type === "basic" && {
-      "okd-bg-white okd-text-gray-700 okd-border okd-border-solid okd-border-gray-300 hover:okd-bg-gray-50 focus:okd-ring-brand-500 dark:hover:okd-bg-brand-500": !disabled,
-      "okd-bg-white okd-text-gray-300 okd-cursor-not-allowed okd-border okd-border-solid okd-border-gray-300 hover:okd-bg-gray-50 focus:okd-ring-brand-500 dark:hover:okd-bg-brand-500": !!disabled,
+      "okd-text-gray-700 okd-bg-white okd-border-gray-300 okd-shadow-sm hover:okd-bg-gray-50 focus:okd-ring-brand-500":
+        !disabled && !loading,
+      "okd-text-gray-300 okd-bg-white okd-border-gray-200":
+        !!disabled || !!loading,
     },
     ["plain", "link"].includes(type) && {
-      "okd-shadow-none okd-bg-white okd-text-gray-700 hover:okd-bg-gray-50 focus:okd-ring-brand-500 dark:hover:okd-bg-brand-500": !disabled,
-      "okd-shadow-none okd-bg-white okd-text-gray-300 okd-cursor-not-allowed hover:okd-bg-gray-50 focus:okd-ring-brand-500 dark:hover:okd-bg-brand-500": !!disabled,
-      "hover:okd-bg-white hover:okd-text-gray-500": type === "link",
+      "okd-text-gray-700 hover:okd-bg-gray-50 focus:okd-ring-brand-500":
+        !disabled && !loading,
+      "okd-text-gray-300": !!disabled || !!loading,
     },
     type === "destructive" && {
-      "okd-bg-white okd-text-red-600 okd-border okd-border-solid okd-border-red-300 hover:okd-bg-red-50 focus:okd-ring-red-500 dark:hover:okd-bg-red-500": !disabled,
-      "okd-bg-white okd-text-red-200 okd-cursor-not-allowed okd-border okd-border-solid okd-border-red-300 hover:okd-bg-red-50 focus:okd-ring-red-500 dark:hover:okd-bg-red-500": !!disabled,
+      "okd-bg-white okd-text-red-600 okd-border-red-300 hover:okd-bg-red-50 focus:okd-ring-red-500":
+        !disabled && !loading,
+      "okd-bg-white okd-text-red-200 okd-border-red-200":
+        !!disabled || !!loading,
     },
-    size === "xs" && {
-      "okd-px-2.5 okd-py-2 okd-text-xs okd-w-22":
-        !loading && !(shape === "circle" && iconName),
-      "okd-px-9 okd-py-1.5 okd-text-xs": !!loading && shape !== "circle",
-      "okd-rounded-full okd-px-0 okd-py-0 okd-w-7 okd-h-7 okd-text-xs":
-        shape === "circle" && (iconName || !!loading),
-    },
-    size === "sm" && {
-      "okd-px-3.5 okd-py-2 okd-text-sm":
-        !loading && !(shape === "circle" && iconName),
-      "okd-px-10 okd-py-1.5 okd-text-sm": !!loading && shape !== "circle",
-      "okd-rounded-full okd-px-0 okd-py-0 okd-w-8.5 okd-h-8.5 okd-text-sm":
-        shape === "circle" && (iconName || !!loading),
-    },
-    size === "base" && {
-      "okd-px-4 okd-py-2 okd-text-base":
-        !loading && !(shape === "circle" && iconName),
-      "okd-px-11 okd-py-2 okd-text-base": !!loading && shape !== "circle",
-      "okd-text-base okd-rounded-full okd-px-0 okd-py-0 okd-w-9.5 okd-h-9.5":
-        shape === "circle" && (iconName || !!loading),
-    },
-    size === "lg" && {
-      "okd-px-4 okd-py-2 okd-text-base":
-        !loading && !(shape === "circle" && iconName),
-      "okd-px-12 okd-py-2 okd-text-base": !!loading && shape !== "circle",
-      "okd-text-base okd-rounded-full okd-px-0 okd-py-0 okd-w-10.5 okd-h-10.5":
-        shape === "circle" && (iconName || !!loading),
-    },
-    size === "xl" && {
-      "okd-px-6 okd-py-3 okd-text-base":
-        !loading && !(shape === "circle" && iconName),
-      "okd-px-14 okd-py-3 okd-text-base": !!loading && shape !== "circle",
-      "okd-text-base okd-rounded-full okd-px-0 okd-py-0 okd-w-12.5 okd-h-12.5":
-        shape === "circle" && (iconName || !!loading),
-    }
+    // Cursor style
+    { "okd-cursor-not-allowed": !!disabled || !!loading },
+    // Paddings
+    circular
+      ? {
+          "okd-p-1": size === "xs",
+          "okd-p-1.5": size === "sm",
+          "okd-p-2": size === "base" || size === "lg",
+          "okd-p-3": size === "xl",
+        }
+      : {
+          "okd-px-2.5 okd-py-1.5": size === "xs",
+          "okd-px-3 okd-py-1.5": size === "sm",
+          "okd-px-4 okd-py-2": size === "base" || size === "lg",
+          "okd-px-6 okd-py-3": size === "xl",
+        },
+    // Font size
+    { "okd-text-xs": size === "xs" },
+    { "okd-text-sm": size === "sm" || size === "base" },
+    // Border Radius
+    circular ? "okd-rounded-full" : "okd-rounded"
   );
 
   if (type === "link" && href) {
     return (
-      <a className={classes} href={href}>
+      <a className={cx(btnClasses, !!className && className)} href={href}>
         {React.isValidElement(<Icon name={iconName} />) && (
-          <Icon name={iconName} size={iconSize} />
+          <Icon
+            name={iconName}
+            className={cx(
+              // Size
+              !circular
+                ? {
+                    "okd-w-4 okd-h-4": size === "xs" || size === "sm",
+                    "okd-w-5 okd-h-5":
+                      size === "base" || size === "lg" || size === "xl",
+                  }
+                : {
+                    "okd-w-5 okd-h-5":
+                      size === "xs" || size === "sm" || size === "base",
+                    "okd-w-6 okd-h-6": size === "lg" || size === "xl",
+                  },
+              // Padding left
+              { "okd--ml-0.5": !circular },
+              // Padding right
+              !circular && {
+                "okd-mr-2": size === "xs" || size === "sm" || size === "base",
+                "okd-mr-3": size === "lg" || size === "xl",
+              },
+              // Color
+              !disabled ? "okd-text-gray-400" : "okd-text-gray-300"
+            )}
+          />
         )}
         {children}
       </a>
@@ -171,24 +187,57 @@ const Button: FC<ButtonProps> = (props) => {
   return (
     <button
       type="button"
-      className={classes}
-      // disabled={!!disabled}
+      className={cx(btnClasses, !!className && className)}
       onClick={handleClick}
+      disabled={!!disabled}
     >
       {loading ? (
-        <Icon
-          name="LoadingOutline"
-          size={iconSize}
-          className="okd-text-xs"
-        ></Icon>
-      ) : shape === "circle" && !!iconName ? (
-        React.isValidElement(<Icon name={iconName} />) && (
-          <Icon name={iconName} size={iconSize}></Icon>
-        )
+        <Spinner
+          buttonSize={size}
+          buttonType={type}
+          circularButton={circular}
+        />
       ) : (
         <>
           {React.isValidElement(<Icon name={iconName} />) && (
-            <Icon className="okd-mr-2.5" name={iconName} size={iconSize}></Icon>
+            <Icon
+              name={iconName}
+              className={cx(
+                // Size
+                !circular
+                  ? {
+                      "okd-w-4 okd-h-4": size === "xs" || size === "sm",
+                      "okd-w-5 okd-h-5":
+                        size === "base" || size === "lg" || size === "xl",
+                    }
+                  : {
+                      "okd-w-5 okd-h-5":
+                        size === "xs" || size === "sm" || size === "base",
+                      "okd-w-6 okd-h-6": size === "lg" || size === "xl",
+                    },
+                // Padding left
+                { "okd--ml-0.5": !circular },
+                // Padding right
+                !circular && {
+                  "okd-mr-2": size === "xs" || size === "sm" || size === "base",
+                  "okd-mr-3": size === "lg" || size === "xl",
+                },
+                // Color
+                !disabled
+                  ? {
+                      "okd-text-white": type === "primary",
+                      "okd-text-gray-400": type === "basic",
+                      "okd-text-red-400": type === "destructive",
+                    }
+                  : {
+                      "okd-text-gray-300":
+                        type === "primary" ||
+                        type === "basic" ||
+                        type === "plain",
+                      "okd-text-red-200": type === "destructive",
+                    }
+              )}
+            />
           )}
           {children}
         </>

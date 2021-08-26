@@ -22,12 +22,6 @@ module.exports = {
           "WenQuanYi Micro Hei",
         ],
       },
-      spacing: {
-        8.5: "2.125rem",
-        9.5: "2.375rem",
-        10.5: "2.625rem",
-        12.5: "3.125rem",
-      },
     },
     borderRadius: {
       none: "0",
