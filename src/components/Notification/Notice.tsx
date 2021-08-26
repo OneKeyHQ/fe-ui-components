@@ -1,4 +1,4 @@
-import React, { FC, Fragment, ReactNode, useCallback, useEffect } from 'react'
+import React, { FC, Fragment, Key, ReactNode, useCallback, useEffect } from 'react'
 import { Transition } from '@headlessui/react'
 import { uniqueId } from 'lodash'
 import { CheckCircleOutlineIcon, CloseCircleOutlineIcon, ExclamationOutlineIcon, RefreshOutlineIcon } from '../Icon/react/outline'
@@ -24,19 +24,21 @@ export type NotificationProps = {
   /** 多久后关闭 Notification 组件，默认为 3s。单位为秒 */
   duration?: number | null;
   /** Mark as final key since set maxCount may keep the key but user pass key is different */
-  noticeKey?: React.Key;
+  noticeKey?: Key;
   /** 自定义关闭按钮的 icon */
-  closeIcon?: React.ReactNode;
+  closeIcon?: ReactNode;
   /** 是否可被关闭 */
   closable?: boolean;
   /** 关闭时的回调 */
-  onClose?: (key?: React.Key) => void;
+  onClose?: (key?: Key) => void;
   /** 类型 */
   type?: NotificationType;
   /** 标题 */
   title?: ReactNode;
   /** 内容 */
   content?: ReactNode;
+  /** 页脚，可用来添加按钮 */
+  footer?: ReactNode;
   /** @private Only for internal usage. We don't promise that we will refactor this */
   holder?: HTMLDivElement;
   /** @private Provided by CSSMotionList */
@@ -52,6 +54,7 @@ const Notification: FC<NotificationProps> = ({
   type,
   title,
   content,
+  footer,
   noticeKey = uniqueId('onekey-modal'),
   show,
   onClose,
@@ -109,6 +112,11 @@ const Notification: FC<NotificationProps> = ({
                 <div className="okd-ml-3 okd-w-0 okd-flex-1 okd-pt-0.5">
                   <p className="okd-text-sm okd-font-medium okd-text-gray-900">{title}</p>
                   <p className="okd-mt-1 okd-text-sm okd-text-gray-500">{textContent}</p>
+
+                  {!!footer &&
+                    <div className="okd-mt-4 okd-flex">
+                      {footer}
+                    </div>}
                 </div>
                 {closable &&
                   <div className="okd-ml-4 okd-flex-shrink-0 okd-flex">
