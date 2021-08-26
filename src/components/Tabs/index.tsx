@@ -1,7 +1,6 @@
-import React, { FC } from "react";
+import React from "react";
 import cx from "classnames";
 import { Tab } from "@headlessui/react";
-import Icon from "../Icon/index";
 import Badge from "../Badge";
 
 type TabsProps = {
