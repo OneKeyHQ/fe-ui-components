@@ -1,7 +1,7 @@
 import React from 'react';
 import { ComponentMeta } from '@storybook/react';
 
-import { Notification as NotificationComponent } from '../components';
+import { NotificationContainer, Notification as NotificationComponent } from '../components';
 import { useState } from 'react';
 
 export default {
@@ -14,6 +14,7 @@ export const Default = () => {
   const [errorVisibility, setErrorVisibility] = useState(false)
   const [processingWithActionVisibility, setProcessingWithActionVisibility] = useState(false)
 
+  // 声明式使用方法
   return (
     <div className="okd-block okd-space-x-2">
       <button
@@ -72,3 +73,36 @@ export const Default = () => {
     </div>
   )
 };
+
+export const usingStaticMethods = () => {
+  return (
+    <div className="okd-space-x-2">
+      <button
+        className="okd-inline-flex okd-items-center okd-justify-center okd-px-4 okd-py-2 okd-text-sm okd-font-medium okd-border okd-rounded okd-shadow-sm focus:okd-outline-none focus:okd-ring-2 focus:okd-ring-offset-2 dark:okd-ring-offset-gray-900 okd-bg-brand-500 hover:okd-bg-brand-600 focus:okd-ring-brand-500 dark:okd-bg-brand-600 dark:hover:okd-bg-brand-500 okd-border-transparent okd-text-white"
+        onClick={() => {
+          NotificationComponent.success("Added 2.3245 BNB to CAKE/WBNB.", { title: 'Successfully added!' })
+        }}
+      >Success</button>
+      <button
+        className="okd-inline-flex okd-items-center okd-justify-center okd-px-4 okd-py-2 okd-text-sm okd-font-medium okd-border okd-rounded okd-shadow-sm focus:okd-outline-none focus:okd-ring-2 focus:okd-ring-offset-2 dark:okd-ring-offset-gray-900 okd-bg-brand-500 hover:okd-bg-brand-600 focus:okd-ring-brand-500 dark:okd-bg-brand-600 dark:hover:okd-bg-brand-500 okd-border-transparent okd-text-white"
+        onClick={() => {
+          NotificationComponent.error("Failure to add 2.3245 BNB to CAKE/WBNB.", { title: 'Add failure' })
+        }}
+      >Error</button>
+      <button
+        className="okd-inline-flex okd-items-center okd-justify-center okd-px-4 okd-py-2 okd-text-sm okd-font-medium okd-border okd-rounded okd-shadow-sm focus:okd-outline-none focus:okd-ring-2 focus:okd-ring-offset-2 dark:okd-ring-offset-gray-900 okd-bg-brand-500 hover:okd-bg-brand-600 focus:okd-ring-brand-500 dark:okd-bg-brand-600 dark:hover:okd-bg-brand-500 okd-border-transparent okd-text-white"
+        onClick={() => {
+          NotificationComponent.processing("Something is happening.", { title: 'Processing...' })
+        }}
+      >Processing</button>
+      <button
+        className="okd-inline-flex okd-items-center okd-justify-center okd-px-4 okd-py-2 okd-text-sm okd-font-medium okd-border okd-rounded okd-shadow-sm focus:okd-outline-none focus:okd-ring-2 focus:okd-ring-offset-2 dark:okd-ring-offset-gray-900 okd-bg-brand-500 hover:okd-bg-brand-600 focus:okd-ring-brand-500 dark:okd-bg-brand-600 dark:hover:okd-bg-brand-500 okd-border-transparent okd-text-white"
+        onClick={() => {
+          NotificationComponent.warn("Something is happening.", { title: 'Attention neededƒ' })
+        }}
+      >Warn</button>
+
+      <NotificationContainer />
+    </div>
+  )
+}
