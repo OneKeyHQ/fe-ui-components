@@ -98,9 +98,35 @@ export const usingStaticMethods = () => {
       <button
         className="okd-inline-flex okd-items-center okd-justify-center okd-px-4 okd-py-2 okd-text-sm okd-font-medium okd-border okd-rounded okd-shadow-sm focus:okd-outline-none focus:okd-ring-2 focus:okd-ring-offset-2 dark:okd-ring-offset-gray-900 okd-bg-brand-500 hover:okd-bg-brand-600 focus:okd-ring-brand-500 dark:okd-bg-brand-600 dark:hover:okd-bg-brand-500 okd-border-transparent okd-text-white"
         onClick={() => {
-          NotificationComponent.warn("Something is happening.", { title: 'Attention neededƒ' })
+          NotificationComponent.warn("Something is happening.", { title: 'Attention needed' })
         }}
       >Warn</button>
+
+
+      <button
+        className="okd-inline-flex okd-items-center okd-justify-center okd-px-4 okd-py-2 okd-text-sm okd-font-medium okd-border okd-rounded okd-shadow-sm focus:okd-outline-none focus:okd-ring-2 focus:okd-ring-offset-2 dark:okd-ring-offset-gray-900 okd-bg-brand-500 hover:okd-bg-brand-600 focus:okd-ring-brand-500 dark:okd-bg-brand-600 dark:hover:okd-bg-brand-500 okd-border-transparent okd-text-white"
+        onClick={() => {
+          NotificationComponent.warn("Something is happening.", {
+            title: 'Attention needed',
+            footer: (
+              <div className="okd-space-x-2">
+                <button
+                  type="button"
+                  className="okd-inline-flex okd-items-center okd-justify-center okd-px-4 okd-py-2 okd-text-sm okd-font-medium okd-border okd-rounded okd-shadow-sm focus:okd-outline-none focus:okd-ring-2 focus:okd-ring-offset-2 dark:okd-ring-offset-gray-900 okd-bg-brand-500 hover:okd-bg-brand-600 focus:okd-ring-brand-500 dark:okd-bg-brand-600 dark:hover:okd-bg-brand-500 okd-border-transparent okd-text-white"
+                >
+                  Accept
+                </button>
+                <button
+                  type="button"
+                  className="okd-inline-flex okd-items-center okd-justify-center okd-px-4 okd-py-2 okd-text-sm okd-font-medium okd-border okd-border-gray-300 okd-rounded focus:okd-outline-none focus:okd-ring-2 focus:okd-ring-offset-2 dark:okd-ring-offset-gray-900 okd-bg-white hover:okd-bg-gray-200 focus:okd-ring-gray-500 dark:okd-bg-gray-500 dark:hover:okd-bg-brand-500 okd-border-transparent okd-text-gray-900"
+                >
+                  Decline
+                </button>
+              </div>
+            )
+          })
+        }}
+      >With Footer</button>
 
       <NotificationContainer />
     </div>
