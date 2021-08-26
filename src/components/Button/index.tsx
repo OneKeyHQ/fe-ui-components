@@ -47,7 +47,7 @@ type ButtonProps = {
   /**
    * 点击按钮时的回调，默认情况下，会同时注册键盘事件 onKeyEnter 点击回车
    */
-  onClick?: () => void;
+  onClick?: (e: React.MouseEventHandler<HTMLElement>) => void;
 };
 
 export const iconSizeMap = {
@@ -83,17 +83,13 @@ const Button: FC<ButtonProps> = (props) => {
   } = props;
 
   const handleClick = useCallback(
-    (
-      e: React.MouseEvent<HTMLButtonElement | HTMLAnchorElement, MouseEvent>
-    ) => {
+    (e) => {
       const { onClick, loading, disabled } = props;
       if (loading || disabled) {
         e.preventDefault();
         return;
       }
-      (onClick as React.MouseEventHandler<
-        HTMLButtonElement | HTMLAnchorElement
-      >)?.(e);
+      onClick?.(e);
     },
     [props]
   );
