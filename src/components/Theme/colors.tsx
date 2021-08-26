@@ -141,7 +141,8 @@ const theme = {
 
 const DEFAULT_THEME_VARIANT = 'light';
 
-export const getDefaultTheme = (): keyof typeof theme => {
+export const getDefaultTheme = (initial: string): keyof typeof theme => {
+  if (Object.keys(theme).includes(initial)) return initial as keyof typeof theme;
   if (typeof window === "undefined") return DEFAULT_THEME_VARIANT;
 
   /** 如果被 OneKey Desktop 注入，使用默认 desktop 注入的结果 */
