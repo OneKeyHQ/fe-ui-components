@@ -1,12 +1,22 @@
-import React, { Fragment } from 'react'
+import React, { FC, Fragment, ReactNode, useCallback, useEffect } from 'react'
 import { Transition } from '@headlessui/react'
 import { uniqueId } from 'lodash'
+import { CheckCircleOutlineIcon, CloseCircleOutlineIcon, ExclamationOutlineIcon, RefreshOutlineIcon } from '../Icon/react/outline'
+import { CloseSolidIcon } from '../Icon/react/solid'
 
 
 interface DivProps extends React.HTMLProps<HTMLDivElement> {
-  // Ideally we would allow all data-* props but this would depend on https://github.com/microsoft/TypeScript/issues/28960
   'data-testid'?: string;
 }
+
+export type NotificationType = 'success' | 'error' | 'processing' | 'warning'
+
+const notificationIcons = {
+  'success': <CheckCircleOutlineIcon className="okd-h-6 okd-w-6 okd-text-green-400" okd-aria-hidden="true" />,
+  'error': <CloseCircleOutlineIcon className="okd-h-6 okd-w-6 okd-text-red-400" okd-aria-hidden="true" />,
+  'processing': <RefreshOutlineIcon className="okd-h-6 okd-w-6 okd-text-gray-400" okd-aria-hidden="true" />,
+  'warning': <ExclamationOutlineIcon className="okd-h-6 okd-w-6 okd-text-yellow-400" okd-aria-hidden="true" />
+} as const
 
 export type NotificationProps = {
   /** 是否展示 */
@@ -15,22 +25,45 @@ export type NotificationProps = {
   duration?: number | null;
   /** Mark as final key since set maxCount may keep the key but user pass key is different */
   noticeKey?: React.Key;
+  /** 自定义关闭按钮的 icon */
   closeIcon?: React.ReactNode;
+  /** 是否可被关闭 */
   closable?: boolean;
-  props?: DivProps;
-  onClose?: (key: React.Key) => void;
-
+  /** 关闭时的回调 */
+  onClose?: (key?: React.Key) => void;
+  /** 类型 */
+  type?: NotificationType;
+  /** 标题 */
+  title?: ReactNode;
+  /** 内容 */
+  content?: ReactNode;
   /** @private Only for internal usage. We don't promise that we will refactor this */
   holder?: HTMLDivElement;
-
   /** @private Provided by CSSMotionList */
   show?: boolean;
 }
 
-export default function Notification({ noticeKey = uniqueId('onekey-modal'), show, onClose, duration = 3 }: NotificationProps) {
+const defaultProps: Partial<NotificationProps> = {
+  type: 'success',
+  closable: true,
+}
+
+const Notification: FC<NotificationProps> = ({
+  type,
+  title,
+  content,
+  noticeKey = uniqueId('onekey-modal'),
+  show,
+  onClose,
+  closable,
+  duration = 3,
+  children,
+}) => {
   const timerRef = React.useRef(null)
 
-  React.useEffect(() => {
+  useEffect(() => {
+    if (!duration || duration === 0) return
+
     timerRef.current = setTimeout(() => {
       onClose?.(noticeKey)
     }, duration * 1000)
@@ -38,7 +71,17 @@ export default function Notification({ noticeKey = uniqueId('onekey-modal'), sho
     return () => {
       clearTimeout(timerRef.current)
     }
-  }, [duration, noticeKey, onClose])
+  }, [closable, duration, noticeKey, onClose])
+
+  const handleClose = useCallback(
+    () => {
+      onClose?.()
+    },
+    [onClose],
+  )
+
+  const icon = notificationIcons[type]
+  const textContent = content || children
 
   return (
     <div
@@ -57,31 +100,28 @@ export default function Notification({ noticeKey = uniqueId('onekey-modal'), sho
           leaveFrom="okd-opacity-100"
           leaveTo="okd-opacity-0"
         >
-          <div className="okd-max-w-md okd-w-full okd-bg-white okd-shadow-lg okd-rounded-lg okd-pointer-events-auto okd-flex okd-ring-1 okd-ring-black okd-ring-opacity-5">
-            <div className="okd-w-0 okd-flex-1 okd-p-4">
+          <div className="okd-max-w-sm okd-w-full okd-bg-white okd-shadow-lg okd-rounded-lg okd-pointer-events-auto okd-ring-1 okd-ring-black okd-ring-opacity-5 okd-overflow-hidden">
+            <div className="okd-p-4">
               <div className="okd-flex okd-items-start">
-                <div className="okd-flex-shrink-0 okd-pt-0.5">
-                  <img
-                    className="okd-h-10 okd-w-10 okd-rounded-full"
-                    src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2.2&w=160&h=160&q=80"
-                    alt=""
-                  />
+                <div className="okd-flex-shrink-0">
+                  {icon}
                 </div>
-                <div className="okd-ml-3 okd-w-0 okd-flex-1">
-                  <p className="okd-text-sm okd-font-medium okd-text-gray-900">Emilia Gates</p>
-                  <p className="okd-mt-1 okd-text-sm okd-text-gray-500">Sure! 8:30pm works great!</p>
+                <div className="okd-ml-3 okd-w-0 okd-flex-1 okd-pt-0.5">
+                  <p className="okd-text-sm okd-font-medium okd-text-gray-900">{title}</p>
+                  <p className="okd-mt-1 okd-text-sm okd-text-gray-500">{textContent}</p>
                 </div>
+                {closable &&
+                  <div className="okd-ml-4 okd-flex-shrink-0 okd-flex">
+                    <button
+                      className="okd-bg-white okd-rounded-md okd-inline-flex okd-text-gray-400 hover:okd-text-gray-500 focus:okd-outline-none focus:okd-ring-2 focus:okd-ring-offset-2 focus:okd-ring-brand-500"
+                      onClick={handleClose}
+                    >
+                      <span className="okd-sr-only">Close</span>
+                      <CloseSolidIcon className="okd-h-5 okd-w-5 okd-text-gray-500" aria-hidden="true" />
+                    </button>
+                  </div>
+                }
               </div>
-            </div>
-            <div className="okd-flex okd-border-l okd-border-gray-200">
-              <button
-                className="okd-w-full okd-border okd-border-transparent okd-rounded-none okd-rounded-r-lg okd-p-4 okd-flex okd-items-center okd-justify-center okd-text-sm okd-font-medium okd-text-brand-600 hover:okd-text-brand-500 focus:okd-outline-none focus:okd-ring-2 focus:okd-ring-brand-500"
-                onClick={() => {
-                  onClose(noticeKey)
-                }}
-              >
-                Reply
-              </button>
             </div>
           </div>
         </Transition>
@@ -89,3 +129,7 @@ export default function Notification({ noticeKey = uniqueId('onekey-modal'), sho
     </div>
   )
 }
+
+Notification.defaultProps = defaultProps
+
+export default Notification;
