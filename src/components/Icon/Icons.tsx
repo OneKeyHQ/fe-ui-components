@@ -129,6 +129,7 @@ import LibraryOutline from "./react/outline/Library";
 import LightBulbOutline from "./react/outline/LightBulb";
 import LightningBoltOutline from "./react/outline/LightningBolt";
 import LinkOutline from "./react/outline/Link";
+import LoadingIndicatorOutline from "./react/outline/LoadingIndicator";
 import LocationMarkerOutline from "./react/outline/LocationMarker";
 import LockClosedOutline from "./react/outline/LockClosed";
 import LockOpenOutline from "./react/outline/LockOpen";
@@ -231,7 +232,6 @@ import VolumeUpOutline from "./react/outline/VolumeUp";
 import WifiOutline from "./react/outline/Wifi";
 import ZoomInOutline from "./react/outline/ZoomIn";
 import ZoomOutOutline from "./react/outline/ZoomOut";
-import LoadingOutline from "./react/outline/LoadingOutline";
 import AcademicCapSolid from "./react/solid/AcademicCap";
 import AdjustmentsSolid from "./react/solid/Adjustments";
 import AnnotationSolid from "./react/solid/Annotation";
@@ -594,6 +594,7 @@ export type ICON_NAMES =
   | "LightBulbOutline"
   | "LightningBoltOutline"
   | "LinkOutline"
+  | "LoadingIndicatorOutline"
   | "LocationMarkerOutline"
   | "LockClosedOutline"
   | "LockOpenOutline"
@@ -696,7 +697,6 @@ export type ICON_NAMES =
   | "WifiOutline"
   | "ZoomInOutline"
   | "ZoomOutOutline"
-  | "LoadingOutline"
   | "AcademicCapSolid"
   | "AdjustmentsSolid"
   | "AnnotationSolid"
@@ -1059,6 +1059,7 @@ export default {
   LightBulbOutline: LightBulbOutline,
   LightningBoltOutline: LightningBoltOutline,
   LinkOutline: LinkOutline,
+  LoadingIndicatorOutline: LoadingIndicatorOutline,
   LocationMarkerOutline: LocationMarkerOutline,
   LockClosedOutline: LockClosedOutline,
   LockOpenOutline: LockOpenOutline,
@@ -1161,7 +1162,6 @@ export default {
   WifiOutline: WifiOutline,
   ZoomInOutline: ZoomInOutline,
   ZoomOutOutline: ZoomOutOutline,
-  LoadingOutline: LoadingOutline,
   AcademicCapSolid: AcademicCapSolid,
   AdjustmentsSolid: AdjustmentsSolid,
   AnnotationSolid: AnnotationSolid,
