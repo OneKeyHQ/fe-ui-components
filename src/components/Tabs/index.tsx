@@ -96,10 +96,11 @@ const TabItem = ({
       className={({ selected }) =>
         cx(
           "okd-inline-flex okd-items-center okd-py-4 okd-px-1 okd-font-medium okd-text-sm okd-text-gray-500 focus:okd-outline-none",
-          "okd-cursor-pointer okd-border-b-2 okd-border-transparent okd-duration-300 okd-transition-colors",
+          "okd-cursor-pointer okd-border-b-2 okd-duration-300 okd-transition-colors",
           !first && tabLayout !== "between" && "okd-ml-9",
           tabLayout === "between" && "okd-flex-grow okd-justify-center",
-          !selected && "hover:okd-text-gray-700 hover:okd-border-gray-500",
+          !selected &&
+            "hover:okd-text-gray-700 okd-border-transparent hover:okd-border-gray-500",
           selected && "okd-text-brand-500 okd-border-brand-500"
         )
       }
@@ -123,7 +124,7 @@ const Tabs = (props: TabsProps) => {
   const { children, onChange, defaultIndex } = props;
 
   return (
-    <div className="okd-w-full okd-list-none okd-overflow-hidden okd-p-0">
+    <div className="okd-w-full okd-overflow-hidden okd-p-0">
       <Tab.Group defaultIndex={defaultIndex} onChange={onChange}>
         {children(props)}
       </Tab.Group>
