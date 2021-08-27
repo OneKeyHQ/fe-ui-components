@@ -35,23 +35,23 @@ export type ConfirmDialogProps = {
   afterClose?: () => void;
 };
 
-export const iconColors: Record<ModalType, string> = {
+export const iconColors = {
   'info': 'okd-text-gray-400',
   'success': 'okd-text-green-400',
   'error': 'okd-text-red-400',
   'warn': 'okd-text-yellow-500',
   'warning': 'okd-text-yellow-500',
   'confirm': 'okd-text-yellow-500',
-}
+} as const
 
-const iconBgColors: Record<ModalType, string> = {
+const iconBgColors = {
   'info': 'okd-bg-gray-100',
   'success': 'okd-bg-green-100',
   'error': 'okd-bg-red-100',
   'warn': 'okd-bg-yellow-100',
   'warning': 'okd-bg-yellow-100',
   'confirm': 'okd-bg-yellow-100',
-}
+} as const
 
 const ConfirmDialog: FC<ConfirmDialogProps> = (props) => {
   const { icon, onOk, close, onCancel, okText, okCancel, cancelText, visible, title, content, type, children } = props
