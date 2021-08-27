@@ -129,6 +129,7 @@ import LibraryOutline from "./react/outline/Library";
 import LightBulbOutline from "./react/outline/LightBulb";
 import LightningBoltOutline from "./react/outline/LightningBolt";
 import LinkOutline from "./react/outline/Link";
+import LoadingIndicatorOutline from "./react/outline/LoadingIndicator";
 import LocationMarkerOutline from "./react/outline/LocationMarker";
 import LockClosedOutline from "./react/outline/LockClosed";
 import LockOpenOutline from "./react/outline/LockOpen";
@@ -593,6 +594,7 @@ export type ICON_NAMES =
   | "LightBulbOutline"
   | "LightningBoltOutline"
   | "LinkOutline"
+  | "LoadingIndicatorOutline"
   | "LocationMarkerOutline"
   | "LockClosedOutline"
   | "LockOpenOutline"
@@ -1057,6 +1059,7 @@ export default {
   LightBulbOutline: LightBulbOutline,
   LightningBoltOutline: LightningBoltOutline,
   LinkOutline: LinkOutline,
+  LoadingIndicatorOutline: LoadingIndicatorOutline,
   LocationMarkerOutline: LocationMarkerOutline,
   LockClosedOutline: LockClosedOutline,
   LockOpenOutline: LockOpenOutline,

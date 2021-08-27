@@ -256,6 +256,8 @@ export { default as LightningBoltOutlineIcon } from './LightningBolt';
 
 export { default as LinkOutlineIcon } from './Link';
 
+export { default as LoadingIndicatorOutlineIcon } from './LoadingIndicator';
+
 export { default as LocationMarkerOutlineIcon } from './LocationMarker';
 
 export { default as LockClosedOutlineIcon } from './LockClosed';
