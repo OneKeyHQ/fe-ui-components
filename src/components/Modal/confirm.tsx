@@ -47,23 +47,25 @@ export default function confirm(config: ConfirmDialogProps) {
     }
   }
 
-  function render({ okText, cancelText, prefixCls: customizePrefixCls, ...props }: any) {
+  function render({ okText, cancelText, ...props }: ConfirmDialogProps) {
     /**
      * https://github.com/ant-design/ant-design/issues/23623
      *
      * Sync render blocks React event. Let's make this async.
      */
     setTimeout(() => {
+      // 根据 Cookie 从文件里获取翻译内容
       const messages = defaultLocaleMessages[getLocaleSymbol()]
-      const okText = messages[modalLocaleKeys.okText]
-      const justOkText = messages[modalLocaleKeys.justOkText]
-      const cancelText = messages[modalLocaleKeys.cancelText]
+      const defaultCancelText = messages[modalLocaleKeys.cancelText]
+      const defaultOkText = props.okCancel
+        ? messages[modalLocaleKeys.okText]
+        : messages[modalLocaleKeys.justOkText]
 
       ReactDOM.render(
         <ConfirmDialog
           {...props}
-          okText={okText || (props.okCancel ? okText : justOkText)}
-          cancelText={cancelText || cancelText}
+          okText={okText || defaultOkText}
+          cancelText={cancelText || defaultCancelText}
         />,
         div,
       );
