@@ -11,10 +11,6 @@ type ButtonProps = {
    */
   block?: boolean | null;
   /**
-   * 设置危险按钮（danger与type destructive是冲突的，所以暂不使用danger props）
-   */
-  danger?: boolean | null;
-  /**
    * 按钮失效状态
    */
   disabled?: boolean | null;
@@ -62,7 +58,6 @@ type ButtonProps = {
 
 const defaultProps = {
   block: false,
-  danger: false,
   disabled: false,
   loading: false,
   circular: false,
