@@ -57,14 +57,14 @@ const ConfirmDialog: FC<ConfirmDialogProps> = (props) => {
   const { icon, onOk, close, onCancel, okText, okCancel, cancelText, visible, title, content, type, children } = props
 
   const handleCancel = useCallback(() => {
-    if (!onCancel || !onCancel()) {
+    if (!onCancel) {
       close({ triggerCancel: true })
       return
     }
   }, [close, onCancel])
 
   const handleOkClick = useCallback(() => {
-    if (!onOk || !onOk()) {
+    if (!onOk) {
       close({ triggerCancel: true })
       return
     }
