@@ -12,16 +12,16 @@ export default {
 const Template: ComponentStory<typeof TabsComponent> = (args) => (
   <TabsComponent {...args}>
     {(props) => {
-      const { tabLayout, tabIcon, tabBadge } = props;
+      const { fitted, tabIcon, tabBadge } = props;
 
       return (
         <>
-          <TabList tabLayout={tabLayout}>
-            <TabItem first tabLayout={tabLayout} icon={tabIcon}>
+          <TabList fitted={fitted}>
+            <TabItem fitted={fitted} icon={tabIcon}>
               Tab1
             </TabItem>
             <TabItem
-              tabLayout={tabLayout}
+              fitted={fitted}
               icon={tabIcon}
               tabBadge={tabBadge}
               badgeContent={6}
@@ -29,7 +29,7 @@ const Template: ComponentStory<typeof TabsComponent> = (args) => (
               Tab1
             </TabItem>
             <TabItem
-              tabLayout={tabLayout}
+              fitted={fitted}
               icon={tabIcon}
               tabBadge={tabBadge}
               badgeContent={6}
@@ -37,7 +37,7 @@ const Template: ComponentStory<typeof TabsComponent> = (args) => (
               Tab2222
             </TabItem>
             <TabItem
-              tabLayout={tabLayout}
+              fitted={fitted}
               icon={tabIcon}
               tabBadge={tabBadge}
               badgeContent={10}
@@ -63,7 +63,6 @@ Default.args = {
   onChange: (index) => {
     console.log("index: ", index);
   },
-  tabLayout: "normal",
 };
 
 export const TabIcon = Template.bind({});
@@ -73,7 +72,6 @@ TabIcon.args = {
   onChange: (index) => {
     console.log("index: ", index);
   },
-  tabLayout: "normal",
   tabIcon: <Icon name="AcademicCapOutline" size={16}></Icon>,
 };
 
@@ -84,7 +82,7 @@ TabBetween.args = {
   onChange: (index) => {
     console.log("index: ", index);
   },
-  tabLayout: "between",
+  fitted: true,
 };
 
 export const TabBadge = Template.bind({});
@@ -94,6 +92,5 @@ TabBadge.args = {
   onChange: (index) => {
     console.log("index: ", index);
   },
-  tabLayout: "normal",
   tabBadge: true,
 };
