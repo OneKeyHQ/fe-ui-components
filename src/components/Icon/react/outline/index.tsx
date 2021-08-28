@@ -340,6 +340,8 @@ export { default as QrcodeOutlineIcon } from './Qrcode';
 
 export { default as QuestionMarkCircleOutlineIcon } from './QuestionMarkCircle';
 
+export { default as QuestionMarkOutlineIcon } from './QuestionMark';
+
 export { default as ReceiptRefundOutlineIcon } from './ReceiptRefund';
 
 export { default as ReceiptTaxOutlineIcon } from './ReceiptTax';
