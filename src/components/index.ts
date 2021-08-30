@@ -18,5 +18,7 @@ export { default as Image } from "./Image";
 export { default as Tabs } from "./Tabs";
 export { default as Togglelist } from "./ToggleList";
 export { default as Card } from "./Card";
+export { default as Token } from "./Token";
+export { default as TokenGroup } from "./TokenGroup";
 
 export { useConfig, useLocale, useTheme, useColors } from "./Provider/hooks";

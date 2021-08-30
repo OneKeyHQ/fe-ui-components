@@ -170,6 +170,7 @@ import PresentationChartLineOutline from "./react/outline/PresentationChartLine"
 import PrinterOutline from "./react/outline/Printer";
 import PuzzleOutline from "./react/outline/Puzzle";
 import QrcodeOutline from "./react/outline/Qrcode";
+import QuestionMarkOutline from "./react/outline/QuestionMark";
 import QuestionMarkCircleOutline from "./react/outline/QuestionMarkCircle";
 import ReceiptRefundOutline from "./react/outline/ReceiptRefund";
 import ReceiptTaxOutline from "./react/outline/ReceiptTax";
@@ -635,6 +636,7 @@ export type ICON_NAMES =
   | "PrinterOutline"
   | "PuzzleOutline"
   | "QrcodeOutline"
+  | "QuestionMarkOutline"
   | "QuestionMarkCircleOutline"
   | "ReceiptRefundOutline"
   | "ReceiptTaxOutline"
@@ -1100,6 +1102,7 @@ export default {
   PrinterOutline: PrinterOutline,
   PuzzleOutline: PuzzleOutline,
   QrcodeOutline: QrcodeOutline,
+  QuestionMarkOutline: QuestionMarkOutline,
   QuestionMarkCircleOutline: QuestionMarkCircleOutline,
   ReceiptRefundOutline: ReceiptRefundOutline,
   ReceiptTaxOutline: ReceiptTaxOutline,
