@@ -16,12 +16,16 @@ export const alertIcons = {
 }
 
 export type AlertProps = {
+  /** 标题 */
   title: ReactNode;
+  /** 内容 */
   content?: ReactNode;
+  /** Alert 的类型 */
   type?: 'info' | 'warning' | 'error' | 'success';
+  /** 是否可关闭 */
   closable?: boolean;
+  /** 点击关闭按钮的事件 */
   onClose?: () => void;
-  className?: string;
 }
 
 const defaultProps = {
