@@ -1,7 +1,36 @@
 import React, { useState, FC } from "react";
 import cx from "classnames";
+import { divide } from "lodash";
 
 type InputProps = {
+  /**
+   * 声明 input 类型
+   */
+  type?: string;
+  /**
+   * 是否禁用状态，默认为 false
+   */
+  disabled?: boolean;
+  /**
+   * 只读，默认为 false
+   */
+  readOnly?: boolean;
+  /**
+   * 设置前置内容
+   */
+  addonBefore?: React.ReactNode;
+  /**
+   * 设置后置内容
+   */
+  addonAfter?: React.ReactNode;
+  /**
+   * 覆盖默认左间距，当添加了 `addonBefore` 时，适用于 `addonBefore` 为图标的默认值 `40` 会被应用，当不为图标时（如纯文本、按钮或者选择器），可自定义
+   */
+  paddingLeft?: number;
+  /**
+   * 同 `paddingLeft`
+   */
+  paddingRight?: number;
   /**
    * 是否是错误样式
    */
@@ -9,7 +38,7 @@ type InputProps = {
   /**
    * 错误信息
    */
-  errorMessage?: string;
+  helpText?: string;
   /**
    * 受控的表单控件的值
    */
@@ -26,46 +55,117 @@ type InputProps = {
    * 内容更改回调信息
    */
   onChange?: (content: string) => void;
+  /**
+   * Label for input
+   */
+  label?: string;
+  /**
+   * Label tooltip
+   */
+  labelTooltip?: string;
+  /**
+   * Corner content
+   */
+  labelCorner?: React.ReactNode;
 };
 
 const defaultProps = {
   initialValue: "",
+  type: "text",
+  paddingLeft: 40,
+  paddingRight: 40,
 } as const;
 
 const Input: FC<InputProps> = ({
+  type,
+  disabled,
+  readOnly,
   error,
   value,
   initialValue,
   onChange,
-  errorMessage,
+  helpText,
   placeholder,
+  addonBefore,
+  addonAfter,
+  paddingLeft,
+  paddingRight,
+  label,
+  labelTooltip,
+  labelCorner,
 }) => {
   const [defaultValue, setInitialValue] = useState(initialValue ?? "");
   const currentValue = value ?? defaultValue;
   return (
     <div>
-      <input
-        value={currentValue}
-        onChange={(e) => {
-          const content = e.target.value;
-          onChange?.(content);
-          setInitialValue(content);
-        }}
-        type="text"
-        className={cx(
-          "okd-block okd-w-full okd-pr-10 okd-bg-gray-50 okd-form-input sm:okd-text-sm okd-rounded dark:okd-bg-black/50",
-          error
-            ? "okd-border-red-300 okd-text-red-900 okd-placeholder-red-300 focus:okd-outline-none focus:okd-ring-red-500 focus:okd-border-red-500 dark:okd-text-red-300"
-            : "okd-text-gray-700 okd-placeholder-gray-400 focus:okd-ring-brand-500 focus:okd-border-brand-500 okd-border-gray-200 dark:okd-border-gray-600 dark:okd-placeholder-gray-500 dark:okd-text-gray-200"
+      {/* Label */}
+      {!!label && (
+        <div className="okd-flex okd-items-center okd-justify-between okd-mb-1">
+          {/* Leading Contnet */}
+          <div className="okd-flex okd-items-center">
+            <label
+              className="okd-text-sm okd-font-medium okd-text-gray-700"
+              htmlFor="inputID"
+            >
+              {label}
+            </label>
+            {!!labelTooltip && <div className="okd-ml-1">{labelTooltip}</div>}
+          </div>
+          {/* labelCorner */}
+          {!!labelCorner && (
+            <div className="okd-text-sm okd-text-gray-500">{labelCorner}</div>
+          )}
+        </div>
+      )}
+      {/* Input 的容器，包含 `addOnBefore`、`addOnAfter` 和 `input` */}
+      <div className="okd-relative">
+        {/* addonBefore */}
+        {!!addonBefore && (
+          <div className="okd-absolute okd-inset-y-0 okd-left-0 okd-flex okd-items-center okd-pl-3 okd-text-gray-500 okd-pointer-events-none sm:okd-text-sm">
+            {addonBefore}
+          </div>
         )}
-        placeholder={placeholder}
-      />
-      {error && (
+        {/* Input */}
+        <input
+          id="inputID"
+          name="inputID"
+          value={currentValue}
+          onChange={(e) => {
+            const content = e.target.value;
+            onChange?.(content);
+            setInitialValue(content);
+          }}
+          type={type}
+          className={cx(
+            "form-input okd-block okd-w-full sm:okd-text-sm okd-rounded okd-bg-gray-50 okd-placeholder-gray-400 disabled:okd-text-gray-700 disabled:okd-bg-gray-100 disabled:okd-cursor-not-allowed",
+            error
+              ? "okd-border-red-300 focus:okd-ring-red-500 focus:okd-border-red-500 okd-text-red-900"
+              : "okd-border-gray-200 focus:okd-ring-brand-500 focus:okd-border-brand-500 okd-text-gray-900"
+          )}
+          placeholder={placeholder}
+          disabled={disabled}
+          readOnly={readOnly}
+          style={{
+            paddingLeft: addonBefore ? paddingLeft : "",
+            paddingRight: addonAfter ? paddingRight : "",
+          }}
+        />
+        {/* addOnAfter */}
+        {!!addonAfter && (
+          <div className="okd-absolute okd-inset-y-0 okd-right-0 okd-flex okd-items-center okd-pr-3 okd-text-gray-500 okd-pointer-events-none sm:okd-text-sm">
+            {addonAfter}
+          </div>
+        )}
+      </div>
+      {/* `helpText` 即是帮助文本，在 `error` 时，也可以修改为错误的提示文本 */}
+      {!!helpText && (
         <p
-          className="okd-mt-2 okd-text-sm okd-text-left okd-text-red-600 dark:okd-text-red-300"
-          id="email-error"
+          className={cx(
+            "okd-mt-2 okd-text-sm okd-text-left",
+            error ? "okd-text-red-600" : "okd-text-gray-500"
+          )}
         >
-          {errorMessage ?? "error"}
+          {helpText}
         </p>
       )}
     </div>

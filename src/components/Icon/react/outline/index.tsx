@@ -256,6 +256,8 @@ export { default as LightningBoltOutlineIcon } from './LightningBolt';
 
 export { default as LinkOutlineIcon } from './Link';
 
+export { default as LoadingIndicatorOutlineIcon } from './LoadingIndicator';
+
 export { default as LocationMarkerOutlineIcon } from './LocationMarker';
 
 export { default as LockClosedOutlineIcon } from './LockClosed';
@@ -337,6 +339,8 @@ export { default as PuzzleOutlineIcon } from './Puzzle';
 export { default as QrcodeOutlineIcon } from './Qrcode';
 
 export { default as QuestionMarkCircleOutlineIcon } from './QuestionMarkCircle';
+
+export { default as QuestionMarkOutlineIcon } from './QuestionMark';
 
 export { default as ReceiptRefundOutlineIcon } from './ReceiptRefund';
 

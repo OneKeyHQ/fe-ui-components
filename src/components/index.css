@@ -2,22 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-@layer base {
-  html,
-  body {
-    @apply okd-w-full okd-h-full;
-  }
-
-  body {
-    @apply okd-m-0 okd-antialiased okd-bg-white dark:okd-bg-gray-900;
-  }
-
-  code {
-    font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-      monospace;
-  }
-}
-
 @layer components {
   .tooltip {
     /* the !important is must-have, go to https://github.com/wwayne/react-tooltip for more info */

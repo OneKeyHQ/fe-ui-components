@@ -1,5 +1,5 @@
 import React, { FC } from "react";
-import cx from "classnames";
+import cx, { Argument } from "classnames";
 
 export type BadgeProps = {
   /**
@@ -25,7 +25,7 @@ export type BadgeProps = {
   /**
    * 传入 badge 组件的样式名称
    */
-  className?: string;
+  className?: Argument;
 };
 
 const defaultProps = {
@@ -61,11 +61,16 @@ const Badge: FC<BadgeProps> = ({
           "okd-bg-red-100 okd-text-red-500": type === "critical",
         },
         {
-          "okd-bg-gray-200 okd-text-gray-600": type === "default" && theme === "ongray",
-          "okd-bg-green-200 okd-text-green-700": type === "success" && theme === "ongray",
-          "okd-bg-blue-100 okd-text-blue-600": type === "info" && theme === "ongray",
-          "okd-bg-yellow-200 okd-text-yellow-800": type === "warning" && theme === "ongray",
-          "okd-bg-red-100 okd-text-red-500": type === "critical" && theme === "ongray",
+          "okd-bg-gray-200 okd-text-gray-600":
+            type === "default" && theme === "ongray",
+          "okd-bg-green-200 okd-text-green-700":
+            type === "success" && theme === "ongray",
+          "okd-bg-blue-100 okd-text-blue-600":
+            type === "info" && theme === "ongray",
+          "okd-bg-yellow-200 okd-text-yellow-800":
+            type === "warning" && theme === "ongray",
+          "okd-bg-red-100 okd-text-red-500":
+            type === "critical" && theme === "ongray",
         }
       )}
       {...rest}
