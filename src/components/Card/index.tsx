@@ -1,5 +1,5 @@
 import React, { FC } from "react";
-import cx from "classnames";
+import cx, { Argument } from "classnames";
 
 const TitleComponent: FC = ({ children }) => {
   return (
@@ -21,7 +21,7 @@ type CardProps = {
   /**
    * 设置额外的 class
    */
-  className?: string | null;
+  className?: Argument;
 };
 
 const defaultProps = {} as const;
