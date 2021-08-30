@@ -1,76 +1,84 @@
-import React, { FC, ReactNode, Ref, Fragment, useCallback } from "react";
-import { Popover, Transition } from "@headlessui/react";
-import classNames from "classnames";
-
-import Icon from "../Icon";
+import React, {
+  FC,
+  Fragment,
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
+import cx from "classnames";
+import { Menu, Transition } from "@headlessui/react";
+import Button from "../Button";
 
 type DropdownProps = {
   /**
-   * 触发打开 Dropdown 组件的元素
+   * Menu 的位置，分别对应左下、中下、右下
    */
-  trigger?: ReactNode | ((open: boolean, defaultIcon: ReactNode) => ReactNode);
-  /**
-   * Dropdown 组件自身外层 button 的 ref
-   */
-  triggerButtonRef?: Ref<HTMLButtonElement>;
+  place: "bottom-start" | "bottom-center" | "bottom-end";
+  trigger?: JSX.Element | string;
 };
 
-const Dropdown: FC<DropdownProps> = ({
-  triggerButtonRef,
-  trigger,
-  children,
-}) => {
-  const defaultIcon = useCallback((open) => {
+const defaultProps = {
+  place: "bottom-end",
+} as const;
+
+const Dropdown: FC<DropdownProps> = ({ place, children, trigger }) => {
+  const defaultTrigger = useCallback(() => {
     return (
-      <Icon
-        className={classNames(
-          "okd-w-5 okd-h-5 okd-transition okd-flex okd-items-center okd-justify-center",
-          open
-            ? "okd-text-gray-500 okd--rotate-180  dark:okd-text-gray-400"
-            : "okd-text-gray-400 dark:okd-text-gray-500"
-        )}
-        size={14}
-        name="ChevronDownOutline"
-      />
+      <Button circular leadingIcon="DotsVerticalSolid" type="plain">
+        {/* TODO i18n */}
+        <span className="okd-sr-only">Open options</span>
+      </Button>
     );
   }, []);
   return (
-    <Popover className="relative okd-inline-block">
-      {({ open }) => (
-        <>
-          <Popover.Button
-            ref={triggerButtonRef}
-            className={classNames(
-              "okd-inline-flex okd-items-center okd-p-2 okd-text-sm okd-font-medium okd-rounded focus:okd-outline-none focus:okd-ring-2 focus:okd-ring-offset-2 focus:okd-ring-brand-500 dark:okd-ring-offset-gray-900",
-              open
-                ? "okd-bg-gray-100 okd-text-gray-900 dark:okd-bg-gray-700 dark:okd-text-gray-50 focus:okd-ring-0 focus:okd-ring-transparent"
-                : "okd-text-gray-700 hover:okd-bg-gray-50 dark:hover:okd-bg-gray-800 dark:okd-text-gray-200"
-            )}
-          >
-            {typeof trigger === "function"
-              ? trigger(open, defaultIcon(open))
-              : trigger || defaultIcon(open)}
-          </Popover.Button>
-          <Transition
-            show={open}
-            as={Fragment}
-            enter="okd-transition okd-ease-out okd-duration-100"
-            enterFrom="okd-transform okd-opacity-0 okd-scale-95"
-            enterTo="okd-transform okd-opacity-100 okd-scale-100"
-            leave="okd-transition okd-ease-in okd-duration-75"
-            leaveFrom="okd-transform okd-opacity-100 okd-scale-100"
-            leaveTo="okd-transform okd-opacity-0 okd-scale-95"
-          >
-            <Popover.Panel className="okd-absolute okd-z-10 okd-w-64 okd-mt-2 okd-origin-top okd--translate-x-1/2 left-1/2 sm:origin-tookd-p-right sm:left-auto sm:translate-x-0 sm:-right-1">
-              <div className="bg-white okd-overflow-hidden okd-rounded-lg okd-shadow-lg okd-ring-1 okd-ring-black/5 dark:okd-bg-gray-900 dark:okd-ring-white/20">
+    <Menu as="div" className="okd-relative okd-inline-block okd-text-left">
+      {/* The `Menu.Button` will automatically open/close the `Menu.Items` when clicked,
+      and when the menu is open, the list of items receives focus and is
+      automatically navigable via the keyboard. */}
+      <Menu.Button as="div">
+        {typeof trigger === "string" ? (
+          <Button trailingIcon="ChevronDownSolid">{trigger}</Button>
+        ) : (
+          trigger || defaultTrigger
+        )}
+      </Menu.Button>
+      <Transition
+        as={Fragment}
+        enter="okd-transition okd-ease-out okd-duration-100"
+        enterFrom="okd-transform okd-opacity-0 okd-scale-95"
+        enterTo="okd-transform okd-opacity-100 okd-scale-100"
+        leave="okd-transition okd-ease-in okd-duration-75"
+        leaveFrom="okd-transform okd-opacity-100 okd-scale-100"
+        leaveTo="okd-transform okd-opacity-0 okd-scale-95"
+      >
+        <Menu.Items
+          className={cx(
+            "okd-absolute okd-mt-2 okd-w-56 okd-rounded okd-shadow-lg okd-bg-white okd-ring-1 okd-ring-black/5 focus:okd-outline-none",
+            {
+              "okd-origin-top-left okd-left-0": place === "bottom-start",
+              "okd-left-1/2 okd--translate-x-1/2": place === "bottom-center",
+              "okd-origin-top-right okd-right-0": place === "bottom-end",
+            }
+          )}
+        >
+          <Menu.Item>
+            {/* To style the active `Menu.Item` you can read the `active` render prop
+            argument, which tells you whether or not that menu item is currently
+            focused via the mouse or keyboard. */}
+            {({ active }) => (
+              <button className={`${active && "bg-blue-500"}`}>
+                Account settings
                 {children}
-              </div>
-            </Popover.Panel>
-          </Transition>
-        </>
-      )}
-    </Popover>
+              </button>
+            )}
+          </Menu.Item>
+        </Menu.Items>
+      </Transition>
+    </Menu>
   );
 };
+
+Dropdown.defaultProps = defaultProps;
 
 export default Dropdown;

@@ -32,7 +32,7 @@ const ThemeComponent = () => {
                   <div className="space-y-1.5">
                     <div
                       className="okd-h-10 okd-w-full okd-rounded okd-ring-1 okd-ring-inset okd-ring-black okd-ring-opacity-0"
-                      style={{ backgroundColor: color }}
+                      style={{ backgroundColor: `rgb(${color})` }}
                     ></div>
                     <div className="okd-px-0.5 md:okd-flex md:okd-justify-between md:okd-space-x-2 2xl:okd-space-x-0 2xl:okd-block">
                       <div className="okd-w-full okd-font-medium okd-text-gray-900">

@@ -1,7 +1,9 @@
-import { FC } from "react";
+import React, { FC } from "react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 
-import { Button, Dropdown as DropdownComponent } from "../components";
+import { Dropdown as DropdownComponent } from "../components";
+import { Button } from "../components";
+import ConfigBar from "./Base";
 
 export default {
   title: "UI/Dropdown",
@@ -14,32 +16,31 @@ const Paint: FC = ({ children }) => {
   );
 };
 
-export const Dropdown: ComponentStory<typeof DropdownComponent> = () => (
+const Template: ComponentStory<typeof DropdownComponent> = (args) => (
   <Paint>
-    <DropdownComponent>hello dropdown</DropdownComponent>
+    <DropdownComponent {...args} />
   </Paint>
 );
 
-export const CustomTrigger: ComponentStory<typeof DropdownComponent> = () => (
-  <Paint>
-    <DropdownComponent trigger={<Button type="primary">Click Me!!</Button>}>
-      hello dropdown
-    </DropdownComponent>
-  </Paint>
+export const Default: ComponentStory<typeof DropdownComponent> = (args) => (
+  <>
+    <ConfigBar />
+    <Paint>
+      <DropdownComponent {...args} />
+    </Paint>
+  </>
 );
 
-export const CustomTriggerStatus: ComponentStory<
-  typeof DropdownComponent
-> = () => (
-  <Paint>
-    <DropdownComponent
-      trigger={(status, icon) => (
-        <Button type="primary">
-          {icon}isOpen: {status ? "true" : "false"}
-        </Button>
-      )}
-    >
-      hello dropdown
-    </DropdownComponent>
-  </Paint>
-);
+Default.args = {};
+
+export const BasicButtonAsTrigger = Template.bind({});
+BasicButtonAsTrigger.args = {
+  trigger: "Trigger"
+};
+
+export const CustomTrigger = Template.bind({});
+CustomTrigger.args = {
+  trigger: (
+    <Button type="primary">Custom Trigger</Button>
+  )
+};
