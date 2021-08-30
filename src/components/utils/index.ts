@@ -22,12 +22,8 @@ export const getLocaleSymbol = (locale?: string): LocaleSymbol => {
     return userSystemDefaultLang;
   }
 
-  return localeSymbols.find(localeSymbol => {
-    // user is zh or en，zh-CN includes zh
-    if (localeSymbol.includes(userSystemDefaultLang)) {
-      return localeSymbol;
-    }
-
-    return null;
-  }) || DEFAULT;
+  // user is zh or en，zh-CN includes zh
+  return localeSymbols.find(
+    localeSymbol => localeSymbol.includes(userSystemDefaultLang)
+  ) ?? DEFAULT;
 }
