@@ -100,7 +100,7 @@ const Button: FC<ButtonProps> = (props) => {
     // Add border
     { "okd-border": !(type === "plain" || type === "link") },
     // The width and offset of ring
-    { "focus:okd-ring-2 focus:okd-ring-offset-2": !loading },
+    { "focus:okd-ring-2 focus:okd-ring-offset-2 focus:okd-ring-offset-white": !loading },
     // Text's color, background's color, border's color and ring's color
     type === "primary" && {
       "okd-text-white okd-bg-brand-500 okd-border-brand-500 okd-shadow-sm hover:okd-bg-brand-600 hover:okd-border-brand-600 focus:okd-ring-brand-500":
@@ -226,7 +226,7 @@ const Button: FC<ButtonProps> = (props) => {
                 !disabled
                   ? {
                       "okd-text-white": type === "primary",
-                      "okd-text-gray-400": type === "basic",
+                      "okd-text-gray-400": type === "basic" || type === "plain",
                       "okd-text-red-400": type === "destructive",
                     }
                   : {
