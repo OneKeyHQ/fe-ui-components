@@ -1,7 +1,7 @@
 import React, { FC, useState } from "react";
 
 import { Switch as BaseSwitch } from "@headlessui/react";
-import cx from "classnames";
+import cx, { Argument } from "classnames";
 
 type SwitchProps = {
   /**
@@ -28,6 +28,10 @@ type SwitchProps = {
    * 尺寸
    */
   size?: "sm" | "lg";
+  /**
+   * 设置额外的 class
+   */
+  className?: Argument;
 };
 
 const defaultProps = {
@@ -44,11 +48,15 @@ const Switch: FC<SwitchProps> = ({
   label,
   disabled,
   size,
+  className,
 }) => {
   const [enabled, setEnabled] = useState(initialValue);
   const active = value ?? enabled;
   return (
-    <BaseSwitch.Group as="div" className="okd-flex okd-items-center">
+    <BaseSwitch.Group
+      as="div"
+      className={cx("okd-flex okd-items-center", !!className && className)}
+    >
       <BaseSwitch
         checked={!!active}
         onChange={(val) => {
