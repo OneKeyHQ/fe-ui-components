@@ -10,20 +10,31 @@ export default {
 
 const Paint: FC = ({ children }) => {
   return (
-    <div className="okd-h-[150px] okd-flex okd-justify-center">{children}</div>
+    <div className="okd-pt-4 okd-pb-28 okd-flex okd-justify-center">{children}</div>
   );
 };
 
 export const Popover: ComponentStory<typeof PopoverComponent> = () => (
   <Paint>
-    <PopoverComponent>hello Popover</PopoverComponent>
+    <PopoverComponent place="bottom-center">
+      <div className="okd-p-4 okd-text-center okd-text-sm okd-text-gray-500">
+        Popovers are perfect for floating panels with arbitrary content like
+        navigation menus, mobile menus and flyout menus.
+      </div>
+    </PopoverComponent>
   </Paint>
 );
 
 export const CustomTrigger: ComponentStory<typeof PopoverComponent> = () => (
   <Paint>
-    <PopoverComponent trigger={<Button type="primary">Click Me!!</Button>}>
-      hello Popover
+    <PopoverComponent
+      place="bottom-center"
+      trigger={<Button type="primary">Click Me!!</Button>}
+    >
+      <div className="okd-p-4 okd-text-center okd-text-sm okd-text-gray-500">
+        Popovers are perfect for floating panels with arbitrary content like
+        navigation menus, mobile menus and flyout menus.
+      </div>
     </PopoverComponent>
   </Paint>
 );
@@ -33,13 +44,15 @@ export const CustomTriggerStatus: ComponentStory<
 > = () => (
   <Paint>
     <PopoverComponent
+      place="bottom-center"
       trigger={(status, icon) => (
-        <Button type="primary">
-          {icon}isOpen: {status ? "true" : "false"}
-        </Button>
+        <Button type="primary">isOpen: {status ? "true" : "false"}</Button>
       )}
     >
-      hello Popover
+      <div className="okd-p-4 okd-text-center okd-text-sm okd-text-gray-500">
+        Popovers are perfect for floating panels with arbitrary content like
+        navigation menus, mobile menus and flyout menus.
+      </div>
     </PopoverComponent>
   </Paint>
 );
