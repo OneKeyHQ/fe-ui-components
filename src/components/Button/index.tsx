@@ -3,6 +3,7 @@ import cx from "classnames";
 import Icon from "../Icon/index";
 import { ICON_NAMES } from "../Icon/Icons";
 import Spinner from "./Spinner";
+import { LeadingIcon, TrailingIcon } from "./ButtonIcon";
 
 type ButtonProps = {
   /**
@@ -10,17 +11,17 @@ type ButtonProps = {
    */
   block?: boolean | null;
   /**
-   * 设置危险按钮（danger与type destructive是冲突的，所以暂不使用danger props）
-   */
-  danger?: boolean | null;
-  /**
    * 按钮失效状态
    */
   disabled?: boolean | null;
   /**
-   * 设置按钮的图标组件，如果想控制Icon具体的位置，只能直接使用Icon组件，而非icon属性
+   * 前置图标
    */
-  iconName?: ICON_NAMES;
+  leadingIcon?: ICON_NAMES;
+  /**
+   * 后置图标
+   */
+  trailingIcon?: ICON_NAMES;
   /**
    * 设置按钮的载入状态
    */
@@ -57,7 +58,6 @@ type ButtonProps = {
 
 const defaultProps = {
   block: false,
-  danger: false,
   disabled: false,
   loading: false,
   circular: false,
@@ -75,7 +75,8 @@ const Button: FC<ButtonProps> = (props) => {
     size,
     loading,
     circular,
-    iconName,
+    leadingIcon,
+    trailingIcon,
     href,
     className,
   } = props;
@@ -151,35 +152,25 @@ const Button: FC<ButtonProps> = (props) => {
   if (type === "link" && href) {
     return (
       <a className={cx(btnClasses, !!className && className)} href={href}>
-        {React.isValidElement(<Icon name={iconName} />) && (
-          <Icon
-            name={iconName}
-            className={cx(
-              // Size
-              !circular
-                ? {
-                    "okd-w-4 okd-h-4": size === "xs" || size === "sm",
-                    "okd-w-5 okd-h-5":
-                      size === "base" || size === "lg" || size === "xl",
-                  }
-                : {
-                    "okd-w-5 okd-h-5":
-                      size === "xs" || size === "sm" || size === "base",
-                    "okd-w-6 okd-h-6": size === "lg" || size === "xl",
-                  },
-              // Padding left
-              { "okd--ml-0.5": !circular },
-              // Padding right
-              !circular && {
-                "okd-mr-2": size === "xs" || size === "sm" || size === "base",
-                "okd-mr-3": size === "lg" || size === "xl",
-              },
-              // Color
-              !disabled ? "okd-text-gray-400" : "okd-text-gray-300"
-            )}
+        {React.isValidElement(<Icon name={leadingIcon} />) && (
+          <LeadingIcon
+            iconName={leadingIcon}
+            circularButton={circular}
+            buttonSize={size}
+            isDisabledButton={disabled}
+            buttonType={type}
           />
         )}
         {children}
+        {React.isValidElement(<Icon name={trailingIcon} />) && (
+          <TrailingIcon
+            iconName={trailingIcon}
+            circularButton={circular}
+            buttonSize={size}
+            isDisabledButton={disabled}
+            buttonType={type}
+          />
+        )}
       </a>
     );
   }
@@ -199,47 +190,25 @@ const Button: FC<ButtonProps> = (props) => {
         />
       ) : (
         <>
-          {React.isValidElement(<Icon name={iconName} />) && (
-            <Icon
-              name={iconName}
-              className={cx(
-                // Size
-                !circular
-                  ? {
-                      "okd-w-4 okd-h-4": size === "xs" || size === "sm",
-                      "okd-w-5 okd-h-5":
-                        size === "base" || size === "lg" || size === "xl",
-                    }
-                  : {
-                      "okd-w-5 okd-h-5":
-                        size === "xs" || size === "sm" || size === "base",
-                      "okd-w-6 okd-h-6": size === "lg" || size === "xl",
-                    },
-                // Padding left
-                { "okd--ml-0.5": !circular },
-                // Padding right
-                !circular && {
-                  "okd-mr-2": size === "xs" || size === "sm" || size === "base",
-                  "okd-mr-3": size === "lg" || size === "xl",
-                },
-                // Color
-                !disabled
-                  ? {
-                      "okd-text-white": type === "primary",
-                      "okd-text-gray-400": type === "basic" || type === "plain",
-                      "okd-text-red-400": type === "destructive",
-                    }
-                  : {
-                      "okd-text-gray-300":
-                        type === "primary" ||
-                        type === "basic" ||
-                        type === "plain",
-                      "okd-text-red-200": type === "destructive",
-                    }
-              )}
+          {React.isValidElement(<Icon name={leadingIcon} />) && (
+            <LeadingIcon
+              iconName={leadingIcon}
+              circularButton={circular}
+              buttonSize={size}
+              isDisabledButton={disabled}
+              buttonType={type}
             />
           )}
           {children}
+          {React.isValidElement(<Icon name={trailingIcon} />) && (
+            <TrailingIcon
+              iconName={trailingIcon}
+              circularButton={circular}
+              buttonSize={size}
+              isDisabledButton={disabled}
+              buttonType={type}
+            />
+          )}
         </>
       )}
     </button>
