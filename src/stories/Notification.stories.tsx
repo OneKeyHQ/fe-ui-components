@@ -6,6 +6,7 @@ import {
   Notification as NotificationComponent,
 } from "../components";
 import { useState } from "react";
+import { Button } from "../components";
 
 export default {
   title: "UI/Notification",
@@ -23,25 +24,17 @@ export const Default = () => {
   // 声明式使用方法
   return (
     <div className="okd-block okd-space-x-2">
-      <button
-        className="okd-inline-flex okd-items-center okd-justify-center okd-px-4 okd-py-2 okd-text-sm okd-font-medium okd-border okd-rounded okd-shadow-sm focus:okd-outline-none focus:okd-ring-2 focus:okd-ring-offset-2 dark:okd-ring-offset-gray-900 okd-bg-brand-500 hover:okd-bg-brand-600 focus:okd-ring-brand-500 dark:okd-bg-brand-600 dark:hover:okd-bg-brand-500 okd-border-transparent okd-text-white"
-        onClick={() => setSuccessVisibility(true)}
-      >
-        点击打开 Success Notification 提示
-      </button>
-      <button
-        className="okd-inline-flex okd-items-center okd-justify-center okd-px-4 okd-py-2 okd-text-sm okd-font-medium okd-border okd-rounded okd-shadow-sm focus:okd-outline-none focus:okd-ring-2 focus:okd-ring-offset-2 dark:okd-ring-offset-gray-900 okd-bg-brand-500 hover:okd-bg-brand-600 focus:okd-ring-brand-500 dark:okd-bg-brand-600 dark:hover:okd-bg-brand-500 okd-border-transparent okd-text-white"
-        onClick={() => setErrorVisibility(true)}
-      >
-        点击打开 Error Notification 提示
-      </button>
+      <Button onClick={() => setSuccessVisibility(true)}>
+        Success Notification
+      </Button>
 
-      <button
-        className="okd-inline-flex okd-items-center okd-justify-center okd-px-4 okd-py-2 okd-text-sm okd-font-medium okd-border okd-rounded okd-shadow-sm focus:okd-outline-none focus:okd-ring-2 focus:okd-ring-offset-2 dark:okd-ring-offset-gray-900 okd-bg-brand-500 hover:okd-bg-brand-600 focus:okd-ring-brand-500 dark:okd-bg-brand-600 dark:hover:okd-bg-brand-500 okd-border-transparent okd-text-white"
-        onClick={() => setProcessingWithActionVisibility(true)}
-      >
-        点击打开拥有 footer 按钮的 Notification 提示
-      </button>
+      <Button onClick={() => setErrorVisibility(true)}>
+        Error Notification
+      </Button>
+
+      <Button onClick={() => setProcessingWithActionVisibility(true)}>
+        Custom Footer
+      </Button>
 
       <NotificationComponent
         title="Successfully added!"
@@ -66,19 +59,9 @@ export const Default = () => {
         type="processing"
         duration={0}
         footer={
-          <div className="okd-space-x-2">
-            <button
-              type="button"
-              className="okd-inline-flex okd-items-center okd-justify-center okd-px-4 okd-py-2 okd-text-sm okd-font-medium okd-border okd-rounded okd-shadow-sm focus:okd-outline-none focus:okd-ring-2 focus:okd-ring-offset-2 dark:okd-ring-offset-gray-900 okd-bg-brand-500 hover:okd-bg-brand-600 focus:okd-ring-brand-500 dark:okd-bg-brand-600 dark:hover:okd-bg-brand-500 okd-border-transparent okd-text-white"
-            >
-              Accept
-            </button>
-            <button
-              type="button"
-              className="okd-inline-flex okd-items-center okd-justify-center okd-px-4 okd-py-2 okd-text-sm okd-font-medium okd-border okd-border-gray-300 okd-rounded focus:okd-outline-none focus:okd-ring-2 focus:okd-ring-offset-2 dark:okd-ring-offset-gray-900 okd-bg-white hover:okd-bg-gray-200 focus:okd-ring-gray-500 dark:okd-bg-gray-500 dark:hover:okd-bg-brand-500 okd-border-transparent okd-text-gray-900"
-            >
-              Decline
-            </button>
+          <div className="okd-space-x-3">
+            <Button type="primary">Accept</Button>
+            <Button>Decline</Button>
           </div>
         }
       />
@@ -89,8 +72,7 @@ export const Default = () => {
 export const usingStaticMethods = () => {
   return (
     <div className="okd-space-x-2">
-      <button
-        className="okd-inline-flex okd-items-center okd-justify-center okd-px-4 okd-py-2 okd-text-sm okd-font-medium okd-border okd-rounded okd-shadow-sm focus:okd-outline-none focus:okd-ring-2 focus:okd-ring-offset-2 dark:okd-ring-offset-gray-900 okd-bg-brand-500 hover:okd-bg-brand-600 focus:okd-ring-brand-500 dark:okd-bg-brand-600 dark:hover:okd-bg-brand-500 okd-border-transparent okd-text-white"
+      <Button
         onClick={() => {
           NotificationComponent.success("Added 2.3245 BNB to CAKE/WBNB.", {
             title: "Successfully added!",
@@ -98,9 +80,8 @@ export const usingStaticMethods = () => {
         }}
       >
         Success
-      </button>
-      <button
-        className="okd-inline-flex okd-items-center okd-justify-center okd-px-4 okd-py-2 okd-text-sm okd-font-medium okd-border okd-rounded okd-shadow-sm focus:okd-outline-none focus:okd-ring-2 focus:okd-ring-offset-2 dark:okd-ring-offset-gray-900 okd-bg-brand-500 hover:okd-bg-brand-600 focus:okd-ring-brand-500 dark:okd-bg-brand-600 dark:hover:okd-bg-brand-500 okd-border-transparent okd-text-white"
+      </Button>
+      <Button
         onClick={() => {
           NotificationComponent.error(
             "Failure to add 2.3245 BNB to CAKE/WBNB.",
@@ -109,9 +90,8 @@ export const usingStaticMethods = () => {
         }}
       >
         Error
-      </button>
-      <button
-        className="okd-inline-flex okd-items-center okd-justify-center okd-px-4 okd-py-2 okd-text-sm okd-font-medium okd-border okd-rounded okd-shadow-sm focus:okd-outline-none focus:okd-ring-2 focus:okd-ring-offset-2 dark:okd-ring-offset-gray-900 okd-bg-brand-500 hover:okd-bg-brand-600 focus:okd-ring-brand-500 dark:okd-bg-brand-600 dark:hover:okd-bg-brand-500 okd-border-transparent okd-text-white"
+      </Button>
+      <Button
         onClick={() => {
           NotificationComponent.processing("Something is happening.", {
             title: "Processing...",
@@ -119,9 +99,8 @@ export const usingStaticMethods = () => {
         }}
       >
         Processing
-      </button>
-      <button
-        className="okd-inline-flex okd-items-center okd-justify-center okd-px-4 okd-py-2 okd-text-sm okd-font-medium okd-border okd-rounded okd-shadow-sm focus:okd-outline-none focus:okd-ring-2 focus:okd-ring-offset-2 dark:okd-ring-offset-gray-900 okd-bg-brand-500 hover:okd-bg-brand-600 focus:okd-ring-brand-500 dark:okd-bg-brand-600 dark:hover:okd-bg-brand-500 okd-border-transparent okd-text-white"
+      </Button>
+      <Button
         onClick={() => {
           NotificationComponent.warn("Something is happening.", {
             title: "Attention needed",
@@ -129,34 +108,23 @@ export const usingStaticMethods = () => {
         }}
       >
         Warn
-      </button>
+      </Button>
 
-      <button
-        className="okd-inline-flex okd-items-center okd-justify-center okd-px-4 okd-py-2 okd-text-sm okd-font-medium okd-border okd-rounded okd-shadow-sm focus:okd-outline-none focus:okd-ring-2 focus:okd-ring-offset-2 dark:okd-ring-offset-gray-900 okd-bg-brand-500 hover:okd-bg-brand-600 focus:okd-ring-brand-500 dark:okd-bg-brand-600 dark:hover:okd-bg-brand-500 okd-border-transparent okd-text-white"
+      <Button
         onClick={() => {
           NotificationComponent.warn("Something is happening.", {
             title: "Attention needed",
             footer: (
               <div className="okd-space-x-2">
-                <button
-                  type="button"
-                  className="okd-inline-flex okd-items-center okd-justify-center okd-px-4 okd-py-2 okd-text-sm okd-font-medium okd-border okd-rounded okd-shadow-sm focus:okd-outline-none focus:okd-ring-2 focus:okd-ring-offset-2 dark:okd-ring-offset-gray-900 okd-bg-brand-500 hover:okd-bg-brand-600 focus:okd-ring-brand-500 dark:okd-bg-brand-600 dark:hover:okd-bg-brand-500 okd-border-transparent okd-text-white"
-                >
-                  Accept
-                </button>
-                <button
-                  type="button"
-                  className="okd-inline-flex okd-items-center okd-justify-center okd-px-4 okd-py-2 okd-text-sm okd-font-medium okd-border okd-border-gray-300 okd-rounded focus:okd-outline-none focus:okd-ring-2 focus:okd-ring-offset-2 dark:okd-ring-offset-gray-900 okd-bg-white hover:okd-bg-gray-200 focus:okd-ring-gray-500 dark:okd-bg-gray-500 dark:hover:okd-bg-brand-500 okd-border-transparent okd-text-gray-900"
-                >
-                  Decline
-                </button>
+                <Button type="primary">Accept</Button>
+                <Button>Decline</Button>
               </div>
             ),
           });
         }}
       >
         With Footer
-      </button>
+      </Button>
 
       <NotificationContainer />
     </div>
