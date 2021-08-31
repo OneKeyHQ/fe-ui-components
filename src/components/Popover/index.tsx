@@ -1,55 +1,53 @@
 import React, { FC, ReactNode, Ref, Fragment, useCallback } from "react";
 import { Popover as HeadlessPopover, Transition } from "@headlessui/react";
-import classNames from "classnames";
-
-import Icon from "../Icon";
+import cx from "classnames";
+import Button from "../Button";
 
 type PopoverProps = {
   /**
    * 触发打开 Popover 组件的元素
    */
-  trigger?: ReactNode | ((open: boolean, defaultIcon: ReactNode) => ReactNode);
+  trigger?:
+    | ReactNode
+    | ((open: boolean, defaultTrigger: ReactNode) => ReactNode);
   /**
    * Popover 组件自身外层 button 的 ref
    */
   triggerButtonRef?: Ref<HTMLButtonElement>;
+  /**
+   * Menu 的位置，分别对应左下、中下、右下
+   */
+  place?: "bottom-start" | "bottom-center" | "bottom-end";
 };
+
+const defaultProps = {
+  place: "bottom-end",
+} as const;
 
 const Popover: FC<PopoverProps> = ({
   triggerButtonRef,
   trigger,
   children,
+  place,
 }) => {
-  const defaultIcon = useCallback((open) => {
+  const defaultTrigger = useCallback((open) => {
     return (
-      <Icon
-        className={classNames(
-          "okd-w-5 okd-h-5 okd-transition okd-flex okd-items-center okd-justify-center",
-          open
-            ? "okd-text-gray-500 okd--rotate-180  dark:okd-text-gray-400"
-            : "okd-text-gray-400 dark:okd-text-gray-500"
-        )}
-        size={14}
-        name="ChevronDownOutline"
+      <Button
+        className={cx({ "okd-bg-gray-100 okd-text-gray-500": open })}
+        circular
+        leadingIcon="DotsVerticalSolid"
+        type="plain"
       />
     );
   }, []);
   return (
-    <HeadlessPopover className="relative okd-inline-block">
+    <HeadlessPopover className="okd-relative okd-inline-block">
       {({ open }) => (
         <>
-          <HeadlessPopover.Button
-            ref={triggerButtonRef}
-            className={classNames(
-              "okd-inline-flex okd-items-center okd-p-2 okd-text-sm okd-font-medium okd-rounded focus:okd-outline-none focus:okd-ring-2 focus:okd-ring-offset-2 focus:okd-ring-brand-500 dark:okd-ring-offset-gray-900",
-              open
-                ? "okd-bg-gray-100 okd-text-gray-900 dark:okd-bg-gray-700 dark:okd-text-gray-50 focus:okd-ring-0 focus:okd-ring-transparent"
-                : "okd-text-gray-700 hover:okd-bg-gray-50 dark:hover:okd-bg-gray-800 dark:okd-text-gray-200"
-            )}
-          >
+          <HeadlessPopover.Button ref={triggerButtonRef}>
             {typeof trigger === "function"
-              ? trigger(open, defaultIcon(open))
-              : trigger || defaultIcon(open)}
+              ? trigger(open, defaultTrigger(open))
+              : trigger || defaultTrigger(open)}
           </HeadlessPopover.Button>
           <Transition
             show={open}
@@ -61,8 +59,14 @@ const Popover: FC<PopoverProps> = ({
             leaveFrom="okd-transform okd-opacity-100 okd-scale-100"
             leaveTo="okd-transform okd-opacity-0 okd-scale-95"
           >
-            <HeadlessPopover.Panel className="okd-absolute okd-z-10 okd-w-64 okd-mt-2 okd-origin-top okd--translate-x-1/2 left-1/2 sm:origin-tookd-p-right sm:left-auto sm:translate-x-0 sm:-right-1">
-              <div className="bg-white okd-overflow-hidden okd-rounded-lg okd-shadow-lg okd-ring-1 okd-ring-black/5 dark:okd-bg-gray-900 dark:okd-ring-white/20">
+            <HeadlessPopover.Panel
+              className={cx("okd-absolute okd-z-10 okd-w-64 okd-mt-2", {
+                "okd-origin-top-left okd-left-0": place === "bottom-start",
+                "okd-left-1/2 okd--translate-x-1/2": place === "bottom-center",
+                "okd-origin-top-right okd-right-0": place === "bottom-end",
+              })}
+            >
+              <div className="bg-white okd-overflow-hidden okd-rounded okd-shadow-lg okd-ring-1 okd-ring-black/5">
                 {children}
               </div>
             </HeadlessPopover.Panel>
@@ -72,5 +76,7 @@ const Popover: FC<PopoverProps> = ({
     </HeadlessPopover>
   );
 };
+
+Popover.defaultProps = defaultProps;
 
 export default Popover;
