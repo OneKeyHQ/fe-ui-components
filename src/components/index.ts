@@ -12,6 +12,7 @@ export { default as Dropdown } from "./Dropdown";
 export { default as Input } from "./Input";
 export { default as Image } from './Image';
 export { default as Numberic } from "./Numberic";
+export { default as Popover } from "./Popover";
 export { default as UIProvider } from "./Provider";
 export { default as Tabs } from "./Tabs";
 export { default as Togglelist } from "./ToggleList";

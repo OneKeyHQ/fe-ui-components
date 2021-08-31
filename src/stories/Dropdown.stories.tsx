@@ -1,7 +1,9 @@
-import { FC } from "react";
+import React, { FC } from "react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 
-import { Button, Dropdown as DropdownComponent } from "../components";
+import { Dropdown as DropdownComponent } from "../components";
+import { Button } from "../components";
+import ConfigBar from "./Base";
 
 export default {
   title: "UI/Dropdown",
@@ -10,36 +12,97 @@ export default {
 
 const Paint: FC = ({ children }) => {
   return (
-    <div className="okd-h-[150px] okd-flex okd-justify-center">{children}</div>
+    <div className="okd-pt-8 okd-pb-48 okd-flex okd-justify-center">
+      {children}
+    </div>
   );
 };
 
-export const Dropdown: ComponentStory<typeof DropdownComponent> = () => (
+const Template: ComponentStory<typeof DropdownComponent> = (args) => (
   <Paint>
-    <DropdownComponent>hello dropdown</DropdownComponent>
+    <DropdownComponent {...args} />
   </Paint>
 );
 
-export const CustomTrigger: ComponentStory<typeof DropdownComponent> = () => (
-  <Paint>
-    <DropdownComponent trigger={<Button type="primary">Click Me!!</Button>}>
-      hello dropdown
-    </DropdownComponent>
-  </Paint>
+export const Default: ComponentStory<typeof DropdownComponent> = (args) => (
+  <>
+    <ConfigBar />
+    <Paint>
+      <DropdownComponent {...args} />
+    </Paint>
+  </>
 );
 
-export const CustomTriggerStatus: ComponentStory<
-  typeof DropdownComponent
-> = () => (
-  <Paint>
-    <DropdownComponent
-      trigger={(status, icon) => (
-        <Button type="primary">
-          {icon}isOpen: {status ? "true" : "false"}
-        </Button>
-      )}
-    >
-      hello dropdown
-    </DropdownComponent>
-  </Paint>
-);
+Default.args = {
+  sections: [
+    {
+      items: [
+        {
+          content: "Add Liquidity",
+          icon: "PlusSolid",
+          onAction: console.log("click"),
+        },
+        {
+          content: "Remove Liquidity",
+          icon: "MinusSolid",
+        },
+      ],
+    },
+    {
+      items: [
+        {
+          content: "Filter in Farm",
+          icon: "ExternalLinkSolid",
+        },
+      ],
+    },
+  ],
+};
+
+export const BasicButtonAsTriggerAndSectionTitle = Template.bind({});
+BasicButtonAsTriggerAndSectionTitle.args = {
+  trigger: "Trigger",
+  sections: [
+    {
+      items: [
+        {
+          content: "Action 1",
+        },
+        {
+          content: "Action 2",
+        },
+      ],
+    },
+    {
+      title: "Section Title",
+      items: [
+        {
+          content: "Action 3",
+        },
+        {
+          content: "Action 4",
+        },
+      ],
+    },
+  ],
+};
+
+export const CustomTrigger = Template.bind({});
+CustomTrigger.args = {
+  trigger: <Button type="primary">Custom Trigger</Button>,
+  sections: [
+    {
+      items: [
+        {
+          content: "Action 1"
+        },
+        {
+          content: "Action 2"
+        },
+        {
+          content: "Action 3"
+        },
+      ]
+    }
+  ],
+};
