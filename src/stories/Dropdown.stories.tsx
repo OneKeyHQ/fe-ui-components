@@ -12,7 +12,9 @@ export default {
 
 const Paint: FC = ({ children }) => {
   return (
-    <div className="okd-h-[150px] okd-flex okd-justify-center">{children}</div>
+    <div className="okd-pt-8 okd-pb-48 okd-flex okd-justify-center">
+      {children}
+    </div>
   );
 };
 
@@ -31,16 +33,76 @@ export const Default: ComponentStory<typeof DropdownComponent> = (args) => (
   </>
 );
 
-Default.args = {};
+Default.args = {
+  sections: [
+    {
+      items: [
+        {
+          content: "Add Liquidity",
+          icon: "PlusSolid",
+          onAction: console.log("click"),
+        },
+        {
+          content: "Remove Liquidity",
+          icon: "MinusSolid",
+        },
+      ],
+    },
+    {
+      items: [
+        {
+          content: "Filter in Farm",
+          icon: "ExternalLinkSolid",
+        },
+      ],
+    },
+  ],
+};
 
-export const BasicButtonAsTrigger = Template.bind({});
-BasicButtonAsTrigger.args = {
-  trigger: "Trigger"
+export const BasicButtonAsTriggerAndSectionTitle = Template.bind({});
+BasicButtonAsTriggerAndSectionTitle.args = {
+  trigger: "Trigger",
+  sections: [
+    {
+      items: [
+        {
+          content: "Action 1",
+        },
+        {
+          content: "Action 2",
+        },
+      ],
+    },
+    {
+      title: "Section Title",
+      items: [
+        {
+          content: "Action 3",
+        },
+        {
+          content: "Action 4",
+        },
+      ],
+    },
+  ],
 };
 
 export const CustomTrigger = Template.bind({});
 CustomTrigger.args = {
-  trigger: (
-    <Button type="primary">Custom Trigger</Button>
-  )
+  trigger: <Button type="primary">Custom Trigger</Button>,
+  sections: [
+    {
+      items: [
+        {
+          content: "Action 1"
+        },
+        {
+          content: "Action 2"
+        },
+        {
+          content: "Action 3"
+        },
+      ]
+    }
+  ],
 };
