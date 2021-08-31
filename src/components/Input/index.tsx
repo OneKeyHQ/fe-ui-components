@@ -1,5 +1,5 @@
 import React, { useState, FC } from "react";
-import cx from "classnames";
+import cx, { Argument } from "classnames";
 import { divide } from "lodash";
 
 type InputProps = {
@@ -67,6 +67,10 @@ type InputProps = {
    * Corner content
    */
   labelCorner?: React.ReactNode;
+  /**
+   * 设置额外的 class
+   */
+  className?: Argument;
 };
 
 const defaultProps = {
@@ -93,11 +97,12 @@ const Input: FC<InputProps> = ({
   label,
   labelTooltip,
   labelCorner,
+  className,
 }) => {
   const [defaultValue, setInitialValue] = useState(initialValue ?? "");
   const currentValue = value ?? defaultValue;
   return (
-    <div>
+    <div className={cx(!!className && className)}>
       {/* Label */}
       {!!label && (
         <div className="okd-flex okd-items-center okd-justify-between okd-mb-1">
