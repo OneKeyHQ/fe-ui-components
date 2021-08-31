@@ -24,4 +24,6 @@ export { default as Sidebar } from "./Sidebar";
 export { default as Skeleton } from "./Skeleton";
 export { default as Switch } from "./Switch";
 
-export { useConfig, useLocale, useTheme, useColors } from "./Provider/hooks";
+export { default as Notification, NotificationContainer } from './Notification';
+
+export { useConfig, useLocale, useTheme, useColors } from './Provider/hooks';
