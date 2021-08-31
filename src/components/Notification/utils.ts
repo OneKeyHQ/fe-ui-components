@@ -1,19 +1,19 @@
-import { Events } from './types'
-import { NotificationProps } from './Notification'
-import { NotificationAction } from './useNotification'
+import { Events } from "./types";
+import { NotificationProps } from "./Notification";
+import { NotificationAction } from "./useNotification";
 
 // An event handler will take an event argument
 // and should not return a value
-export type Handler<T = any> = (event: T) => void
+export type Handler<T = any> = (event: T) => void;
 
 interface Emitter {
-  on<T = any>(event: Events, handler: Handler<T>): void
-  emit<T = any>(event: Events, args?: T): void
-  off(): void
+  on<T = any>(event: Events, handler: Handler<T>): void;
+  emit<T = any>(event: Events, args?: T): void;
+  off(): void;
 }
 
 export const emitter = ((): Emitter => {
-  const events = new Map()
+  const events = new Map();
 
   return {
     /**
@@ -22,8 +22,8 @@ export const emitter = ((): Emitter => {
      * @param {Handler} callback Handler to call in response to given event
      */
     on<T = any>(event: Events, callback: Handler<T>) {
-      if (!events.has(event)) events.set(event, [])
-      events.get(event).push(callback)
+      if (!events.has(event)) events.set(event, []);
+      events.get(event).push(callback);
     },
 
     /**
@@ -32,31 +32,37 @@ export const emitter = ((): Emitter => {
      * @param {Any} args Any value passed to each handler
      */
     emit<T = any>(event: Events, args: T) {
-      if (!events.has(event)) return
-      events.get(event).forEach((callback: Handler) => callback(args))
+      if (!events.has(event)) return;
+      events.get(event).forEach((callback: Handler) => callback(args));
     },
 
     /** Remove all events. */
     off() {
-      events.clear()
+      events.clear();
     },
-  }
-})()
+  };
+})();
 
 interface INotificationDispatcher {
-  dispatch: (value: NotificationAction) => void
-  delay?: number
+  dispatch: (value: NotificationAction) => void;
+  duration?: number;
 }
 
-export const notificationDispatcher = ({ dispatch, delay }: INotificationDispatcher) => {
+export const notificationDispatcher = ({
+  dispatch,
+  duration,
+}: INotificationDispatcher) => {
   emitter.on(Events.SHOW, (notification: NotificationProps) => {
-    dispatch({ type: 'ADD', notification })
+    dispatch({ type: "ADD", notification });
 
-    if (delay)
+    if (duration) {
       setTimeout(() => {
-        dispatch({ type: 'REMOVE', noticeKey: notification.noticeKey })
-      }, delay)
-  })
-  emitter.on(Events.HIDE, (id: string) => dispatch({ type: 'REMOVE', noticeKey: id }))
-  emitter.on(Events.HIDE_ALL, () => dispatch({ type: 'REMOVE_ALL' }))
-}
+        dispatch({ type: "REMOVE", noticeKey: notification.noticeKey });
+      }, duration);
+    }
+  });
+  emitter.on(Events.HIDE, (id: string) =>
+    dispatch({ type: "REMOVE", noticeKey: id })
+  );
+  emitter.on(Events.HIDE_ALL, () => dispatch({ type: "REMOVE_ALL" }));
+};

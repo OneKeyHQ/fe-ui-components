@@ -1,19 +1,50 @@
-import React, { ElementType, FC, Fragment, Key, ReactNode, useCallback, useEffect } from 'react'
-import { Transition } from '@headlessui/react'
-import cx from 'classnames'
-import { uniqueId } from 'lodash'
-import { CheckCircleOutlineIcon, CloseCircleOutlineIcon, ExclamationOutlineIcon, RefreshOutlineIcon } from '../Icon/react/outline'
-import { CloseSolidIcon } from '../Icon/react/solid'
+import React, {
+  ElementType,
+  FC,
+  Key,
+  ReactNode,
+  useCallback,
+  useEffect,
+} from "react";
+import { Transition } from "@headlessui/react";
+import cx from "classnames";
+import { uniqueId } from "lodash";
+import {
+  CheckCircleOutlineIcon,
+  CloseCircleOutlineIcon,
+  ExclamationOutlineIcon,
+  RefreshOutlineIcon,
+} from "../Icon/react/outline";
+import { CloseSolidIcon } from "../Icon/react/solid";
 
-
-export type NotificationType = 'success' | 'error' | 'processing' | 'warning'
+export type NotificationType = "success" | "error" | "processing" | "warning";
 
 const notificationIcons = {
-  'success': <CheckCircleOutlineIcon className="okd-h-6 okd-w-6 okd-text-green-400" okd-aria-hidden="true" />,
-  'error': <CloseCircleOutlineIcon className="okd-h-6 okd-w-6 okd-text-red-400" okd-aria-hidden="true" />,
-  'processing': <RefreshOutlineIcon className="okd-h-6 okd-w-6 okd-text-gray-400" okd-aria-hidden="true" />,
-  'warning': <ExclamationOutlineIcon className="okd-h-6 okd-w-6 okd-text-yellow-400" okd-aria-hidden="true" />
-} as const
+  success: (
+    <CheckCircleOutlineIcon
+      className="okd-h-6 okd-w-6 okd-text-green-400"
+      okd-aria-hidden="true"
+    />
+  ),
+  error: (
+    <CloseCircleOutlineIcon
+      className="okd-h-6 okd-w-6 okd-text-red-400"
+      okd-aria-hidden="true"
+    />
+  ),
+  processing: (
+    <RefreshOutlineIcon
+      className="okd-h-6 okd-w-6 okd-text-gray-400"
+      okd-aria-hidden="true"
+    />
+  ),
+  warning: (
+    <ExclamationOutlineIcon
+      className="okd-h-6 okd-w-6 okd-text-yellow-400"
+      okd-aria-hidden="true"
+    />
+  ),
+} as const;
 
 export type NotificationProps = {
   /** 是否展示 */
@@ -39,8 +70,8 @@ export type NotificationProps = {
   /** 是否展示 Notification */
   show?: boolean;
   /** 最外层的 wrapper  */
-  container?: ElementType<any>
-}
+  container?: ElementType<any>;
+};
 
 const DefaultContainer: FC = ({ children }) => (
   <div
@@ -51,14 +82,14 @@ const DefaultContainer: FC = ({ children }) => (
       {children}
     </div>
   </div>
-)
+);
 
 const defaultProps: Partial<NotificationProps> = {
-  type: 'success',
+  type: "success",
   closable: true,
   duration: 3,
-  container: DefaultContainer
-}
+  container: DefaultContainer,
+};
 
 const Notification: FC<NotificationProps> = ({
   type,
@@ -66,7 +97,7 @@ const Notification: FC<NotificationProps> = ({
   content,
   footer,
   // Calling uniqueId at runtime
-  noticeKey = uniqueId('onekey-modal'),
+  noticeKey = uniqueId("onekey-modal"),
   show,
   onClose,
   closable,
@@ -74,29 +105,26 @@ const Notification: FC<NotificationProps> = ({
   children,
   container: Container,
 }) => {
-  const timerRef = React.useRef(null)
+  const timerRef = React.useRef(null);
 
   useEffect(() => {
-    if (!duration || duration === 0) return
+    if (!duration || duration === 0) return;
 
     timerRef.current = setTimeout(() => {
-      onClose?.(noticeKey)
-    }, duration * 1000)
+      onClose?.(noticeKey);
+    }, duration * 1000);
 
     return () => {
-      clearTimeout(timerRef.current)
-    }
-  }, [closable, duration, noticeKey, onClose])
+      clearTimeout(timerRef.current);
+    };
+  }, [closable, duration, noticeKey, onClose]);
 
-  const handleClose = useCallback(
-    () => {
-      onClose?.(noticeKey)
-    },
-    [noticeKey, onClose],
-  )
+  const handleClose = useCallback(() => {
+    onClose?.(noticeKey);
+  }, [noticeKey, onClose]);
 
-  const icon = notificationIcons[type]
-  const textContent = content || children
+  const icon = notificationIcons[type];
+  const textContent = content || children;
 
   const notificationNode = (
     <Transition
@@ -113,47 +141,50 @@ const Notification: FC<NotificationProps> = ({
       {/* <div className="okd-max-w-sm okd-w-full okd-bg-white okd-shadow-lg okd-rounded-lg okd-pointer-events-auto okd-ring-1 okd-ring-black okd-ring-opacity-5 okd-overflow-hidden"> */}
       <div className="okd-p-4">
         <div className="okd-flex okd-items-start">
-          <div className="okd-flex-shrink-0">
-            {icon}
-          </div>
+          <div className="okd-flex-shrink-0">{icon}</div>
           <div className="okd-ml-3 okd-w-0 okd-flex-1 okd-pt-0.5">
-            <p className="okd-text-sm okd-font-medium okd-text-gray-900">{title}</p>
-            <p className={cx("okd-text-sm okd-text-gray-500", !!title && "okd-mt-1")}>{textContent}</p>
+            <p className="okd-text-sm okd-font-medium okd-text-gray-900">
+              {title}
+            </p>
+            <p
+              className={cx(
+                "okd-text-sm okd-text-gray-500",
+                !!title && "okd-mt-1"
+              )}
+            >
+              {textContent}
+            </p>
 
-            {!!footer &&
-              <div className="okd-mt-4 okd-flex">
-                {footer}
-              </div>}
+            {!!footer && <div className="okd-mt-4 okd-flex">{footer}</div>}
           </div>
 
-          {closable &&
+          {closable && (
             <div className="okd-ml-4 okd-flex-shrink-0 okd-flex">
               <button
                 className="okd-bg-white okd-rounded-md okd-inline-flex okd-text-gray-400 hover:okd-text-gray-500 focus:okd-outline-none focus:okd-ring-2 focus:okd-ring-offset-2 focus:okd-ring-brand-500"
                 onClick={handleClose}
               >
                 <span className="okd-sr-only">Close</span>
-                <CloseSolidIcon className="okd-h-5 okd-w-5 okd-text-gray-500" aria-hidden="true" />
+                <CloseSolidIcon
+                  className="okd-h-5 okd-w-5 okd-text-gray-500"
+                  aria-hidden="true"
+                />
               </button>
             </div>
-          }
+          )}
         </div>
       </div>
       {/* </div> */}
     </Transition>
-  )
+  );
 
   if (Container) {
-    return (
-      <Container>
-        {notificationNode}
-      </Container>
-    )
+    return <Container>{notificationNode}</Container>;
   }
 
-  return notificationNode
-}
+  return notificationNode;
+};
 
-Notification.defaultProps = defaultProps
+Notification.defaultProps = defaultProps;
 
 export default Notification;
