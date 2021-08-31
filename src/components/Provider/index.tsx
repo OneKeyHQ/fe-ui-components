@@ -10,10 +10,15 @@ import cookie from "js-cookie";
 import { Context } from "./hooks";
 
 import { COLORS, getDefaultTheme } from "../Theme";
-import type { ThemeValues } from '../Theme/colors'
+import type { ThemeValues } from "../Theme/colors";
 
-import locales from '../locales';
-import { getLocaleSymbol, LocaleSymbol, OK_LOCALE_CACHE_KEY, TranslationMap } from "../utils";
+import locales from "../locales";
+import {
+  getLocaleSymbol,
+  LocaleSymbol,
+  OK_LOCALE_CACHE_KEY,
+  TranslationMap,
+} from "../utils";
 
 const cache = createIntlCache();
 
@@ -30,6 +35,10 @@ export type UIProviderProps = {
    * fallback locale symbol
    */
   defaultLocale?: LocaleSymbol;
+  /**
+   * default theme variant
+   */
+  defaultTheme?: keyof typeof COLORS;
 };
 
 const Provider: FC<UIProviderProps> = ({
@@ -37,11 +46,15 @@ const Provider: FC<UIProviderProps> = ({
   intl,
   messagesMap,
   defaultLocale,
+  defaultTheme: initialTheme,
 }) => {
+  const defaultTheme = getDefaultTheme(initialTheme);
   const [theme, setTheme] = useState<ThemeValues>();
-  const [themeVariant, setThemeVariant] = useState<keyof typeof COLORS>(getDefaultTheme());
+  const [themeVariant, setThemeVariant] = useState<keyof typeof COLORS>(
+    defaultTheme
+  );
   useEffect(() => {
-    const currentTheme = COLORS[themeVariant] ?? COLORS[getDefaultTheme()];
+    const currentTheme = COLORS[themeVariant];
     Object.entries(currentTheme).forEach(([key, value]) => {
       if (typeof document === "undefined") return;
       document.documentElement.style.setProperty(`--${key}`, value);
@@ -54,7 +67,10 @@ const Provider: FC<UIProviderProps> = ({
   const getMessage = useCallback(
     (activeLocale) => ({
       ...locales[activeLocale],
-      ...({...(messagesMap?.[defaultLocale] ?? {}), ...(messagesMap?.[activeLocale] ?? {})} ??
+      ...({
+        ...(messagesMap?.[defaultLocale] ?? {}),
+        ...(messagesMap?.[activeLocale] ?? {}),
+      } ??
         intl?.messages ??
         {}),
     }),
