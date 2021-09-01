@@ -1,6 +1,7 @@
-import React, { FC, ReactNode, Component } from "react";
+import React, { FC, ReactNode, Component, Fragment, useMemo } from "react";
 import cx, { Argument } from "classnames";
 import { RadioGroup } from "@headlessui/react";
+import { isArray, isObject } from "lodash";
 
 type RadioButtonProps = {
   /**
@@ -11,7 +12,13 @@ type RadioButtonProps = {
    * Whether or not the RadioButton is disabled..
    */
   disabled?: boolean;
+  /**
+   * 展示的标题
+   */
   label?: String | Component;
+  /**
+   * 展示的描述
+   */
   description?: ReactNode;
   /**
    * 设置额外的 class
@@ -42,7 +49,7 @@ const RadioButton: FC<RadioButtonProps> = ({
       value={value}
       className={({ active, checked }) =>
         cx(
-          "okd-flex okd-flex-col okd-items-center okd-rounded okd-border focus:okd-outline-none",
+          "okd-flex okd-flex-col okd-items-center okd-justify-center okd-rounded okd-border focus:okd-outline-none",
           disabled
             ? "okd-bg-white okd-border-gray-200 okd-cursor-not-allowed"
             : checked
@@ -149,8 +156,29 @@ const RadioButtonGroup: FC<RadioButtonGroupProps> & {
   onChange,
   children,
   className,
+  size,
   ...rest
 }) => {
+  const childrenWithProps = useMemo(() => {
+    if (React.isValidElement(children)) {
+      // What if we met Option nested inside another container?
+      if (isArray(children.props.children)) {
+        const commonOptionProps = { size, disabled } as const;
+        return React.Children.map(children.props.children, (child) => {
+          // Checking isValidElement is the safe way and avoids a typescript error too.
+          if (React.isValidElement(child) && child.type === RadioButton) {
+            return React.cloneElement<RadioButtonProps>(child, {
+              ...commonOptionProps,
+              ...(isObject(child.props) ? child.props : {}),
+            });
+          }
+          return child;
+        });
+      }
+    }
+
+    return children;
+  }, [children, size, disabled]);
 
   return (
     <RadioGroup
@@ -161,7 +189,7 @@ const RadioButtonGroup: FC<RadioButtonGroupProps> & {
       {...rest}
     >
       <RadioGroup.Label className="okd-sr-only">{label}</RadioGroup.Label>
-      <div className="okd-flex okd-space-x-2">{children}</div>
+      <div className="okd-flex okd-space-x-2">{childrenWithProps}</div>
     </RadioGroup>
   );
 };
