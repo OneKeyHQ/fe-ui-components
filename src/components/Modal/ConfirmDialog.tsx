@@ -75,10 +75,8 @@ const ConfirmDialog: FC<ConfirmDialogProps> = (props) => {
   }, [close, onCancel]);
 
   const handleOkClick = useCallback(() => {
-    if (!onOk) {
-      close({ triggerCancel: true });
-      return;
-    }
+    onOk?.();
+    close({ triggerCancel: true });
   }, [close, onOk]);
 
   const cancelActionNode = useMemo(
