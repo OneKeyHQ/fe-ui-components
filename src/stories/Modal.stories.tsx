@@ -61,10 +61,7 @@ export const Default = () => {
         </Button>
       </div>
 
-      <Modal
-        visible={isModalVisible}
-        onClose={() => handleCancel()}
-      >
+      <Modal visible={isModalVisible} onClose={() => handleCancel()}>
         {!!isHeaderVisible && (
           <Modal.Header
             // Custom styled title
@@ -84,18 +81,26 @@ export const Default = () => {
             }
           />
         )}
-        <div className="okd-px-4 okd-pt-5 okd-pb-4 sm:okd-p-6">
+
+        <Modal.Body>
           <p className="okd-font-normal okd-text-sm okd-leading-5 okd-text-gray-900">
             <strong className="okd-font-bold">Detach instance to use.</strong>{" "}
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Odio porta
             risus nec, cursus faucibus libero dolor integer. Cursus sagittis,
             tempus ut cum cursus gravida suspendisse tristique nunc.
           </p>
-        </div>
+        </Modal.Body>
+
         {!!isFooterVisible && (
-          <Modal.Footer onOk={handleOk} onCancel={handleCancel} okText="Create" />
+          <Modal.Footer
+            onOk={handleOk}
+            onCancel={handleCancel}
+            okText="Create"
+          />
         )}
       </Modal>
+
+      <Modal visible={true} onClose={() => null}>No body. <Button></Button></Modal>
     </>
   );
 };

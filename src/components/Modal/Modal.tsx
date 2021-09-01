@@ -36,6 +36,10 @@ export const iconColors: Record<ModalType, string> = {
 //   confirm: "okd-bg-yellow-100",
 // };
 
+export const ModalBody = ({ children }) => {
+  return <div className="okd-p-4 sm:okd-p-6">{children}</div>;
+};
+
 const Modal = (props: PropsWithChildren<ModalProps>) => {
   const { visible, content, onClose, children } = props;
 
@@ -95,6 +99,7 @@ const Modal = (props: PropsWithChildren<ModalProps>) => {
 };
 
 Modal.Header = ModalHeader;
+Modal.Body = ModalBody;
 Modal.Footer = ModalFooter;
 
 export default Modal;
