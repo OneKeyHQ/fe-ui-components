@@ -1,5 +1,5 @@
 import React from "react";
-import { ModalProps } from "../Modal";
+import type { ConfirmDialogProps } from "../ConfirmDialog";
 import usePatchElement from "./usePatchElement";
 import HookModal, { HookModalRef } from "./HookModal";
 import {
@@ -53,8 +53,8 @@ export default function useModal(): [
 
   // =========================== Hook ===========================
   const getConfirmFunc = React.useCallback(
-    (withFunc: (config: ModalProps) => ModalProps) =>
-      function hookConfirm(config: ModalProps) {
+    (withFunc: (config: ConfirmDialogProps) => ConfirmDialogProps) =>
+      function hookConfirm(config: ConfirmDialogProps) {
         uuid += 1;
 
         const modalRef = React.createRef<HookModalRef>();
@@ -85,7 +85,7 @@ export default function useModal(): [
               setActionQueue((prev) => [...prev, destroyAction]);
             }
           },
-          update: (newConfig: ModalProps) => {
+          update: (newConfig: ConfirmDialogProps) => {
             function updateAction() {
               modalRef.current?.update(newConfig);
             }
