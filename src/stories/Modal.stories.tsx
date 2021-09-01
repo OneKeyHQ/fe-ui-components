@@ -1,7 +1,7 @@
 import React from "react";
 import { ComponentMeta } from "@storybook/react";
 
-import { Modal } from "../components";
+import { Button, Modal } from "../components";
 import { iconColors } from "../components/Modal/ConfirmDialog";
 import ExclamationOutlined from "../components/Icon/react/outline/Exclamation";
 import ConfigBar from "./Base";
@@ -13,6 +13,8 @@ export default {
 
 export const Default = () => {
   const [isModalVisible, setIsModalVisible] = React.useState(false);
+  const [isHeaderVisible, setIsHeaderVisible] = React.useState(false);
+  const [isFooterVisible, setIsFooterVisible] = React.useState(false);
 
   const showModal = () => {
     setIsModalVisible(true);
@@ -29,24 +31,60 @@ export const Default = () => {
   return (
     <>
       <ConfigBar />
-      <button
-        className="okd-inline-flex okd-items-center okd-justify-center okd-px-4 okd-py-2 okd-text-sm okd-font-medium border okd-rounded okd-shadow-sm focus:okd-outline-none focus:okd-ring-2 focus:okd-ring-offset-2 dark:okd-ring-offset-gray-900 okd-bg-brand-500 hover:okd-bg-brand-600 focus:okd-ring-brand-500 dark:okd-bg-brand-600 dark:hover:okd-bg-brand-500 okd-border-transparent okd-text-white"
-        onClick={() => showModal()}
-      >
-        Open Modal
-      </button>
+      <div className="okd-space-x-3">
+        <Button
+          onClick={() => {
+            setIsHeaderVisible(true);
+            setIsFooterVisible(false);
+            showModal();
+          }}
+        >
+          Open Header Modal
+        </Button>
+        <Button
+          onClick={() => {
+            setIsHeaderVisible(false);
+            setIsFooterVisible(true);
+            showModal();
+          }}
+        >
+          Open Footer Modal
+        </Button>
+        <Button
+          onClick={() => {
+            setIsHeaderVisible(true);
+            setIsFooterVisible(true);
+            showModal();
+          }}
+        >
+          Open Full Modal
+        </Button>
+      </div>
+
       <Modal
-        title={<div> Aha </div>}
         visible={isModalVisible}
-        onOk={handleOk}
-        onCancel={handleCancel}
-        type="success"
+        onClose={() => handleCancel()}
       >
-        <div className="okd-text-gray-500">
-          <p>Some contents...</p>
-          <p>Some contents...</p>
-          <p>Some contents...</p>
+        {!!isHeaderVisible && (
+          <Modal.Header
+            // Custom styled title
+            // title={<div className="okd-text-green-200">Create User</div>}
+            // Default title style
+            title="Create User"
+            onClose={() => handleCancel()}
+          />
+        )}
+        <div className="okd-px-4 okd-pt-5 okd-pb-4 sm:okd-p-6">
+          <p className="okd-font-normal okd-text-sm okd-leading-5 okd-text-gray-900">
+            <strong className="okd-font-bold">Detach instance to use.</strong>{" "}
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Odio porta
+            risus nec, cursus faucibus libero dolor integer. Cursus sagittis,
+            tempus ut cum cursus gravida suspendisse tristique nunc.
+          </p>
         </div>
+        {!!isFooterVisible && (
+          <Modal.Footer onOk={handleOk} onCancel={handleCancel} okText="Create" />
+        )}
       </Modal>
     </>
   );
