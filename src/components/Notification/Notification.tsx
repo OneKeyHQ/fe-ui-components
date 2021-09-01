@@ -15,7 +15,7 @@ import {
   ExclamationOutlineIcon,
   RefreshOutlineIcon,
 } from "../Icon/react/outline";
-import { CloseSolidIcon } from "../Icon/react/solid";
+import Button from "../Button";
 
 export type NotificationType = "success" | "error" | "processing" | "warning";
 
@@ -159,17 +159,16 @@ const Notification: FC<NotificationProps> = ({
           </div>
 
           {closable && (
-            <div className="okd-ml-4 okd-flex-shrink-0 okd-flex">
-              <button
-                className="okd-bg-white okd-rounded-md okd-inline-flex okd-text-gray-400 hover:okd-text-gray-500 focus:okd-outline-none focus:okd-ring-2 focus:okd-ring-offset-2 focus:okd-ring-brand-500"
+            <div className="okd-ml-4 okd-flex-shrink-0 okd-flex okd-items-center okd-justify-center okd-w-5 okd-h-5">
+              <Button
                 onClick={handleClose}
+                circular
+                size="xs"
+                leadingIcon="CloseSolid"
+                type="plain"
               >
                 <span className="okd-sr-only">Close</span>
-                <CloseSolidIcon
-                  className="okd-h-5 okd-w-5 okd-text-gray-500"
-                  aria-hidden="true"
-                />
-              </button>
+              </Button>
             </div>
           )}
         </div>
