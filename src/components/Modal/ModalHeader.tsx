@@ -42,7 +42,7 @@ export const ModalHeader: FC<ModalHeaderProps> = ({
       return isValidElement(title) ? (
         title
       ) : (
-        <Dialog.Title className="okd-text-lg okd-font-medium okd-leading-7">
+        <Dialog.Title className="okd-text-lg okd-font-medium okd-text-gray-900 okd-flex-1">
           {title}
         </Dialog.Title>
       );
@@ -51,25 +51,20 @@ export const ModalHeader: FC<ModalHeaderProps> = ({
     return children;
   })();
 
-  // 只在有 关闭按钮 和 actions 都有时显示
-  const divider = !!actions && !!closable && (
-    <div className="okd-w-[1px] okd-bg-gray-200"></div>
-  );
-
-  // TODO: Add small padding
   return (
-    <div className="okd-text-gray-900 okd-py-4 okd-px-6 okd-flex okd-items-center okd-border-b okd-border-gray-200">
+    <div className="px-4 py-3 sm:okd-py-4 sm:okd-px-6 okd-flex okd-items-center okd-justify-between okd-border-b okd-border-gray-200">
       {titleNode}
-      <div className="okd-relative okd-flex-1 okd-flex okd-justify-end okd-space-x-2">
+      <div className="okd-flex okd-items-center okd-space-x-4 okd-divide-x okd-divide-gray-200 okd-flex-shrink-0">
         {actions}
-        {divider}
         {!!closable && (
-          <Button
-            type="plain"
-            leadingIcon="CloseSolid"
-            onClick={onClose}
-            circular
-          />
+          <div className="okd-pl-4 okd-w-9 okd-h-5 okd-flex okd-items-center okd-justify-center">
+            <Button
+              type="plain"
+              leadingIcon="CloseSolid"
+              onClick={onClose}
+              circular
+            />
+          </div>
         )}
       </div>
     </div>
