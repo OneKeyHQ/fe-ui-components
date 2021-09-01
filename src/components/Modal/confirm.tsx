@@ -1,31 +1,37 @@
-import * as React from 'react';
-import * as ReactDOM from 'react-dom';
+import * as React from "react";
+import * as ReactDOM from "react-dom";
 
-import { modalLocaleKeys } from './locale'
-import defaultLocaleMessages from '../locales'
-import { getLocaleSymbol } from '../utils'
-import InfoCircleOutlined from '../Icon/react/outline/InformationCircle';
-import CheckOutlined from '../Icon/react/outline/Check';
-import CloseCircleOutlined from '../Icon/react/outline/CloseCircle';
-import ExclamationCircleOutlined from '../Icon/react/outline/ExclamationCircle';
-import ConfirmDialog, { iconColors } from './ConfirmDialog';
-import type { ConfirmDialogProps } from './ConfirmDialog';
+import { modalLocaleKeys } from "./locale";
+import defaultLocaleMessages from "../locales";
+import { getLocaleSymbol } from "../utils";
+import InfoCircleOutlined from "../Icon/react/outline/InformationCircle";
+import CheckOutlined from "../Icon/react/outline/Check";
+import CloseCircleOutlined from "../Icon/react/outline/CloseCircle";
+import ExclamationCircleOutlined from "../Icon/react/outline/ExclamationCircle";
+import ConfirmDialog, { iconColors } from "./ConfirmDialog";
+import type { ConfirmDialogProps } from "./ConfirmDialog";
 
+type ConfigUpdate =
+  | ConfirmDialogProps
+  | ((prevConfig: ConfirmDialogProps) => ConfirmDialogProps);
 
-type ConfigUpdate = ConfirmDialogProps | ((prevConfig: ConfirmDialogProps) => ConfirmDialogProps);
-
-export type ModalFunc = (props: ConfirmDialogProps) => {
+export type ModalFunc = (
+  props: ConfirmDialogProps
+) => {
   destroy: () => void;
   update: (configUpdate: ConfigUpdate) => void;
 };
 
-export type ModalStaticFunctions = Record<NonNullable<ConfirmDialogProps['type']>, ModalFunc>;
+export type ModalStaticFunctions = Record<
+  NonNullable<ConfirmDialogProps["type"]>,
+  ModalFunc
+>;
 
 // 用于储存销毁函数
 export const destroyFns: Array<() => void> = [];
 
 export default function confirm(config: ConfirmDialogProps) {
-  const div = document.createElement('div');
+  const div = document.createElement("div");
   document.body.appendChild(div);
   let currentConfig = { ...config, close, visible: true } as any;
 
@@ -34,7 +40,7 @@ export default function confirm(config: ConfirmDialogProps) {
     if (unmountResult && div.parentNode) {
       div.parentNode.removeChild(div);
     }
-    const triggerCancel = args.some(param => param && param.triggerCancel);
+    const triggerCancel = args.some((param) => param && param.triggerCancel);
     if (config.onCancel && triggerCancel) {
       config.onCancel();
     }
@@ -55,11 +61,11 @@ export default function confirm(config: ConfirmDialogProps) {
      */
     setTimeout(() => {
       // 根据 Cookie 从文件里获取翻译内容
-      const messages = defaultLocaleMessages[getLocaleSymbol()]
-      const defaultCancelText = messages[modalLocaleKeys.cancelText]
+      const messages = defaultLocaleMessages[getLocaleSymbol()];
+      const defaultCancelText = messages[modalLocaleKeys.cancelText];
       const defaultOkText = props.okCancel
         ? messages[modalLocaleKeys.okText]
-        : messages[modalLocaleKeys.justOkText]
+        : messages[modalLocaleKeys.justOkText];
 
       ReactDOM.render(
         <ConfirmDialog
@@ -67,7 +73,7 @@ export default function confirm(config: ConfirmDialogProps) {
           okText={okText || defaultOkText}
           cancelText={cancelText || defaultCancelText}
         />,
-        div,
+        div
       );
     });
   }
@@ -77,7 +83,7 @@ export default function confirm(config: ConfirmDialogProps) {
       ...currentConfig,
       visible: false,
       afterClose: () => {
-        if (typeof config.afterClose === 'function') {
+        if (typeof config.afterClose === "function") {
           config.afterClose();
         }
         destroy.apply(this, args);
@@ -87,7 +93,7 @@ export default function confirm(config: ConfirmDialogProps) {
   }
 
   function update(configUpdate: ConfigUpdate) {
-    if (typeof configUpdate === 'function') {
+    if (typeof configUpdate === "function") {
       currentConfig = configUpdate(currentConfig);
     } else {
       currentConfig = {
@@ -109,9 +115,14 @@ export default function confirm(config: ConfirmDialogProps) {
 }
 
 export function withWarn(props: ConfirmDialogProps): ConfirmDialogProps {
-  const type = 'warning'
+  const type = "warning";
   return {
-    icon: <ExclamationCircleOutlined className={`okd-h-6 okd-w-6 ${iconColors[type]}`} okd-aria-hidden="true" />,
+    icon: (
+      <ExclamationCircleOutlined
+        className={`okd-h-6 okd-w-6 ${iconColors[type]}`}
+        okd-aria-hidden="true"
+      />
+    ),
     okCancel: false,
     ...props,
     type,
@@ -119,9 +130,14 @@ export function withWarn(props: ConfirmDialogProps): ConfirmDialogProps {
 }
 
 export function withInfo(props: ConfirmDialogProps): ConfirmDialogProps {
-  const type = 'info'
+  const type = "info";
   return {
-    icon: <InfoCircleOutlined className={`okd-h-6 okd-w-6 ${iconColors[type]}`} okd-aria-hidden="true" />,
+    icon: (
+      <InfoCircleOutlined
+        className={`okd-h-6 okd-w-6 ${iconColors[type]}`}
+        okd-aria-hidden="true"
+      />
+    ),
     okCancel: false,
     ...props,
     type,
@@ -129,9 +145,14 @@ export function withInfo(props: ConfirmDialogProps): ConfirmDialogProps {
 }
 
 export function withSuccess(props: ConfirmDialogProps): ConfirmDialogProps {
-  const type = 'success'
+  const type = "success";
   return {
-    icon: <CheckOutlined className={`okd-h-6 okd-w-6 ${iconColors[type]}`} okd-aria-hidden="true" />,
+    icon: (
+      <CheckOutlined
+        className={`okd-h-6 okd-w-6 ${iconColors[type]}`}
+        okd-aria-hidden="true"
+      />
+    ),
     okCancel: false,
     ...props,
     type,
@@ -139,9 +160,14 @@ export function withSuccess(props: ConfirmDialogProps): ConfirmDialogProps {
 }
 
 export function withError(props: ConfirmDialogProps): ConfirmDialogProps {
-  const type = 'error'
+  const type = "error";
   return {
-    icon: <CloseCircleOutlined className={`okd-h-6 okd-w-6 ${iconColors[type]}`} okd-aria-hidden="true" />,
+    icon: (
+      <CloseCircleOutlined
+        className={`okd-h-6 okd-w-6 ${iconColors[type]}`}
+        okd-aria-hidden="true"
+      />
+    ),
     okCancel: false,
     ...props,
     type,
@@ -149,10 +175,15 @@ export function withError(props: ConfirmDialogProps): ConfirmDialogProps {
 }
 
 export function withConfirm(props: ConfirmDialogProps): ConfirmDialogProps {
-  const type = 'confirm'
+  const type = "confirm";
   return {
     type,
-    icon: <ExclamationCircleOutlined className={`okd-h-6 okd-w-6 ${iconColors[type]}`} okd-aria-hidden="true" />,
+    icon: (
+      <ExclamationCircleOutlined
+        className={`okd-h-6 okd-w-6 ${iconColors[type]}`}
+        okd-aria-hidden="true"
+      />
+    ),
     okCancel: true,
     ...props,
   };

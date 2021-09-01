@@ -1,7 +1,7 @@
-import React from 'react';
-import { ModalProps } from '../Modal';
-import usePatchElement from './usePatchElement';
-import HookModal, { HookModalRef } from './HookModal';
+import React from "react";
+import { ModalProps } from "../Modal";
+import usePatchElement from "./usePatchElement";
+import HookModal, { HookModalRef } from "./HookModal";
 import {
   withConfirm,
   ModalStaticFunctions,
@@ -9,7 +9,7 @@ import {
   withSuccess,
   withError,
   withWarn,
-} from '../confirm';
+} from "../confirm";
 
 let uuid = 0;
 
@@ -25,13 +25,16 @@ const ElementsHolder = React.memo(
       () => ({
         patchElement,
       }),
-      [],
+      []
     );
     return <>{elements}</>;
-  }),
+  })
 );
 
-export default function useModal(): [Omit<ModalStaticFunctions, 'warn'>, React.ReactElement] {
+export default function useModal(): [
+  Omit<ModalStaticFunctions, "warn">,
+  React.ReactElement
+] {
   const holderRef = React.useRef<ElementsHolderRef>(null as any);
 
   // ========================== Effect ==========================
@@ -40,7 +43,7 @@ export default function useModal(): [Omit<ModalStaticFunctions, 'warn'>, React.R
   React.useEffect(() => {
     if (actionQueue.length) {
       const cloneQueue = [...actionQueue];
-      cloneQueue.forEach(action => {
+      cloneQueue.forEach((action) => {
         action();
       });
 
@@ -79,7 +82,7 @@ export default function useModal(): [Omit<ModalStaticFunctions, 'warn'>, React.R
             if (modalRef.current) {
               destroyAction();
             } else {
-              setActionQueue(prev => [...prev, destroyAction]);
+              setActionQueue((prev) => [...prev, destroyAction]);
             }
           },
           update: (newConfig: ModalProps) => {
@@ -90,12 +93,12 @@ export default function useModal(): [Omit<ModalStaticFunctions, 'warn'>, React.R
             if (modalRef.current) {
               updateAction();
             } else {
-              setActionQueue(prev => [...prev, updateAction]);
+              setActionQueue((prev) => [...prev, updateAction]);
             }
           },
         };
       },
-    [],
+    []
   );
 
   const fns = React.useMemo(
@@ -106,7 +109,7 @@ export default function useModal(): [Omit<ModalStaticFunctions, 'warn'>, React.R
       warning: getConfirmFunc(withWarn),
       confirm: getConfirmFunc(withConfirm),
     }),
-    [getConfirmFunc],
+    [getConfirmFunc]
   );
 
   return [fns, <ElementsHolder ref={holderRef} />];

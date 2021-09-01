@@ -1,4 +1,4 @@
-import OriginModal, { ModalProps } from './Modal'
+import OriginModal, { ModalProps } from "./Modal";
 import confirm, {
   destroyFns,
   withWarn,
@@ -7,8 +7,8 @@ import confirm, {
   withError,
   withConfirm,
   ModalStaticFunctions,
-} from './confirm';
-import useModal from './useModal'
+} from "./confirm";
+import useModal from "./useModal";
 
 function modalWarn(props: ModalProps) {
   return confirm(withWarn(props));
