@@ -24,6 +24,7 @@ export { default as Sidebar } from "./Sidebar";
 export { default as Skeleton } from "./Skeleton";
 export { default as Switch } from "./Switch";
 export { default as SectionHeader } from "./SectionHeader";
+export { default as RadioButtonGroup } from "./RadioButtonGroup";
 
 export { default as Notification, NotificationContainer } from './Notification';
 
