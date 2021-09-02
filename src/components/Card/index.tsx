@@ -19,6 +19,10 @@ type CardProps = {
    */
   actions?: React.ReactNode;
   /**
+   * 底部 自定义 Node
+   */
+  footer?: React.ReactNode;
+  /**
    * 设置额外的 class
    */
   className?: Argument;
@@ -31,6 +35,7 @@ const Card: FC<CardProps> = ({
   actions,
   className,
   children,
+  footer,
   ...rest
 }) => {
   return (
@@ -50,7 +55,7 @@ const Card: FC<CardProps> = ({
         >
           <div className="okd-flex okd-justify-between okd-items-center okd-flex-wrap sm:okd-flex-nowrap okd--ml-4 okd--mt-4">
             {title && (
-              <div className="okd-ml-4 okd-mt-4">
+              <div className="okd-ml-4 okd-mt-4 okd-flex-1">
                 <TitleComponent>{title}</TitleComponent>
               </div>
             )}
@@ -64,6 +69,15 @@ const Card: FC<CardProps> = ({
       )}
       {/* // Body */}
       <div className={cx("okd-px-4 sm:okd-px-6 okd-py-6")}>{children}</div>
+
+      {/* Footer */}
+      <div
+        className={cx(
+          "px-4 okd-py-5 okd-border-t okd-border-gray-200 sm:okd-px-6"
+        )}
+      >
+        {footer}
+      </div>
     </div>
   );
 };
