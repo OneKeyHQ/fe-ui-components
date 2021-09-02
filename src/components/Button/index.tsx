@@ -5,7 +5,7 @@ import { ICON_NAMES } from "../Icon/Icons";
 import Spinner from "./Spinner";
 import { LeadingIcon, TrailingIcon } from "./ButtonIcon";
 
-type ButtonProps = {
+export type ButtonProps = {
   /**
    * block 为 true 则宽度撑满父元素宽度，默认 false 则为 auto 宽度，自动根据内容长度变长。
    */
@@ -101,7 +101,9 @@ const Button: FC<ButtonProps> = (props) => {
     // Add border
     { "okd-border": !(type === "plain" || type === "link") },
     // The width and offset of ring
-    { "focus:okd-ring-2 focus:okd-ring-offset-2 focus:okd-ring-offset-white": !loading },
+    {
+      "focus:okd-ring-2 focus:okd-ring-offset-2 focus:okd-ring-offset-white": !loading,
+    },
     // Text's color, background's color, border's color and ring's color
     type === "primary" && {
       "okd-text-white okd-bg-brand-500 okd-border-brand-500 okd-shadow-sm hover:okd-bg-brand-600 hover:okd-border-brand-600 focus:okd-ring-brand-500":
@@ -183,11 +185,18 @@ const Button: FC<ButtonProps> = (props) => {
       disabled={!!disabled}
     >
       {loading ? (
-        <Spinner
-          buttonSize={size}
-          buttonType={type}
-          circularButton={circular}
-        />
+        <>
+          <Spinner
+            buttonSize={size}
+            buttonType={type}
+            circularButton={circular}
+            className={cx({
+              "okd-mr-2": size === "xs" || size === "sm" || size === "base",
+              "okd-mr-3": size === "lg" || size === "xl",
+            })}
+          />
+          {children}
+        </>
       ) : (
         <>
           {React.isValidElement(<Icon name={leadingIcon} />) && (
