@@ -1,6 +1,6 @@
 {
   "name": "@onekeyhq/ui-components",
-  "version": "0.0.18",
+  "version": "0.0.16",
   "main": "./index.js",
   "author": "OneKey <hi@onekey.so>",
   "homepage": "https://github.com/onekeyhq/fe-ui-components",
