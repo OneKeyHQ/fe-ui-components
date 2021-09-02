@@ -79,6 +79,7 @@ export const Loading = Template.bind({});
 Loading.args = {
   type: "primary",
   loading: true,
+  children: "Loading Data",
 };
 
 export const ButtonLink = Template.bind({});

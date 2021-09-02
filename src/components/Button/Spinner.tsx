@@ -1,7 +1,31 @@
 import React from "react";
 import cx from "classnames";
 
-export default function Spinner({ circularButton, buttonSize, buttonType }) {
+type SpinnerProps = {
+  /**
+   * 设置按钮形状为圆形
+   */
+  circularButton?: boolean | null;
+  /**
+   * 设置按钮大小
+   */
+  buttonSize?: "xs" | "sm" | "base" | "lg" | "xl";
+  /**
+   * 设置按钮类型
+   */
+  buttonType?: "primary" | "basic" | "plain" | "destructive" | "link";
+  /**
+   * 设置额外的 class
+   */
+  className?: string | null;
+};
+
+export default function Spinner({
+  circularButton,
+  buttonSize,
+  buttonType,
+  className,
+}: SpinnerProps) {
   return (
     <svg
       className={cx(
@@ -11,7 +35,8 @@ export default function Spinner({ circularButton, buttonSize, buttonType }) {
           "okd-w-5 okd-h-5": !!circularButton,
         },
         { "okd-w-5 okd-h-5": buttonSize === "sm" || buttonSize === "base" },
-        { "okd-w-6 okd-h-6": buttonSize === "lg" || buttonSize === "xl" }
+        { "okd-w-6 okd-h-6": buttonSize === "lg" || buttonSize === "xl" },
+        className
       )}
       xmlns="http://www.w3.org/2000/svg"
       fill="none"
@@ -19,7 +44,9 @@ export default function Spinner({ circularButton, buttonSize, buttonType }) {
     >
       <circle
         className={
-          buttonType === "destructive" ? "okd-text-red-200" : "okd-text-gray-400"
+          buttonType === "destructive"
+            ? "okd-text-red-200"
+            : "okd-text-gray-400"
         }
         cx="12"
         cy="12"

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 
 import { Card as CardComponent } from "../components";
@@ -14,31 +14,70 @@ const Template: ComponentStory<typeof CardComponent> = (args) => (
   <CardComponent {...args} />
 );
 
-export const Default: ComponentStory<typeof CardComponent> = (args) => (
-  <>
-    <ConfigBar />
-    <CardComponent {...args} />
-  </>
-);
+export const Default: ComponentStory<typeof CardComponent> = (args) => {
+  const [isApproving, setIsApproving] = useState(false);
+  const [swapable, setSwapable] = useState(false);
 
-Default.args = {
-  title: "Card Title",
-  className: "okd-mx-auto okd-w-[480px]",
-  actions: (
-    <div className="okd-space-x-3">
-      <Button>Secondary</Button>
-      <Button type="primary">Primary</Button>
-    </div>
-  ),
-  children: (
-    <div className="okd-text-gray-700">
-      Lorem ipsum dolor sit, amet consectetur adipisicing elit. Illo impedit
-      sapiente recusandae iusto officiis dolor? Laborum quibusdam quam, quidem
-      vel assumenda repellat inventore sint nesciunt, ullam asperiores magnam
-      placeat eveniet. Aliquam voluptatibus assumenda distinctio veniam quam
-      tempora modi aperiam nemo voluptate reprehenderit quidem, nisi vero est.
-    </div>
-  ),
+  const handleApprove = () => {
+    setIsApproving(true);
+    setTimeout(() => {
+      setIsApproving(false);
+      setSwapable(true);
+    }, 666);
+  };
+
+  const resetApproveState = () => {
+    setIsApproving(false);
+    setSwapable(false);
+  };
+
+  const defaultProps = {
+    title: "Card Title",
+    className: "okd-mx-auto okd-w-[480px]",
+    actions: (
+      <div className="okd-space-x-3 okd-flex okd-items-center">
+        <Button leadingIcon="RefreshSolid" type="plain" circular></Button>
+        <Button leadingIcon="CogSolid" type="plain" circular></Button>
+      </div>
+    ),
+    children: (
+      <div className="okd-text-gray-700">
+        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Illo impedit
+        sapiente recusandae iusto officiis dolor? Laborum quibusdam quam, quidem
+        vel assumenda repellat inventore sint nesciunt, ullam asperiores magnam
+        placeat eveniet. Aliquam voluptatibus assumenda distinctio veniam quam
+        tempora modi aperiam nemo voluptate reprehenderit quidem, nisi vero est.
+      </div>
+    ),
+    footer: (
+      <div className="okd-flex">
+        <Button
+          className="okd-flex-1 okd-mr-2"
+          type="primary"
+          loading={isApproving}
+          disabled={swapable}
+          onClick={handleApprove}
+        >
+          {swapable ? "Approved" : "Approve"}
+        </Button>
+        <Button
+          className="okd-flex-1"
+          type="primary"
+          disabled={!swapable}
+          onClick={resetApproveState}
+        >
+          Swap
+        </Button>
+      </div>
+    ),
+  };
+
+  return (
+    <>
+      <ConfigBar />
+      <CardComponent {...defaultProps} {...args} />
+    </>
+  );
 };
 
 export const CardBody = Template.bind({});
