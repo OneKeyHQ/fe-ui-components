@@ -99,8 +99,6 @@ export const Default = () => {
           />
         )}
       </Modal>
-
-      <Modal visible={true} onClose={() => null}>No body. <Button></Button></Modal>
     </>
   );
 };
