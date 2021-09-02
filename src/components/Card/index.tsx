@@ -71,13 +71,15 @@ const Card: FC<CardProps> = ({
       <div className={cx("okd-px-4 sm:okd-px-6 okd-py-6")}>{children}</div>
 
       {/* Footer */}
-      <div
-        className={cx(
-          "px-4 okd-py-5 okd-border-t okd-border-gray-200 sm:okd-px-6"
-        )}
-      >
-        {footer}
-      </div>
+      {!!footer && (
+        <div
+          className={cx(
+            "px-4 okd-py-5 okd-border-t okd-border-gray-200 sm:okd-px-6"
+          )}
+        >
+          {footer}
+        </div>
+      )}
     </div>
   );
 };
