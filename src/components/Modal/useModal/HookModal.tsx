@@ -1,9 +1,9 @@
-import React from 'react';
-import { useIntl } from 'react-intl';
+import React from "react";
+import { useIntl } from "react-intl";
 
-import { modalLocaleKeys } from '../locale';
-import ConfirmDialog, { ConfirmDialogProps } from '../ConfirmDialog';
-import UIProvider from '../../Provider';
+import { modalLocaleKeys } from "../locale";
+import ConfirmDialog, { ConfirmDialogProps } from "../ConfirmDialog";
+import UIProvider from "../../Provider";
 
 export interface HookModalProps {
   /** 取消之后的函数 */
@@ -17,17 +17,17 @@ export interface HookModalRef {
   update: (config: ConfirmDialogProps) => void;
 }
 
-const HookModal: React.ForwardRefRenderFunction<HookModalRef, HookModalProps> = (
-  { afterClose, config },
-  ref,
-) => {
+const HookModal: React.ForwardRefRenderFunction<
+  HookModalRef,
+  HookModalProps
+> = ({ afterClose, config }, ref) => {
   const [visible, setVisible] = React.useState(true);
   const [innerConfig, setInnerConfig] = React.useState(config);
-  const { formatMessage } = useIntl()
+  const { formatMessage } = useIntl();
 
   function close(...args: any[]) {
     setVisible(false);
-    const triggerCancel = args.some(param => param && param.triggerCancel);
+    const triggerCancel = args.some((param) => param && param.triggerCancel);
     if (innerConfig.onCancel && triggerCancel) {
       innerConfig.onCancel();
     }
@@ -36,7 +36,7 @@ const HookModal: React.ForwardRefRenderFunction<HookModalRef, HookModalProps> = 
   React.useImperativeHandle(ref, () => ({
     destroy: close,
     update: (newConfig: ConfirmDialogProps) => {
-      setInnerConfig(originConfig => ({
+      setInnerConfig((originConfig) => ({
         ...originConfig,
         ...newConfig,
       }));
@@ -52,9 +52,14 @@ const HookModal: React.ForwardRefRenderFunction<HookModalRef, HookModalProps> = 
         afterClose={afterClose}
         okText={
           innerConfig.okText ||
-          (innerConfig.okCancel ? formatMessage({ id: modalLocaleKeys.okText }) : formatMessage({ id: modalLocaleKeys.justOkText }))
+          (innerConfig.okCancel
+            ? formatMessage({ id: modalLocaleKeys.okText })
+            : formatMessage({ id: modalLocaleKeys.justOkText }))
         }
-        cancelText={innerConfig.cancelText || formatMessage({ id: modalLocaleKeys.cancelText })}
+        cancelText={
+          innerConfig.cancelText ||
+          formatMessage({ id: modalLocaleKeys.cancelText })
+        }
       />
     </UIProvider>
   );
