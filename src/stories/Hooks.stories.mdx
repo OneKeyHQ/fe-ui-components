@@ -1,0 +1,76 @@
+import { Meta } from '@storybook/addon-docs';
+
+<Meta title="Basic/Hooks" />
+
+# React Hooks 文档
+
+## useLocale
+
+获取当前 `locale` 以及 `setLocale` 方法，`setLocale` 之后会对所有 .onekey.so 的域名生效，默认也会对 locale 进行统一规则检测。
+
+- locale: "zh-CN" | "en-US" | "de" | "es-AR" | "es-US" | "he" | "it-IT" | "ro" | "ru" | "vi-VN" | "zh-TW"
+- setLocale: (l: locale) => void;
+
+```js
+import { useLocale } from '@onekeyhq/ui-components';
+
+const ReactComponent = () => {
+  const { locale, setLocale } = useLocale();
+}
+```
+
+## useColors
+
+获取当前主题下的所有 `color` 颜色
+
+```js
+import { useColors } from '@onekeyhq/ui-components';
+
+const ReactComponent = () => {
+  const { colors } = useColors();
+}
+```
+
+## useTheme
+
+获取和设置当前颜色主题
+
+- themeVariant: 'light' | 'dark'
+- setThemeVariant: (t: themeVariant) => void;
+
+```js
+import { useTheme } from '@onekeyhq/ui-components';
+
+const ReactComponent = () => {
+  const { themeVariant, setThemeVariant} = useTheme();
+}
+```
+
+## useLayout
+
+获取当前屏幕宽度的 layout 结果，此状态为响应式更新，无法手动更改
+
+- layout: "sm" | "md" | "lg" | "xl" | "2xl"
+
+```js
+import { useLayout } from '@onekeyhq/ui-components';
+
+const ReactComponent = () => {
+  const layout = useLayout();
+}
+```
+
+## useScreen
+
+获取屏幕宽度及高度，返回像素值的 number
+
+- width: number
+- height: number
+
+```js
+import { useScreen } from '@onekeyhq/ui-components';
+
+const ReactComponent = () => {
+  const { width, height } = useScreen();
+}
+```
