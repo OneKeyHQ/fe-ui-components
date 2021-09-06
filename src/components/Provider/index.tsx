@@ -7,11 +7,12 @@ import {
 } from "react-intl";
 import cookie from "js-cookie";
 
+import Resize from "./Resize";
 import { Context } from "./hooks";
 
 import { COLORS, getDefaultTheme } from "../Theme";
 import type { ThemeValues } from "../Theme/colors";
-
+import type { ScreenState } from "./hooks";
 import locales from "../locales";
 import {
   getLocaleSymbol,
@@ -54,6 +55,13 @@ const Provider: FC<UIProviderProps> = ({
   const [themeVariant, setThemeVariant] = useState<keyof typeof COLORS>(
     defaultTheme
   );
+
+  const [layout, setLayout] = useState<ScreenState>({
+    layout: "lg",
+    screenWidth: null,
+    screenHeight: null,
+  } as const);
+
   useEffect(() => {
     const currentTheme = COLORS[themeVariant];
     Object.entries(currentTheme).forEach(([key, value]) => {
@@ -63,7 +71,7 @@ const Provider: FC<UIProviderProps> = ({
     setTheme(currentTheme);
   }, [themeVariant]);
 
-  const validLocaleSymbol = getLocaleSymbol(intl?.locale);
+  const validLocaleSymbol = getLocaleSymbol(intl?.locale ?? defaultLocale);
 
   const getMessage = useCallback(
     (activeLocale) => ({
@@ -122,11 +130,20 @@ const Provider: FC<UIProviderProps> = ({
       setThemeVariant,
       setLocale,
       locale: globalIntl.locale as LocaleSymbol,
+      ...layout,
     };
-  }, [theme, globalIntl.locale, getMessage, themeVariant, setThemeVariant]);
+  }, [
+    theme,
+    globalIntl.locale,
+    getMessage,
+    themeVariant,
+    setThemeVariant,
+    layout,
+  ]);
 
   return (
     <Context.Provider value={providerValue}>
+      <Resize setLayout={setLayout} />
       <RawIntlProvider value={globalIntl}>{children}</RawIntlProvider>
       <NotificationContainer />
     </Context.Provider>

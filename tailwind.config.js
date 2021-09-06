@@ -1,5 +1,5 @@
 const defaultTheme = require("tailwindcss/defaultTheme");
-const { colors, boxShadow } = require("./src/components/utils/tailwind");
+const { colors, boxShadow, screens } = require("./src/components/utils/tailwind");
 
 module.exports = {
   mode: "jit",
@@ -12,6 +12,7 @@ module.exports = {
   theme: {
     extend: {
       colors: colors,
+      screens: screens,
       fontFamily: {
         sans: [
           ...defaultTheme.fontFamily.sans,
