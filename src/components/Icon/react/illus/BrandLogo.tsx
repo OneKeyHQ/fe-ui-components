@@ -10,7 +10,7 @@ function SvgBrandLogo(props: React.SVGProps<SVGSVGElement>) {
     >
       <path
         d="M26.918 13.459c0 9.291-4.168 13.459-13.46 13.459C4.169 26.918 0 22.75 0 13.458 0 4.169 4.167 0 13.459 0c9.291 0 13.459 4.167 13.459 13.459z"
-        fill="currentColor"
+        fill="#00B812"
       />
       <path
         d="M10.93 5.707h3.745v6.17h-2.322V7.693h-2.08l.657-1.986z"
