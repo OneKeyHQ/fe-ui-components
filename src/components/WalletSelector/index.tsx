@@ -11,7 +11,7 @@ const wallets = [
     name: "MetaMask",
     logo: "MetamaskIllus"
   },
-];
+] as const;
 
 type WalletSelectorProps = {
   /** 是否可见 */
