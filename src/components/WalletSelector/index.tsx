@@ -90,11 +90,11 @@ const WalletSelector: FC<WalletSelectorProps> = ({
                 <Button
                   block
                   size="xl"
-                  type="link"
+                  as="a"
                   href={wallet.downloadLink}
                   key={wallet.name}
                   target="_blank"
-                  className="okd-flex okd-items-center okd-justify-between okd-border okd-border-gray-200"
+                  className="okd-flex okd-items-center okd-justify-between !okd-p-4 okd-border okd-border-gray-200 okd-shadow-none"
                 >
                   <span className="okd-text-gray-900">
                     <FormattedMessage id="ui-components__connect__option_item__install_onekey" />
@@ -109,7 +109,7 @@ const WalletSelector: FC<WalletSelectorProps> = ({
                 size="xl"
                 onClick={() => tryActivation(wallet.connector, wallet)}
                 key={wallet.name}
-                className="okd-flex okd-items-center okd-justify-between okd-border okd-border-gray-200"
+                className="okd-flex okd-items-center okd-justify-between !okd-p-4 okd-border okd-border-gray-200 okd-shadow-none"
               >
                 <span className="okd-text-gray-900">
                   <FormattedMessage id="ui-components__connect__option_item__install_onekey" />
