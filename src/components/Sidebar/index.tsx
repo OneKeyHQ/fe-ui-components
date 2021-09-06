@@ -107,7 +107,7 @@ const Sidebar: FC<SidebarProps> = ({
         {/* Brand */}
         <div className="okd-flex okd-items-center okd-flex-shrink-0 okd-pl-4">
           <Icon
-            className="okd-w-7 okd-h-7 okd-text-brand-500"
+            className="okd-w-7 okd-h-7"
             name="BrandLogoIllus"
             size={28}
             aria-label="The Brand Logo – OneKey"
@@ -189,7 +189,7 @@ const Sidebar: FC<SidebarProps> = ({
               {/* Brand */}
               <div className="okd-flex okd-items-center okd-flex-shrink-0 okd-pl-[22px]">
                 <Icon
-                  className="okd-w-7 okd-h-7 okd-text-brand-500"
+                  className="okd-w-7 okd-h-7"
                   name="BrandLogoIllus"
                   size={28}
                   aria-label="The Brand Logo – OneKey"
@@ -388,7 +388,7 @@ const Sidebar: FC<SidebarProps> = ({
             onClick={() => window.location.reload()}
           >
             <Icon
-              className="okd-w-7 okd-h-7 okd-text-brand-500"
+              className="okd-w-7 okd-h-7"
               name="BrandLogoIllus"
               size={28}
               aria-label="The Brand Logo – OneKey"
