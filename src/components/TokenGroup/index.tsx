@@ -12,10 +12,6 @@ type TokenGroupProps = {
    */
   size?: 6 | 8 | 10;
   /**
-   * 是否显示 Token 所属链
-   */
-  chain?: boolean;
-  /**
    * Token 所属链的 url
    */
   chainUrl?: string;
@@ -25,7 +21,7 @@ const defaultProps = {
   size: 6,
 } as const;
 
-const TokenGroup: FC<TokenGroupProps> = ({ list, size, chain, chainUrl }) => {
+const TokenGroup: FC<TokenGroupProps> = ({ list, size, chainUrl }) => {
   return (
     <div className={cx("okd-relative okd-inline-flex")}>
       <div
@@ -46,7 +42,7 @@ const TokenGroup: FC<TokenGroupProps> = ({ list, size, chain, chainUrl }) => {
             />
           ))}
       </div>
-      {!!chain && (
+      {!!chainUrl && (
         <Token
           className={cx("okd-absolute okd-ring-2 okd-ring-white", {
             "okd--top-1 okd--right-1": size === 6,
