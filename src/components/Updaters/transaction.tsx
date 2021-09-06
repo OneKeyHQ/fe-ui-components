@@ -54,14 +54,32 @@ export interface ProviderLike {
 
 export interface TransactionsUpdaterProps {
   /**
-   * 在 交易 确认的时候调用
+   * 在交易确认的时候调用
    */
   onTransactionConfirm: (response: TransactionDetails) => void;
+  /**
+   * 在检查交易未被确认的时候调用
+   */
   onTransactionChecked: (response: TransactionDetails) => void;
+  /**
+   * 在检查交易记录发送错误的时候调用
+   */
   onTransactionError: (error: Error) => void;
+  /**
+   * { [hash]: tx } 类型的交易记录
+   */
   transactions: Record<string, TransactionDetails>;
+  /**
+   * 最新的区块高度
+   */
   lastBlockNumber?: number;
+  /**
+   * 链 id
+   */
   chainId: number;
+  /**
+   * Web3 Provider
+   */
   library: ProviderLike;
 }
 
