@@ -6,6 +6,8 @@ import {
   IntlConfig,
 } from "react-intl";
 import cookie from "js-cookie";
+import { Web3ReactProvider } from "@web3-react/core";
+import { ExternalProvider, Web3Provider } from "@ethersproject/providers";
 
 import Resize from "./Resize";
 import { Context } from "./hooks";
@@ -23,6 +25,10 @@ import {
 import { NotificationContainer } from "../Notification";
 
 const cache = createIntlCache();
+
+const getLibrary = (provider: ExternalProvider) => {
+  return new Web3Provider(provider); // this will vary according to whether you use e.g. ethers or web3.js
+};
 
 export type UIProviderProps = {
   /**
@@ -144,7 +150,11 @@ const Provider: FC<UIProviderProps> = ({
   return (
     <Context.Provider value={providerValue}>
       <Resize setLayout={setLayout} />
-      <RawIntlProvider value={globalIntl}>{children}</RawIntlProvider>
+      <RawIntlProvider value={globalIntl}>
+        <Web3ReactProvider getLibrary={getLibrary}>
+          {children}
+        </Web3ReactProvider>
+      </RawIntlProvider>
       <NotificationContainer />
     </Context.Provider>
   );

@@ -49,7 +49,7 @@ Destructive.args = {
 export const Link = Template.bind({});
 Link.args = {
   children: "Button Link",
-  type: "link",
+  as: "a",
   href: "https://crowdfund.onekey.so/shop",
 };
 
@@ -80,11 +80,4 @@ Loading.args = {
   type: "primary",
   loading: true,
   children: "Loading Data",
-};
-
-export const ButtonLink = Template.bind({});
-ButtonLink.args = {
-  children: "Button Link",
-  type: "link",
-  href: "https://crowdfund.onekey.so/shop",
 };
