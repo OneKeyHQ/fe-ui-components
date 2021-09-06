@@ -21,6 +21,7 @@ export const Icon = Template.bind({});
 Icon.args = {
   name: "BrandLogoIllus",
   size: 128,
+  className: "okd-text-brand-500"
 };
 
 export const List: ComponentStory<typeof IconComponent> = () => {
