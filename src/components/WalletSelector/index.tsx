@@ -5,13 +5,13 @@ import Icon from "../Icon";
 const wallets = [
   {
     name: "OneKey",
-    logo: "BrandLogoIllus"
+    logo: "BrandLogoIllus",
   },
   {
     name: "MetaMask",
-    logo: "MetamaskIllus"
+    logo: "MetamaskIllus",
   },
-];
+] as const;
 
 type WalletSelectorProps = {
   /** 是否可见 */
@@ -22,12 +22,13 @@ type WalletSelectorProps = {
 
 const defaultProps = {} as const;
 
-const WalletSelector: FC<WalletSelectorProps> = ({
-  visible,
-  onClose,
-}) => {
+const WalletSelector: FC<WalletSelectorProps> = ({ visible, onClose }) => {
   return (
-    <Modal visible={visible} onClose={onClose} className="okd-w-full sm:okd-max-w-md">
+    <Modal
+      visible={visible}
+      onClose={onClose}
+      className="okd-w-full sm:okd-max-w-md"
+    >
       <Modal.Header title="Connect Wallet" onClose={onClose} />
       <Modal.Body>
         <div className="max-w-full okd-flex okd-flex-col okd-space-y-3">
