@@ -15,7 +15,7 @@ type WalletSelectorProps = {
   visible?: boolean;
   /** 点击模态框遮罩时或键盘按下 Esc 时的回调 */
   onClose: () => void;
-  /** @web3-react connector params */
+  /** @web3-react connector 配置 */
   connectorConfig?: AbstractConnectorArguments;
 };
 
