@@ -50,11 +50,8 @@ export type ButtonProps = {
    * 设置额外的 class
    */
   className?: string | null;
-  /**
-   * 点击按钮时的回调，默认情况下，会同时注册键盘事件 onKeyEnter 点击回车
-   */
-  onClick?: (e: React.MouseEventHandler<HTMLElement>) => void;
-};
+} & Omit<React.HTMLProps<HTMLButtonElement>, "size"> &
+  Omit<React.HTMLProps<HTMLAnchorElement>, "size">;
 
 const defaultProps = {
   block: false,
@@ -79,6 +76,7 @@ const Button: FC<ButtonProps> = (props) => {
     trailingIcon,
     href,
     className,
+    ...rest
   } = props;
 
   const handleClick = useCallback(
@@ -153,7 +151,11 @@ const Button: FC<ButtonProps> = (props) => {
 
   if (type === "link" && href) {
     return (
-      <a className={cx(btnClasses, !!className && className)} href={href}>
+      <a
+        className={cx(btnClasses, !!className && className)}
+        href={href}
+        {...rest}
+      >
         {React.isValidElement(<Icon name={leadingIcon} />) && (
           <LeadingIcon
             iconName={leadingIcon}
@@ -183,6 +185,7 @@ const Button: FC<ButtonProps> = (props) => {
       className={cx(btnClasses, !!className && className)}
       onClick={handleClick}
       disabled={!!disabled}
+      {...rest}
     >
       {loading ? (
         <>

@@ -60,7 +60,11 @@
     ]
   },
   "dependencies": {
+    "@ethersproject/providers": "^5.4.5",
     "@headlessui/react": "^1.4.0",
+    "@web3-react/abstract-connector": "^6.0.7",
+    "@web3-react/core": "^6.1.9",
+    "@web3-react/injected-connector": "^6.0.7",
     "bignumber.js": "^9.0.1",
     "js-cookie": "^3.0.0",
     "lodash": "^4.17.21",
@@ -91,6 +95,7 @@
     "@types/node": "^12.0.0",
     "@types/react": "^17.0.0",
     "@types/react-dom": "^17.0.0",
+    "@web3-react/types": "^6.0.7",
     "autoprefixer": "^9",
     "cssnano": "^5.0.7",
     "postcss": "^8.3.6",
