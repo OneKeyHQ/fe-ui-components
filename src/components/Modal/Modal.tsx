@@ -70,7 +70,7 @@ const Modal = (props: PropsWithChildren<ModalProps>) => {
             {/* This element is to trick the browser into centering the modal contents. */}
             <span
               className="okd-hidden sm:okd-inline-block sm:okd-align-middle sm:okd-h-screen"
-              okd-aria-hidden="true"
+              aria-hidden="true"
             >
               &#8203;
             </span>

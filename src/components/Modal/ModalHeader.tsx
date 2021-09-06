@@ -19,7 +19,7 @@ export type ModalHeaderProps = {
   /**
    * 点击关闭按钮时的事件回调
    */
-  onClose?: () => void;
+  onClose?: (v: boolean) => void;
 };
 
 const ModalHeaderDefaultProps: Partial<ModalHeaderProps> = {
