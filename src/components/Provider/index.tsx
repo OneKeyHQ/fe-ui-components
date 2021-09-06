@@ -19,6 +19,7 @@ import {
   OK_LOCALE_CACHE_KEY,
   TranslationMap,
 } from "../utils";
+import { NotificationContainer } from "../Notification";
 
 const cache = createIntlCache();
 
@@ -127,6 +128,7 @@ const Provider: FC<UIProviderProps> = ({
   return (
     <Context.Provider value={providerValue}>
       <RawIntlProvider value={globalIntl}>{children}</RawIntlProvider>
+      <NotificationContainer />
     </Context.Provider>
   );
 };
