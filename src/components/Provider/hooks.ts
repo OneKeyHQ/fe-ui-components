@@ -2,14 +2,22 @@ import { useContext, createContext, useMemo } from "react";
 
 import type { ThemeVariant, ThemeValues } from '../Theme/colors';
 import type { LocaleSymbol } from '../locales';
+import { screens } from "../utils/tailwind";
 
-type ContextValue = {
+export type ScreenState = {
+  layout: keyof typeof screens;
+  screenWidth: number | null;
+  screenHeight: number | null;
+};
+
+export type ContextValue = {
   themeVariant: ThemeVariant;
   theme: ThemeValues;
   setThemeVariant: (k: ThemeVariant) => void;
   locale: LocaleSymbol;
   setLocale: (k: LocaleSymbol) => void;
-};
+} & ScreenState;
+
 
 export const Context = createContext<ContextValue>({} as ContextValue);
 
@@ -44,4 +52,21 @@ export const useColors = (color: keyof ThemeValues) => {
     return context.theme;
   }, [context.theme]);
   return colors[color];
+}
+
+export const useLayout = () => {
+  const context = useContext(Context);
+
+  return context.layout;
+}
+
+export const useScreen = () => {
+  const context = useContext(Context);
+
+  return useMemo(() => {
+    return {
+      width: context.screenWidth,
+      height: context.screenHeight,
+    };
+  }, [context.screenWidth, context.screenHeight]);
 }

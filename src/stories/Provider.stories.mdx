@@ -1,0 +1,107 @@
+import { Meta } from '@storybook/addon-docs';
+
+<Meta title="Basic/Provider" />
+
+# React UIProvider 文档
+
+UIProvider 是所有组件库的顶层配置，存储 hooks 状态以及全局的配置（locale / theme / layout）等内容，想要正确使用组件库则必须首先引入 UIProvider。
+
+## 引入
+
+UIProvider 必须在顶层引入，所有它的 children 才能正确加载组件库相关的状态
+
+```jsx
+import { UIProvider } from '@onekeyhq/ui-components';
+
+ReactDOM.render(
+  <UIProvider>
+    <App />
+  </UIProvider>,
+  container,
+)
+
+```
+
+## 参数
+
+UIProvider 可以接受如下 props，作为全局的默认值
+
+```ts
+export type UIProviderProps = {
+  /**
+   * react-intl i18n 配置
+   */
+  intl?: IntlConfig;
+  /**
+   * 不同语种的词条映射
+   */
+  messagesMap?: Partial<TranslationMap>;
+  /**
+   * 默认语言的类型及 fallback 语言的类型
+   */
+  defaultLocale?: LocaleSymbol;
+  /**
+   * 默认主题名称
+   */
+  defaultTheme?: keyof typeof COLORS;
+};
+```
+
+常见配置方式
+
+```jsx
+
+// （注意：locale 的名称必须为 "zh-CN" | "en-US" | "de" | "es-AR" | "es-US" | "he" | "it-IT" | "ro" | "ru" | "vi-VN" | "zh-TW" 其中标识）
+const messagesMap = {
+  'zh-CN': {
+    'hello': '你好'
+  },
+  'en-US': {
+    'hello': 'hello'
+  }
+};
+
+<UIProvider messagesMap={messagesMap} />
+
+```
+
+`UIProvider` 内部会根据 cookie 记录结果，当前浏览器用户选择语言等方式，统一选择默认语言的词条并加载，如果词条不完全，希望有 fallback 机制，那么可以设置 `defaultLocale`。
+
+## 词条渲染
+
+```jsx
+
+import { FormattedMessage, useIntl } from '@onekeyhq/ui-components/Intl';
+
+const A = () => {
+  const intl = useIntl();
+
+  return (
+    <>
+      <FormattedMessage id="hello" />
+      {intl.formatMessage({ id: 'hello' })}
+    </>
+  );
+}
+
+```
+
+## 读取当前语言及语言切换
+
+```jsx
+
+import { useLocale } from '@onekeyhq/ui-components';
+
+const A = () => {
+  const { locale, setLocale } = useLocale();
+
+  return (
+    <>
+      <FormattedMessage id="hello" />
+      <button onClick={() => setLocale(locale === 'en-US' ? 'zh-CN' : 'en-US')} />
+      当前语言是：{locale}
+    </>
+  );
+}
+
+```
