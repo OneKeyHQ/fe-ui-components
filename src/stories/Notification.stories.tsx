@@ -71,6 +71,8 @@ export const Default = () => {
 
 export const usingStaticMethods = () => {
   return (
+    // <NotificationContainer /> should declare at the root component
+    // <NotificationContainer /> 应该在根组件声明
     <div className="okd-space-x-2">
       <Button
         onClick={() => {
@@ -125,8 +127,6 @@ export const usingStaticMethods = () => {
       >
         With Footer
       </Button>
-
-      <NotificationContainer />
     </div>
   );
 };
