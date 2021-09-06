@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import { useWeb3React } from "@web3-react/core";
 
 export interface SerializableTransactionReceipt {
   to: string;
@@ -73,14 +74,6 @@ export interface TransactionsUpdaterProps {
    * 最新的区块高度
    */
   lastBlockNumber?: number;
-  /**
-   * 链 id
-   */
-  chainId: number;
-  /**
-   * Web3 Provider
-   */
-  library: ProviderLike;
 }
 
 export default function TransactionUpdater({
@@ -89,9 +82,9 @@ export default function TransactionUpdater({
   onTransactionError,
   transactions,
   lastBlockNumber,
-  chainId,
-  library,
 }: TransactionsUpdaterProps): null {
+  const { library, chainId } = useWeb3React();
+
   useEffect(() => {
     if (!chainId || !library || !lastBlockNumber) return;
 

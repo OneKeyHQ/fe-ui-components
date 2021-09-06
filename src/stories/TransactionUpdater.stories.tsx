@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 
 import {
@@ -7,8 +7,6 @@ import {
   TransactionDetails,
   TransactionUpdater,
 } from "../components";
-import { useState } from "react";
-import { useEffect } from "react";
 
 export default {
   title: "DAPP/TransactionUpdater",
@@ -63,8 +61,6 @@ export const Default: ComponentStory<typeof TransactionUpdater> = (args) => {
     <>
       <p>打开控制台查看 TransactionUpdater 返回的内容</p>
       <TransactionUpdater
-        chainId={1}
-        library={mockProvider}
         lastBlockNumber={blockNumber}
         transactions={mockTransactions}
         onTransactionChecked={onConfirm}
