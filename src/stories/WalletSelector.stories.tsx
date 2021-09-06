@@ -22,6 +22,7 @@ export const Default = () => {
 
   return (
     <>
+      <ConfigBar />
       <Button type="primary" onClick={() => { showModal(); }}>Connect</Button>
       <WalletSelector visible={isModalVisible} onClose={() => handleCancel()} />
     </>

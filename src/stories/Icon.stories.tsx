@@ -19,8 +19,7 @@ const Template: ComponentStory<typeof IconComponent> = (args) => (
 
 export const Icon = Template.bind({});
 Icon.args = {
-  name: "BrandLogoSolid",
-  color: "#00b812",
+  name: "BrandLogoIllus",
   size: 128,
 };
 
@@ -51,7 +50,7 @@ export const IconGroup: ComponentStory<typeof IconGroupComponent> = () => {
   return (
     <IconGroupComponent
       icons={[
-        { name: "BrandLogoSolid" },
+        { name: "BrandLogoIllus" },
         { name: "AtSymbolOutline" },
         { name: "BackspaceOutline" },
       ]}

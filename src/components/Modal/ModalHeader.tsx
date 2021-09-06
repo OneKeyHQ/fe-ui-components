@@ -19,7 +19,7 @@ export type ModalHeaderProps = {
   /**
    * 点击关闭按钮时的事件回调
    */
-  onClose?: (v: boolean) => void;
+  onClose: () => void;
 };
 
 const ModalHeaderDefaultProps: Partial<ModalHeaderProps> = {
@@ -52,7 +52,7 @@ export const ModalHeader: FC<ModalHeaderProps> = ({
   })();
 
   return (
-    <div className="px-4 py-3 sm:okd-py-4 sm:okd-px-6 okd-flex okd-items-center okd-justify-between okd-border-b okd-border-gray-200">
+    <div className="okd-px-4 okd-py-3 sm:okd-py-4 sm:okd-px-6 okd-flex okd-items-center okd-justify-between okd-border-b okd-border-gray-200">
       {titleNode}
       <div className="okd-flex okd-items-center okd-space-x-4 okd-divide-x okd-divide-gray-200 okd-flex-shrink-0">
         {actions}
