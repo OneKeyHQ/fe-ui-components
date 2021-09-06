@@ -14,7 +14,7 @@ export type ModalProps = {
   /** 内容 */
   content?: React.ReactNode;
   /** 点击模态框遮罩时或键盘按下 Esc 时的回调 */
-  onClose: (v: boolean) => void;
+  onClose: () => void;
 };
 
 export const iconColors: Record<ModalType, string> = {
