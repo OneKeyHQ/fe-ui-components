@@ -26,7 +26,6 @@ export { default as Togglelist } from "./ToggleList";
 export { default as Token } from "./Token";
 export { default as TokenGroup } from "./TokenGroup";
 export { default as Tooltip } from "./Tooltip";
-export { default as WalletSelector } from "./WalletSelector";
 
 
 export { useConfig, useLocale, useTheme, useColors, useLayout, useScreen } from "./Provider/hooks";
