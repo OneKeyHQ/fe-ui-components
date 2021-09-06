@@ -58,8 +58,6 @@ export { default as BookmarkAltSolidIcon } from './BookmarkAlt';
 
 export { default as BookmarkSolidIcon } from './Bookmark';
 
-export { default as BrandLogoSolidIcon } from './BrandLogo';
-
 export { default as BriefcaseSolidIcon } from './Briefcase';
 
 export { default as CakeSolidIcon } from './Cake';

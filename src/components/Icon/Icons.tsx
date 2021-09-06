@@ -1,5 +1,7 @@
 /* eslint-disable */
 
+import BrandLogoIllus from "./react/illus/BrandLogo";
+import MetamaskIllus from "./react/illus/Metamask";
 import AcademicCapOutline from "./react/outline/AcademicCap";
 import AdjustmentsOutline from "./react/outline/Adjustments";
 import AnnotationOutline from "./react/outline/Annotation";
@@ -263,7 +265,6 @@ import BellSolid from "./react/solid/Bell";
 import BookOpenSolid from "./react/solid/BookOpen";
 import BookmarkSolid from "./react/solid/Bookmark";
 import BookmarkAltSolid from "./react/solid/BookmarkAlt";
-import BrandLogoSolid from "./react/solid/BrandLogo";
 import BriefcaseSolid from "./react/solid/Briefcase";
 import CakeSolid from "./react/solid/Cake";
 import CalculatorSolid from "./react/solid/Calculator";
@@ -466,6 +467,8 @@ import ZoomInSolid from "./react/solid/ZoomIn";
 import ZoomOutSolid from "./react/solid/ZoomOut";
 
 export type ICON_NAMES =
+  | "BrandLogoIllus"
+  | "MetamaskIllus"
   | "AcademicCapOutline"
   | "AdjustmentsOutline"
   | "AnnotationOutline"
@@ -729,7 +732,6 @@ export type ICON_NAMES =
   | "BookOpenSolid"
   | "BookmarkSolid"
   | "BookmarkAltSolid"
-  | "BrandLogoSolid"
   | "BriefcaseSolid"
   | "CakeSolid"
   | "CalculatorSolid"
@@ -932,6 +934,8 @@ export type ICON_NAMES =
   | "ZoomOutSolid";
 
 export default {
+  BrandLogoIllus: BrandLogoIllus,
+  MetamaskIllus: MetamaskIllus,
   AcademicCapOutline: AcademicCapOutline,
   AdjustmentsOutline: AdjustmentsOutline,
   AnnotationOutline: AnnotationOutline,
@@ -1195,7 +1199,6 @@ export default {
   BookOpenSolid: BookOpenSolid,
   BookmarkSolid: BookmarkSolid,
   BookmarkAltSolid: BookmarkAltSolid,
-  BrandLogoSolid: BrandLogoSolid,
   BriefcaseSolid: BriefcaseSolid,
   CakeSolid: CakeSolid,
   CalculatorSolid: CalculatorSolid,

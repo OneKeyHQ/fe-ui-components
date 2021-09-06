@@ -1,5 +1,5 @@
 import React, { Fragment, PropsWithChildren } from "react";
-import cx from "classnames";
+import cx, { Argument } from "classnames";
 import { Dialog, Transition } from "@headlessui/react";
 
 import ModalHeader from "./ModalHeader";
@@ -15,6 +15,10 @@ export type ModalProps = {
   content?: React.ReactNode;
   /** 点击模态框遮罩时或键盘按下 Esc 时的回调 */
   onClose: () => void;
+  /**
+   * 设置额外的 class
+   */
+  className?: string | null;
 };
 
 export const iconColors: Record<ModalType, string> = {
@@ -41,7 +45,7 @@ export const ModalBody = ({ children }) => {
 };
 
 const Modal = (props: PropsWithChildren<ModalProps>) => {
-  const { visible, content, onClose, children } = props;
+  const { visible, content, onClose, className, children } = props;
 
   const contentNode = content ?? children;
 
@@ -70,7 +74,7 @@ const Modal = (props: PropsWithChildren<ModalProps>) => {
             {/* This element is to trick the browser into centering the modal contents. */}
             <span
               className="okd-hidden sm:okd-inline-block sm:okd-align-middle sm:okd-h-screen"
-              okd-aria-hidden="true"
+              aria-hidden="true"
             >
               &#8203;
             </span>
@@ -80,7 +84,8 @@ const Modal = (props: PropsWithChildren<ModalProps>) => {
                 "okd-inline-block okd-align-bottom okd-bg-white-ground okd-rounded-lg okd-text-left okd-overflow-hidden",
                 "okd-ring-1 okd-ring-black okd-ring-opacity-5 okd-shadow-xl",
                 "sm:okd-my-8 sm:okd-align-middle sm:okd-max-w-lg sm:okd-w-full",
-                "okd-transform okd-transition-all"
+                "okd-transform okd-transition-all",
+                className && className
               )}
               enter="okd-ease-out okd-duration-300"
               enterFrom="okd-opacity-0 okd-translate-y-4 sm:okd-translate-y-0 sm:okd-scale-95"
