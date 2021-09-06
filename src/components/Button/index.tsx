@@ -45,11 +45,15 @@ export type ButtonProps = {
   /**
    * 设置按钮类型
    */
-  type?: "primary" | "basic" | "plain" | "destructive" | "link";
+  type?: "primary" | "basic" | "plain" | "destructive";
   /**
    * 设置额外的 class
    */
   className?: string | null;
+  /**
+   * 设置额外的 class
+   */
+  as?: "button" | "a";
 } & Omit<React.HTMLProps<HTMLButtonElement>, "size"> &
   Omit<React.HTMLProps<HTMLAnchorElement>, "size">;
 
@@ -60,6 +64,7 @@ const defaultProps = {
   circular: false,
   size: "base",
   type: "basic",
+  as: "button",
   // icon: <Icon name="AcademicCapOutline" size={16}></Icon>,
 } as const;
 
@@ -76,6 +81,7 @@ const Button: FC<ButtonProps> = (props) => {
     trailingIcon,
     href,
     className,
+    as,
     ...rest
   } = props;
 
@@ -97,7 +103,7 @@ const Button: FC<ButtonProps> = (props) => {
     // Full width
     { "okd-w-full": block },
     // Add border
-    { "okd-border": !(type === "plain" || type === "link") },
+    { "okd-border": type !== "plain" },
     // The width and offset of ring
     {
       "focus:okd-ring-2 focus:okd-ring-offset-2 focus:okd-ring-offset-white": !loading,
@@ -115,7 +121,7 @@ const Button: FC<ButtonProps> = (props) => {
       "okd-text-gray-300 okd-bg-white okd-border-gray-200":
         !!disabled || !!loading,
     },
-    ["plain", "link"].includes(type) && {
+    ["plain"].includes(type) && {
       "okd-text-gray-700 hover:okd-bg-gray-50 focus:okd-ring-brand-500":
         !disabled && !loading,
       "okd-text-gray-300": !!disabled || !!loading,
@@ -149,9 +155,10 @@ const Button: FC<ButtonProps> = (props) => {
     circular ? "okd-rounded-full" : "okd-rounded"
   );
 
-  if (type === "link" && href) {
+  if (as === "a" && href) {
     return (
       <a
+        role="button"
         className={cx(btnClasses, !!className && className)}
         href={href}
         {...rest}
