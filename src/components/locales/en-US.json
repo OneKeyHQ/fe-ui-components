@@ -1,6 +1,8 @@
 {
   "ui-components__connect__action_change_wallet": "Change Wallet",
+  "ui-components__connect__option_item__install_metamask": "Install MetaMask Browser Extension",
   "ui-components__connect__option_item__install_onekey": "Install OneKey Browser Extension",
+  "ui-components__connect__option_item__metamask": "MetaMask",
   "ui-components__connect__option_item__onekey": "OneKey",
   "ui-components__connect_a_wallet": "Connect to a wallet",
   "ui-components__connect_account_literal": "Account",
