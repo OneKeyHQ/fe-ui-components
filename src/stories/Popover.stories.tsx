@@ -10,13 +10,26 @@ export default {
 
 const Paint: FC = ({ children }) => {
   return (
-    <div className="okd-pt-4 okd-pb-28 okd-flex okd-justify-center">{children}</div>
+    <div className="okd-pt-4 okd-pb-28 okd-flex okd-justify-center">
+      {children}
+    </div>
   );
 };
 
 export const Popover: ComponentStory<typeof PopoverComponent> = () => (
   <Paint>
     <PopoverComponent place="bottom-center">
+      <div className="okd-p-4 okd-text-center okd-text-sm okd-text-gray-500">
+        Popovers are perfect for floating panels with arbitrary content like
+        navigation menus, mobile menus and flyout menus.
+      </div>
+    </PopoverComponent>
+  </Paint>
+);
+
+export const CustomWidth: ComponentStory<typeof PopoverComponent> = () => (
+  <Paint>
+    <PopoverComponent place="bottom-center" className="okd-w-auto okd-min-w-[40rem]">
       <div className="okd-p-4 okd-text-center okd-text-sm okd-text-gray-500">
         Popovers are perfect for floating panels with arbitrary content like
         navigation menus, mobile menus and flyout menus.
