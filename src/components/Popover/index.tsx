@@ -18,6 +18,10 @@ type PopoverProps = {
    * Menu 的位置，分别对应左下、中下、右下
    */
   place?: "bottom-start" | "bottom-center" | "bottom-end";
+  /**
+   * 设置额外的 class
+   */
+  className?: string | null;
 };
 
 const defaultProps = {
@@ -29,6 +33,7 @@ const Popover: FC<PopoverProps> = ({
   trigger,
   children,
   place,
+  className,
 }) => {
   const defaultTrigger = useCallback((open) => {
     return (
@@ -60,11 +65,16 @@ const Popover: FC<PopoverProps> = ({
             leaveTo="okd-transform okd-opacity-0 okd-scale-95"
           >
             <HeadlessPopover.Panel
-              className={cx("okd-absolute okd-z-10 okd-w-64 okd-mt-2", {
-                "okd-origin-top-left okd-left-0": place === "bottom-start",
-                "okd-left-1/2 okd--translate-x-1/2": place === "bottom-center",
-                "okd-origin-top-right okd-right-0": place === "bottom-end",
-              })}
+              className={cx(
+                "okd-absolute okd-z-10 okd-w-64 okd-mt-2",
+                {
+                  "okd-origin-top-left okd-left-0": place === "bottom-start",
+                  "okd-left-1/2 okd--translate-x-1/2":
+                    place === "bottom-center",
+                  "okd-origin-top-right okd-right-0": place === "bottom-end",
+                },
+                className
+              )}
             >
               <div className="bg-white okd-overflow-hidden okd-rounded okd-shadow-lg okd-ring-1 okd-ring-black/5">
                 {children}
