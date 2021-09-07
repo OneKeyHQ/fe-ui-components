@@ -8,6 +8,7 @@ import { buildMetaMaskConnector, buildOneKeyConnector } from "./connectors";
 import { UnsupportedChainIdError, useWeb3React } from "../web3/core";
 import { FormattedMessage, useIntl } from "../Intl";
 import Button from "../Button";
+import Alert from "../Alert";
 import Icon from "../Icon";
 import Modal from "../Modal";
 
@@ -204,12 +205,12 @@ const WalletSelector: FC<WalletSelectorProps> = ({
               href={wallet.downloadLink}
               key={wallet.name}
               target="_blank"
-              className="okd-flex okd-items-center okd-justify-between !okd-p-4 okd-border okd-border-gray-200 okd-shadow-none"
+              className="okd-flex okd-items-center !okd-p-4 okd-border okd-border-gray-200 okd-shadow-none"
             >
-              <span className="okd-text-gray-900">
+              <span className="okd-text-gray-900 okd-flex-1">
                 <FormattedMessage id={wallet.unloadTranslationId} />
               </span>
-              <Icon className="okd-ml-4" name={wallet.logo} />
+              <Icon className="okd-ml-4 okd-flex-shrink-0" name={wallet.logo} />
             </Button>
           );
         }
@@ -222,15 +223,15 @@ const WalletSelector: FC<WalletSelectorProps> = ({
             size="xl"
             onClick={() => tryActivation(wallet.connector)}
             key={wallet.name}
-            className={classNames("okd-flex okd-items-center okd-justify-between !okd-p-4", {
+            className={classNames("okd-flex okd-items-center !okd-p-4", {
               'okd-border okd-border-gray-200 okd-shadow-none': !isActiveConnection,
               'okd-ring-2 okd-ring-brand-500 okd-ring-offset-2 okd-ring-offset-white': isActiveConnection,
             })}
           >
-            <span className="okd-text-gray-900 okd-inline-flex">
+            <span className="okd-text-gray-900 okd-inline-flex okd-flex-1">
               <FormattedMessage id={wallet.translationId} />
             </span>
-            <Icon className="okd-ml-4" name={wallet.logo} />
+            <Icon className="okd-ml-4 okd-flex-shrink-0" name={wallet.logo} />
           </Button>
         );
       })
