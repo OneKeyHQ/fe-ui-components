@@ -65,6 +65,7 @@ type CommonWeb3InjectorObject = {
 
 type Web3InjectorObject = {
   isMetaMask?: boolean;
+  isOneKey?: boolean;
 } & CommonWeb3InjectorObject;
 
 type OneKeyWeb3InjectorObject = CommonWeb3InjectorObject;
