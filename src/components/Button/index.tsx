@@ -163,24 +163,41 @@ const Button: FC<ButtonProps> = (props) => {
         href={href}
         {...rest}
       >
-        {React.isValidElement(<Icon name={leadingIcon} />) && (
-          <LeadingIcon
-            iconName={leadingIcon}
-            circularButton={circular}
-            buttonSize={size}
-            isDisabledButton={disabled}
-            buttonType={type}
-          />
-        )}
-        {children}
-        {React.isValidElement(<Icon name={trailingIcon} />) && (
-          <TrailingIcon
-            iconName={trailingIcon}
-            circularButton={circular}
-            buttonSize={size}
-            isDisabledButton={disabled}
-            buttonType={type}
-          />
+        {loading ? (
+          <>
+            <Spinner
+              buttonSize={size}
+              buttonType={type}
+              circularButton={circular}
+              className={cx({
+                "okd-mr-2": size === "xs" || size === "sm" || size === "base",
+                "okd-mr-3": size === "lg" || size === "xl",
+              })}
+            />
+            {children}
+          </>
+        ) : (
+          <>
+            {React.isValidElement(<Icon name={leadingIcon} />) && (
+              <LeadingIcon
+                iconName={leadingIcon}
+                circularButton={circular}
+                buttonSize={size}
+                isDisabledButton={disabled}
+                buttonType={type}
+              />
+            )}
+            {children}
+            {React.isValidElement(<Icon name={trailingIcon} />) && (
+              <TrailingIcon
+                iconName={trailingIcon}
+                circularButton={circular}
+                buttonSize={size}
+                isDisabledButton={disabled}
+                buttonType={type}
+              />
+            )}
+          </>
         )}
       </a>
     );

@@ -48,7 +48,7 @@ const Component: FC<ComponentProps> = ({ title, description, actions, className 
     >
       {/* Title */}
       {title && (
-        <div className="okd-w-0 okd-flex-1">
+        <div className="sm:okd-w-0 okd-flex-1">
           <Title>{title}</Title>
           {description && <Description>{description}</Description>}
         </div>

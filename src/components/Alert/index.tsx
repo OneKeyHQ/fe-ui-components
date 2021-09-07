@@ -1,5 +1,5 @@
 import React, { FC, ReactNode } from 'react';
-import cx from 'classnames'
+import cx, { Argument } from 'classnames'
 
 import CheckCircleSolid from '../Icon/react/solid/CheckCircle'
 import ExclamationSolid from '../Icon/react/solid/Exclamation';
@@ -26,6 +26,10 @@ export type AlertProps = {
   closable?: boolean;
   /** 点击关闭按钮的事件 */
   onClose?: () => void;
+  /**
+   * 设置额外的 class
+   */
+  className?: Argument;
 }
 
 const defaultProps = {
@@ -33,7 +37,7 @@ const defaultProps = {
   closable: false,
 } as const
 
-const Alert: FC<AlertProps> = ({ type, title, content, closable, onClose, children }) => {
+const Alert: FC<AlertProps> = ({ type, title, content, closable, onClose, className, children }) => {
   const alertIconNode = alertIcons[type]
   const textContent = content ?? children
 
@@ -43,7 +47,7 @@ const Alert: FC<AlertProps> = ({ type, title, content, closable, onClose, childr
       'okd-bg-yellow-50': type === 'warning',
       'okd-bg-red-50': type === 'error',
       'okd-bg-green-50': type === 'success',
-    })}>
+    }, className && className)}>
       <div className="okd-flex">
         <div className="okd-flex-shrink-0">
           {alertIconNode}
