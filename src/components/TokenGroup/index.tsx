@@ -8,6 +8,10 @@ type TokenGroupProps = {
    */
   list?: Array<string>;
   /**
+   * 单个 url
+   */
+  url?: string;
+  /**
    * 尺寸大小
    */
   size?: 6 | 8 | 10;
@@ -15,13 +19,19 @@ type TokenGroupProps = {
    * Token 所属链的 url
    */
   chainUrl?: string;
+  /**
+   * chain 的名字 eth / bsc 等
+   */
+  chain?: string;
 };
 
 const defaultProps = {
   size: 6,
 } as const;
 
-const TokenGroup: FC<TokenGroupProps> = ({ list, size, chainUrl }) => {
+const TokenGroup: FC<TokenGroupProps> = ({ list, size, chainUrl, chain, url }) => {
+  if (!list && url) list = [url];
+
   return (
     <div className={cx("okd-relative okd-inline-flex")}>
       <div
@@ -42,7 +52,7 @@ const TokenGroup: FC<TokenGroupProps> = ({ list, size, chainUrl }) => {
             />
           ))}
       </div>
-      {!!chainUrl && (
+      {!!(chainUrl || chain) && (
         <Token
           className={cx("okd-absolute okd-ring-2 okd-ring-white", {
             "okd--top-1 okd--right-1": size === 6,
@@ -50,6 +60,7 @@ const TokenGroup: FC<TokenGroupProps> = ({ list, size, chainUrl }) => {
             "okd--top-1.5 okd--right-1.5": size === 10,
           })}
           src={chainUrl}
+          chain={chain}
           size={(size === 6 && 12) || (size === 8 && 16) || (size === 10 && 20)}
         />
       )}

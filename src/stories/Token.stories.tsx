@@ -18,6 +18,11 @@ Token.args = {
     "https://cdn.jsdelivr.net/gh/atomiclabs/cryptocurrency-icons@d5c68edec1f5eaec59ac77ff2b48144679cebca1/128/color/btc.png",
 };
 
+export const EVMToken = Template.bind({});
+EVMToken.args = {
+  chain: 'bsc',
+};
+
 export const Placeholder = Template.bind({});
 Placeholder.args = {
 };
