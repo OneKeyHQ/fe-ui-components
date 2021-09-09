@@ -4,6 +4,7 @@ export { default as Icon } from "./Icon";
 export { default as ICONS } from "./Icon/Icons";
 export { default as IconGroup } from "./Icon/IconGroup";
 
+export { default as Address } from "./Address";
 export { default as Alert } from "./Alert";
 export { default as Avatar } from "./Avatar";
 export { default as Badge } from "./Badge";
