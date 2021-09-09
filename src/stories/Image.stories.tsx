@@ -12,8 +12,12 @@ const Template: ComponentStory<typeof ImageComponent> = (args) => (
   <ImageComponent {...args} />
 );
 
-export const Avatar = Template.bind({});
-Avatar.args = {
+export const Image = Template.bind({});
+Image.args = {
   src: "https://source.unsplash.com/random",
-  layout: "fill",
+};
+
+export const Fallback = Template.bind({});
+Fallback.args = {
+  src: "dafsfdsadfsaf",
 };
