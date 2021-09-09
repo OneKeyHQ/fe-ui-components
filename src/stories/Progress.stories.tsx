@@ -64,3 +64,13 @@ export const DynamicSetWidth: ComponentStory<typeof ProgressComponent> = () => {
     </Paint>
   );
 };
+
+/**
+ * 展示当前进度
+ */
+export const ShowHint = Template.bind({});
+ShowHint.args = {
+  value: 300,
+  max: 600,
+  hint: true,
+};
