@@ -23,6 +23,8 @@ export { default as Skeleton } from "./Skeleton";
 export { default as Switch } from "./Switch";
 export { default as SectionHeader } from "./SectionHeader";
 export { default as Tabs } from "./Tabs";
+export { default as Tag } from './Tag';
+export { default as TagList } from './Tag/List';
 export { default as Togglelist } from "./ToggleList";
 export { default as Token } from "./Token";
 export { default as TokenGroup } from "./TokenGroup";
