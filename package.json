@@ -26,7 +26,8 @@
     "build": "rm -rf build && yarn build:components && yarn build:css",
     "eject": "react-scripts eject",
     "storybook": "TAILWIND_MODE=watch start-storybook -p 6006 -s public",
-    "build-storybook": "build-storybook -s public"
+    "build-storybook": "build-storybook -s public",
+    "type-check": "tsc --noEmit"
   },
   "publishConfig": {
     "registry": "https://npm.pkg.github.com"

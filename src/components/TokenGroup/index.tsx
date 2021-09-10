@@ -1,36 +1,28 @@
 import React, { FC } from "react";
 import cx from "classnames";
-import Token from "../Token";
+import Token, { TokenProps } from "../Token";
 
 type TokenGroupProps = {
   /**
-   * Token 列表数组
+   * 单个 url 或是列表
    */
-  list?: Array<string>;
-  /**
-   * 单个 url
-   */
-  url?: string;
+  url?: string | string[];
   /**
    * 尺寸大小
    */
   size?: 6 | 8 | 10;
   /**
-   * Token 所属链的 url
+   * 角标 Token 的 props
    */
-  chainUrl?: string;
-  /**
-   * chain 的名字 eth / bsc 等
-   */
-  chain?: string;
+  cornerToken?: TokenProps;
 };
 
 const defaultProps = {
   size: 6,
 } as const;
 
-const TokenGroup: FC<TokenGroupProps> = ({ list, size, chainUrl, chain, url }) => {
-  if (!list && url) list = [url];
+const TokenGroup: FC<TokenGroupProps> = ({ size, cornerToken, url }) => {
+  const list = Array.isArray(url) ? url : [url];
 
   return (
     <div className={cx("okd-relative okd-inline-flex")}>
@@ -52,16 +44,15 @@ const TokenGroup: FC<TokenGroupProps> = ({ list, size, chainUrl, chain, url }) =
             />
           ))}
       </div>
-      {!!(chainUrl || chain) && (
+      {!!cornerToken && (
         <Token
           className={cx("okd-absolute okd-ring-2 okd-ring-white", {
             "okd--top-1 okd--right-1": size === 6,
             "okd-top-[-5px] okd-right-[-5px]": size === 8,
             "okd--top-1.5 okd--right-1.5": size === 10,
           })}
-          src={chainUrl}
-          chain={chain}
           size={(size === 6 && 12) || (size === 8 && 16) || (size === 10 && 20)}
+          {...cornerToken}
         />
       )}
     </div>

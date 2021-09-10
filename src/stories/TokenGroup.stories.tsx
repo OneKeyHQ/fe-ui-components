@@ -14,23 +14,28 @@ const Template: ComponentStory<typeof TokenGroupComponent> = (args) => (
 
 export const TokenGroup = Template.bind({});
 TokenGroup.args = {
-  list: [
+  url: [
     "https://cdn.jsdelivr.net/gh/atomiclabs/cryptocurrency-icons@d5c68edec1f5eaec59ac77ff2b48144679cebca1/128/color/btc.png",
     "https://cdn.jsdelivr.net/gh/atomiclabs/cryptocurrency-icons@d5c68edec1f5eaec59ac77ff2b48144679cebca1/128/color/usdt.png",
     "https://cdn.jsdelivr.net/gh/atomiclabs/cryptocurrency-icons@d5c68edec1f5eaec59ac77ff2b48144679cebca1/128/color/bnb.png",
   ],
-  chainUrl:
-    "https://cdn.jsdelivr.net/gh/atomiclabs/cryptocurrency-icons@d5c68edec1f5eaec59ac77ff2b48144679cebca1/128/color/eth.png",
+  cornerToken: {
+    src: 'https://cdn.jsdelivr.net/gh/atomiclabs/cryptocurrency-icons@d5c68edec1f5eaec59ac77ff2b48144679cebca1/128/color/eth.png',
+  },
 };
 
 export const TokenGroupChain = Template.bind({});
 TokenGroupChain.args = {
   url: "https://cdn.jsdelivr.net/gh/atomiclabs/cryptocurrency-icons@d5c68edec1f5eaec59ac77ff2b48144679cebca1/128/color/btc.png",
-  chain: 'eth',
+  cornerToken: {
+    chain: 'eth',
+  }
 };
 
 export const TokenGroupWithUnavailableChain = Template.bind({});
 TokenGroupWithUnavailableChain.args = {
   url: "https://cdn.jsdelivr.net/gh/atomiclabs/cryptocurrency-icons@d5c68edec1f5eaec59ac77ff2b48144679cebca1/128/color/btc.png",
-  chain: 'asdfasdfsf',
+  cornerToken: {
+    chain: 'asdfasdfsf',
+  },
 };

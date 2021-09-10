@@ -18,7 +18,7 @@ export type TokenProps = {
    */
   className?: string | null;
   /**
-   * 链的 symbol
+   * 链的 symbol，提供 chain 之后就可以默认使用 cdn 的 chain 的图标
    */
   chain?: string;
 };
