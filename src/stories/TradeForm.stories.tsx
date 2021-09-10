@@ -28,7 +28,7 @@ export const Default: ComponentStory<typeof TradeFormComponent> = (args) => (
 );
 
 Default.args = {
-  label: "Form",
+  label: "You Pay",
   labelCorner: (
     <div className="okd-flex okd--mx-1">
       <Button type="plain" size="sm" className="!okd-px-1 !okd-py-0 okd-text-brand-600 hover:okd-bg-gray-100">

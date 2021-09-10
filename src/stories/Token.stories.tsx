@@ -26,3 +26,16 @@ EVMToken.args = {
 export const Placeholder = Template.bind({});
 Placeholder.args = {
 };
+
+export const TokenWithName = Template.bind({});
+TokenWithName.args = {
+  chain: 'bsc',
+  name: 'BSC'
+};
+
+export const TokenWithDescription = Template.bind({});
+TokenWithDescription.args = {
+  chain: 'bsc',
+  name: 'BSC',
+  description: 'Ethereum'
+};
