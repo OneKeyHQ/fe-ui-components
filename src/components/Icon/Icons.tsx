@@ -1,7 +1,10 @@
 /* eslint-disable */
 
 import BrandLogoIllus from "./react/illus/BrandLogo";
+import CrownBadgeIllus from "./react/illus/CrownBadge";
+import DiamondBadgeIllus from "./react/illus/DiamondBadge";
 import MetamaskIllus from "./react/illus/Metamask";
+import StarBadgeIllus from "./react/illus/StarBadge";
 import AcademicCapOutline from "./react/outline/AcademicCap";
 import AdjustmentsOutline from "./react/outline/Adjustments";
 import AnnotationOutline from "./react/outline/Annotation";
@@ -468,7 +471,10 @@ import ZoomOutSolid from "./react/solid/ZoomOut";
 
 export type ICON_NAMES =
   | "BrandLogoIllus"
+  | "CrownBadgeIllus"
+  | "DiamondBadgeIllus"
   | "MetamaskIllus"
+  | "StarBadgeIllus"
   | "AcademicCapOutline"
   | "AdjustmentsOutline"
   | "AnnotationOutline"
@@ -935,7 +941,10 @@ export type ICON_NAMES =
 
 export default {
   BrandLogoIllus: BrandLogoIllus,
+  CrownBadgeIllus: CrownBadgeIllus,
+  DiamondBadgeIllus: DiamondBadgeIllus,
   MetamaskIllus: MetamaskIllus,
+  StarBadgeIllus: StarBadgeIllus,
   AcademicCapOutline: AcademicCapOutline,
   AdjustmentsOutline: AdjustmentsOutline,
   AnnotationOutline: AnnotationOutline,
