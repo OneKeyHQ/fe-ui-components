@@ -2,8 +2,8 @@ import React, { useMemo, useState, useRef } from "react";
 import type { FC, ReactNode } from "react";
 import cx from "classnames";
 
-import Icon from '../Icon';
 import Card from "../Card";
+import EmptyNFT from "../Icon/react/illus/EmptyNft";
 
 type StackImageProps = {
   total: number;
@@ -12,7 +12,7 @@ type StackImageProps = {
   current: number;
   isHovering: boolean;
   onHover: (i: number) => void;
-  size?: number,
+  size?: number;
 };
 
 const StackImage: FC<StackImageProps> = ({
@@ -60,21 +60,16 @@ const StackImage: FC<StackImageProps> = ({
             isHovering && !isActive && "okd-opacity-40"
           )}
         />
-        {
-          src ? (
-            <img
-              src={src}
-              style={{ width: size * 0.9, height: size * 0.9 }}
-              className="okd-rounded-sm okd-box-border okd-w-[108px] okd-h-[108px]"
-              alt="OneKey NFT pets"
-            />
-          ) : (
-            <Icon
-              className="okd-w-full okd-h-full okd-text-gray-400"
-              name="QuestionMarkOutline"
-            />
-          )
-        }
+        {src ? (
+          <img
+            src={src}
+            style={{ width: size * 0.9, height: size * 0.9 }}
+            className="okd-rounded-sm okd-box-border okd-w-[108px] okd-h-[108px]"
+            alt="OneKey NFT pets"
+          />
+        ) : (
+          <EmptyNFT width={108} height={108} viewBox="0 0 98 98" />
+        )}
       </div>
     </div>
   );
@@ -98,7 +93,7 @@ export type NFTCardProps = {
 /**
  * 用于展示所拥有的 NFT 宠物封面 与 动画，可自定义标题和动作信息
  */
-const NFTCard: FC<NFTCardProps> = ({
+const NFTStackedCard: FC<NFTCardProps> = ({
   sources,
   title,
   subTitle,
@@ -110,7 +105,6 @@ const NFTCard: FC<NFTCardProps> = ({
   const [currentHoverIndex, setCurrentHoverIndex] = useState<number>();
 
   const imagesNode = useMemo(() => {
-
     if (!Array.isArray(sources) || !sources.length) {
       return (
         <StackImage
@@ -123,7 +117,7 @@ const NFTCard: FC<NFTCardProps> = ({
             setCurrentHoverIndex(index);
           }}
         />
-      )
+      );
     }
 
     // Maximum 5 stack images
@@ -145,7 +139,9 @@ const NFTCard: FC<NFTCardProps> = ({
   }, [currentHoverIndex, imageSize, isHovering, sources]);
 
   return (
-    <Card className={cx("okd-relative okd-overflow-hidden okd-w-full", className)}>
+    <Card
+      className={cx("okd-relative okd-overflow-hidden okd-w-full", className)}
+    >
       <div className="okd-relative okd-z-[1000] okd-flex okd-flex-col okd-min-h-[160px] okd-w-[fit-content]">
         <div>{title}</div>
         <div>{subTitle}</div>
@@ -166,4 +162,4 @@ const NFTCard: FC<NFTCardProps> = ({
   );
 };
 
-export default NFTCard;
+export default NFTStackedCard;
