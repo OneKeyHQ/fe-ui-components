@@ -14,7 +14,7 @@ const Template: ComponentStory<typeof TokenGroupComponent> = (args) => (
 
 export const TokenGroup = Template.bind({});
 TokenGroup.args = {
-  url: [
+  sources: [
     "https://cdn.jsdelivr.net/gh/atomiclabs/cryptocurrency-icons@d5c68edec1f5eaec59ac77ff2b48144679cebca1/128/color/btc.png",
     "https://cdn.jsdelivr.net/gh/atomiclabs/cryptocurrency-icons@d5c68edec1f5eaec59ac77ff2b48144679cebca1/128/color/usdt.png",
     "https://cdn.jsdelivr.net/gh/atomiclabs/cryptocurrency-icons@d5c68edec1f5eaec59ac77ff2b48144679cebca1/128/color/bnb.png",
@@ -26,7 +26,7 @@ TokenGroup.args = {
 
 export const TokenGroupChain = Template.bind({});
 TokenGroupChain.args = {
-  url: "https://cdn.jsdelivr.net/gh/atomiclabs/cryptocurrency-icons@d5c68edec1f5eaec59ac77ff2b48144679cebca1/128/color/btc.png",
+  sources: "https://cdn.jsdelivr.net/gh/atomiclabs/cryptocurrency-icons@d5c68edec1f5eaec59ac77ff2b48144679cebca1/128/color/btc.png",
   cornerToken: {
     chain: 'eth',
   }
@@ -34,8 +34,25 @@ TokenGroupChain.args = {
 
 export const TokenGroupWithUnavailableChain = Template.bind({});
 TokenGroupWithUnavailableChain.args = {
-  url: "https://cdn.jsdelivr.net/gh/atomiclabs/cryptocurrency-icons@d5c68edec1f5eaec59ac77ff2b48144679cebca1/128/color/btc.png",
+  sources: "https://cdn.jsdelivr.net/gh/atomiclabs/cryptocurrency-icons@d5c68edec1f5eaec59ac77ff2b48144679cebca1/128/color/btc.png",
   cornerToken: {
     chain: 'asdfasdfsf',
   },
+};
+
+export const TokenGroupWithChain = Template.bind({});
+TokenGroupWithChain.args = {
+  sources: [{ chain: 'bsc', name: 'BSC' }, { chain: 'eth', name: 'ETH' }],
+  cornerToken: {
+    chain: 'asdfasdfsf',
+  },
+};
+
+export const TokenGroupWithDescription = Template.bind({});
+TokenGroupWithDescription.args = {
+  sources: [{ chain: 'bsc', name: 'BSC' }, { chain: 'eth', name: 'ETH' }],
+  cornerToken: {
+    chain: 'asdfasdfsf',
+  },
+  description: 'something'
 };
