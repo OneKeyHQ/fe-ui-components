@@ -21,7 +21,7 @@ type TokenGroupProps = {
   /**
    * 尺寸大小
    */
-  size?: 6 | 8 | 10;
+  size?: "md" | "lg" | "xl";
   /**
    * 角标 Token 的 props
    */
@@ -33,24 +33,30 @@ type TokenGroupProps = {
 };
 
 const defaultProps = {
-  size: 6,
+  size: "md",
 } as const;
 
 /** 断言为 TokenItem */
-const isTokenItem = (c: TokenGroupProps['sources']): c is TokenItem => !!(typeof c === 'object' && !Array.isArray(c));
+const isTokenItem = (c: TokenGroupProps["sources"]): c is TokenItem =>
+  !!(typeof c === "object" && !Array.isArray(c));
 
-const buildProps = (sources: TokenGroupProps['sources']): TokenItem[] => {
+const buildProps = (sources: TokenGroupProps["sources"]): TokenItem[] => {
   if (!sources) return [];
-  if (typeof sources === 'string') {
+  if (typeof sources === "string") {
     return [{ src: sources }];
   }
   if (isTokenItem(sources)) {
     return [sources];
   }
   return flatten(sources.map(buildProps));
-}
+};
 
-const TokenGroup: FC<TokenGroupProps> = ({ size, cornerToken, sources, description }) => {
+const TokenGroup: FC<TokenGroupProps> = ({
+  size,
+  cornerToken,
+  sources,
+  description,
+}) => {
   const list = buildProps(sources);
 
   return (
@@ -58,20 +64,18 @@ const TokenGroup: FC<TokenGroupProps> = ({ size, cornerToken, sources, descripti
       <div className={cx("okd-relative okd-inline-flex")}>
         <div
           className={cx("okd-inline-flex", {
-            "okd--space-x-1": size === 6,
-            "okd--space-x-2": size === 8 || size === 10,
+            "okd--space-x-1": size === "md",
+            "okd--space-x-2": size === "lg" || size === "xl",
           })}
         >
           {!!list.length &&
             list.map((tokenItem, i) => (
               <Fragment key={i}>
                 <Token
-                  className="okd-ring-2 okd-ring-white first:okd-ring-transparent"
+                  className="okd-ring-2 okd-ring-white"
                   src={tokenItem.src}
                   chain={tokenItem.chain}
-                  size={
-                    (size === 6 && 24) || (size === 8 && 32) || (size === 10 && 40)
-                  }
+                  size={size}
                 />
               </Fragment>
             ))}
@@ -79,35 +83,49 @@ const TokenGroup: FC<TokenGroupProps> = ({ size, cornerToken, sources, descripti
         {!!cornerToken && (
           <Token
             className={cx("okd-absolute okd-ring-2 okd-ring-white", {
-              "okd--top-1 okd--right-1": size === 6,
-              "okd-top-[-5px] okd-right-[-5px]": size === 8,
-              "okd--top-1.5 okd--right-1.5": size === 10,
+              "okd--top-1 okd--right-1": size === "md",
+              "okd-top-[-5px] okd-right-[-5px]": size === "lg",
+              "okd--top-1.5 okd--right-1.5": size === "xl",
             })}
-            size={(size === 6 && 12) || (size === 8 && 16) || (size === 10 && 20)}
+            size={
+              (size === "md" && 12) ||
+              (size === "lg" && 16) ||
+              (size === "xl" && 20)
+            }
             {...cornerToken}
           />
         )}
       </div>
-      {
-        !!(list.some(s => s.name) || description) && (
-          <div className="okd-ml-4 okd-text-sm okd-inline-flex okd-flex-col okd-justify-center">
-            {
-              list.some(s => s.name) && (
-                <p className="okd-font-medium okd-text-gray-900 okd-inline-flex okd-items-center">
-                  {
-                    list
-                      .filter(l => !!l.name)
-                      .map((token, index) => {
-                        return (<Fragment key={index}>{index > 0 && (<span className="okd-mx-1 okd-font-normal okd-text-gray-500"> / </span>)}<span>{token.name}</span></Fragment>);
-                      })
-                  }
-                </p>
-              )
-            }
-            {!!description && (<span className="okd-text-gray-500">{description}</span>)}
-          </div>
-        )
-      }
+      {!!(list.some((s) => s.name) || description) && (
+        <div className={cx(size === "md" ? "okd-ml-3" : "okd-ml-4")}>
+          {list.some((s) => s.name) && (
+            <p
+              className={cx(
+                size === "xl" ? "okd-text-base" : "okd-text-sm",
+                "okd-font-medium okd-text-gray-900"
+              )}
+            >
+              {list
+                .filter((l) => !!l.name)
+                .map((token, index) => {
+                  return (
+                    <Fragment key={index}>
+                      {index > 0 && (
+                        <span className="okd-mx-1 okd-font-normal okd-text-gray-500">
+                          /
+                        </span>
+                      )}
+                      <span>{token.name}</span>
+                    </Fragment>
+                  );
+                })}
+            </p>
+          )}
+          {!!description && (
+            <p className="okd-text-sm okd-text-gray-500">{description}</p>
+          )}
+        </div>
+      )}
     </div>
   );
 };
