@@ -1,7 +1,7 @@
 /* eslint-disable */
 
 import BrandLogoIllus from "./react/illus/BrandLogo";
-import EmptyNftillus from "./react/illus/EmptyNFT";
+import EmptyNftIllus from "./react/illus/EmptyNft";
 import MetamaskIllus from "./react/illus/Metamask";
 import AcademicCapOutline from "./react/outline/AcademicCap";
 import AdjustmentsOutline from "./react/outline/Adjustments";
@@ -469,7 +469,7 @@ import ZoomOutSolid from "./react/solid/ZoomOut";
 
 export type ICON_NAMES =
   | "BrandLogoIllus"
-  | "EmptyNftillus"
+  | "EmptyNftIllus"
   | "MetamaskIllus"
   | "AcademicCapOutline"
   | "AdjustmentsOutline"
@@ -937,7 +937,7 @@ export type ICON_NAMES =
 
 export default {
   BrandLogoIllus: BrandLogoIllus,
-  EmptyNftillus: EmptyNftillus,
+  EmptyNftIllus: EmptyNftIllus,
   MetamaskIllus: MetamaskIllus,
   AcademicCapOutline: AcademicCapOutline,
   AdjustmentsOutline: AdjustmentsOutline,

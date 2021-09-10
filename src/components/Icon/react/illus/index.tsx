@@ -1,5 +1,5 @@
 export { default as BrandLogoIllusIcon } from './BrandLogo';
 
-export { default as MetamaskIllusIcon } from './Metamask';
+export { default as EmptyNftIllusIcon } from './EmptyNft';
 
-export { default as EmptyNFTIllusIcon } from './EmptyNFT';
+export { default as MetamaskIllusIcon } from './Metamask';
