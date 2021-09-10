@@ -3,7 +3,7 @@ import type { FC, ReactNode } from "react";
 import cx from "classnames";
 
 import Card from "../Card";
-import EmptyNFT from "../Icon/react/illus/EmptyNft";
+import EmptyNFT from "../Icon/react/illus/EmptyNFT";
 
 type StackImageProps = {
   total: number;
