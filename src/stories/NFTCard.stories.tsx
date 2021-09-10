@@ -51,3 +51,21 @@ NFTCard.args = {
     "https://images.unsplash.com/photo-1628499139581-739194851413?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxfDB8MXxyYW5kb218MHx8fHx8fHx8MTYzMTE4MjU4NA&ixlib=rb-1.2.1&q=80&w=1080",
   ],
 };
+
+export const NFTCardWithEmptySource = Template.bind({});
+NFTCardWithEmptySource.args = {
+  title: (
+    <div className="okd-flex okd-items-end">
+      <p className="okd-text-gray-900 okd-text-4xl okd-font-semibold">75</p>
+      <p className="okd-text-gray-700 okd-text-sm okd-font-medium okd-ml-2 okd-leading-7">
+        XP / DAY
+      </p>
+    </div>
+  ),
+  subTitle: (
+    <p className="okd-text-gray-500 okd-text-xs okd-font-normal">
+      Cumulative: 675 XP
+    </p>
+  ),
+  action: <Button size="xs">View New NFT Pets →</Button>,
+};
