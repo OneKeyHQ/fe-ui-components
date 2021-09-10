@@ -17,6 +17,7 @@ export { default as Modal } from './Modal'
 export { default as NFTCard } from './NFTCard';
 export { default as Notification, NotificationContainer } from './Notification';
 export { default as Popover } from "./Popover";
+export { default as Progress } from "./Progress";
 export { default as UIProvider } from "./Provider";
 export { default as RadioButtonGroup } from "./RadioButtonGroup";
 export { default as Sidebar } from "./Sidebar";
