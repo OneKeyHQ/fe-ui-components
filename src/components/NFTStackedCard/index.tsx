@@ -2,8 +2,8 @@ import React, { useMemo, useState, useRef } from "react";
 import type { FC, ReactNode } from "react";
 import cx from "classnames";
 
-import Icon from '../Icon';
 import Card from "../Card";
+import EmptyNFTSvg from './EmptyNFTSvg';
 
 type StackImageProps = {
   total: number;
@@ -69,10 +69,7 @@ const StackImage: FC<StackImageProps> = ({
               alt="OneKey NFT pets"
             />
           ) : (
-            <Icon
-              className="okd-w-full okd-h-full okd-text-gray-400"
-              name="QuestionMarkOutline"
-            />
+            <EmptyNFTSvg size={size} />
           )
         }
       </div>
