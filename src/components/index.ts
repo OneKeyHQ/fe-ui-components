@@ -11,6 +11,7 @@ export { default as Card } from "./Card";
 export { default as Dropdown } from "./Dropdown";
 export { default as Input } from "./Input";
 export { default as Image } from "./Image";
+export { default as LevelBadge } from "./LevelBadge";
 export { default as Modal } from "./Modal";
 export { default as NFTCard } from "./NFTCard";
 export { default as Notification, NotificationContainer } from "./Notification";
