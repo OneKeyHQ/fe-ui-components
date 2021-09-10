@@ -1,9 +1,7 @@
 export { COLORS } from "./Theme";
-
 export { default as Icon } from "./Icon";
 export { default as ICONS } from "./Icon/Icons";
 export { default as IconGroup } from "./Icon/IconGroup";
-
 export { default as Address } from "./Address";
 export { default as Alert } from "./Alert";
 export { default as Avatar } from "./Avatar";
@@ -25,14 +23,22 @@ export { default as Skeleton } from "./Skeleton";
 export { default as Switch } from "./Switch";
 export { default as SectionHeader } from "./SectionHeader";
 export { default as Tabs } from "./Tabs";
-export { default as Tag } from './Tag';
-export { default as TagList } from './Tag/List';
+export { default as Tag } from "./Tag";
+export { default as TagList } from "./Tag/List";
 export { default as Togglelist } from "./ToggleList";
 export { default as Token } from "./Token";
 export { default as TokenGroup } from "./TokenGroup";
 export { default as Tooltip } from "./Tooltip";
 export { default as WalletSelector } from "./WalletSelector";
+export { default as Table } from "./Table";
 
-export * from './Updaters'
+export * from "./Updaters";
 
-export { useConfig, useLocale, useTheme, useColors, useLayout, useScreen } from "./Provider/hooks";
+export {
+  useConfig,
+  useLocale,
+  useTheme,
+  useColors,
+  useLayout,
+  useScreen,
+} from "./Provider/hooks";
