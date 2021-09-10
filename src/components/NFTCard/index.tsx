@@ -1,11 +1,21 @@
-import React, { useMemo, useState } from "react";
+import React, { useMemo, useState, useRef } from "react";
 import type { FC, ReactNode } from "react";
 import cx from "classnames";
 
+import Icon from '../Icon';
 import Card from "../Card";
-import { useRef } from "react";
 
-const StackImage = ({
+type StackImageProps = {
+  total: number;
+  src?: string;
+  index: number;
+  current: number;
+  isHovering: boolean;
+  onHover: (i: number) => void;
+  size?: number,
+};
+
+const StackImage: FC<StackImageProps> = ({
   total,
   src,
   index,
@@ -50,23 +60,38 @@ const StackImage = ({
             isHovering && !isActive && "okd-opacity-40"
           )}
         />
-        <img
-          src={src}
-          style={{ width: size * 0.9, height: size * 0.9 }}
-          className="okd-rounded-sm okd-box-border okd-w-[108px] okd-h-[108px]"
-          alt="OneKey NFT pets"
-        />
+        {
+          src ? (
+            <img
+              src={src}
+              style={{ width: size * 0.9, height: size * 0.9 }}
+              className="okd-rounded-sm okd-box-border okd-w-[108px] okd-h-[108px]"
+              alt="OneKey NFT pets"
+            />
+          ) : (
+            <Icon
+              className="okd-w-full okd-h-full okd-text-gray-400"
+              name="QuestionMarkOutline"
+            />
+          )
+        }
       </div>
     </div>
   );
 };
 
 export type NFTCardProps = {
+  /** 左上角主元素 */
   title?: ReactNode;
+  /** 左上角副元素 */
   subTitle?: ReactNode;
+  /** 图片地址 */
   sources?: string[];
+  /** Card 容器 className */
   className?: string;
+  /** 左下角操作元素 */
   action?: ReactNode;
+  /** 图片展示尺寸 */
   imageSize?: number;
 };
 
@@ -85,6 +110,22 @@ const NFTCard: FC<NFTCardProps> = ({
   const [currentHoverIndex, setCurrentHoverIndex] = useState<number>();
 
   const imagesNode = useMemo(() => {
+
+    if (!Array.isArray(sources) || !sources.length) {
+      return (
+        <StackImage
+          total={1}
+          index={0}
+          current={currentHoverIndex}
+          isHovering={isHovering}
+          size={imageSize}
+          onHover={(index?: number) => {
+            setCurrentHoverIndex(index);
+          }}
+        />
+      )
+    }
+
     // Maximum 5 stack images
     const images = sources?.slice(0, 5).map((src, index) => (
       <StackImage
