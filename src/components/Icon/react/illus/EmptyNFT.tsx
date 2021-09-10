@@ -1,11 +1,10 @@
 import React from "react";
-import type { FC } from "react";
 
-interface EmptyNFTSvgProps {
+interface EmptyNFTSvgProps extends React.SVGProps<SVGSVGElement> {
   size?: number;
 }
 
-const EmptyNFTSvg: FC<EmptyNFTSvgProps> = ({ size = 108 }) => {
+function EmptyNFTSvg({ size = 108 }: EmptyNFTSvgProps) {
   return (
     <svg
       width={size}
@@ -1611,10 +1610,6 @@ const EmptyNFTSvg: FC<EmptyNFTSvgProps> = ({ size = 108 }) => {
             fill="white"
           />
         </g>
-        {/* eslint-disable-next-line react/style-prop-object */}
-        {/* <g style="mix-blend-mode:color">
-          <rect width="97.2249" height="97.2249" fill="black" />
-        </g> */}
       </g>
       <defs>
         <clipPath id="clip0">
@@ -1623,6 +1618,6 @@ const EmptyNFTSvg: FC<EmptyNFTSvgProps> = ({ size = 108 }) => {
       </defs>
     </svg>
   );
-};
+}
 
 export default EmptyNFTSvg;
