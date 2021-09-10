@@ -1,4 +1,4 @@
-import React, { FC, ReactNode } from "react";
+import React, { FC, ReactNode, useMemo } from "react";
 import cx, { Argument } from "classnames";
 
 import CheckCircleSolid from "../Icon/react/solid/CheckCircle";
@@ -46,6 +46,14 @@ export type AlertProps = {
   /** 点击关闭按钮的事件 */
   onClose?: () => void;
   /**
+   * 自定义左边的提示 Icon
+   */
+  icon?: Argument;
+  /**
+   * 自定义右边的按钮
+   */
+  action?: Argument;
+  /**
    * 设置额外的 class
    */
   className?: Argument;
@@ -58,6 +66,8 @@ const defaultProps = {
 
 const Alert: FC<AlertProps> = ({
   type,
+  icon,
+  action,
   title,
   content,
   closable,
@@ -65,8 +75,44 @@ const Alert: FC<AlertProps> = ({
   className,
   children,
 }) => {
-  const alertIconNode = alertIcons[type];
+  const alertIconNode = icon ?? alertIcons[type];
   const textContent = content ?? children;
+
+  const rightNode = useMemo(() => {
+    if (!!action)
+      return (
+        <div className="okd-ml-auto okd-self-center okd-pl-3">{action}</div>
+      );
+
+    return (
+      closable && (
+        <div className="okd-ml-auto okd-pl-3">
+          <div className="okd--mx-1.5 okd--my-1.5">
+            <button
+              type="button"
+              className={cx(
+                "okd-inline-flex okd-justify-center okd-items-center okd-rounded okd-p-1.5 focus:okd-outline-none focus:okd-ring-2 focus:okd-ring-offset-1",
+                {
+                  "okd-text-gray-400 focus:okd-ring-offset-gray-50 focus:okd-ring-gray-600":
+                    type === "info",
+                  "okd-text-yellow-500 focus:okd-ring-offset-yellow-50 focus:okd-ring-yellow-600":
+                    type === "warning",
+                  "okd-text-red-500 focus:okd-ring-offset-red-50 focus:okd-ring-red-600":
+                    type === "error",
+                  "okd-text-green-500 focus:okd-ring-offset-green-50 focus:okd-ring-green-600":
+                    type === "success",
+                }
+              )}
+              onClick={onClose}
+            >
+              <span className="okd-sr-only">Dismiss</span>
+              <XSolid className="okd-h-5 okd-w-5" okd-aria-hidden="true" />
+            </button>
+          </div>
+        </div>
+      )
+    );
+  }, [action, closable, onClose, type]);
 
   return (
     <div
@@ -84,7 +130,12 @@ const Alert: FC<AlertProps> = ({
       <div className="okd-flex">
         <div className="okd-flex-shrink-0">{alertIconNode}</div>
 
-        <div className="okd-ml-3">
+        <div
+          className={cx("okd-flex okd-flex-col okd-justify-between", {
+            "okd-ml-1 okd-p-2": !!icon,
+            "okd-ml-3": !icon,
+          })}
+        >
           <h3
             className={cx("okd-text-sm okd-font-medium", {
               "okd-text-gray-700": type === "info",
@@ -110,32 +161,7 @@ const Alert: FC<AlertProps> = ({
           )}
         </div>
 
-        {closable && (
-          <div className="okd-ml-auto okd-pl-3">
-            <div className="okd--mx-1.5 okd--my-1.5">
-              <button
-                type="button"
-                className={cx(
-                  "okd-inline-flex okd-justify-center okd-items-center okd-rounded okd-p-1.5 focus:okd-outline-none focus:okd-ring-2 focus:okd-ring-offset-1",
-                  {
-                    "okd-text-gray-400 focus:okd-ring-offset-gray-50 focus:okd-ring-gray-600":
-                      type === "info",
-                    "okd-text-yellow-500 focus:okd-ring-offset-yellow-50 focus:okd-ring-yellow-600":
-                      type === "warning",
-                    "okd-text-red-500 focus:okd-ring-offset-red-50 focus:okd-ring-red-600":
-                      type === "error",
-                    "okd-text-green-500 focus:okd-ring-offset-green-50 focus:okd-ring-green-600":
-                      type === "success",
-                  }
-                )}
-                onClick={onClose}
-              >
-                <span className="okd-sr-only">Dismiss</span>
-                <XSolid className="okd-h-5 okd-w-5" okd-aria-hidden="true" />
-              </button>
-            </div>
-          </div>
-        )}
+        {rightNode}
       </div>
     </div>
   );
