@@ -98,7 +98,7 @@ export type NFTCardProps = {
 /**
  * 用于展示所拥有的 NFT 宠物封面 与 动画，可自定义标题和动作信息
  */
-const NFTCard: FC<NFTCardProps> = ({
+const NFTStackedCard: FC<NFTCardProps> = ({
   sources,
   title,
   subTitle,
@@ -166,4 +166,4 @@ const NFTCard: FC<NFTCardProps> = ({
   );
 };
 
-export default NFTCard;
+export default NFTStackedCard;
