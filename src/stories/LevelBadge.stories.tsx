@@ -4,7 +4,7 @@ import { ComponentStory, ComponentMeta } from "@storybook/react";
 import { LevelBadge } from "../components";
 
 export default {
-  title: "UI/LevelBadge",
+  title: "Custom/LevelBadge",
   component: LevelBadge,
 } as ComponentMeta<typeof LevelBadge>;
 
