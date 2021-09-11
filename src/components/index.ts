@@ -39,7 +39,7 @@ export {
   useConfig,
   useLocale,
   useTheme,
-  useColors,
+  useColor,
   useLayout,
   useScreen,
 } from "./Provider/hooks";
