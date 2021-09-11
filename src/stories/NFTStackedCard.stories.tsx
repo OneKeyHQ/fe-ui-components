@@ -1,13 +1,13 @@
 import React from "react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 
-import { Button, NFTCard as NFTCardComponent } from "../components";
+import { Button, NFTStackedCard as NFTStackedCardComponent } from "../components";
 import ConfigBar from "./Base";
 
 export default {
-  title: "CUSTOM/NFTCard",
-  component: NFTCardComponent,
-} as ComponentMeta<typeof NFTCardComponent>;
+  title: "CUSTOM/NFTStackedCard",
+  component: NFTStackedCardComponent,
+} as ComponentMeta<typeof NFTStackedCardComponent>;
 
 const Paint = ({ children }) => {
   return (
@@ -17,17 +17,17 @@ const Paint = ({ children }) => {
   );
 };
 
-const Template: ComponentStory<typeof NFTCardComponent> = (args) => (
+const Template: ComponentStory<typeof NFTStackedCardComponent> = (args) => (
   <>
     <ConfigBar />
     <Paint>
-      <NFTCardComponent {...args} />
+      <NFTStackedCardComponent {...args} />
     </Paint>
   </>
 );
 
-export const NFTCard = Template.bind({});
-NFTCard.args = {
+export const NFTStackedCard = Template.bind({});
+NFTStackedCard.args = {
   // className: 'okd-w-[520px]',
   title: (
     <div className="okd-flex okd-items-end">
@@ -52,8 +52,8 @@ NFTCard.args = {
   ],
 };
 
-export const NFTCardWithEmptySource = Template.bind({});
-NFTCardWithEmptySource.args = {
+export const NFTStackedCardWithEmptySource = Template.bind({});
+NFTStackedCardWithEmptySource.args = {
   title: (
     <div className="okd-flex okd-items-end">
       <p className="okd-text-gray-900 okd-text-4xl okd-font-semibold">75</p>
