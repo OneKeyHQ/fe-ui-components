@@ -74,7 +74,14 @@ const Provider: FC<UIProviderProps> = ({
       if (typeof document === "undefined") return;
       document.documentElement.style.setProperty(`--${key}`, value);
     });
-    setTheme(currentTheme);
+    const rgbColors = Object.entries(currentTheme).reduce((memo, current) => {
+      const [key, val] = current;
+      return {
+        ...memo,
+        [key]: `rgb(${val})`,
+      };
+    }, {} as ThemeValues);
+    setTheme(rgbColors);
   }, [themeVariant]);
 
   const validLocaleSymbol = getLocaleSymbol(intl?.locale ?? defaultLocale);
