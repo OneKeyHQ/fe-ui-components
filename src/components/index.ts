@@ -10,11 +10,12 @@ export { default as Button } from "./Button";
 export { default as Card } from "./Card";
 export { default as Dropdown } from "./Dropdown";
 export { default as Input } from "./Input";
-export { default as Image } from './Image';
+export { default as Image } from "./Image";
 export { default as LevelBadge } from "./LevelBadge";
-export { default as Modal } from './Modal'
-export { default as NFTStackedCard } from './NFTStackedCard';
-export { default as Notification, NotificationContainer } from './Notification';
+export { default as Link } from "./Link";
+export { default as Modal } from "./Modal";
+export { default as NFTStackedCard } from "./NFTStackedCard";
+export { default as Notification, NotificationContainer } from "./Notification";
 export { default as Popover } from "./Popover";
 export { default as Progress } from "./Progress";
 export { default as UIProvider } from "./Provider";
