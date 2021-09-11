@@ -19,15 +19,22 @@ const ReactComponent = () => {
 }
 ```
 
-## useColors
+## useColor
 
-获取当前主题下的所有 `color` 颜色
+获取当前主题下的所有 `color` 颜色，或者某个 symbol 当前的颜色。
 
 ```js
-import { useColors } from '@onekeyhq/ui-components';
+import { useColor } from '@onekeyhq/ui-components';
 
 const ReactComponent = () => {
-  const { colors } = useColors();
+  const colors = useColor();
+  // {
+  //   'brand-50': 'xxx',
+  //   'brand-100': 'xxx'
+  // }
+
+  const color = useColor('brand-50');
+  // xxx
 }
 ```
 

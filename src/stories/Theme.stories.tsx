@@ -38,7 +38,7 @@ const ThemeComponent = () => {
                       <div className="okd-w-full okd-font-medium okd-text-gray-900">
                         {level}
                       </div>
-                      <div>{color}</div>
+                      <div>{`rgb(${color})`}</div>
                     </div>
                   </div>
                 );
