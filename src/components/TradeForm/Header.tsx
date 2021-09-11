@@ -32,8 +32,12 @@ const Header: FC<HeaderProps> = ({
       )}
       {...rest}
     >
-      <h5 className="okd-text-sm okd-font-medium okd-text-gray-700">{label}</h5>
-      <div>{labelCorner}</div>
+      {!!label && (
+        <h5 className="okd-text-sm okd-font-medium okd-text-gray-700">
+          {label}
+        </h5>
+      )}
+      {!!labelCorner && labelCorner}
     </div>
   );
 };
