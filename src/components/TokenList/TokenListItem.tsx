@@ -16,7 +16,7 @@ type TokenListItemProps = {
    */
   current?: boolean;
   /**
-   * 角标 Token 的 props
+   * Token 的 props
    */
   token?: TokenProps;
   /**
@@ -53,11 +53,11 @@ const TokenListItem: FC<TokenListItemProps> = ({
   return (
     <button
       className={cx(
-        "okd-flex okd-items-center okd-justify-between okd-w-full focus:okd-outline-none",
-        "focus:okd-ring-2 focus:okd-ring-brand-500",
-        "okd-p-4 sm:okd-px-6",
+        "okd-flex okd-items-center okd-justify-between okd-w-full",
+        "focus:okd-outline-none focus:okd-border-brand-500",
+        "okd-p-3.5 sm:okd-px-[22px] okd-border-2 okd-border-transparent",
         "disabled:okd-opacity-50 disabled:okd-cursor-not-allowed",
-        !isCurrent ? "hover:okd-bg-gray-50" : "",
+        !isCurrent ? "hover:okd-bg-gray-50 hover:okd-border-gray-50" : "",
         !!className && className
       )}
       disabled={isCurrent}
