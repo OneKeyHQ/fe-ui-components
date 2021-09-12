@@ -47,3 +47,4 @@ export {
   useLayout,
   useScreen,
 } from "./Provider/hooks";
+export { useTokens, useToken } from './Provider/tokens';
