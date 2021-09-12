@@ -34,6 +34,7 @@ export { default as WalletSelector } from "./WalletSelector";
 export { default as TradeForm } from "./TradeForm";
 export { default as Table } from "./Table";
 export { default as TokenSelector } from "./TokenSelector";
+export { default as TokenList } from "./TokenList";
 
 export * from "./Updaters";
 
