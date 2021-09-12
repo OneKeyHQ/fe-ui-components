@@ -20,7 +20,31 @@ export const Default: ComponentStory<typeof TokenListComponent> = (args) => (
   </>
 );
 
-Default.args = {};
+Default.args = {
+  list: [
+    {
+      src:
+        "https://cdn.jsdelivr.net/gh/atomiclabs/cryptocurrency-icons@d5c68edec1f5eaec59ac77ff2b48144679cebca1/128/color/btc.png",
+      name: "BTC",
+      balance: 123,
+      rate: "$333",
+    },
+    {
+      src:
+        "https://cdn.jsdelivr.net/gh/atomiclabs/cryptocurrency-icons@d5c68edec1f5eaec59ac77ff2b48144679cebca1/128/color/btc.png",
+      name: "BTC",
+      balance: 123,
+      rate: "$333",
+    },
+    {
+      src:
+        "https://cdn.jsdelivr.net/gh/atomiclabs/cryptocurrency-icons@d5c68edec1f5eaec59ac77ff2b48144679cebca1/128/color/btc.png",
+      name: "BTC",
+      balance: 123,
+      rate: "$333",
+    },
+  ],
+};
 
-export const example = Template.bind({});
-example.args = {};
+// export const example = Template.bind({});
+// example.args = {};
