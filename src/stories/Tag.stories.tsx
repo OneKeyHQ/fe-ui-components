@@ -28,3 +28,20 @@ TagActiveControl.args = {
     chain: 'eth'
   }
 };
+
+export const TokenOnly = Template.bind({});
+TokenOnly.args = {
+  active: true,
+  token: {
+    chain: 'eth'
+  }
+};
+
+export const RemoveableTag = Template.bind({});
+RemoveableTag.args = {
+  children: "OneKeyHQ",
+  removeable: true,
+  token: {
+    chain: "eth",
+  },
+};
