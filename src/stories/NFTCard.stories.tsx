@@ -9,25 +9,24 @@ export default {
 
 export const Default = () => {
   const defaultProps = {
-    className: "okd-mx-auto okd-w-[280px]",
+    className: "okd-mx-auto",
     cover: (
       <img
-        className=""
         src="https://lh3.googleusercontent.com/BBCWmkmfseCDAzWW_7Vj4xLP_XPAPDtUiCPvoqz1QDEXHpaSxJdNii2K6ajq6J7tlRXg82TFQMg4qkS-poyiSM6l2_yPUBeClgDU=w354"
-        alt="Random"
+        alt="Hooka Cha Cat"
       />
     ),
     children: (
       <div className="okd-space-y-1">
         <div className="okd-flex okd-items-center okd-justify-between">
           <h5 className="okd-text-base okd-font-medium okd-text-gray-900">
-            Galaxy Hooka Cat
+            Galaxy Hooka Cha Cat
           </h5>
           <Badge>X 2</Badge>
         </div>
 
         <p className="okd-text-sm okd-font-normal okd-text-gray-500">
-          Galaxy Hooka Cat is from a the K'-1391 planet, who skip out from a
+          Galaxy Hooka Cha Cat is from a the K'-1391 planet, who skip out from a
           apocalyptic catastrophe and accidentally jump into Ricks Teleport to
           the OpenSea World.
         </p>
