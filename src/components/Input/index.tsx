@@ -142,10 +142,10 @@ const Input: FC<InputProps> = ({
           }}
           type={type}
           className={cx(
-            "form-input okd-block okd-w-full sm:okd-text-sm okd-rounded okd-bg-gray-50 okd-placeholder-gray-400 disabled:okd-text-gray-700 disabled:okd-bg-gray-100 disabled:okd-cursor-not-allowed",
+            "form-input okd-block okd-w-full sm:okd-text-sm okd-rounded okd-bg-white okd-shadow-sm okd-placeholder-gray-400 disabled:okd-text-gray-700 disabled:okd-bg-gray-100 disabled:okd-cursor-not-allowed",
             error
               ? "okd-border-red-300 focus:okd-ring-red-500 focus:okd-border-red-500 okd-text-red-900"
-              : "okd-border-gray-200 focus:okd-ring-brand-500 focus:okd-border-brand-500 okd-text-gray-900"
+              : "okd-border-gray-300 focus:okd-ring-brand-500 focus:okd-border-brand-500 okd-text-gray-900"
           )}
           placeholder={placeholder}
           disabled={disabled}
