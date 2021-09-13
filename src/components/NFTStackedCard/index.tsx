@@ -142,7 +142,7 @@ const NFTStackedCard: FC<NFTCardProps> = ({
     <Card
       className={cx("okd-relative okd-overflow-hidden okd-w-full", className)}
     >
-      <div className="okd-relative okd-z-[1000] okd-flex okd-flex-col okd-min-h-[160px] okd-w-[fit-content]">
+      <div className="okd-relative okd-z-[1000] okd-flex okd-flex-col okd-min-h-[120px] okd-w-[fit-content]">
         <div>{title}</div>
         <div>{subTitle}</div>
         {!!action && <div className="okd-mt-auto">{action}</div>}
