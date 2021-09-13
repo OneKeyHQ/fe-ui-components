@@ -11,6 +11,8 @@ type TokenItem = {
   src?: string;
   /** chain 的名称 */
   chain?: string;
+  /** 代币合约地址 */
+  address?: string;
 };
 
 type TokenGroupProps = {
@@ -75,6 +77,7 @@ const TokenGroup: FC<TokenGroupProps> = ({
                   className="okd-ring-2 okd-ring-white"
                   src={tokenItem.src}
                   chain={tokenItem.chain}
+                  address={tokenItem.address}
                   size={size}
                 />
               </Fragment>

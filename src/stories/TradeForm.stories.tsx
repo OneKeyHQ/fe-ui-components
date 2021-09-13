@@ -265,10 +265,11 @@ export const HeaderWithRadioButtonGroup = () => {
               value={selected}
               onChange={setSelected}
               label="example"
+              size="xs"
             >
-              <RadioButtonGroup.Option size="xs" value="25%" label="25%" />
-              <RadioButtonGroup.Option size="xs" value="50%" label="50%" />
-              <RadioButtonGroup.Option size="xs" value="100%" label="100%" />
+              <RadioButtonGroup.Option value="25%" label="25%" />
+              <RadioButtonGroup.Option value="50%" label="50%" />
+              <RadioButtonGroup.Option value="100%" label="100%" />
             </RadioButtonGroup>
           }
         />
@@ -290,10 +291,23 @@ export const HeaderWithRadioButtonGroupOnly = () => {
               onChange={setSelected}
               label="example"
               className="okd-flex-1"
+              size="xs"
             >
-              <RadioButtonGroup.Option className="okd-flex-1" size="xs" value="25%" label="25%" />
-              <RadioButtonGroup.Option className="okd-flex-1" size="xs" value="50%" label="50%" />
-              <RadioButtonGroup.Option className="okd-flex-1" size="xs" value="100%" label="100%" />
+              <RadioButtonGroup.Option
+                className="okd-flex-1"
+                value="25%"
+                label="25%"
+              />
+              <RadioButtonGroup.Option
+                className="okd-flex-1"
+                value="50%"
+                label="50%"
+              />
+              <RadioButtonGroup.Option
+                className="okd-flex-1"
+                value="100%"
+                label="100%"
+              />
             </RadioButtonGroup>
           }
         />

@@ -56,3 +56,12 @@ TokenGroupWithDescription.args = {
   },
   description: 'something'
 };
+
+export const TokenGroupWithContractAddress = Template.bind({});
+TokenGroupWithContractAddress.args = {
+  sources: [{ chain: 'bsc', name: 'DOGE', address: '0xba2ae424d960c26247dd6c32edc70b295c744c43' }, { chain: 'bsc', name: 'UNI', address: '0xbf5140a22578168fd562dccf235e5d43a02ce9b1' }],
+  cornerToken: {
+    chain: 'bsc',
+  },
+  description: 'Binance Smart Chain'
+};

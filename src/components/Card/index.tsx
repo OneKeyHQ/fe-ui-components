@@ -11,6 +11,10 @@ const TitleComponent: FC = ({ children }) => {
 
 type CardProps = {
   /**
+   * 卡片图片，接受一个 ReactNode
+   */
+  cover?: React.ReactNode;
+  /**
    * 卡片标题
    */
   title?: string | React.ReactNode;
@@ -31,6 +35,7 @@ type CardProps = {
 const defaultProps = {} as const;
 
 const Card: FC<CardProps> = ({
+  cover,
   title,
   actions,
   className,
@@ -46,6 +51,13 @@ const Card: FC<CardProps> = ({
       )}
       {...rest}
     >
+      {/* Cover */}
+      {!!cover && (
+        <div className="okd-w-full okd-min-h-80 okd-bg-gray-200 okd-aspect-w-1 okd-aspect-h-1 okd-rounded-md okd-overflow-hidden group-hover:okd-opacity-75 lg:okd-h-80 lg:okd-aspect-none">
+          {cover}
+        </div>
+      )}
+
       {/* // Header */}
       {!!(title || actions) && (
         <div

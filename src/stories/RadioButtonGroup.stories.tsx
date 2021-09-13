@@ -32,11 +32,10 @@ Default.args = {
         value="standard"
         label="Standard"
         description="6 Gwei"
-        size="xs"
       />
       <RadioButtonGroupComponent.Option
         value="fast"
-        label="Fast"
+        label="Custom size"
         description="10 Gwei"
         size="xl"
       />
@@ -44,18 +43,13 @@ Default.args = {
         value="rapid"
         label="Rapid"
         description="15 Gwei"
-        size="xs"
       />
       <RadioButtonGroupComponent.Option
         value="disabled"
         label="Disabled"
         description="I thus be disable"
-        size="xs"
         disabled
       />
     </>
   ),
 };
-
-export const example = Template.bind({});
-example.args = {};

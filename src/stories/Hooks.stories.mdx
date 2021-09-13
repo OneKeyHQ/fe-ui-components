@@ -81,3 +81,28 @@ const ReactComponent = () => {
   const { width, height } = useScreen();
 }
 ```
+
+## useTokens
+
+获取某条链下的所有 token 配置
+
+```js
+import { useTokens, ERC20ChainIdMap } from '@onekeyhq/ui-components';
+const ReactComponent = () => {
+  const tokens = useTokens(ERC20ChainIdMap.ETH);
+  // ETH tokens config
+}
+```
+
+## useToken
+
+获取某一个 token 的配置
+
+```js
+import { useTokens, ERC20ChainIdMap } from '@onekeyhq/ui-components';
+const ReactComponent = () => {
+  // contract address
+  const tokenConfig = useTokens(ERC20ChainIdMap.ETH, 'xxxxxx');
+  // contract token config
+}
+```
