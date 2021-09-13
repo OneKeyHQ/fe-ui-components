@@ -80,7 +80,7 @@ const Card: FC<CardProps> = ({
         </div>
       )}
       {/* // Body */}
-      <div className={cx("okd-px-4 sm:okd-px-6 okd-py-6")}>{children}</div>
+      <div className={cx("okd-p-4 sm:okd-p-6")}>{children}</div>
 
       {/* Footer */}
       {!!footer && (
