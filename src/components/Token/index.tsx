@@ -3,6 +3,7 @@ import cx from "classnames";
 
 import Image from "../Image";
 import Icon from "../Icon";
+import { CDN_PREFIX } from '../utils';
 
 export type TokenProps = {
   /**
@@ -29,11 +30,24 @@ export type TokenProps = {
    * 当前 token 右侧展示的子文案
    */
   description?: string;
+  /**
+   * 当前 chain 下的代币合约地址，必须同时提供 chain 参数
+   */
+  address?: string;
 };
 
 const defaultProps = {
   size: "md",
 } as const;
+
+const buildSrc = (src?: string, _chain = '', _address = '') => {
+  const chain = _chain.toLocaleLowerCase();
+  const address = _address.toLocaleLowerCase();
+  if (src) return src;
+  if (!chain) return null;
+  if (chain && !address) return `${CDN_PREFIX}assets/${chain}/${chain}.png`;
+  return `${CDN_PREFIX}assets/${chain}/${address}.png`
+}
 
 const Token: FC<TokenProps> = ({
   src,
@@ -42,7 +56,10 @@ const Token: FC<TokenProps> = ({
   chain,
   name,
   description,
+  address,
 }) => {
+  const imageSrc = buildSrc(src, chain, address);
+  console.log(imageSrc);
   return (
     <div
       className={cx(
@@ -72,13 +89,9 @@ const Token: FC<TokenProps> = ({
             : {}
         }
       >
-        {!!(src || chain) ? (
+        {!!imageSrc ? (
           <Image
-            src={
-              chain
-                ? `https://onekey-asset.com/assets/${chain}/${chain}.png`
-                : src
-            }
+            src={imageSrc}
             alt="Token"
           />
         ) : (
