@@ -1,4 +1,4 @@
-import React, { ReactNode } from "react";
+import React, { ReactNode, useMemo } from "react";
 import type { FC } from "react";
 import { useIntl } from "react-intl";
 
@@ -15,6 +15,8 @@ export type ProgressProps = {
   max?: number;
   hint?: boolean;
   customHint?: ReactNode;
+  leftText?: ReactNode;
+  rightText?: ReactNode;
 };
 
 const defaultProps = {
@@ -26,7 +28,14 @@ const defaultProps = {
 /**
  * Progress 是一个进度条组件，用于展示事件或与之相关的任务进展。
  */
-const Progress: FC<ProgressProps> = ({ value, max, hint, customHint }) => {
+const Progress: FC<ProgressProps> = ({
+  value,
+  max,
+  hint,
+  customHint,
+  leftText,
+  rightText,
+}) => {
   const portionValue = useProportions(value, max);
   const { formatMessage } = useIntl();
 
@@ -35,12 +44,24 @@ const Progress: FC<ProgressProps> = ({ value, max, hint, customHint }) => {
     { value }
   );
 
-  const hintNode = (!!customHint || hint) && (
-    <div className="okd-flex okd-justify-between okd-text-black okd-text-xs okd-font-normal">
-      <p>{customHint || levelUpText}</p>
-      <p>{max}</p>
-    </div>
-  );
+  const hintNode = useMemo(() => {
+    if (leftText || rightText)
+      return (
+        <div className="okd-flex okd-justify-between okd-text-black okd-text-xs okd-leading-5 okd-font-normal">
+          <p className="okd-justify-self-start">{leftText}</p>
+          <p className="okd-justify-self-end">{rightText}</p>
+        </div>
+      );
+
+    return (
+      (!!customHint || hint) && (
+        <div className="okd-flex okd-justify-between okd-text-black okd-text-xs okd-leading-5 okd-font-normal">
+          <p>{customHint || levelUpText}</p>
+          <p>{max}</p>
+        </div>
+      )
+    );
+  }, [customHint, hint, leftText, levelUpText, max, rightText]);
 
   return (
     <div className="okd-space-y-2 okd-w-full">
