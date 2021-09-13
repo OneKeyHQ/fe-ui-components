@@ -5,6 +5,7 @@ import CrownBadgeIllus from "./react/illus/CrownBadge";
 import DiamondBadgeIllus from "./react/illus/DiamondBadge";
 import EmptyNftIllus from "./react/illus/EmptyNft";
 import MetamaskIllus from "./react/illus/Metamask";
+import NftPegIllus from "./react/illus/NftPeg";
 import StarBadgeIllus from "./react/illus/StarBadge";
 import AcademicCapOutline from "./react/outline/AcademicCap";
 import AdjustmentsOutline from "./react/outline/Adjustments";
@@ -476,6 +477,7 @@ export type ICON_NAMES =
   | "DiamondBadgeIllus"
   | "EmptyNftIllus"
   | "MetamaskIllus"
+  | "NftPegIllus"
   | "StarBadgeIllus"
   | "AcademicCapOutline"
   | "AdjustmentsOutline"
@@ -947,6 +949,7 @@ export default {
   DiamondBadgeIllus: DiamondBadgeIllus,
   EmptyNftIllus: EmptyNftIllus,
   MetamaskIllus: MetamaskIllus,
+  NftPegIllus: NftPegIllus,
   StarBadgeIllus: StarBadgeIllus,
   AcademicCapOutline: AcademicCapOutline,
   AdjustmentsOutline: AdjustmentsOutline,
