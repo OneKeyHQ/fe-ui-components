@@ -1,0 +1,371 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Alert should render element 1`] = `
+LoadedCheerio {
+  "0": Node {
+    "attribs": Object {
+      "class": "okd-rounded okd-p-4 okd-bg-gray-50",
+    },
+    "children": Array [
+      Node {
+        "attribs": Object {
+          "class": "okd-flex",
+        },
+        "children": Array [
+          Node {
+            "attribs": Object {
+              "class": "okd-flex-shrink-0",
+            },
+            "children": Array [
+              Node {
+                "attribs": Object {
+                  "class": "okd-h-5 okd-w-5 okd-text-gray-400",
+                  "fill": "currentColor",
+                  "okd-aria-hidden": "true",
+                  "viewBox": "0 0 20 20",
+                  "xmlns": "http://www.w3.org/2000/svg",
+                },
+                "children": Array [
+                  Node {
+                    "attribs": Object {
+                      "clip-rule": "evenodd",
+                      "d": "M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z",
+                      "fill-rule": "evenodd",
+                    },
+                    "children": Array [],
+                    "name": "path",
+                    "namespace": "http://www.w3.org/2000/svg",
+                    "next": null,
+                    "parent": [Circular],
+                    "prev": null,
+                    "type": "tag",
+                    "x-attribsNamespace": Object {
+                      "clip-rule": undefined,
+                      "d": undefined,
+                      "fill-rule": undefined,
+                    },
+                    "x-attribsPrefix": Object {
+                      "clip-rule": undefined,
+                      "d": undefined,
+                      "fill-rule": undefined,
+                    },
+                  },
+                ],
+                "name": "svg",
+                "namespace": "http://www.w3.org/2000/svg",
+                "next": null,
+                "parent": [Circular],
+                "prev": null,
+                "type": "tag",
+                "x-attribsNamespace": Object {
+                  "class": undefined,
+                  "fill": undefined,
+                  "okd-aria-hidden": undefined,
+                  "viewBox": undefined,
+                  "xmlns": "http://www.w3.org/2000/xmlns/",
+                },
+                "x-attribsPrefix": Object {
+                  "class": undefined,
+                  "fill": undefined,
+                  "okd-aria-hidden": undefined,
+                  "viewBox": undefined,
+                  "xmlns": "",
+                },
+              },
+            ],
+            "name": "div",
+            "namespace": "http://www.w3.org/1999/xhtml",
+            "next": Node {
+              "attribs": Object {
+                "class": "okd-flex okd-flex-col okd-justify-between okd-ml-3",
+              },
+              "children": Array [
+                Node {
+                  "attribs": Object {
+                    "class": "okd-text-sm okd-font-medium okd-text-gray-700",
+                  },
+                  "children": Array [
+                    Node {
+                      "data": "Testing Title",
+                      "next": null,
+                      "parent": [Circular],
+                      "prev": null,
+                      "type": "text",
+                    },
+                  ],
+                  "name": "h3",
+                  "namespace": "http://www.w3.org/1999/xhtml",
+                  "next": null,
+                  "parent": [Circular],
+                  "prev": null,
+                  "type": "tag",
+                  "x-attribsNamespace": Object {
+                    "class": undefined,
+                  },
+                  "x-attribsPrefix": Object {
+                    "class": undefined,
+                  },
+                },
+              ],
+              "name": "div",
+              "namespace": "http://www.w3.org/1999/xhtml",
+              "next": null,
+              "parent": [Circular],
+              "prev": [Circular],
+              "type": "tag",
+              "x-attribsNamespace": Object {
+                "class": undefined,
+              },
+              "x-attribsPrefix": Object {
+                "class": undefined,
+              },
+            },
+            "parent": [Circular],
+            "prev": null,
+            "type": "tag",
+            "x-attribsNamespace": Object {
+              "class": undefined,
+            },
+            "x-attribsPrefix": Object {
+              "class": undefined,
+            },
+          },
+          Node {
+            "attribs": Object {
+              "class": "okd-flex okd-flex-col okd-justify-between okd-ml-3",
+            },
+            "children": Array [
+              Node {
+                "attribs": Object {
+                  "class": "okd-text-sm okd-font-medium okd-text-gray-700",
+                },
+                "children": Array [
+                  Node {
+                    "data": "Testing Title",
+                    "next": null,
+                    "parent": [Circular],
+                    "prev": null,
+                    "type": "text",
+                  },
+                ],
+                "name": "h3",
+                "namespace": "http://www.w3.org/1999/xhtml",
+                "next": null,
+                "parent": [Circular],
+                "prev": null,
+                "type": "tag",
+                "x-attribsNamespace": Object {
+                  "class": undefined,
+                },
+                "x-attribsPrefix": Object {
+                  "class": undefined,
+                },
+              },
+            ],
+            "name": "div",
+            "namespace": "http://www.w3.org/1999/xhtml",
+            "next": null,
+            "parent": [Circular],
+            "prev": Node {
+              "attribs": Object {
+                "class": "okd-flex-shrink-0",
+              },
+              "children": Array [
+                Node {
+                  "attribs": Object {
+                    "class": "okd-h-5 okd-w-5 okd-text-gray-400",
+                    "fill": "currentColor",
+                    "okd-aria-hidden": "true",
+                    "viewBox": "0 0 20 20",
+                    "xmlns": "http://www.w3.org/2000/svg",
+                  },
+                  "children": Array [
+                    Node {
+                      "attribs": Object {
+                        "clip-rule": "evenodd",
+                        "d": "M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z",
+                        "fill-rule": "evenodd",
+                      },
+                      "children": Array [],
+                      "name": "path",
+                      "namespace": "http://www.w3.org/2000/svg",
+                      "next": null,
+                      "parent": [Circular],
+                      "prev": null,
+                      "type": "tag",
+                      "x-attribsNamespace": Object {
+                        "clip-rule": undefined,
+                        "d": undefined,
+                        "fill-rule": undefined,
+                      },
+                      "x-attribsPrefix": Object {
+                        "clip-rule": undefined,
+                        "d": undefined,
+                        "fill-rule": undefined,
+                      },
+                    },
+                  ],
+                  "name": "svg",
+                  "namespace": "http://www.w3.org/2000/svg",
+                  "next": null,
+                  "parent": [Circular],
+                  "prev": null,
+                  "type": "tag",
+                  "x-attribsNamespace": Object {
+                    "class": undefined,
+                    "fill": undefined,
+                    "okd-aria-hidden": undefined,
+                    "viewBox": undefined,
+                    "xmlns": "http://www.w3.org/2000/xmlns/",
+                  },
+                  "x-attribsPrefix": Object {
+                    "class": undefined,
+                    "fill": undefined,
+                    "okd-aria-hidden": undefined,
+                    "viewBox": undefined,
+                    "xmlns": "",
+                  },
+                },
+              ],
+              "name": "div",
+              "namespace": "http://www.w3.org/1999/xhtml",
+              "next": [Circular],
+              "parent": [Circular],
+              "prev": null,
+              "type": "tag",
+              "x-attribsNamespace": Object {
+                "class": undefined,
+              },
+              "x-attribsPrefix": Object {
+                "class": undefined,
+              },
+            },
+            "type": "tag",
+            "x-attribsNamespace": Object {
+              "class": undefined,
+            },
+            "x-attribsPrefix": Object {
+              "class": undefined,
+            },
+          },
+        ],
+        "name": "div",
+        "namespace": "http://www.w3.org/1999/xhtml",
+        "next": null,
+        "parent": [Circular],
+        "prev": null,
+        "type": "tag",
+        "x-attribsNamespace": Object {
+          "class": undefined,
+        },
+        "x-attribsPrefix": Object {
+          "class": undefined,
+        },
+      },
+    ],
+    "name": "div",
+    "namespace": "http://www.w3.org/1999/xhtml",
+    "next": null,
+    "parent": Node {
+      "children": Array [
+        [Circular],
+      ],
+      "name": "root",
+      "next": null,
+      "parent": null,
+      "prev": null,
+      "type": "root",
+    },
+    "prev": null,
+    "type": "tag",
+    "x-attribsNamespace": Object {
+      "class": undefined,
+    },
+    "x-attribsPrefix": Object {
+      "class": undefined,
+    },
+  },
+  "_root": LoadedCheerio {
+    "0": Node {
+      "children": Array [
+        Node {
+          "attribs": Object {},
+          "children": Array [
+            Node {
+              "attribs": Object {},
+              "children": Array [],
+              "name": "head",
+              "namespace": "http://www.w3.org/1999/xhtml",
+              "next": Node {
+                "attribs": Object {},
+                "children": Array [],
+                "name": "body",
+                "namespace": "http://www.w3.org/1999/xhtml",
+                "next": null,
+                "parent": [Circular],
+                "prev": [Circular],
+                "type": "tag",
+                "x-attribsNamespace": Object {},
+                "x-attribsPrefix": Object {},
+              },
+              "parent": [Circular],
+              "prev": null,
+              "type": "tag",
+              "x-attribsNamespace": Object {},
+              "x-attribsPrefix": Object {},
+            },
+            Node {
+              "attribs": Object {},
+              "children": Array [],
+              "name": "body",
+              "namespace": "http://www.w3.org/1999/xhtml",
+              "next": null,
+              "parent": [Circular],
+              "prev": Node {
+                "attribs": Object {},
+                "children": Array [],
+                "name": "head",
+                "namespace": "http://www.w3.org/1999/xhtml",
+                "next": [Circular],
+                "parent": [Circular],
+                "prev": null,
+                "type": "tag",
+                "x-attribsNamespace": Object {},
+                "x-attribsPrefix": Object {},
+              },
+              "type": "tag",
+              "x-attribsNamespace": Object {},
+              "x-attribsPrefix": Object {},
+            },
+          ],
+          "name": "html",
+          "namespace": "http://www.w3.org/1999/xhtml",
+          "next": null,
+          "parent": [Circular],
+          "prev": null,
+          "type": "tag",
+          "x-attribsNamespace": Object {},
+          "x-attribsPrefix": Object {},
+        },
+      ],
+      "name": "root",
+      "next": null,
+      "parent": null,
+      "prev": null,
+      "type": "root",
+      "x-mode": "quirks",
+    },
+    "_root": [Circular],
+    "length": 1,
+    "options": Object {
+      "decodeEntities": true,
+      "xml": false,
+    },
+  },
+  "length": 1,
+  "options": Object {
+    "decodeEntities": true,
+    "xml": false,
+  },
+}
+`;
