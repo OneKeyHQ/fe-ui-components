@@ -54,9 +54,9 @@ const Tooltip: FC<TooltipProps> = ({
       <BaseTooltip id={flag} className={`tooltip ${className}`} {...rest}>
         {/* <span>{content}</span> */}
       </BaseTooltip>
-      <span data-tip={content} data-for={flag}>
+      <div className="okd-inline-flex" data-tip={content} data-for={flag}>
         {children}
-      </span>
+      </div>
     </>
   );
 };

@@ -5,7 +5,7 @@
 @layer components {
   .tooltip {
     /* the !important is must-have, go to https://github.com/wwayne/react-tooltip for more info */
-    @apply okd-px-2 okd-py-1 okd-text-xs okd-rounded okd-shadow okd-transition !important;
+    @apply okd-px-2 okd-py-1 okd-text-xs okd-font-normal okd-lowercase okd-tracking-normal okd-rounded okd-shadow okd-transition !important;
 
     &.type-dark {
       @apply okd-bg-gray-700 okd-text-gray-50 !important;

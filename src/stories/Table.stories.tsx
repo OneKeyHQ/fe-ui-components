@@ -31,7 +31,7 @@ Default.args = {
       title: "Address",
       dataIndex: "address",
       toolTip: true,
-      tipContent: "token address",
+      tooltipContent: "token address",
     },
     {
       title: "Count",
