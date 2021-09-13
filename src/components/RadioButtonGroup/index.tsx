@@ -1,13 +1,7 @@
-import React, {
-  FC,
-  ReactNode,
-  Component,
-  useMemo,
-  ReactElement,
-} from "react";
+import React, { FC, ReactNode, Component, useMemo, ReactElement } from "react";
 import cx, { Argument } from "classnames";
 import { RadioGroup } from "@headlessui/react";
-import { isObject } from "lodash";
+import { isArray, isObject } from "lodash";
 
 type RadioButtonProps = {
   /**
@@ -163,19 +157,44 @@ const RadioButtonGroup: FC<RadioButtonGroupProps> & {
 }) => {
   const childrenWithProps = useMemo(() => {
     const commonOptionProps = { size, disabled } as const;
-    if (React.Children.count(children) === 0) return [];
 
-    return React.Children.map(children, (child: ReactElement) => {
-      if (!React.isValidElement(child)) return child;
+    const isRadioButton = (item: ReactElement) =>
+      item.type === RadioButton ||
+      (item.type as typeof RadioButton).name === "RadioButton";
 
-      if ((child.type as typeof RadioButton).name === "RadioButton") {
-        return React.cloneElement(child, {
-          ...commonOptionProps,
-          ...(isObject(child.props) ? child.props : {}),
+    const traversePropsChildren = (child: ReactNode) => {
+      if (React.isValidElement(child)) {
+        // Single button
+        if (isRadioButton(child)) return child;
+        // in Fragment or other container
+        return React.cloneElement(
+          child,
+          child.props,
+          traversePropsChildren(child.props.children)
+        );
+      }
+
+      // Array
+      if (isArray(child)) {
+        return React.Children.map(child, (child: ReactElement) => {
+          if (!React.isValidElement(child)) return child;
+
+          if (isRadioButton(child)) {
+            return React.cloneElement(child, {
+              ...commonOptionProps,
+              ...(isObject(child.props) ? child.props : {}),
+            });
+          }
+          return child;
         });
       }
-      return child;
-    });
+
+      return false;
+    };
+
+    if (React.Children.count(children) === 0) return [];
+    const propsChildren = traversePropsChildren(children) || children;
+    return propsChildren;
   }, [children, size, disabled]);
 
   return (
