@@ -84,7 +84,7 @@ type tableProps = {
    */
   rowKey: string;
   /**
-   * 使表哥行有 hover 状态，默认为 true
+   * 使表格行有 hover 状态，默认为 true
    */
   hoverable: boolean;
   /**
