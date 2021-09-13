@@ -39,3 +39,11 @@ TokenWithDescription.args = {
   name: 'BSC',
   description: 'Ethereum'
 };
+
+export const TokenWithContractAddress = Template.bind({});
+TokenWithContractAddress.args = {
+  chain: 'bsc',
+  name: 'DOGE',
+  address: '0xba2ae424d960c26247dd6c32edc70b295c744c43',
+  description: 'BSC'
+}

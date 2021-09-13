@@ -48,3 +48,4 @@ export {
   useScreen,
 } from "./Provider/hooks";
 export { useTokens, useToken } from './Provider/tokens';
+export type { ERC20ChainIdMap } from './Provider/config';
