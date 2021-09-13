@@ -89,6 +89,7 @@ const Card: FC<CardProps> & { Body } = ({
       )}
       {/* // Body */}
       {bodyNode}
+
       {/* Footer */}
       {!!footer && (
         <div
