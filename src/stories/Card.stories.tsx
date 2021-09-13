@@ -108,3 +108,20 @@ TitleWithDescription.args = {
     </div>
   ),
 };
+
+export const ImageWithDescription = Template.bind({});
+ImageWithDescription.args = {
+  className: "okd-mx-auto okd-w-[480px]",
+  cover: (
+      <img src="https://source.unsplash.com/random" alt="Random" />
+  ),
+  children: (
+    <div className="okd-text-gray-200">
+      Lorem ipsum dolor sit, amet consectetur adipisicing elit. Illo impedit
+      sapiente recusandae iusto officiis dolor? Laborum quibusdam quam, quidem
+      vel assumenda repellat inventore sint nesciunt, ullam asperiores magnam
+      placeat eveniet. Aliquam voluptatibus assumenda distinctio veniam quam
+      tempora modi aperiam nemo voluptate reprehenderit quidem, nisi vero est.
+    </div>
+  ),
+};
