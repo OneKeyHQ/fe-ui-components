@@ -22,7 +22,7 @@ export const Default = () => {
     <>
       <ConfigBar />
       {/* 自定义了宽度，使用的时候记得根据情况 turn off */}
-      <Card className="okd-bg-brand-50 okd-border-none okd-w-[550px]">
+      <Card className="okd-bg-brand-50 okd-w-[550px]">
         {/* Card 不支持自定义 padding，这里使用了负 margin 来减少 padding */}
         <div className="okd-space-y-2 okd--mt-2 okd--mb-3">
           <div className="okd-flex">
