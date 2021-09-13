@@ -36,6 +36,10 @@ type TooltipProps = {
   offset?: OffsetProps;
 };
 
+const defaultProps = {
+  effect: "solid",
+} as const;
+
 const Tooltip: FC<TooltipProps> = ({
   children,
   content,
@@ -60,5 +64,7 @@ const Tooltip: FC<TooltipProps> = ({
     </>
   );
 };
+
+Tooltip.defaultProps = defaultProps;
 
 export default Tooltip;

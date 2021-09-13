@@ -1,7 +1,7 @@
 import React from "react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 import { Table as TableComponent } from "../components";
-import { Card, TokenGroup } from "../components";
+import { Card, Button, TokenGroup } from "../components";
 
 export default {
   title: "UI/Table",
@@ -17,73 +17,30 @@ const Template: ComponentStory<typeof TableComponent> = (args) => (
 );
 
 export const Default = Template.bind({});
-
-Default.args = {
-  rowkey: "address",
-  columns: [
-    {
-      title: "Name",
-      dataIndex: "name",
-      render: (value, record) => {
-        return `${record.name}-${value}`;
-      },
-    },
-    {
-      title: "Chain",
-      dataIndex: "chain",
-    },
-    {
-      title: "Address",
-      dataIndex: "address",
-      tooltipContent: "token address",
-    },
-    {
-      title: "Count",
-      dataIndex: "count",
-      sortOrder: true,
-      contentType: "numeric",
-    },
-  ],
-  dataSource: [
-    {
-      name: "ETH",
-      chain: "ETH",
-      address: "0x348",
-      count: 20,
-    },
-    {
-      name: "BNB",
-      chain: "BSC",
-      address: "0x000",
-      count: 17,
-    },
-    {
-      name: "HT",
-      chain: "HECO",
-      address: "0x111",
-      count: 1,
-    },
-    {
-      name: "OKB",
-      chain: "OKEX",
-      address: "0x222",
-      count: 7,
-    },
-  ],
-};
-
-export const Opportunities = Template.bind({});
 const TokenGroupDatas = {
   cornerToken: {
     src:
       "https://cdn.jsdelivr.net/gh/atomiclabs/cryptocurrency-icons@d5c68edec1f5eaec59ac77ff2b48144679cebca1/128/color/eth.png",
   },
   sources: [
-    "https://cdn.jsdelivr.net/gh/atomiclabs/cryptocurrency-icons@d5c68edec1f5eaec59ac77ff2b48144679cebca1/128/color/btc.png",
-    "https://cdn.jsdelivr.net/gh/atomiclabs/cryptocurrency-icons@d5c68edec1f5eaec59ac77ff2b48144679cebca1/128/color/bnb.png",
+    {
+      src:
+        "https://cdn.jsdelivr.net/gh/atomiclabs/cryptocurrency-icons@d5c68edec1f5eaec59ac77ff2b48144679cebca1/128/color/btc.png",
+      name: "BTC",
+    },
+    {
+      src:
+        "https://cdn.jsdelivr.net/gh/atomiclabs/cryptocurrency-icons@d5c68edec1f5eaec59ac77ff2b48144679cebca1/128/color/bnb.png",
+      name: "BNB",
+    },
   ],
+  description: "Platform name",
 };
-Opportunities.args = {
+const apyDatas = {
+  total: 93.59,
+  daily: 0.18,
+};
+Default.args = {
   rowkey: "address",
   columns: [
     {
@@ -96,6 +53,7 @@ Opportunities.args = {
               size="lg"
               cornerToken={value.cornerToken}
               sources={value.sources}
+              description={value.description}
             />
           </div>
         );
@@ -107,41 +65,78 @@ Opportunities.args = {
       contentType: "numeric",
     },
     {
-      title: "Address",
-      dataIndex: "address",
-      tooltipContent: "token address",
+      title: "APY",
+      dataIndex: "apy",
+      render: (value) => {
+        return (
+          <>
+            <div className="okd-text-gray-900">{value.total}%</div>
+            <span>{value.daily}% Daily</span>
+          </>
+        );
+      },
+      tooltip: {
+        content:
+          "APY stands for annual percentage yield. It is calculated by profit and loss from all your accounts.<br />Currently it may deviate from the real situation due to the different statistics of each platform.",
+        multiline: true,
+        className: "okd-max-w-sm",
+      },
+      contentType: "numeric",
     },
     {
-      title: "Count",
-      dataIndex: "count",
+      title: "Uptime",
+      dataIndex: "uptime",
       sortOrder: true,
       contentType: "numeric",
+    },
+    {
+      dataIndex: "action",
+      contentType: "numeric",
+      render: (value) => {
+        return (
+          <Button size="xs" onClick={value.action}>
+            {value.label}
+          </Button>
+        );
+      },
     },
   ],
   dataSource: [
     {
       tokenGroup: TokenGroupDatas,
       tvl: "$729,153,278",
-      address: "0x348",
-      count: 20,
+      apy: apyDatas,
+      uptime: "59 Days",
+      action: {
+        label: "Add Liquidity",
+      },
     },
     {
       tokenGroup: TokenGroupDatas,
       tvl: "$729,153,278",
-      address: "0x000",
-      count: 17,
+      apy: apyDatas,
+      uptime: "59 Days",
+      action: {
+        label: "Deposit",
+      },
     },
     {
       tokenGroup: TokenGroupDatas,
       tvl: "$729,153,278",
-      address: "0x111",
-      count: 1,
+      apy: apyDatas,
+      uptime: "59 Days",
+      action: {
+        label: "Add Liquidity",
+      },
     },
     {
       tokenGroup: TokenGroupDatas,
       tvl: "$729,153,278",
-      address: "0x222",
-      count: 7,
+      apy: apyDatas,
+      uptime: "59 Days",
+      action: {
+        label: "Deposit",
+      },
     },
   ],
 };

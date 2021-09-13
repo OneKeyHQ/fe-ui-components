@@ -1,6 +1,6 @@
-import React from "react";
+import React, { ReactNode } from "react";
 import Icon from "../Icon/index";
-import Tooltip from "../Tooltip/index";
+import Tooltip, { TooltipProps } from "../Tooltip/index";
 import Button from "../Button/index";
 import { usePagination } from "./usePagination";
 import cx from "classnames";
@@ -45,13 +45,14 @@ const Pagination = (props: PaginationProps) => {
 
 interface ColumnsType {
   /**
-   * sortOrder 排序的受控属性，外界可用此控制列的排序，可设置为 ascend descend false
+   * sortable 排序的受控属性，外界可用此控制列的排序，可设置为 ascend descend false
    */
-  sortOrder?: boolean | string;
+  sortable?: boolean | string;
   /**
    * tooltipContent 表头hover提示内容
    */
-  tooltipContent?: string;
+  tooltipContent?: ReactNode;
+  tooltip: TooltipProps;
   /**
    * title 列头显示文字
    */
@@ -83,105 +84,139 @@ type tableProps = {
    * rowKey 表格行key的取值，唯一性
    */
   rowKey: string;
+  /**
+   * 使表哥行有 hover 状态，默认为 true
+   */
+  hoverable: boolean;
+  /**
+   * 表格尺寸，可选 lg 和 sm，默认 lg
+   */
+  size: "lg" | "sm";
 };
 
 const defaultProps = {
   rowKey: "address",
+  hoverable: true,
+  size: "lg",
 } as const;
 
 const Table = (props: tableProps) => {
-  const { rowKey, columns, dataSource } = props;
+  const { rowKey, columns, dataSource, hoverable, size } = props;
   const { paginatedData, ...paginationProps } = usePagination(dataSource);
 
   return (
     <>
-      <table className="okd-min-w-full okd-divide-y okd-divide-gray-200">
-        <thead className="okd-bg-gray-50">
-          <tr>
-            {columns.map((column) => {
-              return (
-                <th
-                  key={column.dataIndex}
-                  scope="col"
-                  className={cx(
-                    "okd-px-6 okd-py-3",
-                    "okd-text-left okd-text-xs okd-font-medium okd-text-gray-500 okd-uppercase okd-tracking-wider"
-                  )}
-                >
-                  <div
+      <div className="okd-overflow-x-auto">
+        <table className="okd-min-w-full okd-divide-y okd-divide-gray-200">
+          <thead className="okd-bg-gray-50">
+            <tr>
+              {columns.map((column) => {
+                return (
+                  <th
+                    key={column.dataIndex}
+                    scope="col"
                     className={cx(
-                      "okd-flex okd-items-center okd-w-full",
-                      column.contentType === "text" ? "okd-text-left" : "",
-                      column.contentType === "numeric" ? "okd-text-right okd-justify-end" : ""
+                      "okd-text-left okd-text-xs okd-font-medium okd-text-gray-500 okd-uppercase okd-tracking-wider",
+                      size === "lg" ? "okd-px-4 sm:okd-px-6 okd-py-3" : "",
+                      size === "sm" ? "okd-px-4 okd-py-2" : ""
                     )}
                   >
-                    <span
-                      className={cx(!!column.tooltipContent ? "okd-mr-1" : "")}
+                    <div
+                      className={cx(
+                        "okd-flex okd-items-center okd-w-full",
+                        column.contentType === "text" ? "okd-text-left" : "",
+                        column.contentType === "numeric"
+                          ? "okd-text-right okd-justify-end"
+                          : ""
+                      )}
                     >
-                      {column.title}
-                    </span>
-                    {!!column.tooltipContent && (
-                      <Tooltip
-                        content={column.tooltipContent}
-                        place="top"
-                        effect="solid"
-                      >
-                        <div className="okd-inline-flex okd-items-center okd-justify-center okd-w-4 okd-h-4">
-                          <Icon
-                            className="okd-min-w-[18px] okd-h-[18px] okd-text-gray-300"
-                            name="QuestionMarkCircleSolid"
-                          />
-                        </div>
-                      </Tooltip>
-                    )}
-                  </div>
-                </th>
+                      <span className={cx(!!column.tooltip ? "okd-mr-1" : "")}>
+                        {column.title}
+                      </span>
+                      {!!column.tooltip && (
+                        <Tooltip place="top" {...column.tooltip}>
+                          <div className="okd-inline-flex okd-items-center okd-justify-center okd-w-4 okd-h-4">
+                            <Icon
+                              className="okd-min-w-[18px] okd-h-[18px] okd-text-gray-300"
+                              name="QuestionMarkCircleSolid"
+                            />
+                          </div>
+                        </Tooltip>
+                      )}
+                    </div>
+                  </th>
+                );
+              })}
+            </tr>
+          </thead>
+          <tbody className="okd-divide-y okd-divide-gray-200">
+            {paginatedData.map((record, index) => {
+              return (
+                <tr
+                  className={cx(hoverable ? "okd-group" : "")}
+                  key={record[rowKey]}
+                >
+                  {columns.map((column) => {
+                    if (column.render) {
+                      return (
+                        <td
+                          key={`${record[rowKey]}-${index}`}
+                          className={cx(
+                            "okd-whitespace-nowrap okd-text-sm okd-text-gray-500",
+                            size === "lg"
+                              ? "okd-px-4 sm:okd-px-6 okd-py-4"
+                              : "",
+                            size === "sm"
+                              ? "okd-px-4 okd-py-2"
+                              : "",
+                            hoverable ? "group-hover:okd-bg-gray-50" : "",
+                            column.contentType === "text"
+                              ? "okd-text-left"
+                              : "",
+                            column.contentType === "numeric"
+                              ? "okd-text-right"
+                              : ""
+                          )}
+                        >
+                          {column.render(
+                            record[column.dataIndex],
+                            record,
+                            index
+                          )}
+                        </td>
+                      );
+                    } else {
+                      return (
+                        <td
+                          key={`${record[rowKey]}-${index}`}
+                          className={cx(
+                            "okd-whitespace-nowrap okd-text-sm okd-text-gray-500",
+                            size === "lg"
+                              ? "okd-px-4 sm:okd-px-6 okd-py-4"
+                              : "",
+                            size === "sm"
+                              ? "okd-px-4 okd-py-2"
+                              : "",
+                            hoverable ? "group-hover:okd-bg-gray-50" : "",
+                            column.contentType === "text"
+                              ? "okd-text-left"
+                              : "",
+                            column.contentType === "numeric"
+                              ? "okd-text-right"
+                              : ""
+                          )}
+                        >
+                          {record[column.dataIndex]}
+                        </td>
+                      );
+                    }
+                  })}
+                </tr>
               );
             })}
-          </tr>
-        </thead>
-        <tbody className="okd-divide-y okd-divide-gray-200">
-          {paginatedData.map((record, index) => {
-            return (
-              <tr key={record[rowKey]}>
-                {columns.map((column) => {
-                  if (column.render) {
-                    return (
-                      <td
-                        key={`${record[rowKey]}-${index}`}
-                        className={cx(
-                          "okd-px-6 okd-py-4 okd-whitespace-nowrap okd-text-sm okd-text-gray-500",
-                          column.contentType === "text" ? "okd-text-left" : "",
-                          column.contentType === "numeric"
-                            ? "okd-text-right"
-                            : ""
-                        )}
-                      >
-                        {column.render(record[column.dataIndex], record, index)}
-                      </td>
-                    );
-                  } else {
-                    return (
-                      <td
-                        key={`${record[rowKey]}-${index}`}
-                        className={cx(
-                          "okd-px-6 okd-py-4 okd-whitespace-nowrap okd-text-sm okd-text-gray-500",
-                          column.contentType === "text" ? "okd-text-left" : "",
-                          column.contentType === "numeric"
-                            ? "okd-text-right"
-                            : ""
-                        )}
-                      >
-                        {record[column.dataIndex]}
-                      </td>
-                    );
-                  }
-                })}
-              </tr>
-            );
-          })}
-        </tbody>
-      </table>
+          </tbody>
+        </table>
+      </div>
       <Pagination {...paginationProps}></Pagination>
     </>
   );
