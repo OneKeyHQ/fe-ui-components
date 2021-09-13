@@ -49,9 +49,8 @@ interface ColumnsType {
    */
   sortable?: boolean | string;
   /**
-   * tooltipContent 表头hover提示内容
+   * Tooltip props
    */
-  tooltipContent?: ReactNode;
   tooltip: TooltipProps;
   /**
    * title 列头显示文字
@@ -166,9 +165,7 @@ const Table = (props: tableProps) => {
                             size === "lg"
                               ? "okd-px-4 sm:okd-px-6 okd-py-4"
                               : "",
-                            size === "sm"
-                              ? "okd-px-4 okd-py-2"
-                              : "",
+                            size === "sm" ? "okd-px-4 okd-py-2" : "",
                             hoverable ? "group-hover:okd-bg-gray-50" : "",
                             column.contentType === "text"
                               ? "okd-text-left"
@@ -194,9 +191,7 @@ const Table = (props: tableProps) => {
                             size === "lg"
                               ? "okd-px-4 sm:okd-px-6 okd-py-4"
                               : "",
-                            size === "sm"
-                              ? "okd-px-4 okd-py-2"
-                              : "",
+                            size === "sm" ? "okd-px-4 okd-py-2" : "",
                             hoverable ? "group-hover:okd-bg-gray-50" : "",
                             column.contentType === "text"
                               ? "okd-text-left"
