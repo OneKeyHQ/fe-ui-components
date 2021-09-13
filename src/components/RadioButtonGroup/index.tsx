@@ -1,7 +1,13 @@
-import React, { FC, ReactNode, Component, Fragment, useMemo } from "react";
+import React, {
+  FC,
+  ReactNode,
+  Component,
+  useMemo,
+  ReactElement,
+} from "react";
 import cx, { Argument } from "classnames";
 import { RadioGroup } from "@headlessui/react";
-import { isArray, isObject } from "lodash";
+import { isObject } from "lodash";
 
 type RadioButtonProps = {
   /**
@@ -30,19 +36,17 @@ type RadioButtonProps = {
   size?: "xs" | "sm" | "base" | "lg" | "xl";
 };
 
-const RadioButtonDefaultProps = {
-  size: "base",
-} as const;
-
 const RadioButton: FC<RadioButtonProps> = ({
   value,
   disabled,
   label,
   description,
   className,
-  size,
+  size: givenSize,
   ...rest
 }) => {
+  const size = givenSize ?? "base";
+
   return (
     <RadioGroup.Option
       as="button"
@@ -116,9 +120,11 @@ const RadioButton: FC<RadioButtonProps> = ({
   );
 };
 
-RadioButton.defaultProps = RadioButtonDefaultProps;
-
 type RadioButtonGroupProps = {
+  /**
+   * 设置按钮大小
+   */
+  size?: "xs" | "sm" | "base" | "lg" | "xl";
   /**
    * Improving the semantics and accessibility of your custom selector.
    */
@@ -139,10 +145,6 @@ type RadioButtonGroupProps = {
    * 设置额外的 class
    */
   className?: Argument;
-  /**
-   * 设置按钮大小
-   */
-  size?: "xs" | "sm" | "base" | "lg" | "xl";
 };
 
 const defaultProps = {} as const;
@@ -160,24 +162,20 @@ const RadioButtonGroup: FC<RadioButtonGroupProps> & {
   ...rest
 }) => {
   const childrenWithProps = useMemo(() => {
-    if (React.isValidElement(children)) {
-      // What if we met Option nested inside another container?
-      if (isArray(children.props.children)) {
-        const commonOptionProps = { size, disabled } as const;
-        return React.Children.map(children.props.children, (child) => {
-          // Checking isValidElement is the safe way and avoids a typescript error too.
-          if (React.isValidElement(child) && child.type === RadioButton) {
-            return React.cloneElement<RadioButtonProps>(child, {
-              ...commonOptionProps,
-              ...(isObject(child.props) ? child.props : {}),
-            });
-          }
-          return child;
+    const commonOptionProps = { size, disabled } as const;
+    if (React.Children.count(children) === 0) return [];
+
+    return React.Children.map(children, (child: ReactElement) => {
+      if (!React.isValidElement(child)) return child;
+
+      if ((child.type as typeof RadioButton).name === "RadioButton") {
+        return React.cloneElement(child, {
+          ...commonOptionProps,
+          ...(isObject(child.props) ? child.props : {}),
         });
       }
-    }
-
-    return children;
+      return child;
+    });
   }, [children, size, disabled]);
 
   return (
