@@ -61,6 +61,10 @@ interface ColumnsType {
    */
   dataIndex: string;
   /**
+   * 列表的数据类型，决定 column 内容的对齐方式
+   */
+  contentType: "text" | "numeric";
+  /**
    * render 生成复杂数据的渲染函数，参数分别为当前行的值，当前行数据，行索引
    */
   render?: (text: string, record: object, index: number) => React.ReactNode;
@@ -99,10 +103,21 @@ const Table = (props: tableProps) => {
                 <th
                   key={column.dataIndex}
                   scope="col"
-                  className="okd-px-6 okd-py-3 okd-text-left okd-text-xs okd-font-medium okd-text-gray-500 okd-uppercase okd-tracking-wider"
+                  className={cx(
+                    "okd-px-6 okd-py-3",
+                    "okd-text-left okd-text-xs okd-font-medium okd-text-gray-500 okd-uppercase okd-tracking-wider"
+                  )}
                 >
-                  <div className="okd-flex okd-items-center okd-w-full">
-                    <span className={cx(!!column.tooltipContent ? "okd-mr-1" : "")}>
+                  <div
+                    className={cx(
+                      "okd-flex okd-items-center okd-w-full",
+                      column.contentType === "text" ? "okd-text-left" : "",
+                      column.contentType === "numeric" ? "okd-text-right okd-justify-end" : ""
+                    )}
+                  >
+                    <span
+                      className={cx(!!column.tooltipContent ? "okd-mr-1" : "")}
+                    >
                       {column.title}
                     </span>
                     {!!column.tooltipContent && (
@@ -125,7 +140,7 @@ const Table = (props: tableProps) => {
             })}
           </tr>
         </thead>
-        <tbody className="okd-bg-white okd-divide-y okd-divide-gray-200">
+        <tbody className="okd-divide-y okd-divide-gray-200">
           {paginatedData.map((record, index) => {
             return (
               <tr key={record[rowKey]}>
@@ -134,7 +149,13 @@ const Table = (props: tableProps) => {
                     return (
                       <td
                         key={`${record[rowKey]}-${index}`}
-                        className="okd-px-6 okd-py-4 okd-whitespace-nowrap okd-text-sm okd-font-medium okd-text-gray-900"
+                        className={cx(
+                          "okd-px-6 okd-py-4 okd-whitespace-nowrap okd-text-sm okd-text-gray-500",
+                          column.contentType === "text" ? "okd-text-left" : "",
+                          column.contentType === "numeric"
+                            ? "okd-text-right"
+                            : ""
+                        )}
                       >
                         {column.render(record[column.dataIndex], record, index)}
                       </td>
@@ -143,7 +164,13 @@ const Table = (props: tableProps) => {
                     return (
                       <td
                         key={`${record[rowKey]}-${index}`}
-                        className="okd-px-6 okd-py-4 okd-whitespace-nowrap okd-text-sm okd-font-medium okd-text-gray-900"
+                        className={cx(
+                          "okd-px-6 okd-py-4 okd-whitespace-nowrap okd-text-sm okd-text-gray-500",
+                          column.contentType === "text" ? "okd-text-left" : "",
+                          column.contentType === "numeric"
+                            ? "okd-text-right"
+                            : ""
+                        )}
                       >
                         {record[column.dataIndex]}
                       </td>

@@ -41,7 +41,7 @@ const Card: FC<CardProps> = ({
   return (
     <div
       className={cx(
-        "okd-bg-white okd-border okd-border-gray-200 okd-rounded okd-shadow-sm",
+        "okd-bg-white okd-border okd-border-gray-200 okd-rounded okd-shadow-sm okd-overflow-hidden",
         !!className && className
       )}
       {...rest}
@@ -68,7 +68,7 @@ const Card: FC<CardProps> = ({
         </div>
       )}
       {/* // Body */}
-      <div className={cx("okd-px-4 sm:okd-px-6 okd-py-6")}>{children}</div>
+      <div className={cx("okd-p-4 sm:okd-p-6")}>{children}</div>
 
       {/* Footer */}
       {!!footer && (
