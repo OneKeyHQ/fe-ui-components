@@ -53,7 +53,7 @@ const Card: FC<CardProps> = ({
     >
       {/* Cover */}
       {!!cover && (
-        <div className="w-full min-h-80 bg-gray-200 aspect-w-1 aspect-h-1 rounded-md overflow-hidden group-hover:opacity-75 lg:h-80 lg:aspect-none">
+        <div className="okd-w-full okd-min-h-80 okd-bg-gray-200 okd-aspect-w-1 okd-aspect-h-1 okd-rounded-md okd-overflow-hidden group-hover:okd-opacity-75 lg:okd-h-80 lg:okd-aspect-none">
           {cover}
         </div>
       )}
