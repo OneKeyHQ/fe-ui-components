@@ -46,5 +46,6 @@ module.exports = {
     require("@tailwindcss/forms")({
       strategy: "class",
     }),
+    require('@tailwindcss/aspect-ratio'),
   ],
 };
