@@ -1,4 +1,4 @@
-import React, { ReactNode } from "react";
+import React from "react";
 import Icon from "../Icon/index";
 import Tooltip, { TooltipProps } from "../Tooltip/index";
 import Button from "../Button/index";

@@ -9,7 +9,7 @@ interface OffsetProps {
   left?: number;
 }
 
-type TooltipProps = {
+export type TooltipProps = {
   /**
    * 弹出内容
    */
