@@ -5,7 +5,7 @@ import { Link, Alert } from "../components";
 import ConfigBar from "./Base";
 
 export default {
-  title: "VIEW/NFTPetAlert",
+  title: "Views/NFTFirstEnterAlert",
   component: Alert,
 } as ComponentMeta<typeof Alert>;
 
