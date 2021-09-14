@@ -105,7 +105,9 @@ export const Default = () => {
 };
 
 export const NestedModals = () => {
-  let [open, setOpen] = React.useState(false);
+  const [open, setOpen] = React.useState(false);
+  const [openTop, setOpenTop] = React.useState(false);
+  const [openSecondModal, setOpenSecondModal] = React.useState(false);
 
   const NestedModal = ({ onClose, level = 0 }) => {
     let [showChild, setShowChild] = React.useState(false);
@@ -157,12 +159,30 @@ export const NestedModals = () => {
   };
 
   return (
-    <>
+    <div className="okd-space-x-2">
       <Button onClick={() => setOpen(true)}>
         Open deeply nested Dialog components
       </Button>
       {open && <NestedModal onClose={setOpen} />}
-    </>
+
+      <Button onClick={() => setOpenTop(true)}>
+        Open one nested top Modal
+      </Button>
+      <Modal
+        visible={openTop}
+        onClose={() => setOpenTop(false)}
+        className="okd-p-2"
+      >
+        <Button onClick={() => setOpenSecondModal(true)}>Open Second</Button>
+        <Modal
+          visible={openSecondModal}
+          onClose={() => setOpenSecondModal(false)}
+          className="okd-p-2"
+        >
+          Two
+        </Modal>
+      </Modal>
+    </div>
   );
 };
 
