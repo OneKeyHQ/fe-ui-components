@@ -1,5 +1,6 @@
-import React, { FC } from "react";
+import React, { FC, isValidElement } from "react";
 import cx, { Argument } from "classnames";
+import Body from "./Body";
 
 const TitleComponent: FC = ({ children }) => {
   return (
@@ -34,7 +35,7 @@ type CardProps = {
 
 const defaultProps = {} as const;
 
-const Card: FC<CardProps> = ({
+const Card: FC<CardProps> & { Body } = ({
   cover,
   title,
   actions,
@@ -43,6 +44,14 @@ const Card: FC<CardProps> = ({
   footer,
   ...rest
 }) => {
+  const bodyNode =
+    isValidElement(children) &&
+    (children.type === Body || (children.type as typeof Body).name === "Body") ? (
+      children
+    ) : (
+      <Body>{children}</Body>
+    );
+
   return (
     <div
       className={cx(
@@ -53,11 +62,10 @@ const Card: FC<CardProps> = ({
     >
       {/* Cover */}
       {!!cover && (
-        <div className="okd-w-full okd-min-h-80 okd-bg-gray-200 okd-aspect-w-1 okd-aspect-h-1 okd-rounded-md okd-overflow-hidden group-hover:okd-opacity-75 lg:okd-h-80 lg:okd-aspect-none">
+        <div className="okd-bg-gray-200 okd-aspect-w-1 okd-aspect-h-1 okd-rounded-md okd-overflow-hidden group-hover:okd-opacity-75">
           {cover}
         </div>
       )}
-
       {/* // Header */}
       {!!(title || actions) && (
         <div
@@ -80,7 +88,7 @@ const Card: FC<CardProps> = ({
         </div>
       )}
       {/* // Body */}
-      <div className={cx("okd-p-4 sm:okd-p-6")}>{children}</div>
+      {bodyNode}
 
       {/* Footer */}
       {!!footer && (
@@ -97,5 +105,6 @@ const Card: FC<CardProps> = ({
 };
 
 Card.defaultProps = defaultProps;
+Card.Body = Body;
 
 export default Card;
