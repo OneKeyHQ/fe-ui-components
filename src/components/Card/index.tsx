@@ -55,7 +55,7 @@ const Card: FC<CardProps> & { Body } = ({
   return (
     <div
       className={cx(
-        "okd-bg-white okd-border okd-border-gray-200 okd-rounded okd-shadow-sm okd-overflow-hidden",
+        "okd-bg-white okd-border okd-border-gray-200 okd-rounded okd-shadow-sm",
         !!className && className
       )}
       {...rest}
