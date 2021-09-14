@@ -116,6 +116,7 @@ export const NestedModals = () => {
           onClose={onClose}
           containerStyle={{
             transform: `translate(calc(50px * ${level}), calc(50px * ${level}))`,
+            width: "fit-content",
           }}
         >
           <Modal.Body>
@@ -144,7 +145,10 @@ export const NestedModals = () => {
             </div>
           </Modal.Body>
           {showChild && (
-            <NestedModal onClose={() => setShowChild(false)} level={level + 1} />
+            <NestedModal
+              onClose={() => setShowChild(false)}
+              level={level + 1}
+            />
           )}
         </Modal>
       </>
