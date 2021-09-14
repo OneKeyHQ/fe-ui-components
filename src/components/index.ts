@@ -36,6 +36,7 @@ export { default as TradeForm } from "./TradeForm";
 export { default as Table } from "./Table";
 export { default as TokenSelector } from "./TokenSelector";
 export { default as TokenList } from "./TokenList";
+export { default as Select } from "./Select";
 
 export * from "./Updaters";
 
