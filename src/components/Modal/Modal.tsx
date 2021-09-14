@@ -1,5 +1,5 @@
 import React, { CSSProperties, Fragment, PropsWithChildren } from "react";
-import cx from "classnames";
+import cx, { Argument } from "classnames";
 import { Dialog, Transition } from "@headlessui/react";
 
 import ModalHeader from "./ModalHeader";
@@ -15,6 +15,10 @@ export type ModalProps = {
   content?: React.ReactNode;
   /** 点击模态框遮罩时或键盘按下 Esc 时的回调 */
   onClose: () => void;
+  /**
+   * 聚焦的 ref 对象
+   */
+  initialFocusRef?: React.MutableRefObject<HTMLElement | null>;
   /**
    * 设置 Modal Container 的 style 样式
    */
@@ -34,8 +38,18 @@ export const iconColors: Record<ModalType, string> = {
   confirm: "okd-text-yellow-500",
 };
 
-export const ModalBody = ({ children }) => {
-  return <div className="okd-p-4 sm:okd-p-6">{children}</div>;
+interface ModalBodyProps {
+  /**
+   * 设置 Modal Body 的 class
+   */
+  className?: Argument;
+}
+
+export const ModalBody = ({
+  children,
+  className,
+}: PropsWithChildren<ModalBodyProps>) => {
+  return <div className={cx("okd-p-4 sm:okd-p-6", className)}>{children}</div>;
 };
 
 const Modal = (props: PropsWithChildren<ModalProps>) => {
@@ -45,6 +59,7 @@ const Modal = (props: PropsWithChildren<ModalProps>) => {
     onClose,
     className,
     containerStyle,
+    initialFocusRef,
     children,
   } = props;
 
@@ -58,6 +73,7 @@ const Modal = (props: PropsWithChildren<ModalProps>) => {
           auto-reopen="true"
           className="okd-fixed okd-z-10 okd-inset-0 okd-overflow-y-auto"
           onClose={onClose}
+          initialFocus={initialFocusRef ?? null}
         >
           <div className="okd-flex okd-items-end okd-justify-center okd-min-h-screen okd-pt-4 okd-px-4 okd-pb-20 okd-text-center sm:okd-block sm:okd-p-0">
             <Transition.Child
