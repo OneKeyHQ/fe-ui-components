@@ -1,6 +1,5 @@
 import React, { useState, FC } from "react";
 import cx, { Argument } from "classnames";
-import { divide } from "lodash";
 
 type InputProps = {
   /**

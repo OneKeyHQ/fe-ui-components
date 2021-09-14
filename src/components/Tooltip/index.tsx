@@ -9,7 +9,7 @@ interface OffsetProps {
   left?: number;
 }
 
-type TooltipProps = {
+export type TooltipProps = {
   /**
    * 弹出内容
    */
@@ -36,6 +36,10 @@ type TooltipProps = {
   offset?: OffsetProps;
 };
 
+const defaultProps = {
+  effect: "solid",
+} as const;
+
 const Tooltip: FC<TooltipProps> = ({
   children,
   content,
@@ -54,11 +58,13 @@ const Tooltip: FC<TooltipProps> = ({
       <BaseTooltip id={flag} className={`tooltip ${className}`} {...rest}>
         {/* <span>{content}</span> */}
       </BaseTooltip>
-      <span data-tip={content} data-for={flag}>
+      <div className="okd-inline-flex" data-tip={content} data-for={flag}>
         {children}
-      </span>
+      </div>
     </>
   );
 };
+
+Tooltip.defaultProps = defaultProps;
 
 export default Tooltip;
