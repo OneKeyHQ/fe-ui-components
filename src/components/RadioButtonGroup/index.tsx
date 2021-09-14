@@ -165,7 +165,12 @@ const RadioButtonGroup: FC<RadioButtonGroupProps> & {
     const traversePropsChildren = (child: ReactNode) => {
       if (React.isValidElement(child)) {
         // Single button
-        if (isRadioButton(child)) return child;
+        if (isRadioButton(child)) {
+          return React.cloneElement(child, {
+            ...commonOptionProps,
+            ...(isObject(child.props) ? child.props : {}),
+          });
+        }
         // in Fragment or other container
         return React.cloneElement(
           child,
@@ -173,7 +178,6 @@ const RadioButtonGroup: FC<RadioButtonGroupProps> & {
           traversePropsChildren(child.props.children)
         );
       }
-
       // Array
       if (isArray(child)) {
         return React.Children.map(child, (child: ReactElement) => {
