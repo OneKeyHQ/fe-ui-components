@@ -37,6 +37,7 @@ export { default as Table } from "./Table";
 export { default as TokenSelector } from "./TokenSelector";
 export { default as TokenList } from "./TokenList";
 export { default as Select } from "./Select";
+export { default as Account } from "./Account";
 
 export * from "./Updaters";
 
@@ -49,4 +50,8 @@ export {
   useScreen,
 } from "./Provider/hooks";
 export { useTokens, useToken } from "./Provider/tokens";
-export { ERC20ChainIdMap, useERC20ChainList, useERC20ChainMap } from "./Provider/chain";
+export {
+  ERC20ChainIdMap,
+  useERC20ChainList,
+  useERC20ChainMap,
+} from "./Provider/chain";
