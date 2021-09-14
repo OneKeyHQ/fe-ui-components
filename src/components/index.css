@@ -28,4 +28,66 @@
       }
     }
   }
+
+  .select {
+    @apply okd-text-base sm:okd-text-sm;
+
+    /* control */
+    .select__control {
+      @apply okd-rounded okd-border-gray-300 okd-placeholder-gray-400 okd-shadow-sm hover:okd-border-gray-400 okd-min-h-[42px] sm:okd-min-h-[38px];
+    }
+    .select__control--is-focused {
+      @apply okd-border-brand-500 okd-ring-1 okd-ring-brand-500;
+    }
+    .select__control--menu-is-open {
+      @apply hover:okd-border-brand-500;
+    }
+    /* value container */
+    .select__value-container {
+      @apply okd-px-3;
+    }
+    /* value */
+    .select__single_value {
+      @apply okd-text-gray-700;
+    }
+    /* placeholder */
+    .select__placeholder {
+      @apply okd-text-gray-400;
+    }
+    /* indicator */
+    .select__indicator {
+      @apply okd-text-gray-400;
+    }
+    .select__control--menu-is-open {
+      .select__indicator {
+        @apply okd-text-gray-500;
+      }
+    }
+    /* separator */
+    .select__indicator-separator {
+      @apply okd-bg-gray-200;
+    }
+    /* menu */
+    .select__menu {
+      @apply okd-rounded okd-ring-1 okd-ring-black okd-ring-opacity-5 okd-shadow-lg;
+    }
+    /* menu list */
+    .select__menu-list {
+      @apply okd-px-1;
+    }
+    /* option */
+    .select__option {
+      @apply okd-rounded okd-text-gray-900 hover:okd-bg-gray-50;
+    }
+    .select__option--is-focused {
+      @apply okd-bg-gray-100;
+    }
+    .select__option--is-selected {
+      @apply okd-bg-transparent okd-text-gray-900 okd-font-medium;
+
+      &.select__option--is-focused {
+        @apply okd-bg-gray-100 hover:okd-bg-gray-50;
+      }
+    }
+  }
 }

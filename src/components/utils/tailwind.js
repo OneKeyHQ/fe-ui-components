@@ -1,3 +1,5 @@
+const tailwindDefaultTheme = require("tailwindcss/defaultTheme");
+
 const getColor = (colorVar, { opacityVariable, opacityValue }) => {
   if (opacityValue !== undefined) {
     return `rgba(var(${colorVar}), ${opacityValue})`;
@@ -91,16 +93,37 @@ const boxShadow = {
   none: "none",
 };
 
- const screens = {
-  sm: '640px',
-  md: '768px',
-  lg: '1024px',
-  xl: '1280px',
-  "2xl": '1536px',
+const screens = {
+  sm: "640px",
+  md: "768px",
+  lg: "1024px",
+  xl: "1280px",
+  "2xl": "1536px",
+};
+
+const borderRadius = {
+  none: "0",
+  sm: "0.375rem",
+  DEFAULT: "0.75rem",
+  lg: "1.5rem",
+  full: "9999px",
+};
+
+const fontFamily = {
+  sans: [
+    ...tailwindDefaultTheme.fontFamily.sans,
+    "PingFang SC",
+    '"Microsoft YaHei"',
+    '"Source Han Sans SC"',
+    '"Noto Sans CJK SC"',
+    "WenQuanYi Micro Hei",
+  ],
 };
 
 module.exports = {
   colors,
   boxShadow,
   screens,
+  borderRadius,
+  fontFamily,
 };
