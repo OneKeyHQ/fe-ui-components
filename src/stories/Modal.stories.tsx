@@ -1,10 +1,11 @@
 import React from "react";
 import { ComponentMeta } from "@storybook/react";
 
-import { Button, Modal } from "../components";
+import { Button, Input, Modal, TradeForm } from "../components";
 import { iconColors } from "../components/Modal/ConfirmDialog";
 import ExclamationOutlined from "../components/Icon/react/outline/Exclamation";
 import ConfigBar from "./Base";
+import { InputItem } from "../components/TradeForm/Items";
 
 export default {
   title: "UI/Modal",
@@ -161,6 +162,46 @@ export const NestedModals = () => {
         Open deeply nested Dialog components
       </Button>
       {open && <NestedModal onClose={setOpen} />}
+    </>
+  );
+};
+
+export const ControlledFocus = () => {
+  const [open, setOpen] = React.useState(false);
+  const autoFocusRef = React.useRef<HTMLInputElement>(null);
+  const closeModal = () => {
+    setOpen(false);
+  };
+
+  return (
+    <>
+      <Button type="primary" onClick={() => setOpen(true)}>
+        Open
+      </Button>
+
+      <Modal visible={open} onClose={closeModal} initialFocusRef={autoFocusRef}>
+        <Modal.Header onClose={closeModal}>Modal</Modal.Header>
+        <Modal.Body className="okd-space-y-6">
+          <TradeForm
+            label="You Pay"
+            labelCorner={
+              <Button
+                className="!okd-p-0 okd-text-brand-600 hover:okd-bg-gray-100"
+                size="sm"
+                type="plain"
+              >
+                Balance: 2.3245
+              </Button>
+            }
+          >
+            <InputItem ref={autoFocusRef} placeholder="0.0" />
+          </TradeForm>
+
+          <TradeForm label="You Receive">
+            <InputItem placeholder="0.0" />
+          </TradeForm>
+        </Modal.Body>
+      </Modal>
     </>
   );
 };
