@@ -103,6 +103,64 @@ export const Default = () => {
   );
 };
 
+export const NestedModals = () => {
+  let [open, setOpen] = React.useState(false);
+
+  const NestedModal = ({ onClose, level = 0 }) => {
+    let [showChild, setShowChild] = React.useState(false);
+
+    return (
+      <>
+        <Modal
+          visible={true}
+          onClose={onClose}
+          containerStyle={{
+            transform: `translate(calc(50px * ${level}), calc(50px * ${level}))`,
+          }}
+        >
+          <Modal.Body>
+            <div>
+              <p>Level: {level}</p>
+              <div className="okd-space-x-4">
+                <Button
+                  className="okd-bg-gray-200 okd-px-2 okd-py-1 okd-rounded"
+                  onClick={() => setShowChild(true)}
+                >
+                  Open (1)
+                </Button>
+                <Button
+                  className="okd-bg-gray-200 okd-px-2 okd-py-1 okd-rounded"
+                  onClick={() => setShowChild(true)}
+                >
+                  Open (2)
+                </Button>
+                <Button
+                  className="okd-bg-gray-200 okd-px-2 okd-py-1 okd-rounded"
+                  onClick={() => setShowChild(true)}
+                >
+                  Open (3)
+                </Button>
+              </div>
+            </div>
+          </Modal.Body>
+          {showChild && (
+            <NestedModal onClose={() => setShowChild(false)} level={level + 1} />
+          )}
+        </Modal>
+      </>
+    );
+  };
+
+  return (
+    <>
+      <Button onClick={() => setOpen(true)}>
+        Open deeply nested Dialog components
+      </Button>
+      {open && <NestedModal onClose={setOpen} />}
+    </>
+  );
+};
+
 export const UsingStaticMethods = () => {
   function info() {
     Modal.info({
