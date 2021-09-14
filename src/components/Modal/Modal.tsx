@@ -73,7 +73,7 @@ const Modal = (props: PropsWithChildren<ModalProps>) => {
           auto-reopen="true"
           className="okd-fixed okd-z-10 okd-inset-0 okd-overflow-y-auto"
           onClose={onClose}
-          initialFocus={initialFocusRef ?? null}
+          initialFocus={initialFocusRef}
         >
           <div className="okd-flex okd-items-end okd-justify-center okd-min-h-screen okd-pt-4 okd-px-4 okd-pb-20 okd-text-center sm:okd-block sm:okd-p-0">
             <Transition.Child
@@ -114,6 +114,7 @@ const Modal = (props: PropsWithChildren<ModalProps>) => {
             >
               {contentNode}
             </Transition.Child>
+            <button className="h-0 w-0 overflow-hidden" />
           </div>
         </Dialog>
       </Transition.Root>
