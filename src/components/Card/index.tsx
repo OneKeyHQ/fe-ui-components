@@ -70,7 +70,7 @@ const Card: FC<CardProps> & { Body } = ({
       {!!(title || actions) && (
         <div
           className={cx(
-            "px-4 okd-py-5 okd-border-b okd-border-gray-200 sm:okd-px-6"
+            "okd-px-4 okd-py-5 okd-border-b okd-border-gray-200 sm:okd-px-6"
           )}
         >
           <div className="okd-flex okd-justify-between okd-items-center okd-flex-wrap sm:okd-flex-nowrap okd--ml-4 okd--mt-4">
@@ -94,7 +94,7 @@ const Card: FC<CardProps> & { Body } = ({
       {!!footer && (
         <div
           className={cx(
-            "px-4 okd-py-5 okd-border-t okd-border-gray-200 sm:okd-px-6"
+            "okd-px-4 okd-py-5 okd-border-t okd-border-gray-200 sm:okd-px-6"
           )}
         >
           {footer}

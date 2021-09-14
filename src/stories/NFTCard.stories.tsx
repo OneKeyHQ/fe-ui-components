@@ -9,7 +9,7 @@ export default {
 
 export const Default = () => {
   const defaultProps = {
-    className: "okd-max-w-[280px] okd-mx-auto okd-flex okd-flex-col",
+    className: "okd-max-w-[280px] okd-mx-auto okd-flex okd-flex-col okd-overflow-hidden",
     cover: (
       <img
         src="https://lh3.googleusercontent.com/BBCWmkmfseCDAzWW_7Vj4xLP_XPAPDtUiCPvoqz1QDEXHpaSxJdNii2K6ajq6J7tlRXg82TFQMg4qkS-poyiSM6l2_yPUBeClgDU=w354"
