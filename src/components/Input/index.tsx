@@ -1,5 +1,7 @@
 import React, { useState, FC } from "react";
 import cx, { Argument } from "classnames";
+import Tooltip from "../Tooltip/index";
+import Icon from "../Icon/index";
 
 type InputProps = {
   /**
@@ -113,7 +115,16 @@ const Input: FC<InputProps> = ({
             >
               {label}
             </label>
-            {!!labelTooltip && <div className="okd-ml-1">{labelTooltip}</div>}
+            {!!labelTooltip && (
+              <Tooltip place="bottom" content={labelTooltip}>
+                <div className="okd-inline-flex okd-items-center okd-justify-center okd-w-4 okd-h-4">
+                  <Icon
+                    className="okd-min-w-[18px] okd-h-[18px] okd-text-gray-300"
+                    name="QuestionMarkCircleSolid"
+                  />
+                </div>
+              </Tooltip>
+            )}
           </div>
           {/* labelCorner */}
           {!!labelCorner && (
@@ -156,7 +167,7 @@ const Input: FC<InputProps> = ({
         />
         {/* addOnAfter */}
         {!!addonAfter && (
-          <div className="okd-absolute okd-inset-y-0 okd-right-0 okd-flex okd-items-center okd-pr-3 okd-text-gray-500 okd-pointer-events-none sm:okd-text-sm">
+          <div className="okd-absolute okd-inset-y-0 okd-right-0 okd-flex okd-items-center okd-pr-3 okd-text-gray-400 okd-pointer-events-none sm:okd-text-sm">
             {addonAfter}
           </div>
         )}
@@ -166,7 +177,7 @@ const Input: FC<InputProps> = ({
         <p
           className={cx(
             "okd-mt-2 okd-text-sm okd-text-left",
-            error ? "okd-text-red-600" : "okd-text-gray-500"
+            error ? "okd-text-red-600" : "okd-text-gray-400"
           )}
         >
           {helpText}
