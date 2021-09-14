@@ -31,17 +31,29 @@ export const Account: React.FC<AccountProps> = ({
   ...restProps
 }) => {
   return (
-    <div className="okd-w-full okd-bg-white hover:okd-bg-gray-100 okd-flex okd-items-center">
-      <Avatar address={address}></Avatar>
+    <div className="okd-w-full okd-bg-white hover:okd-bg-gray-100 okd-flex okd-items-center okd-p-3">
+      <div className="okd-w-8 okd-h-8 okd-overflow-hidden">
+        <Avatar address={address} size={32}></Avatar>
+      </div>
       <div className="okd-ml-2">
         {!!label ? (
           <div>
-            <p>{label}</p>
-            <Address address={address} short></Address>
+            <p className="okd-text-gray-900 okd-font-medium okd-text-base okd-leading-5">
+              {label}
+            </p>
+            <Address
+              address={address}
+              short
+              className="okd-text-gray-400 okd-font-medium okd-text-sm okd-leading-4"
+            ></Address>
           </div>
         ) : (
           <div>
-            <Address address={address} short></Address>
+            <Address
+              address={address}
+              short
+              className="okd-text-gray-900 okd-font-medium okd-text-base okd-leading-5"
+            ></Address>
           </div>
         )}
       </div>
