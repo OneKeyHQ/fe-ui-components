@@ -124,7 +124,7 @@ const Alert: FC<AlertProps> = ({
           "okd-bg-red-50": type === "error",
           "okd-bg-green-50": type === "success",
         },
-        className && className
+        className
       )}
     >
       <div className="okd-flex">
