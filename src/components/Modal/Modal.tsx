@@ -1,5 +1,5 @@
-import React, { Fragment, PropsWithChildren } from "react";
-import cx, { Argument } from "classnames";
+import React, { CSSProperties, Fragment, PropsWithChildren } from "react";
+import cx from "classnames";
 import { Dialog, Transition } from "@headlessui/react";
 
 import ModalHeader from "./ModalHeader";
@@ -16,6 +16,10 @@ export type ModalProps = {
   /** 点击模态框遮罩时或键盘按下 Esc 时的回调 */
   onClose: () => void;
   /**
+   * 设置 Modal Container 的 style 样式
+   */
+  containerStyle?: CSSProperties;
+  /**
    * 设置额外的 class
    */
   className?: string | null;
@@ -30,22 +34,19 @@ export const iconColors: Record<ModalType, string> = {
   confirm: "okd-text-yellow-500",
 };
 
-// Comment for future use
-// const iconBgColors: Record<ModalType, string> = {
-//   info: "okd-bg-gray-100",
-//   success: "okd-bg-green-100",
-//   error: "okd-bg-red-100",
-//   warn: "okd-bg-yellow-100",
-//   warning: "okd-bg-yellow-100",
-//   confirm: "okd-bg-yellow-100",
-// };
-
 export const ModalBody = ({ children }) => {
   return <div className="okd-p-4 sm:okd-p-6">{children}</div>;
 };
 
 const Modal = (props: PropsWithChildren<ModalProps>) => {
-  const { visible, content, onClose, className, children } = props;
+  const {
+    visible,
+    content,
+    onClose,
+    className,
+    containerStyle,
+    children,
+  } = props;
 
   const contentNode = content ?? children;
 
@@ -85,8 +86,9 @@ const Modal = (props: PropsWithChildren<ModalProps>) => {
                 "okd-ring-1 okd-ring-black okd-ring-opacity-5 okd-shadow-xl",
                 "sm:okd-my-8 sm:okd-align-middle sm:okd-max-w-lg sm:okd-w-full",
                 "okd-transform okd-transition-all",
-                className && className
+                className
               )}
+              style={containerStyle}
               enter="okd-ease-out okd-duration-300"
               enterFrom="okd-opacity-0 okd-translate-y-4 sm:okd-translate-y-0 sm:okd-scale-95"
               enterTo="okd-opacity-100 okd-translate-y-0 sm:okd-scale-100"
