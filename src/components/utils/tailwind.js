@@ -1,5 +1,3 @@
-const tailwindDefaultTheme = require("tailwindcss/defaultTheme");
-
 const getColor = (colorVar, { opacityVariable, opacityValue }) => {
   if (opacityValue !== undefined) {
     return `rgba(var(${colorVar}), ${opacityValue})`;
@@ -111,12 +109,25 @@ const borderRadius = {
 
 const fontFamily = {
   sans: [
-    ...tailwindDefaultTheme.fontFamily.sans,
-    "PingFang SC",
+    "ui-sans-serif",
+    "system-ui",
+    "-apple-system",
+    "BlinkMacSystemFont",
+    '"Segoe UI"',
+    "Roboto",
+    '"Helvetica Neue"',
+    "Arial",
+    '"Noto Sans"',
+    '"PingFang SC"',
     '"Microsoft YaHei"',
     '"Source Han Sans SC"',
     '"Noto Sans CJK SC"',
-    "WenQuanYi Micro Hei",
+    '"WenQuanYi Micro Hei"',
+    "sans-serif",
+    '"Apple Color Emoji"',
+    '"Segoe UI Emoji"',
+    '"Segoe UI Symbol"',
+    '"Noto Color Emoji"',
   ],
 };
 
