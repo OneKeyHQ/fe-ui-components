@@ -1,7 +1,7 @@
 import React, { FC, ReactNode } from "react";
 import cx, { Argument } from "classnames";
 
-type ComponentProps = {
+export type SectionHeaderProps = {
   /**
    * 标题
    */
@@ -38,7 +38,7 @@ const Description = ({ children }) => {
   );
 };
 
-const Component: FC<ComponentProps> = ({ title, description, actions, className }) => {
+const SectionHeader: FC<SectionHeaderProps> = ({ title, description, actions, className }) => {
   return (
     <div
       className={cx(
@@ -63,6 +63,6 @@ const Component: FC<ComponentProps> = ({ title, description, actions, className 
   );
 };
 
-Component.defaultProps = defaultProps;
+SectionHeader.defaultProps = defaultProps;
 
-export default Component;
+export default SectionHeader;
