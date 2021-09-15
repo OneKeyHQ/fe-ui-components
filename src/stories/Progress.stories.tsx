@@ -66,24 +66,25 @@ export const DynamicSetWidth: ComponentStory<typeof ProgressComponent> = () => {
 };
 
 /**
- * 展示当前进度文字
- */
-export const ShowHint = Template.bind({});
-ShowHint.args = {
-  value: 300,
-  max: 600,
-  hint: true,
-};
-
-
-/**
  * 自定义文字
  */
 export const CustomTexts = Template.bind({});
 CustomTexts.args = {
   value: 300,
   max: 600,
-  hint: true,
   leftText: "You should be right!",
-  rightText: <p className="okd-text-gray-500">Reach me to get a "Lay Flat Koala"!</p>,
+  rightText: (
+    <p className="okd-text-gray-500">Reach me to get a "Lay Flat Koala"!</p>
+  ),
+};
+
+/**
+ * 展示当前进度文字
+ */
+export const CustomHint = Template.bind({});
+CustomHint.args = {
+  value: 30,
+  max: 150,
+  leftText: "Earn 120 more xp to upgrade",
+  rightText: 150,
 };
