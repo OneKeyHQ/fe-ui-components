@@ -48,5 +48,5 @@ export {
   useLayout,
   useScreen,
 } from "./Provider/hooks";
-export { useTokens, useToken } from './Provider/tokens';
-export type { ERC20ChainIdMap } from './Provider/config';
+export { useTokens, useToken } from "./Provider/tokens";
+export { ERC20ChainIdMap, useERC20ChainList, useERC20ChainMap } from "./Provider/chain";

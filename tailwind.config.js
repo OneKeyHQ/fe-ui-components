@@ -10,12 +10,12 @@ module.exports = {
   darkMode: "media", // or 'media' or 'class'
   theme: {
     extend: {
-      colors: colors,
-      screens: screens,
-      fontFamily: fontFamily,
+      colors,
+      screens,
+      fontFamily,
     },
-    borderRadius: borderRadius,
-    boxShadow: boxShadow,
+    borderRadius,
+    boxShadow,
   },
   variants: {
     extend: {},
