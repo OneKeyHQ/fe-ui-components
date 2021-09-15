@@ -1,5 +1,5 @@
 import React, { FC } from "react";
-import cx, { Argument } from "classnames";
+import cx from "classnames";
 import Icon from "../Icon/index";
 import { shortenAddress } from "../utils";
 
@@ -82,7 +82,11 @@ type TransationListProps = {
   /**
    * 设置额外的 class
    */
-  className?: Argument;
+  className?: string;
+  /**
+   * lsitPanelClass 用于覆盖每个label对应的list panel样式
+   */
+  listPanelClass?: string;
   /**
    * renderLabel 生成复杂数据的渲染函数
    */
@@ -96,10 +100,12 @@ type TransationListProps = {
 const TransationList: FC<TransationListProps> = ({
   dataSource,
   className,
+  listPanelClass,
   renderLabel,
   renderItem,
   ...restProps
 }) => {
+  console.log("lsitPanelClass: ", listPanelClass);
   return (
     <div className={cx("okd-bg-gray-50 okd-w-full", className)}>
       {dataSource.map((listRow, index) => {
@@ -183,7 +189,14 @@ const TransationList: FC<TransationListProps> = ({
           <div key={index}>
             {!!label && !!lists.length && labelNode}
             {!!lists.length && (
-              <div className="okd-pl-4 okd-bg-white okd-border-t okd-border-b okd-border-gray-100 okd-border-solid">
+              <div
+                className={cx(
+                  {
+                    "okd-pl-4 okd-bg-white okd-border-t okd-border-b okd-border-gray-100 okd-border-solid": !listPanelClass,
+                  },
+                  listPanelClass
+                )}
+              >
                 {listNodes.map((itemNode) => itemNode)}
               </div>
             )}
