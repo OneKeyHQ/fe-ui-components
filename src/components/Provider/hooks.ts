@@ -45,15 +45,13 @@ export const useTheme = () => {
   }, [context.themeVariant, context.setThemeVariant]);
 }
 
-export const useColor = (color?: keyof ThemeValues) => {
+export const useColor = () => {
   const context = useContext(Context);
 
   const colors = useMemo(() => {
     return context.theme;
   }, [context.theme]);
-  if (color) {
-    return colors[color];
-  }
+
   return colors;
 }
 

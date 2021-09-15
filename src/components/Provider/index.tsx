@@ -57,7 +57,7 @@ const Provider: FC<UIProviderProps> = ({
   defaultTheme: initialTheme,
 }) => {
   const defaultTheme = getDefaultTheme(initialTheme);
-  const [theme, setTheme] = useState<ThemeValues>();
+  const [theme, setTheme] = useState<ThemeValues>({} as ThemeValues);
   const [themeVariant, setThemeVariant] = useState<keyof typeof COLORS>(
     defaultTheme
   );
