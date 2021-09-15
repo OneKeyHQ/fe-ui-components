@@ -41,7 +41,7 @@ const Progress: FC<ProgressProps> = ({
 
   const levelUpText = formatMessage(
     { id: "ui-components__progress__how_much_to_level_up" },
-    { value }
+    { value: max - value }
   );
 
   const hintNode = useMemo(() => {
