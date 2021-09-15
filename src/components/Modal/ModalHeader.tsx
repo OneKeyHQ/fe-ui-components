@@ -52,7 +52,10 @@ export const ModalHeader: FC<ModalHeaderProps> = ({
   })();
 
   return (
-    <div className="okd-px-4 okd-py-3 sm:okd-py-4 sm:okd-px-6 okd-flex okd-items-center okd-justify-between okd-border-b okd-border-gray-200">
+    <Dialog.Title<"div">
+      className="okd-px-4 okd-py-3 sm:okd-py-4 sm:okd-px-6 okd-flex okd-items-center okd-justify-between okd-border-b okd-border-gray-200"
+      as="div"
+    >
       {titleNode}
       <div className="okd-flex okd-items-center okd-space-x-4 okd-divide-x okd-divide-gray-200 okd-flex-shrink-0">
         {actions}
@@ -67,7 +70,7 @@ export const ModalHeader: FC<ModalHeaderProps> = ({
           </div>
         )}
       </div>
-    </div>
+    </Dialog.Title>
   );
 };
 
