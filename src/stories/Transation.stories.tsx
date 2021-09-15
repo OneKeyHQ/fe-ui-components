@@ -156,12 +156,9 @@ AccountList.args = {
           "okd-border-b okd-border-gray-50 okd-border-solid": idx !== len - 1,
         })}
       >
-        <Account
-          className="okd-pl-0"
-          label={item.label}
-          address={item.address}
-        ></Account>
+        <Account label={item.label} address={item.address}></Account>
       </div>
     );
   },
+  listPanelClass: "okd-pl-0",
 };
