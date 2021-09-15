@@ -30,6 +30,12 @@ const MultilineTemplate: ComponentStory<typeof TogglelistComponent> = (
   </>
 );
 
+export const TogglelistNostyle = Template.bind({});
+TogglelistNostyle.args = {
+  header: "OneKeyHQ",
+  noStyle: true,
+};
+
 export const Togglelist = Template.bind({});
 Togglelist.args = {
   header: "OneKeyHQ",

@@ -16,6 +16,10 @@ type TogglelistProps = {
    * className 样式。
    */
   className?: string;
+  /**
+   * boolean 样式。
+   */
+  noStyle?: boolean;
 };
 
 const Togglelist: FC<TogglelistProps> = ({
@@ -23,8 +27,15 @@ const Togglelist: FC<TogglelistProps> = ({
   className,
   defaultOpen,
   header,
+  noStyle,
   ...rest
 }) => {
+  const classes = cx(
+    "okd-flex okd-items-center okd-justify-between okd-w-full okd-p-2 okd-pr-3 okd-text-sm okd-font-medium okd-text-left",
+    noStyle
+      ? "okd-text-gray-400"
+      : "okd-text-brand-800 okd-bg-brand-50 okd-rounded-t okd-rounded-b hover:okd-bg-brand-100 focus:okd-outline-none focus:okd-ring-2 focus:okd-ring-brand-500 focus:okd-ring-offset-2 dark:okd-ring-offset-gray-900 focus:okd-ring-opacity-75"
+  );
   return (
     <Disclosure
       as="div"
@@ -35,13 +46,15 @@ const Togglelist: FC<TogglelistProps> = ({
       {({ open }) => {
         return (
           <>
-            <Disclosure.Button className="okd-flex okd-items-center okd-justify-between okd-w-full okd-p-2 okd-pr-3 okd-text-sm okd-font-medium okd-text-left okd-text-brand-800 okd-bg-brand-50 okd-rounded-t okd-rounded-b hover:okd-bg-brand-100 focus:okd-outline-none focus:okd-ring-2 focus:okd-ring-brand-500 focus:okd-ring-offset-2 dark:okd-ring-offset-gray-900 focus:okd-ring-opacity-75">
+            <Disclosure.Button className={classes}>
               {header}
               <Icon
                 name="ChevronUpOutline"
                 className={`${
-                  open ? "okd-transform okd-rotate-180" : ""
-                } okd-w-5 okd-h-5 okd-text-brand-500`}
+                  !open ? "okd-transform okd-rotate-180" : ""
+                } okd-w-5 okd-h-5 ${
+                  noStyle ? "okd-text-gray-400" : "okd-text-brand-500"
+                }`}
               ></Icon>
             </Disclosure.Button>
             <Disclosure.Panel className="okd-p-2 okd-text-sm text-gray-500">
