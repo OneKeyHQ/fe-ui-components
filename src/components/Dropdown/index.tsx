@@ -115,6 +115,13 @@ const Dropdown: FC<DropdownProps> = ({
                         />
                       )}
                       {item.content}
+                      {active && (
+                        <Icon
+                          name="CheckOutline"
+                          className="okd-w-5 okd-h-5 okd-ml-3 okd-text-brand-400 group-hover:okd-text-gray-500"
+                          aria-hidden="true"
+                        />
+                      )}
                     </button>
                   )}
                 </Menu.Item>

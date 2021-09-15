@@ -74,14 +74,12 @@ AddonBoth.args = {
 export const disabled = Template.bind({});
 disabled.args = {
   disabled: true,
-  placeholder: "You should enabled something first"
+  placeholder: "You should enabled something first",
 };
 
 export const Label = Template.bind({});
 Label.args = {
   label: "label",
   labelTooltip: "tooltip",
-  labelCorner: (
-    <button className="okd-text-brand-600">Max</button>
-  ),
+  labelCorner: <button className="okd-text-brand-600">Max</button>,
 };
