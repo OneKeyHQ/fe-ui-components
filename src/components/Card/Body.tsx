@@ -13,7 +13,7 @@ const defaultProps = {} as const;
 const Body: FC<BodyProps> = ({ className, children, ...rest }) => {
   return (
     <div
-      className={cx("okd-px-4 sm:okd-px-6 okd-py-6", !!className && className)}
+      className={cx("okd-p-4 sm:okd-p-6", !!className && className)}
       {...rest}
     >
       {children}

@@ -31,8 +31,10 @@ const DescriptionItem: FC<DescriptionItemProps> = ({
             return (
               <Fragment key={i}>
                 <div className="okd-flex okd-justify-between okd-text-sm">
-                  <span className="okd-text-gray-500">{item.description}</span>
-                  <div className="okd-text-gray-900">
+                  <span className="okd-text-gray-500 okd-font-medium">
+                    {item.description}
+                  </span>
+                  <div className="okd-text-gray-900 okd-mt-1 sm:okd-mt-0">
                     {!!Array.isArray(item.values)
                       ? item.values.map((item, i) => {
                           return (
