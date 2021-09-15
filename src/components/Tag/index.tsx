@@ -11,16 +11,14 @@ export type TagProps = {
   active?: boolean;
   /** 状态改变回调函数 */
   onChange?: (status: boolean) => void;
+  /** 点击 remove 回调函数，需开启 removeable */
+  onRemove?: (t: TagProps) => void;
   /** 尺寸大小 */
   size?: "sm" | "lg";
   /** 所处环境，默认是白色背景 */
   theme?: "onWhite" | "onGray";
-  /** 是否可移除 */
-  removeable?: boolean;
   /** 是否可点击 */
   clickable?: boolean;
-  /** 实现类似 Checkbox 的效果，点击切换选中效果 */
-  checkable?: boolean;
   /** 设置额外的 class */
   className?: Argument;
 };
@@ -28,22 +26,24 @@ export type TagProps = {
 const defaultProps = {
   size: "sm",
   theme: "onWhite",
+  clickable: false,
 } as const;
 
-const Tag: FC<TagProps> = ({
-  token,
-  children,
-  active,
-  size,
-  theme,
-  onChange,
-  removeable,
-  clickable,
-  checkable,
-  className,
-}) => {
+const Tag: FC<TagProps> = (props) => {
+  const {
+    token,
+    children,
+    active,
+    size,
+    theme,
+    onChange,
+    clickable,
+    className,
+    onRemove,
+  } = props;
   const [status, setStatus] = useState(false);
   const isActive = active ?? status;
+  const removeAble = typeof onRemove === 'function';
 
   const handleClick = useCallback(() => {
     onChange?.(!isActive);
@@ -60,8 +60,8 @@ const Tag: FC<TagProps> = ({
         isActive
           ? "okd-ring-2 okd-ring-offset-2 okd-ring-brand-500 okd-ring-offset-white"
           : "",
-        !!(clickable || checkable) ? "okd-cursor-pointer" : "",
-        !!(clickable || checkable)
+        !!(clickable) ? "okd-cursor-pointer" : "",
+        !!(clickable)
           ? !isActive
             ? "hover:okd-ring-2 hover:okd-ring-gray-200 hover:okd-ring-offset-2 hover:okd-ring-offset-white"
             : ""
@@ -69,7 +69,7 @@ const Tag: FC<TagProps> = ({
         "okd-inline-flex okd-items-center okd-rounded-full okd-py-0.5 okd-font-medium",
         !!className && className
       )}
-      onClick={handleClick}
+      onClick={clickable ? handleClick : null}
     >
       {!!token && (
         <Token
@@ -84,8 +84,12 @@ const Tag: FC<TagProps> = ({
         ></Token>
       )}
       {children}
-      {!!removeable && (
+      {!!removeAble && (
         <button
+          onClick={(e) => {
+            e.stopPropagation();
+            onRemove(props);
+          }}
           className={cx(
             "okd-ml-0.5 okd--mr-1 okd-p-0.5 okd-rounded-full",
             "focus:okd-bg-gray-500 focus:okd-text-white focus:okd-outline-none",

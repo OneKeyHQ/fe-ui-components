@@ -1,5 +1,5 @@
 import useSWR from 'swr';
-import { CDNChainNameMap, ERC20ChainIdMap } from './config';
+import { CDNChainNameMap, ERC20ChainIdMap } from './chain';
 import { CDN_PREFIX } from '../utils';
 
 type TokenItem = {

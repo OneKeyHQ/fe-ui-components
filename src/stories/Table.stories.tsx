@@ -9,7 +9,7 @@ export default {
 } as ComponentMeta<typeof TableComponent>;
 
 const Template: ComponentStory<typeof TableComponent> = (args) => (
-  <Card>
+  <Card className="okd-overflow-hidden">
     <div className="okd--m-4 sm:okd--m-6">
       <TableComponent {...args}></TableComponent>
     </div>

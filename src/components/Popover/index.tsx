@@ -76,7 +76,7 @@ const Popover: FC<PopoverProps> = ({
                 className
               )}
             >
-              <div className="bg-white okd-overflow-hidden okd-rounded okd-shadow-lg okd-ring-1 okd-ring-black/5">
+              <div className="okd-bg-white okd-overflow-hidden okd-rounded okd-shadow-lg okd-ring-1 okd-ring-black/5">
                 {children}
               </div>
             </HeadlessPopover.Panel>

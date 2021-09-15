@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 import { Tag as TagComponent } from "../components";
 
@@ -20,14 +20,31 @@ Tag.args = {
   }
 };
 
-export const TagActiveControl = Template.bind({});
-TagActiveControl.args = {
+export const TagActiveOutOfControl = Template.bind({});
+TagActiveOutOfControl.args = {
   children: "OneKeyHQ",
-  active: true,
+  clickable: true,
   token: {
     chain: 'eth'
   }
 };
+
+export const TagActiveControl: ComponentStory<typeof TagComponent> = () => {
+  const [active, setActive] = useState(true);
+  return (
+    <TagComponent
+      children="OneKeyHQ"
+      clickable={true}
+      active={active}
+      onChange={setActive}
+      token={
+        {
+          chain: 'eth'
+        }
+      }
+    />
+  );
+}
 
 export const TokenOnly = Template.bind({});
 TokenOnly.args = {
@@ -40,7 +57,7 @@ TokenOnly.args = {
 export const RemoveableTag = Template.bind({});
 RemoveableTag.args = {
   children: "OneKeyHQ",
-  removeable: true,
+  onRemove: () => { alert('removed') },
   token: {
     chain: "eth",
   },
