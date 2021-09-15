@@ -1,4 +1,5 @@
 import React from "react";
+import cx from "classnames";
 import Address from "../Address";
 import Avatar from "../Avatar";
 
@@ -28,10 +29,16 @@ export const Account: React.FC<AccountProps> = ({
   address,
   label,
   children,
+  className,
   ...restProps
 }) => {
   return (
-    <div className="okd-w-full okd-bg-white hover:okd-bg-gray-100 okd-flex okd-items-center okd-p-3">
+    <div
+      className={cx(
+        "okd-w-full okd-bg-white hover:okd-bg-gray-100 okd-flex okd-items-center okd-p-3",
+        className
+      )}
+    >
       <div className="okd-w-8 okd-h-8 okd-overflow-hidden">
         <Avatar address={address} size={32}></Avatar>
       </div>
