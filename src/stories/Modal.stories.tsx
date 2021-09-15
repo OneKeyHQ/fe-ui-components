@@ -1,10 +1,11 @@
 import React from "react";
 import { ComponentMeta } from "@storybook/react";
 
-import { Button, Modal } from "../components";
+import { Button, Input, Modal, TradeForm } from "../components";
 import { iconColors } from "../components/Modal/ConfirmDialog";
 import ExclamationOutlined from "../components/Icon/react/outline/Exclamation";
 import ConfigBar from "./Base";
+import { InputItem } from "../components/TradeForm/Items";
 
 export default {
   title: "UI/Modal",
@@ -84,7 +85,7 @@ export const Default = () => {
 
         <Modal.Body>
           <p className="okd-font-normal okd-text-sm okd-leading-5 okd-text-gray-900">
-            <strong className="okd-font-bold">Detach instance to use.</strong>{" "}
+            <strong className="okd-font-bold">Detach instance to use.</strong>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Odio porta
             risus nec, cursus faucibus libero dolor integer. Cursus sagittis,
             tempus ut cum cursus gravida suspendisse tristique nunc.
@@ -98,6 +99,128 @@ export const Default = () => {
             okText="Create"
           />
         )}
+      </Modal>
+    </>
+  );
+};
+
+export const NestedModals = () => {
+  const [open, setOpen] = React.useState(false);
+  const [openTop, setOpenTop] = React.useState(false);
+  const [openSecondModal, setOpenSecondModal] = React.useState(false);
+
+  const NestedModal = ({ onClose, level = 0 }) => {
+    let [showChild, setShowChild] = React.useState(false);
+
+    return (
+      <>
+        <Modal
+          visible={true}
+          onClose={onClose}
+          containerStyle={{
+            transform: `translate(calc(50px * ${level}), calc(50px * ${level}))`,
+            width: "fit-content",
+          }}
+        >
+          <Modal.Body>
+            <div>
+              <p>Level: {level}</p>
+              <div className="okd-space-x-4">
+                <Button
+                  className="okd-bg-gray-200 okd-px-2 okd-py-1 okd-rounded"
+                  onClick={() => setShowChild(true)}
+                >
+                  Open (1)
+                </Button>
+                <Button
+                  className="okd-bg-gray-200 okd-px-2 okd-py-1 okd-rounded"
+                  onClick={() => setShowChild(true)}
+                >
+                  Open (2)
+                </Button>
+                <Button
+                  className="okd-bg-gray-200 okd-px-2 okd-py-1 okd-rounded"
+                  onClick={() => setShowChild(true)}
+                >
+                  Open (3)
+                </Button>
+              </div>
+            </div>
+          </Modal.Body>
+          {showChild && (
+            <NestedModal
+              onClose={() => setShowChild(false)}
+              level={level + 1}
+            />
+          )}
+        </Modal>
+      </>
+    );
+  };
+
+  return (
+    <div className="okd-space-x-2">
+      <Button onClick={() => setOpen(true)}>
+        Open deeply nested Dialog components
+      </Button>
+      {open && <NestedModal onClose={setOpen} />}
+
+      <Button onClick={() => setOpenTop(true)}>
+        Open one nested top Modal
+      </Button>
+      <Modal
+        visible={openTop}
+        onClose={() => setOpenTop(false)}
+        className="okd-p-2"
+      >
+        <Button onClick={() => setOpenSecondModal(true)}>Open Second</Button>
+        <Modal
+          visible={openSecondModal}
+          onClose={() => setOpenSecondModal(false)}
+          className="okd-p-2"
+        >
+          Two
+        </Modal>
+      </Modal>
+    </div>
+  );
+};
+
+export const ControlledFocus = () => {
+  const [open, setOpen] = React.useState(false);
+  const autoFocusRef = React.useRef<HTMLInputElement>(null);
+  const closeModal = () => {
+    setOpen(false);
+  };
+
+  return (
+    <>
+      <Button type="primary" onClick={() => setOpen(true)}>
+        Open
+      </Button>
+
+      <Modal visible={open} onClose={closeModal} initialFocusRef={autoFocusRef}>
+        <Modal.Header onClose={closeModal}>Modal</Modal.Header>
+        <Modal.Body className="okd-space-y-6">
+          <TradeForm
+            label="You Pay"
+            labelCorner={
+              <Button
+                className="!okd-p-0 okd-text-brand-600 hover:okd-bg-gray-100"
+                size="sm"
+                type="plain"
+              >
+                Balance: 2.3245
+              </Button>
+            }
+          >
+            <InputItem ref={autoFocusRef} placeholder="0.0" />
+          </TradeForm>
+
+          <TradeForm label="You Receive">
+            <InputItem placeholder="0.0" />
+          </TradeForm>
+        </Modal.Body>
       </Modal>
     </>
   );
@@ -188,36 +311,21 @@ export const UsingStaticMethods = () => {
 
   return (
     <div className="okd-space-x-2">
-      <button
-        onClick={info}
-        className="border okd-inline-flex okd-items-center okd-justify-center okd-px-4 okd-py-2 okd-text-sm okd-font-medium okd-rounded okd-shadow-sm focus:okd-outline-none focus:okd-ring-2 focus:okd-ring-offset-2 dark:okd-ring-offset-gray-900 okd-bg-brand-500 hover:okd-bg-brand-600 focus:okd-ring-brand-500 dark:okd-bg-brand-600 dark:hover:okd-bg-brand-500 okd-border-transparent okd-text-white"
-      >
+      <Button onClick={info} type="primary">
         Info
-      </button>
-      <button
-        onClick={success}
-        className="border okd-inline-flex okd-items-center okd-justify-center okd-px-4 okd-py-2 okd-text-sm okd-font-medium okd-rounded okd-shadow-sm focus:okd-outline-none focus:okd-ring-2 focus:okd-ring-offset-2 dark:okd-ring-offset-gray-900 okd-bg-brand-500 hover:okd-bg-brand-600 focus:okd-ring-brand-500 dark:okd-bg-brand-600 dark:hover:okd-bg-brand-500 okd-border-transparent okd-text-white"
-      >
+      </Button>
+      <Button onClick={success} type="primary">
         Success
-      </button>
-      <button
-        onClick={error}
-        className="border okd-inline-flex okd-items-center okd-justify-center okd-px-4 okd-py-2 okd-text-sm okd-font-medium okd-rounded okd-shadow-sm focus:okd-outline-none focus:okd-ring-2 focus:okd-ring-offset-2 dark:okd-ring-offset-gray-900 okd-bg-brand-500 hover:okd-bg-brand-600 focus:okd-ring-brand-500 dark:okd-bg-brand-600 dark:hover:okd-bg-brand-500 okd-border-transparent okd-text-white"
-      >
+      </Button>
+      <Button onClick={error} type="primary">
         Error
-      </button>
-      <button
-        onClick={warning}
-        className="border okd-inline-flex okd-items-center okd-justify-center okd-px-4 okd-py-2 okd-text-sm okd-font-medium okd-rounded okd-shadow-sm focus:okd-outline-none focus:okd-ring-2 focus:okd-ring-offset-2 dark:okd-ring-offset-gray-900 okd-bg-brand-500 hover:okd-bg-brand-600 focus:okd-ring-brand-500 dark:okd-bg-brand-600 dark:hover:okd-bg-brand-500 okd-border-transparent okd-text-white"
-      >
+      </Button>
+      <Button onClick={warning} type="primary">
         Warning
-      </button>
-      <button
-        onClick={confirm}
-        className="border okd-inline-flex okd-items-center okd-justify-center okd-px-4 okd-py-2 okd-text-sm okd-font-medium okd-rounded okd-shadow-sm focus:okd-outline-none focus:okd-ring-2 focus:okd-ring-offset-2 dark:okd-ring-offset-gray-900 okd-bg-brand-500 hover:okd-bg-brand-600 focus:okd-ring-brand-500 dark:okd-bg-brand-600 dark:hover:okd-bg-brand-500 okd-border-transparent okd-text-white"
-      >
+      </Button>
+      <Button onClick={confirm} type="primary">
         Confirm
-      </button>
+      </Button>
     </div>
   );
 };
@@ -246,38 +354,38 @@ export const UsingWithHooksInContexts = () => {
   return (
     <ReachableContext.Provider value="Light">
       <div className="okd-space-x-2">
-        <button
-          className="border okd-inline-flex okd-items-center okd-justify-center okd-px-4 okd-py-2 okd-text-sm okd-font-medium okd-rounded okd-shadow-sm focus:okd-outline-none focus:okd-ring-2 focus:okd-ring-offset-2 dark:okd-ring-offset-gray-900 okd-bg-brand-500 hover:okd-bg-brand-600 focus:okd-ring-brand-500 dark:okd-bg-brand-600 dark:hover:okd-bg-brand-500 okd-border-transparent okd-text-white"
+        <Button
+          type="primary"
           onClick={() => {
             modal.confirm(config);
           }}
         >
           Confirm
-        </button>
-        <button
-          className="border okd-inline-flex okd-items-center okd-justify-center okd-px-4 okd-py-2 okd-text-sm okd-font-medium okd-rounded okd-shadow-sm focus:okd-outline-none focus:okd-ring-2 focus:okd-ring-offset-2 dark:okd-ring-offset-gray-900 okd-bg-brand-500 hover:okd-bg-brand-600 focus:okd-ring-brand-500 dark:okd-bg-brand-600 dark:hover:okd-bg-brand-500 okd-border-transparent okd-text-white"
+        </Button>
+        <Button
+          type="primary"
           onClick={() => {
             modal.warning(config);
           }}
         >
           Warning
-        </button>
-        <button
-          className="border okd-inline-flex okd-items-center okd-justify-center okd-px-4 okd-py-2 okd-text-sm okd-font-medium okd-rounded okd-shadow-sm focus:okd-outline-none focus:okd-ring-2 focus:okd-ring-offset-2 dark:okd-ring-offset-gray-900 okd-bg-brand-500 hover:okd-bg-brand-600 focus:okd-ring-brand-500 dark:okd-bg-brand-600 dark:hover:okd-bg-brand-500 okd-border-transparent okd-text-white"
+        </Button>
+        <Button
+          type="primary"
           onClick={() => {
             modal.info(config);
           }}
         >
           Info
-        </button>
-        <button
-          className="border okd-inline-flex okd-items-center okd-justify-center okd-px-4 okd-py-2 okd-text-sm okd-font-medium okd-rounded okd-shadow-sm focus:okd-outline-none focus:okd-ring-2 focus:okd-ring-offset-2 dark:okd-ring-offset-gray-900 okd-bg-brand-500 hover:okd-bg-brand-600 focus:okd-ring-brand-500 dark:okd-bg-brand-600 dark:hover:okd-bg-brand-500 okd-border-transparent okd-text-white"
+        </Button>
+        <Button
+          type="primary"
           onClick={() => {
             modal.error(config);
           }}
         >
           Error
-        </button>
+        </Button>
       </div>
       {/* `contextHolder` 需要始终放在你要访问的 context 里 */}
       {/* `contextHolder` should always under the context you want to access */}
@@ -305,38 +413,38 @@ export const UsingWithHooksWithoutContexts = () => {
 
   return (
     <div className="okd-space-x-2">
-      <button
-        className="border okd-inline-flex okd-items-center okd-justify-center okd-px-4 okd-py-2 okd-text-sm okd-font-medium okd-rounded okd-shadow-sm focus:okd-outline-none focus:okd-ring-2 focus:okd-ring-offset-2 dark:okd-ring-offset-gray-900 okd-bg-brand-500 hover:okd-bg-brand-600 focus:okd-ring-brand-500 dark:okd-bg-brand-600 dark:hover:okd-bg-brand-500 okd-border-transparent okd-text-white"
+      <Button
+        type="primary"
         onClick={() => {
           modal.confirm(config);
         }}
       >
         Confirm
-      </button>
-      <button
-        className="border okd-inline-flex okd-items-center okd-justify-center okd-px-4 okd-py-2 okd-text-sm okd-font-medium okd-rounded okd-shadow-sm focus:okd-outline-none focus:okd-ring-2 focus:okd-ring-offset-2 dark:okd-ring-offset-gray-900 okd-bg-brand-500 hover:okd-bg-brand-600 focus:okd-ring-brand-500 dark:okd-bg-brand-600 dark:hover:okd-bg-brand-500 okd-border-transparent okd-text-white"
+      </Button>
+      <Button
+        type="primary"
         onClick={() => {
           modal.warning(config);
         }}
       >
         Warning
-      </button>
-      <button
-        className="border okd-inline-flex okd-items-center okd-justify-center okd-px-4 okd-py-2 okd-text-sm okd-font-medium okd-rounded okd-shadow-sm focus:okd-outline-none focus:okd-ring-2 focus:okd-ring-offset-2 dark:okd-ring-offset-gray-900 okd-bg-brand-500 hover:okd-bg-brand-600 focus:okd-ring-brand-500 dark:okd-bg-brand-600 dark:hover:okd-bg-brand-500 okd-border-transparent okd-text-white"
+      </Button>
+      <Button
+        type="primary"
         onClick={() => {
           modal.info(config);
         }}
       >
         Info
-      </button>
-      <button
-        className="border okd-inline-flex okd-items-center okd-justify-center okd-px-4 okd-py-2 okd-text-sm okd-font-medium okd-rounded okd-shadow-sm focus:okd-outline-none focus:okd-ring-2 focus:okd-ring-offset-2 dark:okd-ring-offset-gray-900 okd-bg-brand-500 hover:okd-bg-brand-600 focus:okd-ring-brand-500 dark:okd-bg-brand-600 dark:hover:okd-bg-brand-500 okd-border-transparent okd-text-white"
+      </Button>
+      <Button
+        type="primary"
         onClick={() => {
           modal.error(config);
         }}
       >
         Error
-      </button>
+      </Button>
       {contextHolder}
     </div>
   );
