@@ -89,5 +89,13 @@
         @apply okd-bg-gray-100 hover:okd-bg-gray-50;
       }
     }
+    /* notice */
+    .select__menu-notice {
+      @apply okd-text-gray-500;
+    }
+    /* group */
+    .select__group-heading {
+      @apply okd-text-gray-500 okd-text-xs okd-mb-1 okd-tracking-wider;
+    }
   }
 }
