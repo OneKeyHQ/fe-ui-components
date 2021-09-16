@@ -60,6 +60,10 @@ interface ListItem {
    */
   timestamp: number;
   /**
+   * key 交易完成的时间戳
+   */
+  [key: string]: any;
+  /**
    * render 生成复杂数据的渲染函数，参数分别为当前行的值，当前行数据，行索引
    */
   render?: (record: object) => React.ReactNode;
@@ -92,9 +96,14 @@ type TransationListProps = {
    */
   renderLabel?: (label: string, len: number) => React.ReactNode;
   /**
-   * renderItem 生成复杂数据的渲染函数
+   * renderItem 生成复杂数据的渲染函数, label与renderLabel方法里的label参数相同
    */
-  renderItem?: (record: object, idx: number, len: number) => React.ReactNode;
+  renderItem?: (
+    record: object,
+    idx: number,
+    len: number,
+    label: string
+  ) => React.ReactNode;
 };
 
 const TransationList: FC<TransationListProps> = ({
@@ -125,7 +134,7 @@ const TransationList: FC<TransationListProps> = ({
 
         listNodes = lists.map((item, idx) => {
           if (renderItem) {
-            return renderItem(item, idx, lists?.length);
+            return renderItem(item, idx, lists?.length, label);
           } else {
             return (
               <div
