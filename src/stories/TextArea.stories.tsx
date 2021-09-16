@@ -45,3 +45,9 @@ Label.args = {
   label: "label",
   labelTooltip: "tooltip",
 };
+
+export const allowClear = Template.bind({});
+allowClear.args = {
+  allowClear: true,
+  initialValue: "this is initial value control.",
+};
