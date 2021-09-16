@@ -51,3 +51,8 @@ allowClear.args = {
   allowClear: true,
   initialValue: "this is initial value control.",
 };
+
+export const setRows = Template.bind({});
+setRows.args = {
+  rows: 5,
+};

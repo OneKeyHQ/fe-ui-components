@@ -60,6 +60,7 @@ const defaultProps = {
 } as const;
 
 const TextArea: FC<TextAreaProps> = ({
+  rows,
   allowClear,
   disabled,
   readOnly,
@@ -127,6 +128,7 @@ const TextArea: FC<TextAreaProps> = ({
           placeholder={placeholder}
           disabled={disabled}
           readOnly={readOnly}
+          rows={rows}
         />
         {/* allowClear */}
         {!readOnly && !disabled && !!currentValue && allowClear && (
