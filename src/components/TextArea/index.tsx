@@ -1,4 +1,4 @@
-import React, { useState, FC } from "react";
+import React, { useState, FC, useCallback } from "react";
 import cx, { Argument } from "classnames";
 import Tooltip from "../Tooltip/index";
 import Icon from "../Icon/index";
@@ -60,7 +60,7 @@ const defaultProps = {
 } as const;
 
 const TextArea: FC<TextAreaProps> = ({
-  type,
+  allowClear,
   disabled,
   readOnly,
   value,
@@ -73,6 +73,12 @@ const TextArea: FC<TextAreaProps> = ({
 }) => {
   const [defaultValue, setInitialValue] = useState(initialValue ?? "");
   const currentValue = value ?? defaultValue;
+
+  const clearContent = useCallback(() => {
+    if (currentValue) {
+      setInitialValue("");
+    }
+  }, [currentValue]);
 
   return (
     <div className={cx(!!className && className)}>
@@ -112,12 +118,29 @@ const TextArea: FC<TextAreaProps> = ({
             setInitialValue(content);
           }}
           className={cx(
-            "okd-resize-none form-input okd-border-gray-200 okd-block okd-w-full sm:okd-text-sm okd-bg-white okd-shadow-sm okd-placeholder-gray-400 disabled:okd-text-gray-400 disabled:okd-bg-gray-50 disabled:okd-cursor-not-allowed"
+            "okd-resize-none form-input okd-border-gray-200 okd-rounded-sm okd-block okd-w-full sm:okd-text-sm okd-bg-white okd-shadow-sm okd-placeholder-gray-400 disabled:okd-text-gray-400 disabled:okd-bg-gray-50 disabled:okd-cursor-not-allowed"
           )}
+          style={{
+            paddingRight:
+              !readOnly && !disabled && !!currentValue && allowClear ? 24 : "",
+          }}
           placeholder={placeholder}
           disabled={disabled}
           readOnly={readOnly}
         />
+        {/* allowClear */}
+        {!readOnly && !disabled && !!currentValue && allowClear && (
+          <div
+            onClick={clearContent}
+            className="okd-absolute okd-inset-y-0 okd-right-0 okd-pt-2 okd-pr-3 okd-text-gray-400 sm:okd-text-sm"
+          >
+            <Icon
+              name="CloseCircleOutline"
+              size={20}
+              className="okd-text-gray-400 okd-cursor-pointer"
+            ></Icon>
+          </div>
+        )}
       </div>
     </div>
   );
