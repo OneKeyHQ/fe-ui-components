@@ -42,7 +42,7 @@ const SectionHeader: FC<SectionHeaderProps> = ({ title, description, actions, cl
   return (
     <div
       className={cx(
-        "sm:okd-flex okd-items-center okd-justify-between okd-mb-2",
+        "sm:okd-flex okd-items-center okd-justify-between okd-pb-2",
         !!className && className
       )}
     >
