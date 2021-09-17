@@ -84,7 +84,7 @@ const DEFAULT_SIDEBAR_CONFIG = {
   extraActions: DEFAULT_SIDEBAR_EXTRA_ACTIONS,
 } as const;
 
-type SidebarProps = {
+export type SidebarProps = {
   walletNavigation?: ActionTab[];
   tradeNavigation?: ActionTab[];
   extraActions?: ActionTab[];
