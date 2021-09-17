@@ -1,4 +1,4 @@
-import React from "react";
+import React, { LegacyRef } from "react";
 import cx, { Argument } from "classnames";
 import ItemWrapper from "./ItemWrapper";
 import Button from "../../Button";
@@ -32,6 +32,10 @@ type InputItemProps = {
    * 是否显示余额
    */
   showBalance?: boolean;
+  /**
+   * Reference
+   */
+  innerRef?: LegacyRef<HTMLInputElement>;
 };
 
 const defaultProps = {} as const;
@@ -46,6 +50,7 @@ const InputItem = React.forwardRef<HTMLInputElement, InputItemProps>(
       placeholder,
       showRate,
       showBalance,
+      innerRef,
       ...rest
     },
     ref
@@ -70,7 +75,7 @@ const InputItem = React.forwardRef<HTMLInputElement, InputItemProps>(
                 readOnly={readOnly}
                 placeholder={placeholder}
                 value={value}
-                ref={ref}
+                ref={innerRef}
               />
             </div>
             {!!valueType && (

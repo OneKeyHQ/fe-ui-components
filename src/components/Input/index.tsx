@@ -1,4 +1,4 @@
-import React, { useState, FC } from "react";
+import React, { useState, LegacyRef, FC } from "react";
 import cx, { Argument } from "classnames";
 import Tooltip from "../Tooltip/index";
 import Icon from "../Icon/index";
@@ -72,6 +72,10 @@ type InputProps = {
    * 设置额外的 class
    */
   className?: Argument;
+  /**
+   * Reference
+   */
+  innerRef?: LegacyRef<HTMLInputElement>;
 };
 
 const defaultProps = {
@@ -99,6 +103,7 @@ const Input: FC<InputProps> = ({
   labelTooltip,
   labelCorner,
   className,
+  innerRef,
 }) => {
   const [defaultValue, setInitialValue] = useState(initialValue ?? "");
   const currentValue = value ?? defaultValue;
@@ -110,19 +115,20 @@ const Input: FC<InputProps> = ({
           {/* Leading Contnet */}
           <div className="okd-flex okd-items-center">
             <label
-              className="okd-text-sm okd-font-medium okd-text-gray-700"
+              className={cx(
+                "okd-text-sm okd-font-medium okd-text-gray-700",
+                labelTooltip ? "okd-mr-1" : null
+              )}
               htmlFor="inputID"
             >
               {label}
             </label>
             {!!labelTooltip && (
-              <Tooltip place="bottom" content={labelTooltip}>
-                <div className="okd-inline-flex okd-items-center okd-justify-center okd-w-4 okd-h-4">
-                  <Icon
-                    className="okd-min-w-[18px] okd-h-[18px] okd-text-gray-300"
-                    name="QuestionMarkCircleSolid"
-                  />
-                </div>
+              <Tooltip place="top" content={labelTooltip}>
+                <Icon
+                  className="okd-w-[18px] okd-h-[18px] okd-text-gray-300"
+                  name="QuestionMarkCircleSolid"
+                />
               </Tooltip>
             )}
           </div>
@@ -164,6 +170,7 @@ const Input: FC<InputProps> = ({
             paddingLeft: addonBefore ? paddingLeft : "",
             paddingRight: addonAfter ? paddingRight : "",
           }}
+          ref={innerRef}
         />
         {/* addOnAfter */}
         {!!addonAfter && (
