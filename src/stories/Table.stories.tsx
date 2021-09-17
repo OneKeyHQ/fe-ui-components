@@ -41,7 +41,6 @@ const apyDatas = {
   daily: 0.18,
 };
 Default.args = {
-  pageSize: 10,
   rowkey: "address",
   columns: [
     {
