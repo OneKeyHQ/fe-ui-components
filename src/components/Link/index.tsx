@@ -32,7 +32,7 @@ export type Props = {
    * 样式属性，支持 classnames 的参数
    */
   className?: Argument;
-}
+};
 
 const defaultProps = {
   href: "",
@@ -70,13 +70,14 @@ const LinkComponent = React.forwardRef<
     return (
       <a
         className={cx(
-          "okd-inline-flex okd-transition-colors okd-duration-200 okd-p-0 okd-m-0 okd-w-[fit-content]",
-          "okd-text-sm okd-font-medium okd-leading-5",
+          "okd-inline-flex okd-group okd-rounded-sm",
+          "okd-text-sm okd-font-medium",
+          "focus:okd-outline-none focus:okd-ring-offset-2 focus:okd-ring-offset-white focus:okd-ring-2 focus:okd-ring-brand-500",
           {
-            "okd-text-gray-800 hover:okd-text-black": !color,
-            "okd-text-brand-500 hover:okd-text-brand-600": color,
+            "okd-text-gray-700 hover:okd-text-900": !color,
+            "okd-text-brand-600 hover:okd-text-brand-700": color,
             "okd-underline": underline,
-            "okd-py-2 okd-px-4 hover:okd-bg-green-100 okd-rounded-sm": block,
+            "okd-py-2 okd-px-4 hover:okd-bg-brand-100 okd-rounded-sm": block,
           },
           className
         )}
@@ -84,7 +85,17 @@ const LinkComponent = React.forwardRef<
         {...props}
         ref={ref}
       >
-        {icon && <ExternalLinkIcon className="okd-w-5 okd-h-5" />}
+        {icon && (
+          <ExternalLinkIcon
+            className={cx(
+              "okd-w-5 okd-h-5",
+              children ? "okd-mr-1" : null,
+              color
+                ? "okd-text-brand-500 group-hover:okd-text-brand-600"
+                : "okd-text-gray-400 group-hover:okd-text-gray-500"
+            )}
+          />
+        )}
         {children}
       </a>
     );
