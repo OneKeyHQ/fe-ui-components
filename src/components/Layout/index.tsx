@@ -1,7 +1,7 @@
 import React, { FC } from "react";
 import cx, { Argument } from "classnames";
 import Page, { PageProps } from "../Page";
-import Sidebar from "../Sidebar";
+import Sidebar, { SidebarProps } from "../Sidebar";
 
 type LayoutProps = {
   /**
@@ -13,9 +13,13 @@ type LayoutProps = {
    */
   sidebar?: boolean;
   /**
+   * 传入 Sidebar 的 props 属性
+   */
+  sidebarProps?: SidebarProps;
+  /**
    * Page 的属性
    */
-  page?: PageProps;
+  pageProps?: PageProps;
 };
 
 const defaultProps = {
@@ -26,7 +30,8 @@ const Layout: FC<LayoutProps> = ({
   className,
   children,
   sidebar,
-  page,
+  sidebarProps,
+  pageProps,
   ...rest
 }) => {
   return (
@@ -37,8 +42,8 @@ const Layout: FC<LayoutProps> = ({
       )}
       {...rest}
     >
-      {!!sidebar && <Sidebar />}
-      <Page {...page}>{children}</Page>
+      {!!sidebar && <Sidebar {...sidebarProps} />}
+      <Page {...pageProps}>{children}</Page>
     </div>
   );
 };

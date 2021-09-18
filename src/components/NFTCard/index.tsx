@@ -72,7 +72,7 @@ const NFTCard: React.FC<NFTCardProps> = ({
     (isValidElement(description) ? (
       description
     ) : (
-      <p className="okd-mt-1 okd-text-sm okd-text-gray-500">{description}</p>
+      <p className="okd-text-sm okd-text-gray-500">{description}</p>
     ));
 
   const footerNode =
@@ -99,7 +99,7 @@ const NFTCard: React.FC<NFTCardProps> = ({
           className={cx("okd-flex-1 okd-flex okd-flex-col", bodyClassName)}
         >
           <div className="okd-flex okd-flex-col okd-justify-between okd-flex-1">
-            <div className="okd-flex-1">
+            <div className="okd-flex-1 okd-space-y-1">
               {titleNode}
               {descriptionNode}
             </div>
