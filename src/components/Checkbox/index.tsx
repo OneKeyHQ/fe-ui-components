@@ -94,16 +94,12 @@ const Checkbox: FC<CheckboxProps> = ({
 
   return (
     <div
-      className={cx(
-        !!className && className,
-        "okd-p-2 okd-inline-flex okd-items-start hover:okd-bg-gray-50 okd-rounded okd-border-solid okd-border okd-border-transparent",
-        {
-          "": !className,
-        }
-      )}
+      className={cx(!!className && className, {
+        "okd-relative okd-flex okd-items-start": !className,
+      })}
     >
       <div
-        className={cx("okd-inline-flex okd-items-center okd-h-5 okd-bg-white", {
+        className={cx("okd-inline-flex okd-items-center okd-h-5", {
           "": indeterminateVal,
         })}
       >
@@ -114,16 +110,32 @@ const Checkbox: FC<CheckboxProps> = ({
           name={id}
           type="checkbox"
           checked={checkedValue}
-          className="okd-rounded focus:okd-outline-none focus:okd-ring-2 focus:okd-ring-brand-500 focus:okd-ring-offset-2 focus:okd-ring-offset-white okd-h-4 okd-w-4 okd-text-brand-500 okd-border-gray-300"
+          className={cx(
+            "form-checkbox okd-h-4 okd-w-4 okd-rounded-sm",
+            "okd-text-brand-500 okd-border-gray-300 focus:okd-ring-brand-500 disabled:okd-text-gray-300"
+          )}
           onChange={handleChange}
+          disabled={disabled}
         />
+        {disabled && !(checked || indeterminate) && (
+          <div className="okd-absolute okd-bg-gray-50 okd-border okd-border-gray-200 okd-t-0.5 okd-left-0 okd-rounded-sm okd-w-4 okd-h-4" />
+        )}
       </div>
       {!!label && (
         <div className="okd-ml-2 okd-text-sm">
-          <label htmlFor={id} className="okd-font-medium okd-text-gray-700">
+          <label
+            htmlFor={id}
+            className={cx(
+              "okd-font-medium",
+              disabled ? "okd-text-gray-400" : "okd-text-gray-700"
+            )}
+          >
             {label}
           </label>
-          <p id={`${id}-description`} className="okd-text-gray-500">
+          <p
+            id={`${id}-description`}
+            className={cx(disabled ? "okd-text-gray-400" : "okd-text-gray-500")}
+          >
             {description}
           </p>
         </div>
