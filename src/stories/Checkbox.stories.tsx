@@ -27,8 +27,44 @@ Default.args = {
 export const withLabel = Template.bind({});
 withLabel.args = {
   id: "btc",
-  label: "onekey",
+  label: "OneKey",
+};
+
+export const withDescription = Template.bind({});
+withDescription.args = {
+  id: "onekey",
+  label: "OneKey",
   description: "Get notified when someones posts a comment on a posting.",
+};
+
+export const disabledState = () => {
+  return (
+    <>
+      <div className="okd-flex okd-space-x-4">
+        <CheckboxComponent
+          id="defaultDisabled"
+          label="Default Disabled"
+          description="Description here..."
+          disabled={true}
+        />
+        <CheckboxComponent
+          id="defaultDisabled"
+          label="Checked Disabled"
+          checked={true}
+          disabled={true}
+          description="Description here..."
+        />
+        <CheckboxComponent
+          id="defaultDisabled"
+          label="Indeterminate Disabled"
+          checked={true}
+          indeterminate={true}
+          disabled={true}
+          description="Description here..."
+        />
+      </div>
+    </>
+  );
 };
 
 // export const indeterminate = Indeterminate.bind({});
@@ -113,16 +149,18 @@ export const Indeterminate = () => {
           onChange={selectAll}
         />
       </p>
-      {tokens.map((token) => {
-        return (
-          <CheckboxComponent
-            id={token.label}
-            label={token.label}
-            checked={token.checked}
-            onChange={handleChange(token)}
-          />
-        );
-      })}
+      <div className="okd-space-y-3">
+        {tokens.map((token) => {
+          return (
+            <CheckboxComponent
+              id={token.label}
+              label={token.label}
+              checked={token.checked}
+              onChange={handleChange(token)}
+            />
+          );
+        })}
+      </div>
     </>
   );
 };
