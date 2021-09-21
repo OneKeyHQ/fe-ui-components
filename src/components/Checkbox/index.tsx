@@ -9,8 +9,6 @@ import React, {
   useEffect,
 } from "react";
 import cx, { Argument } from "classnames";
-import Tooltip from "../Tooltip/index";
-import Icon from "../Icon/index";
 
 type CheckboxProps = {
   /**

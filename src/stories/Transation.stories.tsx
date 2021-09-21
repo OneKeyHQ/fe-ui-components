@@ -1,6 +1,5 @@
-import React, { useCallback } from "react";
+import React, { useCallback, useState, useEffect, useMemo } from "react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
-import { TransationList as TransationListComponent } from "../components";
 import cx from "classnames";
 import {
   Card,
@@ -11,6 +10,8 @@ import {
   Icon,
   Tabs,
   Input as Search,
+  Checkbox,
+  TransationList as TransationListComponent,
 } from "../components";
 import _ from "lodash";
 const { TabList, TabItem, TabPanels, TabPanel } = Tabs;
@@ -352,3 +353,167 @@ ManageTokens.args = {
   },
   listPanelClass: "okd-pl-0",
 };
+
+const SelectAccountTpl: ComponentStory<typeof TransationListComponent> = (
+  args
+) => {
+  const [indeterminateVal, setIndeterminate] = useState(false);
+  const [checkedAll, setCheckedAll] = useState(false);
+  const [accountList, setAccountList] = useState([]);
+  useEffect(() => {
+    setTimeout(() => {
+      const lists = [
+        {
+          label: "Main(...5wgY)",
+          address: "0xa3C6cA435B784ab686987Fe0850f7B75388b4551",
+          direction: 0,
+          status: 0,
+          value: "0.56",
+          symbol: "BNB",
+          name: "BNB",
+          checked: false,
+          timestamp: "15:03·Sep",
+        },
+        {
+          label: "Account1(...7wga)",
+          address: "0xa3C6cA435B784ab686987Fe0850f7B75388b4552",
+          direction: 0,
+          status: 2,
+          value: "0.5",
+          symbol: "ETH",
+          name: "ETH",
+          checked: false,
+          timestamp: "15:03·Sep",
+        },
+        {
+          label: "Account2(...3agH)",
+          address: "0xa3C6cA435B784ab686987Fe0850f7B75388b4553",
+          direction: 0,
+          status: 3,
+          value: "0.5",
+          symbol: "BTC",
+          name: "BTC",
+          checked: false,
+          timestamp: "15:03·Sep",
+        },
+        {
+          label: "Account3(...9wgT)",
+          address: "0xa3C6cA435B784ab686987Fe0850f7B75388b4554",
+          direction: 0,
+          status: 0,
+          value: "0.5",
+          symbol: "CTT",
+          name: "CTT",
+          checked: false,
+          timestamp: "15:03·Sep",
+        },
+      ];
+      setAccountList(lists);
+    }, 1000);
+  }, []);
+
+  useEffect(() => {
+    const curSelected = accountList.filter((account) => {
+      return account.checked;
+    });
+    const curIndeterminateVal =
+      curSelected?.length > 0 && curSelected?.length !== accountList.length;
+    setIndeterminate(curIndeterminateVal);
+    setCheckedAll(curSelected?.length === accountList?.length);
+  }, [accountList]);
+
+  const toggleCheckAll = useCallback(
+    (checked) => {
+      const curList = accountList.map((account) => {
+        account.checked = checked;
+        return account;
+      });
+      setAccountList(curList);
+    },
+    [accountList]
+  );
+
+  const accountListArgs = useMemo(() => {
+    return {
+      dataSource: [{ label: "My Etherseum Accounts", lists: [...accountList] }],
+      renderItem: (item, idx, len, label) => {
+        const toggleSelect = (curAccount) => (checked) => {
+          const curList = accountList.map((account) => {
+            if (account.address === curAccount.address) {
+              account.checked = checked;
+              return account;
+            }
+            return account;
+          });
+          setAccountList(curList);
+        };
+
+        const actionCheckbox = (account) => {
+          return (
+            <Checkbox
+              id={account.adderss}
+              checked={account.checked}
+              onChange={toggleSelect(account)}
+            ></Checkbox>
+          );
+        };
+
+        return (
+          <div
+            className={cx({
+              "okd-border-b okd-border-gray-50 okd-border-solid":
+                idx !== len - 1,
+            })}
+          >
+            <Account
+              label={item.label}
+              address={item.address}
+              action={actionCheckbox(item)}
+              className="okd-pr-8"
+            ></Account>
+          </div>
+        );
+      },
+      listPanelClass: "okd-pl-0",
+    };
+  }, [accountList]);
+
+  return (
+    <div className="okd-w-96 okd-px-3">
+      <div className="okd-flex okd-justify-between okd-items-center okd-pl-2 okd-pr-8 okd-py-2">
+        <p className="okd-text-xs okd-font-bold okd-text-gray-600">
+          SELECT ACCOUNT(s)
+        </p>
+        <Checkbox
+          id="selectAccounts"
+          checked={checkedAll}
+          indeterminate={indeterminateVal}
+          onChange={toggleCheckAll}
+        ></Checkbox>
+      </div>
+      <Card className="okd-overflow-hidden okd-w-full">
+        <Body className="okd-p-0">
+          <TransationListComponent
+            {...accountListArgs}
+          ></TransationListComponent>
+        </Body>
+      </Card>
+      <div className="okd-py-2 okd-text-brand-500">
+        <Button
+          type="plain"
+          // leadingIcon="PlusOutline"
+          className="okd-text-brand-500 okd-text-sm okd-font-bold okd-pl-0"
+        >
+          <Icon
+            size={14}
+            name="PlusOutline"
+            className="okd-text-brand-500 okd-font-bold okd-mr-1"
+          ></Icon>
+          ADD ACCOUNT
+        </Button>
+      </div>
+    </div>
+  );
+};
+
+export const SelectAccounts = SelectAccountTpl.bind({});

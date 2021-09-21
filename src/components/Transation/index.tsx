@@ -114,7 +114,6 @@ const TransationList: FC<TransationListProps> = ({
   renderItem,
   ...restProps
 }) => {
-  console.log("lsitPanelClass: ", listPanelClass);
   return (
     <div className={cx("okd-bg-gray-50 okd-w-full", className)}>
       {dataSource.map((listRow, index) => {
