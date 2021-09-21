@@ -17,14 +17,15 @@ export const Default: ComponentStory<typeof LayoutComponent> = (args) => (
 );
 
 Default.args = {
-  page: {
+  pageProps: {
     pageHeader: {
-      title: "Page Title"
-    }
+      title: "Page Title",
+    },
   },
-  children: (
-    <div>Content here.</div>
-  )
+  sidebarProps: {
+    active: "portfolio",
+  },
+  children: <div>Content here.</div>,
 };
 
 // const Template: ComponentStory<typeof LayoutComponent> = (args) => (

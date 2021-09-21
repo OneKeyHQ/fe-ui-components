@@ -19,6 +19,7 @@ export const Default: ComponentStory<typeof NFTCardComponent> = (args) => {
           title="chafflike_agua_toad"
           description="Alexander Reben: Thought-Render Fractal Series"
           footer="Top Bids - 12 ETH"
+          amount={2}
           {...args}
         />
       </div>
@@ -65,7 +66,7 @@ export const Customize = () => {
   );
 };
 
-export const OneKeyNFT = () => {
+export const OneKeyNFT = (args) => {
   return (
     <NFTCardComponent
       className="okd-max-w-[360px]"
@@ -73,6 +74,7 @@ export const OneKeyNFT = () => {
       description="Prof. Hedwig is from a mysterious country of magic, and she is shocked to see that the DeFi world has even more knowledge and magic to captivate her."
       footerClassName="okd-text-brand-500"
       footer="+3 XP / DAY"
+      {...args}
     />
   );
 };
