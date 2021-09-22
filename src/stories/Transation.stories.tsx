@@ -11,21 +11,21 @@ import {
   Tabs,
   Input as Search,
   Checkbox,
-  TransationList as TransationListComponent,
+  TransactionList as TransactionListComponent,
 } from "../components";
 import _ from "lodash";
 const { TabList, TabItem, TabPanels, TabPanel } = Tabs;
 const { Body } = Card;
 
 export default {
-  title: "UI/TransationList",
-  component: TransationListComponent,
-} as ComponentMeta<typeof TransationListComponent>;
+  title: "UI/TransactionList",
+  component: TransactionListComponent,
+} as ComponentMeta<typeof TransactionListComponent>;
 
-const Template: ComponentStory<typeof TransationListComponent> = (args) => (
+const Template: ComponentStory<typeof TransactionListComponent> = (args) => (
   <Card className="okd-overflow-hidden okd-w-80">
     <div className="okd--m-4 sm:okd--m-6">
-      <TransationListComponent {...args}></TransationListComponent>
+      <TransactionListComponent {...args}></TransactionListComponent>
     </div>
   </Card>
 );
@@ -178,7 +178,7 @@ AccountList.args = {
 
 // Manage Tokens
 
-const Tokens: ComponentStory<typeof TransationListComponent> = (args) => {
+const Tokens: ComponentStory<typeof TransactionListComponent> = (args) => {
   const searchHandle = useCallback((value) => {
     setTimeout(() => {
       console.log("fetch data: ");
@@ -211,9 +211,9 @@ const Tokens: ComponentStory<typeof TransationListComponent> = (args) => {
                         }
                       />
                     </div>
-                    <TransationListComponent
+                    <TransactionListComponent
                       {...args}
-                    ></TransationListComponent>
+                    ></TransactionListComponent>
                   </TabPanel>
                   <TabPanel>Tab2 Content</TabPanel>
                 </TabPanels>
@@ -354,7 +354,7 @@ ManageTokens.args = {
   listPanelClass: "okd-pl-0",
 };
 
-const SelectAccountTpl: ComponentStory<typeof TransationListComponent> = (
+const SelectAccountTpl: ComponentStory<typeof TransactionListComponent> = (
   args
 ) => {
   const [indeterminateVal, setIndeterminate] = useState(false);
@@ -493,9 +493,9 @@ const SelectAccountTpl: ComponentStory<typeof TransationListComponent> = (
       </div>
       <Card className="okd-overflow-hidden okd-w-full">
         <Body className="okd-p-0">
-          <TransationListComponent
+          <TransactionListComponent
             {...accountListArgs}
-          ></TransationListComponent>
+          ></TransactionListComponent>
         </Body>
       </Card>
       <div className="okd-py-2 okd-text-brand-500">

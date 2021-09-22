@@ -3,14 +3,14 @@ import cx from "classnames";
 import Icon from "../Icon/index";
 import { shortenAddress } from "../utils";
 
-export enum TransationStatus {
+export enum TransactionStatus {
   Success,
   Pending,
   Dropped,
   Failed,
 }
 
-export enum TransationDirection {
+export enum TransactionDirection {
   To,
   From,
 }
@@ -74,7 +74,7 @@ interface ListRow {
   lists: ListItem[];
 }
 
-type TransationListProps = {
+type TransactionListProps = {
   /**
    * list 列表list item 配置描述。
    */
@@ -106,7 +106,7 @@ type TransationListProps = {
   ) => React.ReactNode;
 };
 
-const TransationList: FC<TransationListProps> = ({
+const TransactionList: FC<TransactionListProps> = ({
   dataSource,
   className,
   listPanelClass,
@@ -160,7 +160,7 @@ const TransationList: FC<TransationListProps> = ({
                     </p>
                     {!!item.address && (
                       <p className="okd-text-sm okd-font-medium okd-text-gray-400">
-                        {TransationDirection[item.direction]}:{" "}
+                        {TransactionDirection[item.direction]}:{" "}
                         {shortenAddress(item.address)}
                       </p>
                     )}
@@ -171,7 +171,7 @@ const TransationList: FC<TransationListProps> = ({
                           status2Color[item.status]
                         )}
                       >
-                        {TransationStatus[item.status]}
+                        {TransactionStatus[item.status]}
                       </p>
                     ) : (
                       <p className="okd-text-sm okd-font-medium okd-text-gray-400">
@@ -215,4 +215,4 @@ const TransationList: FC<TransationListProps> = ({
   );
 };
 
-export default TransationList;
+export default TransactionList;

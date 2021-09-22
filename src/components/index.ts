@@ -42,7 +42,7 @@ export { default as Account } from "./Account";
 export { default as Layout } from "./Layout";
 export { default as Page } from "./Page";
 export { default as Section } from "./Section";
-export { default as TransationList } from "./Transation";
+export { default as TransactionList } from "./Transaction";
 export { default as TextArea } from "./TextArea";
 export { default as Checkbox } from "./Checkbox";
 
