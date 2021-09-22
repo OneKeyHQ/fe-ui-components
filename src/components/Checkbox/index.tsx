@@ -32,10 +32,6 @@ type CheckboxProps = {
    */
   checked?: boolean;
   /**
-   * 初始是否选中
-   */
-  defaultChecked?: boolean;
-  /**
    * indeterminate	设置 indeterminate 状态，只负责样式控制
    */
   indeterminate?: boolean;
@@ -59,7 +55,6 @@ const defaultProps = {} as const;
 const Checkbox: FC<CheckboxProps> = ({
   id,
   checked,
-  defaultChecked,
   indeterminate,
   description,
   disabled,
@@ -87,7 +82,7 @@ const Checkbox: FC<CheckboxProps> = ({
   }, [indeterminate]);
 
   useEffect(() => {
-    setCheckedValue(checked);
+    setCheckedValue(checked ?? false);
   }, [checked]);
 
   return (

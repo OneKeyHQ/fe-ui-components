@@ -17,10 +17,6 @@ export type AccountProps = {
    */
   symbol?: string;
   /**
-   * account or token logo src
-   */
-  logoUrl?: string;
-  /**
    * 账户操作
    */
   action?: React.ReactNode;
@@ -43,7 +39,6 @@ const defaultProps = {
  */
 export const Account: React.FC<AccountProps> = ({
   value,
-  logoUrl,
   symbol,
   address,
   label,
@@ -61,7 +56,7 @@ export const Account: React.FC<AccountProps> = ({
     >
       <div className="okd-flex okd-items-center">
         <div className="okd-w-8 okd-h-8 okd-overflow-hidden">
-          <Avatar address={address} size={32} logoUrl={logoUrl}></Avatar>
+          <Avatar address={address} size={32}></Avatar>
         </div>
         <div className="okd-ml-2">
           {!!label ? (
