@@ -24,13 +24,21 @@ const status2Color = {
   3: "okd-text-red-600",
 };
 
-const statusList = [1, 2, 3];
+const statusList = [
+  TransactionStatus.Pending,
+  TransactionStatus.Dropped,
+  TransactionStatus.Failed,
+];
 
 const currency2Usd = (value: string) => {
   return `${value} USD`;
 };
 
 interface ListItem {
+  /**
+   * 是否为列表最后一项
+   */
+  isLast: boolean;
   /**
    * label props
    */
@@ -60,10 +68,6 @@ interface ListItem {
    */
   timestamp: number;
   /**
-   * key 交易完成的时间戳
-   */
-  [key: string]: any;
-  /**
    * render 生成复杂数据的渲染函数，参数分别为当前行的值，当前行数据，行索引
    */
   render?: (record: object) => React.ReactNode;
@@ -82,7 +86,7 @@ type TransactionListProps = {
   /**
    * dataSource 数据数组
    */
-  dataSource: object[];
+  dataSource: ListRow[];
   /**
    * 设置额外的 class
    */
@@ -106,6 +110,83 @@ type TransactionListProps = {
   ) => React.ReactNode;
 };
 
+interface LabelNodeProps {
+  value: string;
+  desc?: number | string;
+}
+
+const LabelNode: FC<LabelNodeProps> = ({ value, desc }) => {
+  return (
+    <div className="okd-px-4 okd-py-2 okd-text-xs  okd-text-gray-400">
+      {value}
+      {!!desc && ` (${desc})`}
+    </div>
+  );
+};
+
+const ListNode: FC<ListItem> = ({
+  isLast,
+  label,
+  address,
+  direction,
+  status,
+  timestamp,
+  value,
+}) => {
+  return (
+    <div
+      className={cx(
+        "okd-flex okd-items-start okd-justify-between okd-pr-4 okd-py-3",
+        {
+          "okd-border-b okd-border-gray-50 okd-border-solid": !isLast,
+        }
+      )}
+    >
+      <div className="okd-flex">
+        <div className="okd-flex okd-items-center okd-justify-center okd-mr-2 okd-w-8 okd-h-8 okd-rounded-full okd-border okd-border-solid okd-border-gray-100">
+          <Icon
+            size={16}
+            className="okd-text-gray-500"
+            name="ArrowUpOutline"
+          ></Icon>
+        </div>
+        <div>
+          <p className="okd-text-base okd-leading-5 okd-font-medium okd-text-gray-900">
+            {label}
+          </p>
+          {address && (
+            <p className="okd-text-sm okd-font-medium okd-text-gray-400">
+              {TransactionDirection[direction]}: {shortenAddress(address)}
+            </p>
+          )}
+          {statusList.includes(status) ? (
+            <p
+              className={cx(
+                "okd-text-sm okd-font-medium",
+                status2Color[status]
+              )}
+            >
+              {TransactionStatus[status]}
+            </p>
+          ) : (
+            <p className="okd-text-sm okd-font-medium okd-text-gray-400">
+              {timestamp}
+            </p>
+          )}
+        </div>
+      </div>
+      <div className="okd-text-right">
+        <p className="okd-text-base okd-leading-5 okd-font-medium okd-text-gray-900">
+          {value}
+        </p>
+        <p className="okd-text-sm okd-font-medium okd-text-gray-400">
+          {currency2Usd(value)}
+        </p>
+      </div>
+    </div>
+  );
+};
+
 const TransactionList: FC<TransactionListProps> = ({
   dataSource,
   className,
@@ -119,15 +200,16 @@ const TransactionList: FC<TransactionListProps> = ({
       {dataSource.map((listRow, index) => {
         const { label, lists } = listRow as ListRow;
         let labelNode: React.ReactNode;
-        // let itemNode: React.ReactNode;
         let listNodes: React.ReactNode[];
         if (renderLabel) {
           labelNode = renderLabel(label, lists?.length);
         } else {
           labelNode = (
-            <div className="okd-px-4 okd-py-2 okd-text-xs  okd-text-gray-400">{`${label?.toUpperCase()} (${
-              lists.length
-            })`}</div>
+            <LabelNode
+              key={`${label?.toUpperCase()}-${index}`}
+              value={label?.toUpperCase()}
+              desc={lists?.length}
+            ></LabelNode>
           );
         }
 
@@ -136,65 +218,17 @@ const TransactionList: FC<TransactionListProps> = ({
             return renderItem(item, idx, lists?.length, label);
           } else {
             return (
-              <div
+              <ListNode
                 key={`item-${idx}`}
-                className={cx(
-                  "okd-flex okd-items-start okd-justify-between okd-pr-4 okd-py-3",
-                  {
-                    "okd-border-b okd-border-gray-50 okd-border-solid":
-                      lists.length - 1 !== idx,
-                  }
-                )}
-              >
-                <div className="okd-flex">
-                  <div className="okd-flex okd-items-center okd-justify-center okd-mr-2 okd-w-8 okd-h-8 okd-rounded-full okd-border okd-border-solid okd-border-gray-100">
-                    <Icon
-                      size={16}
-                      className="okd-text-gray-500"
-                      name="ArrowUpOutline"
-                    ></Icon>
-                  </div>
-                  <div>
-                    <p className="okd-text-base okd-leading-5 okd-font-medium okd-text-gray-900">
-                      {item.label}
-                    </p>
-                    {!!item.address && (
-                      <p className="okd-text-sm okd-font-medium okd-text-gray-400">
-                        {TransactionDirection[item.direction]}:{" "}
-                        {shortenAddress(item.address)}
-                      </p>
-                    )}
-                    {statusList.includes(item.status) ? (
-                      <p
-                        className={cx(
-                          "okd-text-sm okd-font-medium",
-                          status2Color[item.status]
-                        )}
-                      >
-                        {TransactionStatus[item.status]}
-                      </p>
-                    ) : (
-                      <p className="okd-text-sm okd-font-medium okd-text-gray-400">
-                        {item.timestamp}
-                      </p>
-                    )}
-                  </div>
-                </div>
-                <div className="okd-text-right">
-                  <p className="okd-text-base okd-leading-5 okd-font-medium okd-text-gray-900">
-                    {item.value}
-                  </p>
-                  <p className="okd-text-sm okd-font-medium okd-text-gray-400">
-                    {currency2Usd(item.value)}
-                  </p>
-                </div>
-              </div>
+                isLast={lists?.length - 1 === idx}
+                {...item}
+              ></ListNode>
             );
           }
         });
 
         return (
-          <div key={index}>
+          <div key={`${index}-${index}`}>
             {!!label && !!lists.length && labelNode}
             {!!lists.length && (
               <div

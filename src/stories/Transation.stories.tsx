@@ -154,7 +154,10 @@ AccountList.args = {
   ],
   renderLabel: (label, len) => {
     return (
-      <div className="okd-flex okd-items-center okd-text-gray-400 okd-py-2 okd-px-4 okd-text-sm okd-leading-4">
+      <div
+        key={label}
+        className="okd-flex okd-items-center okd-text-gray-400 okd-py-2 okd-px-4 okd-text-sm okd-leading-4"
+      >
         {`${label}(${len})`}
         <Tooltip place="bottom" content="chain">
           <Icon name="PresentationChartBarOutline" size={14}></Icon>
@@ -165,6 +168,7 @@ AccountList.args = {
   renderItem: (item, idx, len) => {
     return (
       <div
+        key={`item-${idx}`}
         className={cx({
           "okd-border-b okd-border-gray-50 okd-border-solid": idx !== len - 1,
         })}
@@ -329,6 +333,7 @@ ManageTokens.args = {
 
     return (
       <div
+        key={`item-${idx}`}
         className={cx({
           "okd-border-b okd-border-gray-50 okd-border-solid": idx !== len - 1,
         })}
@@ -460,6 +465,7 @@ const SelectAccountTpl: ComponentStory<typeof TransactionListComponent> = (
 
         return (
           <div
+            key={`item-${idx}`}
             className={cx({
               "okd-border-b okd-border-gray-50 okd-border-solid":
                 idx !== len - 1,
