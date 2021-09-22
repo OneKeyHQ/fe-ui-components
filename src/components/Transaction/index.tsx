@@ -40,6 +40,10 @@ interface ListItem {
    */
   isLast: boolean;
   /**
+   * 是否已经添加过该token
+   */
+  added?: boolean;
+  /**
    * label props
    */
   label: string;

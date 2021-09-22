@@ -1,4 +1,4 @@
-import React, { useCallback, useState, useEffect, useMemo } from "react";
+import React, { useCallback, useState, useEffect, useMemo, FC } from "react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 import cx from "classnames";
 import {
@@ -11,6 +11,8 @@ import {
   Tabs,
   Input as Search,
   Checkbox,
+  Modal,
+  Token,
   TransactionList as TransactionListComponent,
 } from "../components";
 import _ from "lodash";
@@ -254,7 +256,7 @@ ManageTokens.args = {
       lists: [
         {
           label: "BNB",
-          address: "0xa3C6cA435B784ab686987Fe0850f7B75388b4551",
+          address: "0xa3C6cA435B784ab686987Fe0850f7B75388b4552",
           direction: 0,
           status: 0,
           value: "0.5",
@@ -264,7 +266,7 @@ ManageTokens.args = {
         },
         {
           label: "ETH",
-          address: "0xa3C6cA435B784ab686987Fe0850f7B75388b4551",
+          address: "0xa3C6cA435B784ab686987Fe0850f7B75388b4553",
           direction: 0,
           status: 2,
           value: "0.5",
@@ -274,7 +276,7 @@ ManageTokens.args = {
         },
         {
           label: "BTC",
-          address: "0xa3C6cA435B784ab686987Fe0850f7B75388b4551",
+          address: "0xa3C6cA435B784ab686987Fe0850f7B75388b4554",
           direction: 0,
           status: 3,
           value: "0.5",
@@ -284,12 +286,23 @@ ManageTokens.args = {
         },
         {
           label: "CTT",
-          address: "0xa3C6cA435B784ab686987Fe0850f7B75388b4551",
+          address: "0xa3C6cA435B784ab686987Fe0850f7B75388b4555",
           direction: 0,
           status: 0,
           value: "0.5",
           symbol: "CTT",
           name: "CTT",
+          timestamp: "15:03·Sep",
+        },
+        {
+          label: "USDT",
+          address: "0xa3C6cA435B784ab686987Fe0850f7B75388b4551",
+          direction: 0,
+          status: 1,
+          added: true,
+          value: "0.5",
+          symbol: "USDT",
+          name: "USDT",
           timestamp: "15:03·Sep",
         },
       ],
@@ -321,13 +334,21 @@ ManageTokens.args = {
 
     const actionAdd = (token) => {
       return (
-        <Button
-          className="okd-text-brand-500"
-          type="plain"
-          onClick={() => addToken(token)}
-        >
-          ADD
-        </Button>
+        <>
+          {token.added ? (
+            <Button className="okd-text-brand-500" type="plain" disabled={true}>
+              ADDED
+            </Button>
+          ) : (
+            <Button
+              className="okd-text-brand-500"
+              type="plain"
+              onClick={() => addToken(token)}
+            >
+              ADD
+            </Button>
+          )}
+        </>
       );
     };
 
@@ -523,3 +544,123 @@ const SelectAccountTpl: ComponentStory<typeof TransactionListComponent> = (
 };
 
 export const SelectAccounts = SelectAccountTpl.bind({});
+
+// Add Token
+const defaulToken = {
+  address: "0xa3C6cA435B784ab686987Fe0850f7B75388b45516w0xa3C6454",
+  logoUrl:
+    "https://onekey-asset.com/assets/bsc/0x55d398326f99059ff775485246999027b3197955.png",
+  status: 1,
+  decimal: 18,
+  balance: "0.5",
+  symbol: "USDT",
+  name: "USDT Coin",
+  timestamp: "15:03·Sep",
+};
+
+interface TokenItemProps {
+  label: string;
+  value: string | number;
+  className?: string;
+}
+const TokenItem: FC<TokenItemProps> = ({ label, value, className }) => {
+  return (
+    <div
+      className={cx(
+        "okd-py-2 okd-flex okd-items-center okd-justify-between okd-font-medium okd-text-sm okd-border-b okd-border-solid okd-border-gray-200",
+        className
+      )}
+    >
+      <p className="okd-text-gray-400 okd-flex-shrink-0">{label}</p>
+      <p className="okd-text-gray-900 okd-ml-2 okd-break-all okd-text-right">
+        {value}
+      </p>
+    </div>
+  );
+};
+interface TokenProps {
+  name: string;
+  symbol?: string;
+  address: string;
+  decimal: number;
+  balance: string;
+  logoUrl: string;
+}
+
+const TokenPanel: FC<TokenProps> = ({
+  name,
+  symbol,
+  address,
+  decimal,
+  balance,
+  logoUrl,
+}) => {
+  return (
+    <div className="okd-bg-gray-50 okd-py-8">
+      <div className="okd-bg-gray-50 okd-pb-8 okd-text-center">
+        <Token src={logoUrl}></Token>
+        <p className="okd-text-xl okd-font-bold okd-text-gray-900 okd-mt-1">
+          {`${name}(${symbol})`}
+        </p>
+      </div>
+      <div className="okd-bg-white okd-border okd-border-solid okd-border-gray-200 okd-px-4">
+        <TokenItem label="Name" value={name} />
+        <TokenItem label="Symbol" value={symbol} />
+        <TokenItem label="Contract" value={address} />
+        <TokenItem label="Decimal" value={decimal} />
+        <TokenItem
+          label="Balance"
+          value={balance}
+          className="okd-border-none"
+        />
+      </div>
+    </div>
+  );
+};
+
+const TokenDetailTpl: ComponentStory<typeof Modal> = (args) => {
+  const [modalVisible, setModalVisible] = useState(true);
+  const handleCloseModal = useCallback(() => {
+    setModalVisible(false);
+  }, []);
+  const handleAdd = useCallback(() => {
+    console.log("handleNext: ");
+  }, []);
+  const modalTitle = useMemo(() => {
+    return (
+      <div className="okd-flex okd-items-center okd-justify-between">
+        <div className="okd-inline-flex okd-items-center">
+          <Icon name="PlusCircleSolid" size={16}></Icon>
+          <p className="okd-ml-2 okd-text-base okd-leading-5 okd-font-bold okd-text-gray-900">
+            Add Token
+          </p>
+        </div>
+      </div>
+    );
+  }, []);
+
+  return (
+    <Modal
+      className="okd-w-96"
+      visible={modalVisible}
+      onClose={handleCloseModal}
+    >
+      <Modal.Header title={modalTitle} onClose={handleCloseModal} />
+      <Modal.Body className="okd-p-0 sm:okd-p-0">
+        <TokenPanel {...defaulToken}></TokenPanel>
+      </Modal.Body>
+      <Modal.Footer>
+        <div className="okd-flex okd-space-x-3">
+          <Button className="okd-flex-1" onClick={handleCloseModal}>
+            Cancel
+          </Button>
+          <Button className="okd-flex-1" type="primary" onClick={handleAdd}>
+            Add
+          </Button>
+        </div>
+      </Modal.Footer>
+    </Modal>
+  );
+};
+
+export const TokenDetail = TokenDetailTpl.bind({});
