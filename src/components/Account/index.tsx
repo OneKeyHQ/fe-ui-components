@@ -55,7 +55,7 @@ export const Account: React.FC<AccountProps> = ({
       )}
     >
       <div className="okd-flex okd-items-center">
-        <div className="okd-w-8 okd-h-8 okd-overflow-hidden">
+        <div className="okd-w-8 okd-h-8 okd-flex-shrink-0 okd-overflow-hidden">
           <Avatar address={address} size={32}></Avatar>
         </div>
         <div className="okd-ml-2">

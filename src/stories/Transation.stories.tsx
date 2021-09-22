@@ -238,7 +238,7 @@ ManageTokens.args = {
       label: "my tokens",
       lists: [
         {
-          label: "USDT",
+          label: "USDT-0xa3C6cA435B784-0xa3C6cA435B784",
           address: "0xa3C6cA435B784ab686987Fe0850f7B75388b4551",
           direction: 0,
           status: 1,
