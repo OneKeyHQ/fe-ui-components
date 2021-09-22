@@ -19,6 +19,7 @@ const defaultProps = {
 
 const Avatar: FC<AvatarProps> = ({ address, size }) => {
   const seed = parseInt(address.slice(2, 10), 16);
+
   return (
     <div className={cx("okd-overflow-hidden okd-inline-block")}>
       <JazzIcon diameter={size} seed={seed} />
