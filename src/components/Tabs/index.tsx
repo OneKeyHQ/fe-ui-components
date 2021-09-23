@@ -114,12 +114,24 @@ const TabItem = ({
   );
 };
 
-const TabPanels = ({ children }) => {
-  return <Tab.Panels>{children}</Tab.Panels>;
+const TabPanels = ({
+  children,
+  className,
+}: {
+  children: React.ReactNode;
+  className?: string;
+}) => {
+  return <Tab.Panels className={cx(className)}>{children}</Tab.Panels>;
 };
 
-const TabPanel = ({ children }) => {
-  return <Tab.Panel>{children}</Tab.Panel>;
+const TabPanel = ({
+  children,
+  className,
+}: {
+  children: React.ReactNode;
+  className?: string;
+}) => {
+  return <Tab.Panel className={cx(className)}>{children}</Tab.Panel>;
 };
 
 const Tabs = (props: TabsProps) => {

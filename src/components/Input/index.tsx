@@ -1,13 +1,23 @@
-import React, { useState, LegacyRef, FC } from "react";
+import React, { useState, LegacyRef, FC, useCallback } from "react";
 import cx, { Argument } from "classnames";
 import Tooltip from "../Tooltip/index";
 import Icon from "../Icon/index";
+
+interface Rule {
+  required: boolean;
+  message: string;
+  pattern?: RegExp; //校验规则，不符合规则不显示内容
+}
 
 type InputProps = {
   /**
    * 声明 input 类型
    */
   type?: string;
+  /**
+   * 校验规则，不符合规则不显示内容
+   */
+  rule?: Rule;
   /**
    * 是否禁用状态，默认为 false
    */
@@ -43,7 +53,7 @@ type InputProps = {
   /**
    * 受控的表单控件的值
    */
-  value?: string;
+  value?: string | number;
   /**
    * 初始值，仅第一次渲染有效
    */
@@ -109,11 +119,35 @@ const Input: FC<InputProps> = ({
   className,
   innerRef,
   maxLength,
+  rule,
 }) => {
   const [defaultValue, setInitialValue] = useState(initialValue ?? "");
+  const [errorValue, setErrorValue] = useState(error ?? false);
+  const [helptextValue, setHelptextValue] = useState(helpText ?? "");
   const currentValue = maxLength
     ? value?.slice(0, maxLength) ?? defaultValue?.slice(0, maxLength)
     : value ?? defaultValue;
+
+  const handleChange = useCallback(
+    (e) => {
+      const content = e.target.value;
+      const { required, message, pattern } = rule || {};
+      if (pattern && content && !pattern.test(content)) {
+        return;
+      }
+      if (required && !content) {
+        setErrorValue(true);
+        setHelptextValue(message);
+      }
+      if (required && content) {
+        setErrorValue(false);
+        setHelptextValue("");
+      }
+      onChange?.(content);
+      setInitialValue(content);
+    },
+    [onChange, rule]
+  );
 
   return (
     <div className={cx(!!className && className)}>
@@ -159,15 +193,11 @@ const Input: FC<InputProps> = ({
           id="inputID"
           name="inputID"
           value={currentValue}
-          onChange={(e) => {
-            const content = e.target.value;
-            onChange?.(content);
-            setInitialValue(content);
-          }}
+          onChange={handleChange}
           type={type}
           className={cx(
             "form-input okd-block okd-w-full sm:okd-text-sm okd-rounded okd-bg-white okd-shadow-sm okd-placeholder-gray-400 disabled:okd-text-gray-700 disabled:okd-bg-gray-100 disabled:okd-cursor-not-allowed",
-            error
+            errorValue
               ? "okd-border-red-300 focus:okd-ring-red-500 focus:okd-border-red-500 okd-text-red-900"
               : "okd-border-gray-300 focus:okd-ring-brand-500 focus:okd-border-brand-500 okd-text-gray-900"
           )}
@@ -188,14 +218,14 @@ const Input: FC<InputProps> = ({
         )}
       </div>
       {/* `helpText` 即是帮助文本，在 `error` 时，也可以修改为错误的提示文本 */}
-      {!!helpText && (
+      {!!helptextValue && (
         <p
           className={cx(
             "okd-mt-2 okd-text-sm okd-text-left",
-            error ? "okd-text-red-600" : "okd-text-gray-400"
+            errorValue ? "okd-text-red-600" : "okd-text-gray-400"
           )}
         >
-          {helpText}
+          {helptextValue}
         </p>
       )}
     </div>

@@ -9,10 +9,11 @@ import {
   Switch,
   Icon,
   Tabs,
-  Input as Search,
+  Input,
   Checkbox,
   Modal,
   Token,
+  TextArea,
   TransactionList as TransactionListComponent,
 } from "../components";
 import _ from "lodash";
@@ -185,11 +186,33 @@ AccountList.args = {
 // Manage Tokens
 
 const Tokens: ComponentStory<typeof TransactionListComponent> = (args) => {
+  const [addDisable, setAddDisable] = useState(true);
+  const [address, setAddress] = useState("");
+  const [symbol, setSymbol] = useState("");
+  const [decimal, setDecimal] = useState("6");
   const searchHandle = useCallback((value) => {
     setTimeout(() => {
       console.log("fetch data: ");
     }, 1000);
   }, []);
+
+  const addressChange = useCallback((val) => {
+    setAddress(val);
+  }, []);
+  const symbolChange = useCallback((val) => {
+    setSymbol(val);
+  }, []);
+  const decimalChange = useCallback((val) => {
+    setDecimal(val);
+  }, []);
+
+  useEffect(() => {
+    if (address && symbol && decimal) {
+      setAddDisable(false);
+      return;
+    }
+    setAddDisable(true);
+  }, [address, symbol, decimal]);
 
   return (
     <Card title="Manage Tokens" className="okd-overflow-hidden okd-w-96">
@@ -202,27 +225,84 @@ const Tokens: ComponentStory<typeof TransactionListComponent> = (args) => {
                   <TabItem fitted={true}>Search</TabItem>
                   <TabItem fitted={true}>Custom</TabItem>
                 </TabList>
-                <TabPanels>
-                  <TabPanel>
-                    <div className="okd-p-4 okd-bg-gray-50">
-                      <Search
-                        onChange={_.debounce(searchHandle, 700)}
-                        placeholder="Search Tokens"
-                        addonBefore={
-                          <Icon
-                            name="SearchOutline"
-                            size={20}
-                            className="okd-text-gray-400"
+                <div className="okd-h-122 okd-bg-gray-50 okd-overflow-y-auto">
+                  <TabPanels className="okd-h-full">
+                    <TabPanel className="okd-h-full">
+                      <div className="okd-p-4 okd-bg-gray-50">
+                        <Input
+                          onChange={_.debounce(searchHandle, 700)}
+                          placeholder="Search Tokens"
+                          addonBefore={
+                            <Icon
+                              name="SearchOutline"
+                              size={20}
+                              className="okd-text-gray-400"
+                            />
+                          }
+                        />
+                      </div>
+                      <div>
+                        <TransactionListComponent
+                          {...args}
+                        ></TransactionListComponent>
+                      </div>
+                    </TabPanel>
+                    <TabPanel className="okd-h-full">
+                      <div className="okd-h-full okd-flex okd-flex-col okd-justify-between">
+                        <div className="okd-space-y-5 okd-pt-5 okd-px-4">
+                          <TextArea
+                            label="CONTRACT ADDRESS"
+                            maxLength={100}
+                            value={address}
+                            onChange={addressChange}
+                            rule={{
+                              required: true,
+                              message: "必填项",
+                              pattern: new RegExp(/^[a-zA-Z0-9]+$/),
+                            }}
                           />
-                        }
-                      />
-                    </div>
-                    <TransactionListComponent
-                      {...args}
-                    ></TransactionListComponent>
-                  </TabPanel>
-                  <TabPanel>Tab2 Content</TabPanel>
-                </TabPanels>
+                          <Input
+                            label="TOKEN SYMBOL"
+                            value={symbol}
+                            maxLength={15}
+                            onChange={symbolChange}
+                            rule={{
+                              required: true,
+                              message: "必填项",
+                              pattern: new RegExp(
+                                /^[a-zA-Z0-9]+\(?[a-zA-Z0-9]?\)?$/
+                              ),
+                            }}
+                          />
+                          <Input
+                            label="DECIMAL"
+                            value={decimal}
+                            maxLength={5}
+                            onChange={decimalChange}
+                            rule={{
+                              required: true,
+                              message: "必填项",
+                              pattern: new RegExp(/^[0-9]+$/),
+                            }}
+                          />
+                        </div>
+                        <div className="okd-flex okd-items-center okd-p-4 okd-space-x-3 okd-bg-white okd-border-t okd-border-solid okd-border-gray-200">
+                          <Button className="okd-flex-1" onClick={() => {}}>
+                            Cancel
+                          </Button>
+                          <Button
+                            className="okd-flex-1"
+                            type="primary"
+                            onClick={() => {}}
+                            disabled={addDisable}
+                          >
+                            Add
+                          </Button>
+                        </div>
+                      </div>
+                    </TabPanel>
+                  </TabPanels>
+                </div>
               </>
             );
           }}
