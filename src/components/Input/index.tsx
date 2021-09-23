@@ -76,6 +76,10 @@ type InputProps = {
    * Reference
    */
   innerRef?: LegacyRef<HTMLInputElement>;
+  /**
+   * 最大长度，超出部分不显示
+   */
+  maxLength?: number;
 };
 
 const defaultProps = {
@@ -104,9 +108,13 @@ const Input: FC<InputProps> = ({
   labelCorner,
   className,
   innerRef,
+  maxLength,
 }) => {
   const [defaultValue, setInitialValue] = useState(initialValue ?? "");
-  const currentValue = value ?? defaultValue;
+  const currentValue = maxLength
+    ? value?.slice(0, maxLength) ?? defaultValue?.slice(0, maxLength)
+    : value ?? defaultValue;
+
   return (
     <div className={cx(!!className && className)}>
       {/* Label */}
