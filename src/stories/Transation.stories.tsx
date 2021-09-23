@@ -198,6 +198,7 @@ const Tokens: ComponentStory<typeof TransactionListComponent> = (args) => {
 
   const addressChange = useCallback((val) => {
     setAddress(val);
+    // TODO 校验合约地址有效性
   }, []);
   const symbolChange = useCallback((val) => {
     setSymbol(val);
@@ -744,3 +745,72 @@ const TokenDetailTpl: ComponentStory<typeof Modal> = (args) => {
 };
 
 export const TokenDetail = TokenDetailTpl.bind({});
+
+// token管理 sol top50 token 添加 modal
+interface FootActionProps {
+  cancelText: string;
+  handleCancel: () => void;
+  okText: string;
+  handleOk: () => void;
+}
+
+const FootAction: FC<FootActionProps> = ({
+  cancelText,
+  handleCancel,
+  okText,
+  handleOk,
+}) => {
+  return (
+    <div className="okd-flex okd-space-x-3">
+      <Button className="okd-flex-1" onClick={handleCancel}>
+        {cancelText}
+      </Button>
+      <Button className="okd-flex-1" type="primary" onClick={handleOk}>
+        {okText}
+      </Button>
+    </div>
+  );
+};
+
+const SolTokenAddModalTpl: ComponentStory<typeof Modal> = (args) => {
+  const [modalVisible, setModalVisible] = useState(true);
+  const handleCloseModal = useCallback(() => {
+    setModalVisible(false);
+  }, []);
+  const handlePay = useCallback(() => {
+    console.log("handlePay: pay sol chain add token fee");
+  }, []);
+  const fee = 0.00203928;
+  const symbol = "SXP";
+
+  return (
+    <Modal
+      className="okd-w-80"
+      visible={modalVisible}
+      onClose={handleCloseModal}
+    >
+      <Modal.Body className="okd-p-4">
+        <div className="okd-text-center okd-pb-6">
+          <Token
+            src="https://onekey-asset.com/assets/bsc/0x55d398326f99059ff775485246999027b3197955.png"
+            size={48}
+          ></Token>
+          <p className="okd-text-xl okd-font-bold okd-text-gray-900 okd-mt-4">
+            Transaction Confirm
+          </p>
+          <p className="okd-text-sm okd-font-medium okd-text-gray-500 okd-mt-2">
+            {`Pay ${fee} SOL to add ${symbol} token.`}
+          </p>
+        </div>
+        <FootAction
+          cancelText="Cancel"
+          handleCancel={handleCloseModal}
+          okText="Pay"
+          handleOk={handlePay}
+        />
+      </Modal.Body>
+    </Modal>
+  );
+};
+
+export const SolTokenAddModal = SolTokenAddModalTpl.bind({});
