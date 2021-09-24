@@ -22,8 +22,11 @@ jobs:
       - name: Build Target
         run: |
           yarn build
-      - name: Publish
+      - name: Publish packages
+        uses: changesets/action@master
+        with:
+          publish: cd build/components && yarn publish
+          commit: "chore(release): version packages"
         env:
+          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          cd build/components && yarn publish
