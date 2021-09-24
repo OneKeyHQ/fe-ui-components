@@ -15,7 +15,7 @@ export type AddressProps = {
    * 传入 Address 组件的样式名称
    */
   className?: string;
-}
+};
 
 const defaultProps = {
   short: false,
@@ -28,6 +28,7 @@ export const Address: React.FC<AddressProps> = ({
   address,
   short,
   children,
+  className,
   ...restProps
 }) => {
   let textContent = address || children;
@@ -38,7 +39,7 @@ export const Address: React.FC<AddressProps> = ({
 
   return (
     <p
-      className={cx("okd-font-mono okd-text-gray-700 okd-text-sm okd-font-normal", restProps.className)}
+      className={cx("okd-font-mono", !!className ? className : null)}
       {...restProps}
     >
       {textContent}
