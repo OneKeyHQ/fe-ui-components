@@ -55,7 +55,7 @@ export const Account: React.FC<AccountProps> = ({
   return (
     <div
       className={cx(
-        "okd-w-full okd-bg-white hover:okd-bg-gray-100 okd-flex okd-items-center okd-justify-between okd-p-3",
+        "okd-flex okd-items-center",
         className
       )}
     >

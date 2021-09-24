@@ -16,19 +16,18 @@ type AvatarProps = {
   /**
    * 图像尺寸大小
    */
-  size?: 20 | 24 | 32 | 40 | 48 | 56;
+  size?: number | "sm" | "md" | "lg" | "xl" | "2xl" | "3xl";
 };
 
 const defaultProps = {
-  size: 32,
+  size: "lg",
 } as const;
 
 const Avatar: FC<AvatarProps> = ({ address, size, logoUrl }) => {
   const seed = parseInt(address.slice(2, 10), 16);
 
   return (
-    <div className={cx("okd-overflow-hidden okd-inline-block")}>
-      {/* <JazzIcon diameter={size} seed={seed} /> */}
+    <div className={cx("okd-inline-flex okd-overflow-hidden")}>
       <ImageFallback
         src={
           logoUrl ??
@@ -40,17 +39,28 @@ const Avatar: FC<AvatarProps> = ({ address, size, logoUrl }) => {
               width: "100%",
               height: "100%",
               borderRadius: "50%",
-              overflow: "hidden",
             }}
-            diameter={size}
+            diameter={
+              typeof size === "number"
+                ? size
+                : size === "sm"
+                ? 20
+                : size === "md"
+                ? 24
+                : size === "lg"
+                ? 32
+                : size === "xl"
+                ? 40
+                : size === "2xl"
+                ? 48
+                : size === "3xl"
+                ? 56
+                : null
+            }
             seed={seed}
           />
         }
         alt="avatar"
-        className={cx("", {
-          rounded: "rounded-full overflow-hidden",
-        })}
-        style={{ minWidth: size, minHeight: size }}
       />
     </div>
   );
