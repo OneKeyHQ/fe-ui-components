@@ -53,7 +53,7 @@ type InputProps = {
   /**
    * 受控的表单控件的值
    */
-  value?: string | number;
+  value?: string;
   /**
    * 初始值，仅第一次渲染有效
    */
