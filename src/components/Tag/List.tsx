@@ -1,6 +1,6 @@
-import React, { FC, useState, ReactNode } from "react";
+import React, { useState, ReactNode } from "react";
 import { useCallback } from "react";
-import { uniq, remove, isNil } from "lodash";
+import { uniq, isNil } from "lodash";
 import Tag, { TagProps } from ".";
 
 type TagListProps<T> = {
@@ -14,11 +14,18 @@ type TagListProps<T> = {
   onRemove?: (index: number, item: TagProps) => void;
   /** tag 配置数组 */
   tags: (TagProps & { children?: ReactNode })[];
-} & Omit<TagProps, 'onChange' | 'onRemove'>;
+} & Omit<TagProps, "onChange" | "onRemove">;
 
 const arraify = (v) => (Array.isArray(v) ? v : [v]);
 
-function TagList<T = number | number[]>({ tags, value, onChange, multi, onRemove, ...rest }: TagListProps<T>) {
+function TagList<T = number | number[]>({
+  tags,
+  value,
+  onChange,
+  multi,
+  onRemove,
+  ...rest
+}: TagListProps<T>) {
   const _valueList = arraify(value);
   const valueList = multi ? _valueList : _valueList.slice(0, 1);
 
@@ -27,7 +34,6 @@ function TagList<T = number | number[]>({ tags, value, onChange, multi, onRemove
 
   const handleChange = useCallback(
     (index: number, isAdd: boolean) => {
-
       const sliceArr = activeItemIndexList.slice();
       let result;
       if (multi) {
@@ -35,7 +41,7 @@ function TagList<T = number | number[]>({ tags, value, onChange, multi, onRemove
           sliceArr.push(index);
           result = uniq(sliceArr);
         } else {
-          result = sliceArr.filter(item => item !== index);
+          result = sliceArr.filter((item) => item !== index);
         }
       } else {
         // single
@@ -70,6 +76,6 @@ function TagList<T = number | number[]>({ tags, value, onChange, multi, onRemove
       })}
     </div>
   );
-};
+}
 
 export default TagList;

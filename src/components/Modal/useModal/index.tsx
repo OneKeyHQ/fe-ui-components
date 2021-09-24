@@ -25,7 +25,7 @@ const ElementsHolder = React.memo(
       () => ({
         patchElement,
       }),
-      []
+      [patchElement]
     );
     return <>{elements}</>;
   })

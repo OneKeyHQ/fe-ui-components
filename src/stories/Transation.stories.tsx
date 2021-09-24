@@ -1,4 +1,4 @@
-import React, { useCallback, useState, useEffect, useMemo } from "react";
+import React, { useCallback, useState, useEffect, useMemo, FC } from "react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 import cx from "classnames";
 import {
@@ -9,8 +9,11 @@ import {
   Switch,
   Icon,
   Tabs,
-  Input as Search,
+  Input,
   Checkbox,
+  Modal,
+  Token,
+  TextArea,
   TransactionList as TransactionListComponent,
 } from "../components";
 import _ from "lodash";
@@ -183,11 +186,34 @@ AccountList.args = {
 // Manage Tokens
 
 const Tokens: ComponentStory<typeof TransactionListComponent> = (args) => {
+  const [addDisable, setAddDisable] = useState(true);
+  const [address, setAddress] = useState("");
+  const [symbol, setSymbol] = useState("");
+  const [decimal, setDecimal] = useState("6");
   const searchHandle = useCallback((value) => {
     setTimeout(() => {
       console.log("fetch data: ");
     }, 1000);
   }, []);
+
+  const addressChange = useCallback((val) => {
+    setAddress(val);
+    // TODO 校验合约地址有效性
+  }, []);
+  const symbolChange = useCallback((val) => {
+    setSymbol(val);
+  }, []);
+  const decimalChange = useCallback((val) => {
+    setDecimal(val);
+  }, []);
+
+  useEffect(() => {
+    if (address && symbol && decimal) {
+      setAddDisable(false);
+      return;
+    }
+    setAddDisable(true);
+  }, [address, symbol, decimal]);
 
   return (
     <Card title="Manage Tokens" className="okd-overflow-hidden okd-w-96">
@@ -200,27 +226,84 @@ const Tokens: ComponentStory<typeof TransactionListComponent> = (args) => {
                   <TabItem fitted={true}>Search</TabItem>
                   <TabItem fitted={true}>Custom</TabItem>
                 </TabList>
-                <TabPanels>
-                  <TabPanel>
-                    <div className="okd-p-4 okd-bg-gray-50">
-                      <Search
-                        onChange={_.debounce(searchHandle, 700)}
-                        placeholder="Search Tokens"
-                        addonBefore={
-                          <Icon
-                            name="SearchOutline"
-                            size={20}
-                            className="okd-text-gray-400"
+                <div className="okd-h-122 okd-bg-gray-50 okd-overflow-y-auto">
+                  <TabPanels className="okd-h-full">
+                    <TabPanel className="okd-h-full">
+                      <div className="okd-p-4 okd-bg-gray-50">
+                        <Input
+                          onChange={_.debounce(searchHandle, 700)}
+                          placeholder="Search Tokens"
+                          addonBefore={
+                            <Icon
+                              name="SearchOutline"
+                              size={20}
+                              className="okd-text-gray-400"
+                            />
+                          }
+                        />
+                      </div>
+                      <div>
+                        <TransactionListComponent
+                          {...args}
+                        ></TransactionListComponent>
+                      </div>
+                    </TabPanel>
+                    <TabPanel className="okd-h-full">
+                      <div className="okd-h-full okd-flex okd-flex-col okd-justify-between">
+                        <div className="okd-space-y-5 okd-pt-5 okd-px-4">
+                          <TextArea
+                            label="CONTRACT ADDRESS"
+                            maxLength={100}
+                            value={address}
+                            onChange={addressChange}
+                            rule={{
+                              required: true,
+                              message: "必填项",
+                              pattern: new RegExp(/^[a-zA-Z0-9]+$/),
+                            }}
                           />
-                        }
-                      />
-                    </div>
-                    <TransactionListComponent
-                      {...args}
-                    ></TransactionListComponent>
-                  </TabPanel>
-                  <TabPanel>Tab2 Content</TabPanel>
-                </TabPanels>
+                          <Input
+                            label="TOKEN SYMBOL"
+                            value={symbol}
+                            maxLength={15}
+                            onChange={symbolChange}
+                            rule={{
+                              required: true,
+                              message: "必填项",
+                              pattern: new RegExp(
+                                /^[a-zA-Z0-9]+\(?[a-zA-Z0-9]?\)?$/
+                              ),
+                            }}
+                          />
+                          <Input
+                            label="DECIMAL"
+                            value={decimal}
+                            maxLength={5}
+                            onChange={decimalChange}
+                            rule={{
+                              required: true,
+                              message: "必填项",
+                              pattern: new RegExp(/^[0-9]+$/),
+                            }}
+                          />
+                        </div>
+                        <div className="okd-flex okd-items-center okd-p-4 okd-space-x-3 okd-bg-white okd-border-t okd-border-solid okd-border-gray-200">
+                          <Button className="okd-flex-1" onClick={() => {}}>
+                            Cancel
+                          </Button>
+                          <Button
+                            className="okd-flex-1"
+                            type="primary"
+                            onClick={() => {}}
+                            disabled={addDisable}
+                          >
+                            Add
+                          </Button>
+                        </div>
+                      </div>
+                    </TabPanel>
+                  </TabPanels>
+                </div>
               </>
             );
           }}
@@ -238,7 +321,7 @@ ManageTokens.args = {
       label: "my tokens",
       lists: [
         {
-          label: "USDT",
+          label: "USDT-0xa3C6cA435B784-0xa3C6cA435B784",
           address: "0xa3C6cA435B784ab686987Fe0850f7B75388b4551",
           direction: 0,
           status: 1,
@@ -254,7 +337,7 @@ ManageTokens.args = {
       lists: [
         {
           label: "BNB",
-          address: "0xa3C6cA435B784ab686987Fe0850f7B75388b4551",
+          address: "0xa3C6cA435B784ab686987Fe0850f7B75388b4552",
           direction: 0,
           status: 0,
           value: "0.5",
@@ -264,7 +347,7 @@ ManageTokens.args = {
         },
         {
           label: "ETH",
-          address: "0xa3C6cA435B784ab686987Fe0850f7B75388b4551",
+          address: "0xa3C6cA435B784ab686987Fe0850f7B75388b4553",
           direction: 0,
           status: 2,
           value: "0.5",
@@ -274,7 +357,7 @@ ManageTokens.args = {
         },
         {
           label: "BTC",
-          address: "0xa3C6cA435B784ab686987Fe0850f7B75388b4551",
+          address: "0xa3C6cA435B784ab686987Fe0850f7B75388b4554",
           direction: 0,
           status: 3,
           value: "0.5",
@@ -284,12 +367,23 @@ ManageTokens.args = {
         },
         {
           label: "CTT",
-          address: "0xa3C6cA435B784ab686987Fe0850f7B75388b4551",
+          address: "0xa3C6cA435B784ab686987Fe0850f7B75388b4555",
           direction: 0,
           status: 0,
           value: "0.5",
           symbol: "CTT",
           name: "CTT",
+          timestamp: "15:03·Sep",
+        },
+        {
+          label: "USDT",
+          address: "0xa3C6cA435B784ab686987Fe0850f7B75388b4551",
+          direction: 0,
+          status: 1,
+          added: true,
+          value: "0.5",
+          symbol: "USDT",
+          name: "USDT",
           timestamp: "15:03·Sep",
         },
       ],
@@ -321,13 +415,21 @@ ManageTokens.args = {
 
     const actionAdd = (token) => {
       return (
-        <Button
-          className="okd-text-brand-500"
-          type="plain"
-          onClick={() => addToken(token)}
-        >
-          ADD
-        </Button>
+        <>
+          {token.added ? (
+            <Button className="okd-text-brand-500" type="plain" disabled={true}>
+              ADDED
+            </Button>
+          ) : (
+            <Button
+              className="okd-text-brand-500"
+              type="plain"
+              onClick={() => addToken(token)}
+            >
+              ADD
+            </Button>
+          )}
+        </>
       );
     };
 
@@ -523,3 +625,192 @@ const SelectAccountTpl: ComponentStory<typeof TransactionListComponent> = (
 };
 
 export const SelectAccounts = SelectAccountTpl.bind({});
+
+// Add Token
+const defaulToken = {
+  address: "0xa3C6cA435B784ab686987Fe0850f7B75388b45516w0xa3C6454",
+  logoUrl:
+    "https://onekey-asset.com/assets/bsc/0x55d398326f99059ff775485246999027b3197955.png",
+  status: 1,
+  decimal: 18,
+  balance: "0.5",
+  symbol: "USDT",
+  name: "USDT Coin",
+  timestamp: "15:03·Sep",
+};
+
+interface TokenItemProps {
+  label: string;
+  value: string | number;
+  className?: string;
+}
+const TokenItem: FC<TokenItemProps> = ({ label, value, className }) => {
+  return (
+    <div
+      className={cx(
+        "okd-py-2 okd-flex okd-items-center okd-justify-between okd-font-medium okd-text-sm okd-border-b okd-border-solid okd-border-gray-200",
+        className
+      )}
+    >
+      <p className="okd-text-gray-400 okd-flex-shrink-0">{label}</p>
+      <p className="okd-text-gray-900 okd-ml-2 okd-break-all okd-text-right">
+        {value}
+      </p>
+    </div>
+  );
+};
+interface TokenProps {
+  name: string;
+  symbol?: string;
+  address: string;
+  decimal: number;
+  balance: string;
+  logoUrl: string;
+}
+
+const TokenPanel: FC<TokenProps> = ({
+  name,
+  symbol,
+  address,
+  decimal,
+  balance,
+  logoUrl,
+}) => {
+  return (
+    <div className="okd-bg-gray-50 okd-py-8">
+      <div className="okd-bg-gray-50 okd-pb-8 okd-text-center">
+        <Token src={logoUrl}></Token>
+        <p className="okd-text-xl okd-font-bold okd-text-gray-900 okd-mt-1">
+          {`${name}(${symbol})`}
+        </p>
+      </div>
+      <div className="okd-bg-white okd-border okd-border-solid okd-border-gray-200 okd-px-4">
+        <TokenItem label="Name" value={name} />
+        <TokenItem label="Symbol" value={symbol} />
+        <TokenItem label="Contract" value={address} />
+        <TokenItem label="Decimal" value={decimal} />
+        <TokenItem
+          label="Balance"
+          value={balance}
+          className="okd-border-none"
+        />
+      </div>
+    </div>
+  );
+};
+
+const TokenDetailTpl: ComponentStory<typeof Modal> = (args) => {
+  const [modalVisible, setModalVisible] = useState(true);
+  const handleCloseModal = useCallback(() => {
+    setModalVisible(false);
+  }, []);
+  const handleAdd = useCallback(() => {
+    console.log("handleNext: ");
+  }, []);
+  const modalTitle = useMemo(() => {
+    return (
+      <div className="okd-flex okd-items-center okd-justify-between">
+        <div className="okd-inline-flex okd-items-center">
+          <Icon name="PlusCircleSolid" size={16}></Icon>
+          <p className="okd-ml-2 okd-text-base okd-leading-5 okd-font-bold okd-text-gray-900">
+            Add Token
+          </p>
+        </div>
+      </div>
+    );
+  }, []);
+
+  return (
+    <Modal
+      className="okd-w-96"
+      visible={modalVisible}
+      onClose={handleCloseModal}
+    >
+      <Modal.Header title={modalTitle} onClose={handleCloseModal} />
+      <Modal.Body className="okd-p-0 sm:okd-p-0">
+        <TokenPanel {...defaulToken}></TokenPanel>
+      </Modal.Body>
+      <Modal.Footer>
+        <div className="okd-flex okd-space-x-3">
+          <Button className="okd-flex-1" onClick={handleCloseModal}>
+            Cancel
+          </Button>
+          <Button className="okd-flex-1" type="primary" onClick={handleAdd}>
+            Add
+          </Button>
+        </div>
+      </Modal.Footer>
+    </Modal>
+  );
+};
+
+export const TokenDetail = TokenDetailTpl.bind({});
+
+// token管理 sol top50 token 添加 modal
+interface FootActionProps {
+  cancelText: string;
+  handleCancel: () => void;
+  okText: string;
+  handleOk: () => void;
+}
+
+const FootAction: FC<FootActionProps> = ({
+  cancelText,
+  handleCancel,
+  okText,
+  handleOk,
+}) => {
+  return (
+    <div className="okd-flex okd-space-x-3">
+      <Button className="okd-flex-1" onClick={handleCancel}>
+        {cancelText}
+      </Button>
+      <Button className="okd-flex-1" type="primary" onClick={handleOk}>
+        {okText}
+      </Button>
+    </div>
+  );
+};
+
+const SolTokenAddModalTpl: ComponentStory<typeof Modal> = (args) => {
+  const [modalVisible, setModalVisible] = useState(true);
+  const handleCloseModal = useCallback(() => {
+    setModalVisible(false);
+  }, []);
+  const handlePay = useCallback(() => {
+    console.log("handlePay: pay sol chain add token fee");
+  }, []);
+  const fee = 0.00203928;
+  const symbol = "SXP";
+
+  return (
+    <Modal
+      className="okd-w-80"
+      visible={modalVisible}
+      onClose={handleCloseModal}
+    >
+      <Modal.Body className="okd-p-4">
+        <div className="okd-text-center okd-pb-6">
+          <Token
+            src="https://onekey-asset.com/assets/bsc/0x55d398326f99059ff775485246999027b3197955.png"
+            size={48}
+          ></Token>
+          <p className="okd-text-xl okd-font-bold okd-text-gray-900 okd-mt-4">
+            Transaction Confirm
+          </p>
+          <p className="okd-text-sm okd-font-medium okd-text-gray-500 okd-mt-2">
+            {`Pay ${fee} SOL to add ${symbol} token.`}
+          </p>
+        </div>
+        <FootAction
+          cancelText="Cancel"
+          handleCancel={handleCloseModal}
+          okText="Pay"
+          handleOk={handlePay}
+        />
+      </Modal.Body>
+    </Modal>
+  );
+};
+
+export const SolTokenAddModal = SolTokenAddModalTpl.bind({});

@@ -1,14 +1,18 @@
-import React, { FC, useCallback, useState, useEffect, useRef, useMemo } from "react";
+import React, {
+  FC,
+  useCallback,
+  useState,
+  useEffect,
+  useRef,
+  useMemo,
+} from "react";
 import { AbstractConnectorArguments } from "@web3-react/types";
 import { AbstractConnector } from "@web3-react/abstract-connector";
 import classNames from "classnames";
-
 import { buildMetaMaskConnector, buildOneKeyConnector } from "./connectors";
-
 import { UnsupportedChainIdError, useWeb3React } from "../web3/core";
 import { FormattedMessage, useIntl } from "../Intl";
 import Button from "../Button";
-import Alert from "../Alert";
 import Icon from "../Icon";
 import Modal from "../Modal";
 
@@ -47,9 +51,11 @@ const WalletSelector: FC<WalletSelectorProps> = ({
   connectorConfig,
 }) => {
   const intl = useIntl();
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [pendingError, setPendingError] = useState<boolean>();
   const [walletView, setWalletView] = useState(WALLET_VIEWS.ACCOUNT);
   const { active, account, connector, activate, error } = useWeb3React();
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [pendingWallet, setPendingWallet] = useState<
     AbstractConnector | undefined
   >();
@@ -94,48 +100,51 @@ const WalletSelector: FC<WalletSelectorProps> = ({
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const wallets = [
-      {
-        name: "OneKey",
-        logo: "BrandLogoIllus",
-        translationId: 'ui-components__connect__option_item__onekey',
-        unloadTranslationId: 'ui-components__connect__option_item__install_onekey',
-        connector: buildOneKeyConnector(connectorConfig),
-        downloadLink: "https://onekey.so/plugin",
-        hasLoad: !!(typeof window !== "undefined" && window.onekey),
-      },
-      {
-        name: "MetaMask",
-        logo: "MetamaskIllus",
-        translationId: 'ui-components__connect__option_item__metamask',
-        unloadTranslationId: 'ui-components__connect__option_item__install_metamask',
-        connector: buildMetaMaskConnector(connectorConfig),
-        downloadLink: "https://metamask.io/",
-        hasLoad: !!(typeof window !== "undefined" && window.ethereum && !window.ethereum.isOneKey),
-      },
-    ] as const;
+    {
+      name: "OneKey",
+      logo: "BrandLogoIllus",
+      translationId: "ui-components__connect__option_item__onekey",
+      unloadTranslationId:
+        "ui-components__connect__option_item__install_onekey",
+      connector: buildOneKeyConnector(connectorConfig),
+      downloadLink: "https://onekey.so/plugin",
+      hasLoad: !!(typeof window !== "undefined" && window.onekey),
+    },
+    {
+      name: "MetaMask",
+      logo: "MetamaskIllus",
+      translationId: "ui-components__connect__option_item__metamask",
+      unloadTranslationId:
+        "ui-components__connect__option_item__install_metamask",
+      connector: buildMetaMaskConnector(connectorConfig),
+      downloadLink: "https://metamask.io/",
+      hasLoad: !!(
+        typeof window !== "undefined" &&
+        window.ethereum &&
+        !window.ethereum.isOneKey
+      ),
+    },
+  ] as const;
 
   const tryActivation = useCallback(
-    async (
-      connector: AbstractConnector | undefined
-    ) => {
+    async (connector: AbstractConnector | undefined) => {
       if (!connector) return null;
       setWalletView(WALLET_VIEWS.PENDING);
       setPendingWallet(connector);
 
       /** switchProvider to active wallet */
       if (typeof window !== "undefined" && window.ethereum.switchProvider) {
-        const wallet = wallets.find(wallet => wallet.connector === connector);
+        const wallet = wallets.find((wallet) => wallet.connector === connector);
         window.ethereum.switchProvider(wallet.name.toLowerCase());
       }
 
-      activate(connector, undefined, true)
-        .catch((error) => {
-          if (error instanceof UnsupportedChainIdError) {
-            activate(connector);
-          } else {
-            setPendingError(true);
-          }
-        });
+      activate(connector, undefined, true).catch((error) => {
+        if (error instanceof UnsupportedChainIdError) {
+          activate(connector);
+        } else {
+          setPendingError(true);
+        }
+      });
     },
     [activate, wallets]
   );
@@ -144,20 +153,24 @@ const WalletSelector: FC<WalletSelectorProps> = ({
     if (walletView === WALLET_VIEWS.ACCOUNT) {
       if (account) {
         /** 账户 */
-        return intl.formatMessage({id: 'ui-components__connect_account_literal'});
+        return intl.formatMessage({
+          id: "ui-components__connect_account_literal",
+        });
       } else {
         /** 连接钱包 */
-        return intl.formatMessage({id: 'ui-components__connect_a_wallet'});
+        return intl.formatMessage({ id: "ui-components__connect_a_wallet" });
       }
     } else {
-      return intl.formatMessage({id: 'ui-components__connect_back_literal'});
+      return intl.formatMessage({ id: "ui-components__connect_back_literal" });
     }
   }, [walletView, account, intl]);
 
   const body = useMemo(() => {
     if (walletView === WALLET_VIEWS.PENDING) {
       if (!error) {
-        return intl.formatMessage({id: 'ui-components__connect_wallet__connecting'});
+        return intl.formatMessage({
+          id: "ui-components__connect_wallet__connecting",
+        });
       }
       return (
         <Button
@@ -166,7 +179,7 @@ const WalletSelector: FC<WalletSelectorProps> = ({
             connector && tryActivation(connector);
           }}
         >
-          {intl.formatMessage({id: 'ui-components__connect_wallet__retry'})}
+          {intl.formatMessage({ id: "ui-components__connect_wallet__retry" })}
         </Button>
       );
     }
@@ -189,55 +202,50 @@ const WalletSelector: FC<WalletSelectorProps> = ({
     }
 
     if (account && walletView === WALLET_VIEWS.ACCOUNT) {
-      return (
-        <>{account}</>
-      );
+      return <>{account}</>;
     }
 
-    return (
-      wallets.map((wallet) => {
-        if (!wallet.hasLoad) {
-          return (
-            <Button
-              block
-              size="xl"
-              as="a"
-              href={wallet.downloadLink}
-              key={wallet.name}
-              target="_blank"
-              className="okd-flex okd-items-center !okd-p-4 okd-border okd-border-gray-200 okd-shadow-none"
-            >
-              <span className="okd-text-gray-900 okd-flex-1">
-                <FormattedMessage id={wallet.unloadTranslationId} />
-              </span>
-              <Icon className="okd-ml-4 okd-flex-shrink-0" name={wallet.logo} />
-            </Button>
-          );
-        }
-
-        const isActiveConnection = !!connector && wallet.connector === connector;
-
+    return wallets.map((wallet) => {
+      if (!wallet.hasLoad) {
         return (
           <Button
             block
             size="xl"
-            onClick={() => tryActivation(wallet.connector)}
+            as="a"
+            href={wallet.downloadLink}
             key={wallet.name}
-            className={classNames("okd-flex okd-items-center !okd-p-4", {
-              'okd-border okd-border-gray-200 okd-shadow-none': !isActiveConnection,
-              'okd-ring-2 okd-ring-brand-500 okd-ring-offset-2 okd-ring-offset-white': isActiveConnection,
-            })}
+            target="_blank"
+            className="okd-flex okd-items-center !okd-p-4 okd-border okd-border-gray-200 okd-shadow-none"
           >
-            <span className="okd-text-gray-900 okd-inline-flex okd-flex-1">
-              <FormattedMessage id={wallet.translationId} />
+            <span className="okd-text-gray-900 okd-flex-1">
+              <FormattedMessage id={wallet.unloadTranslationId} />
             </span>
             <Icon className="okd-ml-4 okd-flex-shrink-0" name={wallet.logo} />
           </Button>
         );
-      })
-    )
-  }, [walletView, error, connector, tryActivation, intl, wallets, account]);
+      }
 
+      const isActiveConnection = !!connector && wallet.connector === connector;
+
+      return (
+        <Button
+          block
+          size="xl"
+          onClick={() => tryActivation(wallet.connector)}
+          key={wallet.name}
+          className={classNames("okd-flex okd-items-center !okd-p-4", {
+            "okd-border okd-border-gray-200 okd-shadow-none": !isActiveConnection,
+            "okd-ring-2 okd-ring-brand-500 okd-ring-offset-2 okd-ring-offset-white": isActiveConnection,
+          })}
+        >
+          <span className="okd-text-gray-900 okd-inline-flex okd-flex-1">
+            <FormattedMessage id={wallet.translationId} />
+          </span>
+          <Icon className="okd-ml-4 okd-flex-shrink-0" name={wallet.logo} />
+        </Button>
+      );
+    });
+  }, [walletView, error, connector, tryActivation, intl, wallets, account]);
 
   return (
     <Modal
@@ -245,10 +253,7 @@ const WalletSelector: FC<WalletSelectorProps> = ({
       onClose={onClose}
       className="okd-w-full sm:okd-max-w-md"
     >
-      <Modal.Header
-        title={title}
-        onClose={onClose}
-      />
+      <Modal.Header title={title} onClose={onClose} />
       <Modal.Body>
         <div className="max-w-full okd-flex okd-flex-col okd-space-y-3">
           {body}

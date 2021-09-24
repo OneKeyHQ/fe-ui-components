@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
-
 import {
   ProviderLike,
   SerializableTransactionReceipt,
@@ -28,7 +27,7 @@ const mockReceipt: SerializableTransactionReceipt = {
   blockNumber: 0,
   status: 0,
 };
-
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const mockProvider: ProviderLike = {
   getTransactionReceipt() {
     return new Promise((resolve, reject) => {

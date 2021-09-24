@@ -3,11 +3,20 @@ import cx, { Argument } from "classnames";
 import Tooltip from "../Tooltip/index";
 import Icon from "../Icon/index";
 
+interface Rule {
+  required: boolean;
+  message: string;
+  pattern?: RegExp; //校验规则，不符合规则不显示内容
+}
 type TextAreaProps = {
   /**
    * 声明 textArea 类型，text or code类型
    */
   type?: "text" | "code";
+  /**
+   * 校验规则，不符合规则不显示内容
+   */
+  rule?: Rule;
   /**
    * 是否可清空内容，默认为 false
    */
@@ -52,6 +61,18 @@ type TextAreaProps = {
    * 设置额外的 class
    */
   className?: Argument;
+  /**
+   * 最大长度，超出部分不显示
+   */
+  maxLength?: number;
+  /**
+   * 是否是错误样式
+   */
+  error?: boolean;
+  /**
+   * 错误信息
+   */
+  helpText?: string;
 };
 
 const defaultProps = {
@@ -61,6 +82,8 @@ const defaultProps = {
 
 const TextArea: FC<TextAreaProps> = ({
   rows,
+  error,
+  helpText,
   allowClear,
   disabled,
   readOnly,
@@ -71,15 +94,42 @@ const TextArea: FC<TextAreaProps> = ({
   label,
   labelTooltip,
   className,
+  maxLength,
+  rule,
 }) => {
   const [defaultValue, setInitialValue] = useState(initialValue ?? "");
-  const currentValue = value ?? defaultValue;
+  const [errorValue, setErrorValue] = useState(error ?? false);
+  const [helptextValue, setHelptextValue] = useState(helpText ?? "");
+  const currentValue = maxLength
+    ? value?.slice(0, maxLength) ?? defaultValue?.slice(0, maxLength)
+    : value ?? defaultValue;
 
   const clearContent = useCallback(() => {
     if (currentValue) {
       setInitialValue("");
     }
   }, [currentValue]);
+
+  const handleChange = useCallback(
+    (e) => {
+      const content = e.target.value;
+      const { required, message, pattern } = rule || {};
+      if (pattern && content && !pattern.test(content)) {
+        return;
+      }
+      if (required && !content) {
+        setErrorValue(true);
+        setHelptextValue(message);
+      }
+      if (required && content) {
+        setErrorValue(false);
+        setHelptextValue("");
+      }
+      onChange?.(content);
+      setInitialValue(content);
+    },
+    [onChange, rule]
+  );
 
   return (
     <div className={cx(!!className && className)}>
@@ -113,13 +163,12 @@ const TextArea: FC<TextAreaProps> = ({
           id="textAreaID"
           name="textAreaID"
           value={currentValue}
-          onChange={(e) => {
-            const content = e.target.value;
-            onChange?.(content);
-            setInitialValue(content);
-          }}
+          onChange={handleChange}
           className={cx(
-            "okd-resize-none form-input okd-border-gray-200 okd-rounded-sm okd-block okd-w-full sm:okd-text-sm okd-bg-white okd-shadow-sm okd-placeholder-gray-400 disabled:okd-text-gray-400 disabled:okd-bg-gray-50 disabled:okd-cursor-not-allowed"
+            "okd-resize-none form-input okd-rounded okd-block okd-w-full sm:okd-text-sm okd-bg-white okd-shadow-sm okd-placeholder-gray-400 disabled:okd-text-gray-400 disabled:okd-bg-gray-50 disabled:okd-cursor-not-allowed",
+            errorValue
+              ? "okd-border-red-300 focus:okd-ring-red-500 focus:okd-border-red-500 okd-text-red-900"
+              : "okd-border-gray-300 focus:okd-ring-brand-500 focus:okd-border-brand-500 okd-text-gray-900"
           )}
           style={{
             paddingRight:
@@ -130,6 +179,17 @@ const TextArea: FC<TextAreaProps> = ({
           readOnly={readOnly}
           rows={rows}
         />
+        {/* `helpText` 即是帮助文本，在 `error` 时，也可以修改为错误的提示文本 */}
+        {!!helptextValue && (
+          <p
+            className={cx(
+              "okd-mt-2 okd-text-sm okd-text-left",
+              errorValue ? "okd-text-red-600" : "okd-text-gray-400"
+            )}
+          >
+            {helptextValue}
+          </p>
+        )}
         {/* allowClear */}
         {!readOnly && !disabled && !!currentValue && allowClear && (
           <div

@@ -2,7 +2,6 @@ import React, { useState, useCallback, useEffect } from "react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 import ConfigBar from "./Base";
 import { Checkbox as CheckboxComponent } from "../components";
-import { Icon as IconComponent } from "../components";
 
 export default {
   title: "FORM/Checkbox",

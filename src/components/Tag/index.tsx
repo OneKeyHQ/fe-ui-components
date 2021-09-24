@@ -1,6 +1,5 @@
 import React, { FC, useCallback, useState } from "react";
 import cx, { Argument } from "classnames";
-
 import Token, { TokenProps } from "../Token";
 import Icon from "../Icon";
 
@@ -43,7 +42,7 @@ const Tag: FC<TagProps> = (props) => {
   } = props;
   const [status, setStatus] = useState(false);
   const isActive = active ?? status;
-  const removeAble = typeof onRemove === 'function';
+  const removeAble = typeof onRemove === "function";
 
   const handleClick = useCallback(() => {
     onChange?.(!isActive);
@@ -60,8 +59,8 @@ const Tag: FC<TagProps> = (props) => {
         isActive
           ? "okd-ring-2 okd-ring-offset-2 okd-ring-brand-500 okd-ring-offset-white"
           : "",
-        !!(clickable) ? "okd-cursor-pointer" : "",
-        !!(clickable)
+        !!clickable ? "okd-cursor-pointer" : "",
+        !!clickable
           ? !isActive
             ? "hover:okd-ring-2 hover:okd-ring-gray-200 hover:okd-ring-offset-2 hover:okd-ring-offset-white"
             : ""

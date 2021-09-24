@@ -40,6 +40,10 @@ interface ListItem {
    */
   isLast: boolean;
   /**
+   * 是否已经添加过该token
+   */
+  added?: boolean;
+  /**
    * label props
    */
   label: string;
@@ -198,7 +202,7 @@ const TransactionList: FC<TransactionListProps> = ({
   return (
     <div className={cx("okd-bg-gray-50 okd-w-full", className)}>
       {dataSource.map((listRow, index) => {
-        const { label, lists } = listRow as ListRow;
+        const { label, lists } = listRow;
         let labelNode: React.ReactNode;
         let listNodes: React.ReactNode[];
         if (renderLabel) {
