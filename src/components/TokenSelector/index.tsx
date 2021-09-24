@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import React, { FC, useRef } from "react";
 import cx, { Argument } from "classnames";
 import Modal from "../Modal";
 import TokenList from "../TokenList";
@@ -26,11 +26,14 @@ const TokenSelector: FC<TokenSelectorProps> & { Trigger } = ({
   list,
   ...rest
 }) => {
+  const initialFocusInput = useRef();
+
   return (
     <Modal
       visible={visible}
       onClose={onClose}
       className={cx("okd-w-full sm:okd-max-w-md", !!className && className)}
+      initialFocusRef={initialFocusInput}
       {...rest}
     >
       <Modal.Header title="Select Token" onClose={onClose} />
@@ -39,6 +42,7 @@ const TokenSelector: FC<TokenSelectorProps> & { Trigger } = ({
           <div className="okd-px-4 sm:okd-px-6 okd-py-3 okd-border-b okd-border-gray-200">
             <Input
               type="search"
+              innerRef={initialFocusInput}
               addonBefore={
                 <Icon
                   className="okd-text-gray-400"

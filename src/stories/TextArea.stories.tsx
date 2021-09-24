@@ -1,9 +1,7 @@
 import React from "react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 import ConfigBar from "./Base";
-
 import { TextArea as TextAreaComponent } from "../components";
-import { Icon as IconComponent } from "../components";
 
 export default {
   title: "FORM/TextArea",

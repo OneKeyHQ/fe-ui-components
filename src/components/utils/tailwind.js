@@ -131,10 +131,16 @@ const fontFamily = {
   ],
 };
 
+const spacing = {
+  122: "30.5rem",
+  135: "33.75rem",
+};
+
 module.exports = {
   colors,
   boxShadow,
   screens,
   borderRadius,
   fontFamily,
+  spacing,
 };

@@ -49,7 +49,15 @@ export const ModalBody = ({
   children,
   className,
 }: PropsWithChildren<ModalBodyProps>) => {
-  return <div className={cx("okd-p-4 sm:okd-p-6", className)}>{children}</div>;
+  return (
+    <div
+      className={cx(!!className && className, {
+        "okd-p-4 sm:okd-p-6": !className,
+      })}
+    >
+      {children}
+    </div>
+  );
 };
 
 const Modal = (props: PropsWithChildren<ModalProps>) => {
