@@ -4,7 +4,7 @@ import { TransationList as TransationListComponent } from "../components";
 import cx from "classnames";
 import {
   Card,
-  Account,
+  AccountListItem,
   Tooltip,
   Button,
   Switch,
@@ -168,7 +168,7 @@ AccountList.args = {
           "okd-border-b okd-border-gray-50 okd-border-solid": idx !== len - 1,
         })}
       >
-        <Account label={item.label} address={item.address}></Account>
+        <AccountListItem label={item.label} address={item.address}></AccountListItem>
       </div>
     );
   },
@@ -333,19 +333,19 @@ ManageTokens.args = {
         })}
       >
         {!!label && label.toLowerCase() === "my tokens" ? (
-          <Account
+          <AccountListItem
             label={item.label}
             value={item.value}
             symbol={item.symbol}
             address={item.address}
             action={actionSwitch(item)}
-          ></Account>
+          ></AccountListItem>
         ) : (
-          <Account
+          <AccountListItem
             label={item.label}
             address={item.address}
             action={actionAdd(item)}
-          ></Account>
+          ></AccountListItem>
         )}
       </div>
     );
