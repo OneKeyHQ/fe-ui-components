@@ -51,6 +51,10 @@ export type ButtonProps = {
    */
   className?: string | null;
   /**
+   * 内容更改回调信息
+   */
+  onClick?: () => void;
+  /**
    * 设置额外的 class
    */
   as?: "button" | "a";
@@ -73,6 +77,7 @@ const Button: FC<ButtonProps> = (props) => {
     children,
     block,
     disabled,
+    onClick,
     type,
     size,
     loading,
@@ -87,14 +92,13 @@ const Button: FC<ButtonProps> = (props) => {
 
   const handleClick = useCallback(
     (e) => {
-      const { onClick, loading, disabled } = props;
       if (loading || disabled) {
         e.preventDefault();
         return;
       }
       onClick?.(e);
     },
-    [props]
+    [disabled, loading, onClick]
   );
 
   const btnClasses = cx(

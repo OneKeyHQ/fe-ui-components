@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Switch, useTheme, useLocale } from "../components";
 
 export const LocaleSwitch = () => {
@@ -6,7 +6,9 @@ export const LocaleSwitch = () => {
 
   return (
     <div className="okd-flex okd-items-center">
-      <div className="okd-text-gray-500 okd-font-bold okd-text-xs okd-uppercase okd-tracking-wider okd-mr-4">LOCALE:</div>
+      <div className="okd-text-gray-500 okd-font-bold okd-text-xs okd-uppercase okd-tracking-wider okd-mr-4">
+        LOCALE:
+      </div>
       <div className="okd-flex okd-my-2 okd-items-center">
         <Switch
           value={locale === "zh-CN"}
@@ -23,7 +25,9 @@ export const ThemeSwitch = () => {
 
   return (
     <div className="okd-flex okd-items-center">
-      <div className="okd-text-gray-500 okd-font-bold okd-text-xs okd-uppercase okd-tracking-wider okd-mr-4">THEME:</div>
+      <div className="okd-text-gray-500 okd-font-bold okd-text-xs okd-uppercase okd-tracking-wider okd-mr-4">
+        THEME:
+      </div>
       <div className="okd-flex okd-my-2 okd-items-center">
         <Switch
           value={!!(themeVariant === "light")}

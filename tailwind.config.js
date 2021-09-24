@@ -1,4 +1,11 @@
-const { colors, boxShadow, screens, borderRadius, fontFamily } = require("./src/components/utils/tailwind");
+const {
+  colors,
+  boxShadow,
+  screens,
+  borderRadius,
+  fontFamily,
+  spacing,
+} = require("./src/components/utils/tailwind");
 
 module.exports = {
   mode: "jit",
@@ -13,6 +20,7 @@ module.exports = {
       colors,
       screens,
       fontFamily,
+      spacing,
     },
     borderRadius,
     boxShadow,
@@ -24,6 +32,6 @@ module.exports = {
     require("@tailwindcss/forms")({
       strategy: "class",
     }),
-    require('@tailwindcss/aspect-ratio'),
+    require("@tailwindcss/aspect-ratio"),
   ],
 };

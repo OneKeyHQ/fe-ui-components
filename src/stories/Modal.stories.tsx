@@ -1,7 +1,6 @@
 import React from "react";
 import { ComponentMeta } from "@storybook/react";
-
-import { Button, Input, Modal, TradeForm } from "../components";
+import { Button, Modal, TradeForm } from "../components";
 import { iconColors } from "../components/Modal/ConfirmDialog";
 import ExclamationOutlined from "../components/Icon/react/outline/Exclamation";
 import ConfigBar from "./Base";

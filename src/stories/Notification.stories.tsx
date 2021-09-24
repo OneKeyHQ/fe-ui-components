@@ -1,10 +1,6 @@
 import React from "react";
 import { ComponentMeta } from "@storybook/react";
-
-import {
-  NotificationContainer,
-  Notification as NotificationComponent,
-} from "../components";
+import { Notification as NotificationComponent } from "../components";
 import { useState } from "react";
 import { Button } from "../components";
 

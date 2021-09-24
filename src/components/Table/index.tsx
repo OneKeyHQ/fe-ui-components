@@ -11,17 +11,22 @@ interface PaginationProps {
   total: number;
   onPrevClick: () => void;
   onNextClick: () => void;
+  tableSize: "sm" | "lg";
 }
 
 const Pagination = (props: PaginationProps) => {
-  const { from, to, total, onPrevClick, onNextClick } = props;
+  const { from, to, total, tableSize, onPrevClick, onNextClick } = props;
   const hasPrev = from !== 0;
   const hasNext = to !== total;
   const displayFrom = total !== 0 ? from + 1 : 0;
 
   return (
     <nav
-      className="okd-flex okd-items-center okd-justify-between okd-px-4 okd-py-3 sm:okd-px-6 okd-border-t okd-border-gray-200"
+      className={cx(
+        "okd-flex okd-items-center okd-justify-between okd-border-t okd-border-gray-200",
+        tableSize === "lg" ? "okd-px-4 sm:okd-px-6 okd-py-3" : "",
+        tableSize === "sm" ? "okd-px-4 okd-py-2" : ""
+      )}
       aria-label="Pagination"
     >
       <div className="okd-hidden sm:okd-block">
@@ -32,10 +37,19 @@ const Pagination = (props: PaginationProps) => {
         </p>
       </div>
       <div className="okd-flex-1 okd-flex okd-justify-between sm:okd-justify-end">
-        <Button disabled={!hasPrev} onClick={onPrevClick}>
+        <Button
+          size={tableSize === "sm" ? "xs" : "base"}
+          disabled={!hasPrev}
+          onClick={onPrevClick}
+        >
           Previous
         </Button>
-        <Button className="okd-ml-3" disabled={!hasNext} onClick={onNextClick}>
+        <Button
+          className={cx(tableSize === "sm" ? "okd-ml-2" : "okd-ml-3")}
+          size={tableSize === "sm" ? "xs" : "base"}
+          disabled={!hasNext}
+          onClick={onNextClick}
+        >
           Next
         </Button>
       </div>
@@ -212,7 +226,7 @@ const Table = (props: tableProps) => {
           </tbody>
         </table>
       </div>
-      <Pagination {...paginationProps}></Pagination>
+      <Pagination tableSize={size} {...paginationProps}></Pagination>
     </>
   );
 };

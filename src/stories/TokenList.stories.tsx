@@ -9,10 +9,6 @@ export default {
   component: TokenListComponent,
 } as ComponentMeta<typeof TokenListComponent>;
 
-const Template: ComponentStory<typeof TokenListComponent> = (args) => (
-  <TokenListComponent {...args} />
-);
-
 export const Default: ComponentStory<typeof TokenListComponent> = (args) => (
   <>
     <ConfigBar />
@@ -46,5 +42,8 @@ Default.args = {
   ],
 };
 
+// const Template: ComponentStory<typeof TokenListComponent> = (args) => (
+//   <TokenListComponent {...args} />
+// );
 // export const example = Template.bind({});
 // example.args = {};

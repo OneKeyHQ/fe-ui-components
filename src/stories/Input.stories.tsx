@@ -23,6 +23,11 @@ export const Default: ComponentStory<typeof InputComponent> = (args) => (
 
 Default.args = {};
 
+export const MaxLength = Template.bind({});
+MaxLength.args = {
+  maxLength: 5,
+};
+
 export const InitialValue = Template.bind({});
 InitialValue.args = {
   initialValue: "this is initial value control.",
