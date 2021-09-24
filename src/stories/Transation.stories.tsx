@@ -814,3 +814,240 @@ const SolTokenAddModalTpl: ComponentStory<typeof Modal> = (args) => {
 };
 
 export const SolTokenAddModal = SolTokenAddModalTpl.bind({});
+
+/**
+ * 转账部分
+ */
+const sendToken = {
+  address: "0xa3C6cA435B784ab686987Fe0850f7B75388b45516w0xa3C6454",
+  logoUrl:
+    "https://onekey-asset.com/assets/bsc/0x55d398326f99059ff775485246999027b3197955.png",
+  status: 1,
+  decimal: 18,
+  balance: "0.5",
+  symbol: "USDT",
+  name: "USDT Coin",
+  timestamp: "15:03·Sep",
+  total: "1.6981",
+  fee: "0.001346",
+};
+interface SendFootProps {
+  total: string | number;
+  fee: string;
+  symbol: string;
+  actionDisabled: boolean;
+  actionText: string;
+  actionHandle: () => void;
+}
+const SendFoot: FC<SendFootProps> = ({
+  total,
+  fee,
+  symbol,
+  actionText,
+  actionDisabled,
+  actionHandle,
+}) => {
+  return (
+    <div className="okd-flex okd-justify-between okd-items-center">
+      <div>
+        <p className="okd-text-xs okd-font-medium okd-text-gray-400">
+          TOTOAL(Amount + Fee)
+        </p>
+        <p className="okd-text-xl okd-left-6 okd-font-bold okd-text-gray-900">{`${total} ${symbol}`}</p>
+        <p className="okd-text-xs okd-font-medium okd-text-gray-400">{`Fee: ${fee} ${symbol}`}</p>
+      </div>
+      <div>
+        <Button
+          className="okd-w-28"
+          type="primary"
+          disabled={actionDisabled}
+          onClick={actionHandle}
+        >
+          {actionText}
+        </Button>
+      </div>
+    </div>
+  );
+};
+interface FeeInputProps {
+  label: string;
+  desc: string;
+  value: string;
+  usdValue: string;
+  timeDesc: string;
+  actionText: string;
+  actionHandle: () => void;
+}
+const FeeInput: FC<FeeInputProps> = ({
+  label,
+  desc,
+  value,
+  usdValue,
+  timeDesc,
+  actionText,
+  actionHandle,
+}) => {
+  return (
+    <div>
+      <div className="okd-mb-1">
+        <label className="okd-text-sm okd-font-medium okd-text-gray-700">
+          {label}
+        </label>
+      </div>
+      <div className="okd-p-3 okd-w-full okd-flex okd-items-center okd-justify-between okd-border okd-border-solid okd-border-gray-300 okd-rounded okd-bg-white okd-shadow-sm">
+        <div>
+          <p className="okd-font-medium okd-text-base okd-left-5 okd-text-gray-900 okd-pb-1">
+            {desc}
+          </p>
+          <p className="okd-font-medium okd-text-xs okd-left-5 okd-text-gray-400">
+            {`${value} · ${usdValue}`}
+          </p>
+          <p className="okd-font-medium okd-text-xs okd-left-5 okd-text-gray-400">
+            {timeDesc}
+          </p>
+        </div>
+        <div>
+          <Button
+            type="plain"
+            className="okd-text-brand-500"
+            onClick={actionHandle}
+          >
+            {actionText}
+          </Button>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+const SendTokenTpl: ComponentStory<typeof TransactionListComponent> = (
+  args
+) => {
+  const [sendDisabled, setSendDisabled] = useState(true);
+  const [sendValue, setSendValue] = useState("");
+  const [insufficientError, setInsufficientError] = useState(false);
+  const [toAddress, setToAddress] = useState(sendToken.address ?? "");
+  const [addressErr, setAddressErr] = useState(false);
+  const [addressErrDesc, setAddressErrDesc] = useState("");
+  const [valDesc, setValDesc] = useState("");
+  const cardTitle = useMemo(() => {
+    return (
+      <>
+        <p className="okd-text-lg okd-leading-6 okd-font-bold okd-text-gray-900">
+          Send
+        </p>
+        <p className="okd-text-xs okd-font-medium okd-text-gray-400">
+          Ethereum Mainnet
+        </p>
+      </>
+    );
+  }, []);
+  const gotoContactPage = useCallback(() => {
+    console.log("handSend: ");
+  }, []);
+  const setMaxToken = useCallback(() => {
+    console.log("handSend: ");
+  }, []);
+  const contactAction = useMemo(() => {
+    return (
+      <Button
+        className="okd-text-brand-500 !okd-p-0 !okd-border-none"
+        type="plain"
+        onClick={gotoContactPage}
+      >
+        <Icon
+          name="UsersSolid"
+          className="okd-text-brand-500 okd-mr-1"
+          size={16}
+        ></Icon>
+        CONTACT
+      </Button>
+    );
+  }, [gotoContactPage]);
+  const setMaxAction = useMemo(() => {
+    return (
+      <Button
+        className="okd-text-brand-500 !okd-p-0"
+        type="plain"
+        onClick={setMaxToken}
+      >
+        MAX
+      </Button>
+    );
+  }, [setMaxToken]);
+  const handSend = useCallback(() => {
+    console.log("handSend: ");
+  }, []);
+  const sendValChange = useCallback((val) => {
+    setSendValue(val);
+    if (parseInt(val) > parseInt(sendToken.balance)) {
+      setValDesc("Insufficient balance.");
+      setInsufficientError(true);
+      return;
+    }
+    setValDesc(`~${val} USD`); //代币转换
+    setInsufficientError(false);
+  }, []);
+  const toAddressChange = useCallback((address) => {
+    // address validate
+    setToAddress(address);
+    if (address) {
+      setAddressErr(true);
+      setAddressErrDesc("Invalid address.");
+    }
+  }, []);
+  const editFee = useCallback(() => {
+    console.log("editFee: ");
+  }, []);
+
+  return (
+    <Card title={cardTitle} className="okd-overflow-hidden okd-w-96">
+      <Card.Body className="okd-p-0 ok-pt-4 okd-h-135">
+        <div className="okd-h-full okd-bg-gray-50 okd-flex okd-flex-col okd-justify-between">
+          <div className="okd-px-4 okd-pt-4 okd-space-y-3">
+            <TextArea
+              label="TO"
+              value={toAddress}
+              labelCorner={contactAction}
+              placeholder="Account Address"
+              error={addressErr}
+              helpText={addressErrDesc}
+              onChange={toAddressChange}
+            />
+            <div>token select placeholder</div>
+            <Input
+              label="AMOUNT"
+              value={sendValue}
+              addonAfter={sendToken.symbol}
+              labelCorner={setMaxAction}
+              error={insufficientError}
+              helpText={valDesc}
+              onChange={sendValChange}
+            />
+            <FeeInput
+              label="Fee"
+              desc="Fast(58Gwei)"
+              value="0.001346 ETH"
+              usdValue="~4.13 USD"
+              timeDesc="~30 sec"
+              actionText="EDIT"
+              actionHandle={editFee}
+            />
+          </div>
+          <div className="okd-px-4 okd-py-2 okd-bg-white okd-border-t okd-border-solid okd-border-gray-200">
+            <SendFoot
+              actionDisabled={sendDisabled}
+              total={sendToken.total}
+              fee={sendToken.fee}
+              symbol={sendToken.symbol}
+              actionText="Next"
+              actionHandle={handSend}
+            />
+          </div>
+        </div>
+      </Card.Body>
+    </Card>
+  );
+};
+
+export const SendToken = SendTokenTpl.bind({});
