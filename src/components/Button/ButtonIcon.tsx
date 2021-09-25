@@ -41,12 +41,15 @@ const LeadingIcon = ({
         !isDisabledButton
           ? {
               "okd-text-white": buttonType === "primary",
-              "okd-text-gray-400": buttonType === "basic" || buttonType === "plain",
+              "okd-text-gray-400":
+                buttonType === "basic" || buttonType === "plain",
               "okd-text-red-400": buttonType === "destructive",
             }
           : {
               "okd-text-gray-300":
-                buttonType === "primary" || buttonType === "basic" || buttonType === "plain",
+                buttonType === "primary" ||
+                buttonType === "basic" ||
+                buttonType === "plain",
               "okd-text-red-200": buttonType === "destructive",
             }
       )}
@@ -93,12 +96,15 @@ const TrailingIcon = ({
         !isDisabledButton
           ? {
               "okd-text-white": buttonType === "primary",
-              "okd-text-gray-400": buttonType === "basic" || buttonType === "plain",
+              "okd-text-gray-400":
+                buttonType === "basic" || buttonType === "plain",
               "okd-text-red-400": buttonType === "destructive",
             }
           : {
               "okd-text-gray-300":
-                buttonType === "primary" || buttonType === "basic" || buttonType === "plain",
+                buttonType === "primary" ||
+                buttonType === "basic" ||
+                buttonType === "plain",
               "okd-text-red-200": buttonType === "destructive",
             }
       )}
