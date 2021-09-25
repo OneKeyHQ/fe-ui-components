@@ -54,7 +54,7 @@ const TokenSelector: FC<TokenSelectorProps> & { Trigger } = ({
             />
           </div>
           <div className="okd-max-h-[460px] okd-overflow-y-auto">
-            <TokenList list={list} />
+            <TokenList activatable list={list} />
           </div>
         </div>
       </Modal.Body>
