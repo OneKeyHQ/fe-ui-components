@@ -35,9 +35,13 @@ export const Default: ComponentStory<typeof CardComponent> = (args) => {
     title: "Card Title",
     className: "okd-mx-auto okd-w-[480px]",
     actions: (
-      <div className="okd-space-x-3 okd-flex okd-items-center">
-        <Button leadingIcon="RefreshSolid" type="plain" circular></Button>
-        <Button leadingIcon="CogSolid" type="plain" circular></Button>
+      <div className="okd-space-x-6 okd-flex okd-items-center">
+        <div className="okd-w-5 okd-h-5 okd-flex okd-justify-center okd-items-center">
+          <Button leadingIcon="RefreshSolid" type="plain" circular></Button>
+        </div>
+        <div className="okd-w-5 okd-h-5 okd-flex okd-justify-center okd-items-center">
+          <Button leadingIcon="CogSolid" type="plain" circular></Button>
+        </div>
       </div>
     ),
     children: (
@@ -52,7 +56,7 @@ export const Default: ComponentStory<typeof CardComponent> = (args) => {
     footer: (
       <div className="okd-flex">
         <Button
-          className="okd-flex-1 okd-mr-2"
+          className="okd-flex-1 okd-mr-3"
           type="primary"
           loading={isApproving}
           disabled={swapable}
@@ -109,9 +113,9 @@ TitleWithDescription.args = {
   ),
 };
 
-export const ImageWithDescription = Template.bind({});
-ImageWithDescription.args = {
-  className: "okd-mx-auto okd-w-[480px]",
+export const CoverWithDescription = Template.bind({});
+CoverWithDescription.args = {
+  className: "okd-mx-auto okd-w-[480px] okd-overflow-hidden",
   cover: (
       <img src="https://source.unsplash.com/random" alt="Random" />
   ),
