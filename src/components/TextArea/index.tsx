@@ -1,4 +1,4 @@
-import React, { useState, FC, useCallback } from "react";
+import React, { useState, FC, useCallback, useEffect } from "react";
 import cx, { Argument } from "classnames";
 import Tooltip from "../Tooltip/index";
 import Icon from "../Icon/index";
@@ -21,6 +21,10 @@ type TextAreaProps = {
    * 是否可清空内容，默认为 false
    */
   allowClear?: boolean;
+  /**
+   * 设置后置内容
+   */
+  addonAfter?: React.ReactNode;
   /**
    * 是否禁用状态，默认为 false
    */
@@ -57,6 +61,10 @@ type TextAreaProps = {
    * Label tooltip
    */
   labelTooltip?: string;
+  /**
+   * Corner content
+   */
+  labelCorner?: React.ReactNode;
   /**
    * 设置额外的 class
    */
@@ -95,7 +103,9 @@ const TextArea: FC<TextAreaProps> = ({
   labelTooltip,
   className,
   maxLength,
+  addonAfter,
   rule,
+  labelCorner,
 }) => {
   const [defaultValue, setInitialValue] = useState(initialValue ?? "");
   const [errorValue, setErrorValue] = useState(error ?? false);
@@ -131,13 +141,18 @@ const TextArea: FC<TextAreaProps> = ({
     [onChange, rule]
   );
 
+  useEffect(() => {
+    setErrorValue(error);
+    setHelptextValue(helpText);
+  }, [error, helpText]);
+
   return (
     <div className={cx(!!className && className)}>
       {/* Label */}
       {!!label && (
         <div className="okd-flex okd-items-center okd-justify-between okd-mb-1">
           {/* Leading Contnet */}
-          <div className="okd-flex okd-items-center">
+          <div className="okd-text-sm okd-flex okd-items-center">
             <label
               className="okd-text-sm okd-font-medium okd-text-gray-700"
               htmlFor="textAreaID"
@@ -155,6 +170,12 @@ const TextArea: FC<TextAreaProps> = ({
               </Tooltip>
             )}
           </div>
+          {/* labelCorner */}
+          {!!labelCorner && (
+            <div className="okd-text-sm okd-text-gray-500 okd-inline-flex okd-items-center">
+              {labelCorner}
+            </div>
+          )}
         </div>
       )}
       <div className="okd-relative">
@@ -179,17 +200,6 @@ const TextArea: FC<TextAreaProps> = ({
           readOnly={readOnly}
           rows={rows}
         />
-        {/* `helpText` 即是帮助文本，在 `error` 时，也可以修改为错误的提示文本 */}
-        {!!helptextValue && (
-          <p
-            className={cx(
-              "okd-mt-2 okd-text-sm okd-text-left",
-              errorValue ? "okd-text-red-600" : "okd-text-gray-400"
-            )}
-          >
-            {helptextValue}
-          </p>
-        )}
         {/* allowClear */}
         {!readOnly && !disabled && !!currentValue && allowClear && (
           <div
@@ -203,7 +213,24 @@ const TextArea: FC<TextAreaProps> = ({
             ></Icon>
           </div>
         )}
+        {/* addOnAfter */}
+        {!!addonAfter && (
+          <div className="okd-absolute okd-inset-y-0 okd-right-0 okd-flex okd-items-center okd-pr-3 okd-text-gray-400 okd-pointer-events-none sm:okd-text-sm">
+            {addonAfter}
+          </div>
+        )}
       </div>
+      {/* `helpText` 即是帮助文本，在 `error` 时，也可以修改为错误的提示文本 */}
+      {!!helptextValue && (
+        <p
+          className={cx(
+            "okd-mt-2 okd-text-sm okd-text-left",
+            errorValue ? "okd-text-red-600" : "okd-text-gray-400"
+          )}
+        >
+          {helptextValue}
+        </p>
+      )}
     </div>
   );
 };
