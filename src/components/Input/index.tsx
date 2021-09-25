@@ -1,4 +1,4 @@
-import React, { useState, LegacyRef, FC, useCallback } from "react";
+import React, { useState, LegacyRef, FC, useCallback, useEffect } from "react";
 import cx, { Argument } from "classnames";
 import Tooltip from "../Tooltip/index";
 import Icon from "../Icon/index";
@@ -148,6 +148,11 @@ const Input: FC<InputProps> = ({
     },
     [onChange, rule]
   );
+
+  useEffect(() => {
+    setErrorValue(error);
+    setHelptextValue(helpText);
+  }, [error, helpText]);
 
   return (
     <div className={cx(!!className && className)}>
