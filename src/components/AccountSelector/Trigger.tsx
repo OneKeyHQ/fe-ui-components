@@ -1,8 +1,8 @@
 import React, { FC } from "react";
 import cx, { Argument } from "classnames";
 import Button from "../Button";
-import Account from "../Account";
 import Icon from "../Icon";
+import Account, { AccountProps } from "../Account";
 import Badge from "../Badge";
 
 export type TriggerProps = {
@@ -21,11 +21,19 @@ export type TriggerProps = {
   /**
    * 已捆绑地址的数量
    */
-  bundled?: number;
+  bundledCount?: number;
+  /**
+   * 是否显示 Bundled Address
+   */
+  showBundled?: boolean;
   /**
    * 是否显示选择器指示图标 – arrow
    */
   selectIndicate?: boolean;
+  /**
+   * Account 组件的 props
+   */
+  account?: AccountProps;
 };
 
 const defaultProps = {
@@ -36,8 +44,10 @@ const Trigger: FC<TriggerProps> = ({
   className,
   active,
   selectedAddress,
-  bundled,
+  bundledCount,
+  showBundled,
   selectIndicate,
+  account,
   ...rest
 }) => {
   return (
@@ -51,19 +61,17 @@ const Trigger: FC<TriggerProps> = ({
         )}
         {...rest}
       >
-        {!!bundled ? (
-          <>
+        {!!showBundled ? (
+          <div className="okd-inline-flex okd-items-center">
             <Badge theme={active ? "ongray" : null} type="success">
-              {bundled}
+              {bundledCount}
             </Badge>
             <span className="okd-ml-2 okd-text-sm okd-text-gray-900">
               Bundled Wallts
             </span>
-          </>
+          </div>
         ) : (
-          <>
-            <Account size="md" address={selectedAddress} />
-          </>
+          <Account {...account} />
         )}
         {!!selectIndicate && (
           <Icon
