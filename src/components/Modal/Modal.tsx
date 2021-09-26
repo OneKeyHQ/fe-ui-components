@@ -1,4 +1,9 @@
-import React, { CSSProperties, Fragment, PropsWithChildren } from "react";
+import React, {
+  CSSProperties,
+  Fragment,
+  PropsWithChildren,
+  useContext,
+} from "react";
 import cx, { Argument } from "classnames";
 import { Dialog, Transition } from "@headlessui/react";
 
@@ -59,6 +64,10 @@ export const ModalBody = ({
   );
 };
 
+export interface IModalContext extends ModalProps {}
+export const ModalContext = React.createContext<IModalContext>(undefined);
+export const useModalContext = () => useContext(ModalContext);
+
 const Modal = (props: PropsWithChildren<ModalProps>) => {
   const {
     visible,
@@ -72,58 +81,64 @@ const Modal = (props: PropsWithChildren<ModalProps>) => {
 
   const contentNode = content ?? children;
 
-  return (
-    <Transition.Root show={visible} as={Fragment}>
-      <Dialog
-        as="div"
-        auto-reopen="true"
-        className="okd-fixed okd-z-10 okd-inset-0 okd-overflow-y-auto"
-        onClose={onClose}
-        initialFocus={initialFocusRef}
-      >
-        <div className="okd-flex okd-items-end okd-justify-center okd-min-h-screen okd-pt-4 okd-px-4 okd-pb-20 okd-text-center sm:okd-block sm:okd-p-0">
-          <Transition.Child
-            as={Fragment}
-            enter="okd-ease-out okd-duration-300"
-            enterFrom="okd-opacity-0"
-            enterTo="okd-opacity-100"
-            leave="okd-ease-in okd-duration-200"
-            leaveFrom="okd-opacity-100"
-            leaveTo="okd-opacity-0"
-          >
-            <Dialog.Overlay className="okd-fixed okd-inset-0 okd-bg-gray-500/75 okd-transition-opacity" />
-          </Transition.Child>
+  const context = {
+    ...props,
+  };
 
-          {/* This element is to trick the browser into centering the modal contents. */}
-          <span
-            className="okd-hidden sm:okd-inline-block sm:okd-align-middle sm:okd-h-screen"
-            aria-hidden="true"
-          >
-            &#8203;
-          </span>
-          <Transition.Child
-            as="div"
-            className={cx(
-              "okd-inline-block okd-align-bottom okd-bg-white-ground okd-rounded-lg okd-text-left okd-overflow-hidden",
-              "okd-ring-1 okd-ring-black okd-ring-opacity-5 okd-shadow-xl",
-              "sm:okd-my-8 sm:okd-align-middle sm:okd-max-w-lg sm:okd-w-full",
-              "okd-transform okd-transition-all",
-              className
-            )}
-            style={containerStyle}
-            enter="okd-ease-out okd-duration-300"
-            enterFrom="okd-opacity-0 okd-translate-y-4 sm:okd-translate-y-0 sm:okd-scale-95"
-            enterTo="okd-opacity-100 okd-translate-y-0 sm:okd-scale-100"
-            leave="okd-ease-in okd-duration-200"
-            leaveFrom="okd-opacity-100 okd-translate-y-0 sm:okd-scale-100"
-            leaveTo="okd-opacity-0 okd-translate-y-4 sm:okd-translate-y-0 sm:okd-scale-95"
-          >
-            {contentNode}
-          </Transition.Child>
-          <button className="h-0 w-0 overflow-hidden" />
-        </div>
-      </Dialog>
-    </Transition.Root>
+  return (
+    <ModalContext.Provider value={context}>
+      <Transition.Root show={visible} as={Fragment}>
+        <Dialog
+          as="div"
+          auto-reopen="true"
+          className="okd-fixed okd-z-10 okd-inset-0 okd-overflow-y-auto"
+          onClose={onClose}
+          initialFocus={initialFocusRef}
+        >
+          <div className="okd-flex okd-items-end okd-justify-center okd-min-h-screen okd-pt-4 okd-px-4 okd-pb-20 okd-text-center sm:okd-block sm:okd-p-0">
+            <Transition.Child
+              as={Fragment}
+              enter="okd-ease-out okd-duration-300"
+              enterFrom="okd-opacity-0"
+              enterTo="okd-opacity-100"
+              leave="okd-ease-in okd-duration-200"
+              leaveFrom="okd-opacity-100"
+              leaveTo="okd-opacity-0"
+            >
+              <Dialog.Overlay className="okd-fixed okd-inset-0 okd-bg-gray-500/75 okd-transition-opacity" />
+            </Transition.Child>
+
+            {/* This element is to trick the browser into centering the modal contents. */}
+            <span
+              className="okd-hidden sm:okd-inline-block sm:okd-align-middle sm:okd-h-screen"
+              aria-hidden="true"
+            >
+              &#8203;
+            </span>
+            <Transition.Child
+              as="div"
+              className={cx(
+                "okd-inline-block okd-align-bottom okd-bg-white-ground okd-rounded-lg okd-text-left okd-overflow-hidden",
+                "okd-ring-1 okd-ring-black okd-ring-opacity-5 okd-shadow-xl",
+                "sm:okd-my-8 sm:okd-align-middle sm:okd-max-w-lg sm:okd-w-full",
+                "okd-transform okd-transition-all",
+                className
+              )}
+              style={containerStyle}
+              enter="okd-ease-out okd-duration-300"
+              enterFrom="okd-opacity-0 okd-translate-y-4 sm:okd-translate-y-0 sm:okd-scale-95"
+              enterTo="okd-opacity-100 okd-translate-y-0 sm:okd-scale-100"
+              leave="okd-ease-in okd-duration-200"
+              leaveFrom="okd-opacity-100 okd-translate-y-0 sm:okd-scale-100"
+              leaveTo="okd-opacity-0 okd-translate-y-4 sm:okd-translate-y-0 sm:okd-scale-95"
+            >
+              {contentNode}
+            </Transition.Child>
+            <button className="h-0 w-0 overflow-hidden" />
+          </div>
+        </Dialog>
+      </Transition.Root>
+    </ModalContext.Provider>
   );
 };
 
