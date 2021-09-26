@@ -2,7 +2,13 @@ import React from "react";
 import { ComponentMeta } from "@storybook/react";
 import { useIntl } from "react-intl";
 
-import { Button, Modal, TradeForm, UIProvider } from "../components";
+import {
+  Button,
+  Modal,
+  TradeForm,
+  UIProvider,
+  useDisclosure,
+} from "../components";
 import { iconColors } from "../components/Modal/ConfirmDialog";
 import ExclamationOutlined from "../components/Icon/react/outline/Exclamation";
 import ConfigBar from "./Base";
@@ -15,17 +21,13 @@ export default {
 
 export const Default = () => {
   const [isModalVisible, setIsModalVisible] = React.useState(false);
-  const [isHeaderVisible, setIsHeaderVisible] = React.useState(false);
-  const [isFooterVisible, setIsFooterVisible] = React.useState(false);
 
   const showModal = () => {
     setIsModalVisible(true);
   };
-
   const handleOk = () => {
     setIsModalVisible(false);
   };
-
   const handleCancel = () => {
     setIsModalVisible(false);
   };
@@ -34,72 +36,61 @@ export const Default = () => {
     <>
       <ConfigBar />
       <div className="okd-space-x-3">
-        <Button
-          onClick={() => {
-            setIsHeaderVisible(true);
-            setIsFooterVisible(false);
-            showModal();
-          }}
-        >
-          Open Header Modal
-        </Button>
-        <Button
-          onClick={() => {
-            setIsHeaderVisible(false);
-            setIsFooterVisible(true);
-            showModal();
-          }}
-        >
-          Open Footer Modal
-        </Button>
-        <Button
-          onClick={() => {
-            setIsHeaderVisible(true);
-            setIsFooterVisible(true);
-            showModal();
-          }}
-        >
-          Open Full Modal
-        </Button>
+        <Button onClick={() => showModal()}>Open Full Modal</Button>
       </div>
 
       <Modal visible={isModalVisible} onClose={() => handleCancel()}>
-        {!!isHeaderVisible && (
-          <Modal.Header
-            // Custom styled title
-            // title={<div className="okd-text-green-200">Create User</div>}
-            // Default title style
-            title="Create User"
-            onClose={() => handleCancel()}
-            actions={
-              <div className="okd-flex okd-space-x-6">
-                <div className="okd-flex okd-w-5 okd-h-5 okd-items-center okd-justify-center">
-                  <Button circular type="plain" leadingIcon="RefreshSolid" />
-                </div>
-                <div className="okd-flex okd-w-5 okd-h-5 okd-items-center okd-justify-center">
-                  <Button circular type="plain" leadingIcon="CogSolid" />
-                </div>
+        <Modal.Header
+          title="Create User"
+          actions={
+            <div className="okd-flex okd-space-x-6">
+              <div className="okd-flex okd-w-5 okd-h-5 okd-items-center okd-justify-center">
+                <Button circular type="plain" leadingIcon="RefreshSolid" />
               </div>
-            }
-          />
-        )}
+              <div className="okd-flex okd-w-5 okd-h-5 okd-items-center okd-justify-center">
+                <Button circular type="plain" leadingIcon="CogSolid" />
+              </div>
+            </div>
+          }
+        />
 
         <Modal.Body>
           <p className="okd-font-normal okd-text-sm okd-leading-5 okd-text-gray-900">
-            <strong className="okd-font-bold">Detach instance to use.</strong>
+            <strong className="okd-font-bold">Detach instance to use.</strong>{" "}
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Odio porta
             risus nec, cursus faucibus libero dolor integer. Cursus sagittis,
             tempus ut cum cursus gravida suspendisse tristique nunc.
           </p>
         </Modal.Body>
 
-        {!!isFooterVisible && (
-          <Modal.Footer
-            onOk={handleOk}
-            onCancel={handleCancel}
-            okText="Create"
-          />
-        )}
+        <Modal.Footer onOk={handleOk} onCancel={handleCancel} okText="Create" />
+      </Modal>
+    </>
+  );
+};
+
+export const WithDisclosureHook = () => {
+  const { isOpen, onClose, onOpen } = useDisclosure();
+
+  return (
+    <>
+      <div className="okd-space-x-3">
+        <Button onClick={onOpen}>Open Modal</Button>
+      </div>
+
+      <Modal visible={isOpen} onClose={onClose}>
+        <Modal.Header title="Hooked Modal" />
+
+        <Modal.Body>
+          <p className="okd-font-normal okd-text-sm okd-leading-5 okd-text-gray-900">
+            <strong className="okd-font-bold">Detach instance to use.</strong>{" "}
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Odio porta
+            risus nec, cursus faucibus libero dolor integer. Cursus sagittis,
+            tempus ut cum cursus gravida suspendisse tristique nunc.
+          </p>
+        </Modal.Body>
+
+        <Modal.Footer />
       </Modal>
     </>
   );
