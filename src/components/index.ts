@@ -48,6 +48,7 @@ export { default as TextArea } from "./TextArea";
 export { default as Checkbox } from "./Checkbox";
 
 export * from "./Updaters";
+export * from "./Hooks";
 
 export {
   useConfig,
