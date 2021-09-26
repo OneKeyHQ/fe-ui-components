@@ -1,6 +1,8 @@
 import React from "react";
 import { ComponentMeta } from "@storybook/react";
-import { Button, Modal, TradeForm } from "../components";
+import { useIntl } from "react-intl";
+
+import { Button, Modal, TradeForm, UIProvider } from "../components";
 import { iconColors } from "../components/Modal/ConfirmDialog";
 import ExclamationOutlined from "../components/Icon/react/outline/Exclamation";
 import ConfigBar from "./Base";
@@ -110,50 +112,48 @@ export const NestedModals = () => {
 
   const NestedModal = ({ onClose, level = 0 }) => {
     let [showChild, setShowChild] = React.useState(false);
+    const { formatMessage } = useIntl();
+    const contentMessage = formatMessage({ id: "hello" });
 
     return (
-      <>
-        <Modal
-          visible={true}
-          onClose={onClose}
-          containerStyle={{
-            transform: `translate(calc(50px * ${level}), calc(50px * ${level}))`,
-            width: "fit-content",
-          }}
-        >
-          <Modal.Body>
-            <div>
-              <p>Level: {level}</p>
-              <div className="okd-space-x-4">
-                <Button
-                  className="okd-bg-gray-200 okd-px-2 okd-py-1 okd-rounded"
-                  onClick={() => setShowChild(true)}
-                >
-                  Open (1)
-                </Button>
-                <Button
-                  className="okd-bg-gray-200 okd-px-2 okd-py-1 okd-rounded"
-                  onClick={() => setShowChild(true)}
-                >
-                  Open (2)
-                </Button>
-                <Button
-                  className="okd-bg-gray-200 okd-px-2 okd-py-1 okd-rounded"
-                  onClick={() => setShowChild(true)}
-                >
-                  Open (3)
-                </Button>
-              </div>
+      <Modal
+        visible={true}
+        onClose={onClose}
+        containerStyle={{
+          transform: `translate(calc(50px * ${level}), calc(50px * ${level}))`,
+          width: "fit-content",
+        }}
+      >
+        <Modal.Body>
+          <div>
+            <p>Level: {level}</p>
+            <p>Content: {contentMessage} </p>
+            <div className="okd-space-x-4">
+              <Button
+                className="okd-bg-gray-200 okd-px-2 okd-py-1 okd-rounded"
+                onClick={() => setShowChild(true)}
+              >
+                Open (1)
+              </Button>
+              <Button
+                className="okd-bg-gray-200 okd-px-2 okd-py-1 okd-rounded"
+                onClick={() => setShowChild(true)}
+              >
+                Open (2)
+              </Button>
+              <Button
+                className="okd-bg-gray-200 okd-px-2 okd-py-1 okd-rounded"
+                onClick={() => setShowChild(true)}
+              >
+                Open (3)
+              </Button>
             </div>
-          </Modal.Body>
-          {showChild && (
-            <NestedModal
-              onClose={() => setShowChild(false)}
-              level={level + 1}
-            />
-          )}
-        </Modal>
-      </>
+          </div>
+        </Modal.Body>
+        {showChild && (
+          <NestedModal onClose={() => setShowChild(false)} level={level + 1} />
+        )}
+      </Modal>
     );
   };
 
@@ -162,7 +162,14 @@ export const NestedModals = () => {
       <Button onClick={() => setOpen(true)}>
         Open deeply nested Dialog components
       </Button>
-      {open && <NestedModal onClose={setOpen} />}
+      <UIProvider
+        messagesMap={{
+          "en-US": { hello: "Hello There👋!" },
+          "zh-CN": { hello: "你好啊👋！" },
+        }}
+      >
+        {open && <NestedModal onClose={setOpen} />}
+      </UIProvider>
 
       <Button onClick={() => setOpenTop(true)}>
         Open one nested top Modal
