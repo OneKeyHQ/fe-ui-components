@@ -44,13 +44,13 @@ const ModalFooter = ({
   );
 
   return (
-    <div
+    <footer
       className={cx("okd-py-3 okd-px-4 sm:okd-py-4 sm:okd-px-6 okd-border-t okd-border-gray-200", {
         "okd-space-x-3 okd-flex okd-justify-end": !children,
       })}
     >
       {children ?? defaultFooterContent}
-    </div>
+    </footer>
   );
 };
 

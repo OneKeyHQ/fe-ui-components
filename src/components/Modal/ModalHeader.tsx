@@ -52,9 +52,9 @@ export const ModalHeader: FC<ModalHeaderProps> = ({
   })();
 
   return (
-    <Dialog.Title<"div">
+    <Dialog.Title<"header">
       className="okd-px-4 okd-py-3 sm:okd-py-4 sm:okd-px-6 okd-flex okd-items-center okd-justify-between okd-border-b okd-border-gray-200"
-      as="div"
+      as="header"
     >
       {titleNode}
       <div className="okd-flex okd-items-center okd-space-x-4 okd-divide-x okd-divide-gray-200 okd-flex-shrink-0">
