@@ -83,10 +83,19 @@ export const WithDisclosureHook = () => {
 
         <Modal.Body>
           <p className="okd-font-normal okd-text-sm okd-leading-5 okd-text-gray-900">
-            <strong className="okd-font-bold">Detach instance to use.</strong>{" "}
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Odio porta
-            risus nec, cursus faucibus libero dolor integer. Cursus sagittis,
-            tempus ut cum cursus gravida suspendisse tristique nunc.
+            This Modal uses{" "}
+            <span className="okd-bg-gray-300 okd-px-1 okd-rounded-sm okd-font-medium okd-text-black">
+              useDisclosure
+            </span>{" "}
+            hook to reduce the works of setting up control state for Modal, thats great, give it a try!
+          </p>
+          <br />
+          <p className="okd-font-normal okd-text-sm okd-leading-5 okd-text-gray-900">
+            这个例子使用了{" "}
+            <span className="okd-bg-gray-300 okd-px-1 okd-rounded-sm okd-font-medium okd-text-black">
+              useDisclosure
+            </span>{" "}
+            hook 来减少编写 控制 Modal State 的时间，太棒了，你也尝试一下吧！
           </p>
         </Modal.Body>
 
