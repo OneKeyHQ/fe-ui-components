@@ -1,7 +1,14 @@
-import React, { FC, isValidElement, ReactNode } from "react";
+import React, {
+  FC,
+  isValidElement,
+  MouseEventHandler,
+  ReactNode,
+  useCallback,
+} from "react";
 import { Dialog } from "@headlessui/react";
 
 import Button from "../Button";
+import { useModalContext } from "./Modal";
 
 export type ModalHeaderProps = {
   /**
@@ -17,9 +24,9 @@ export type ModalHeaderProps = {
    */
   closable?: boolean;
   /**
-   * 点击关闭按钮时的事件回调
+   * 点击关闭按钮时的事件回调，默认为 Modal 的 onClose
    */
-  onClose: () => void;
+  onClose?: () => void;
 };
 
 const ModalHeaderDefaultProps: Partial<ModalHeaderProps> = {
@@ -33,9 +40,12 @@ export const ModalHeader: FC<ModalHeaderProps> = ({
   actions,
   children,
 }) => {
-  if (closable && !onClose) {
-    throw new Error("'onClose' props is required when closable is set to true");
-  }
+  const { onClose: rootOnClose } = useModalContext();
+
+  const handleCloseClick = useCallback(() => {
+    onClose?.();
+    closable && rootOnClose();
+  }, [closable, onClose, rootOnClose]);
 
   const titleNode = (() => {
     if (title) {
@@ -52,9 +62,9 @@ export const ModalHeader: FC<ModalHeaderProps> = ({
   })();
 
   return (
-    <Dialog.Title<"div">
+    <Dialog.Title<"header">
       className="okd-px-4 okd-py-3 sm:okd-py-4 sm:okd-px-6 okd-flex okd-items-center okd-justify-between okd-border-b okd-border-gray-200"
-      as="div"
+      as="header"
     >
       {titleNode}
       <div className="okd-flex okd-items-center okd-space-x-4 okd-divide-x okd-divide-gray-200 okd-flex-shrink-0">
@@ -64,7 +74,7 @@ export const ModalHeader: FC<ModalHeaderProps> = ({
             <Button
               type="plain"
               leadingIcon="CloseSolid"
-              onClick={onClose}
+              onClick={handleCloseClick}
               circular
             />
           </div>
