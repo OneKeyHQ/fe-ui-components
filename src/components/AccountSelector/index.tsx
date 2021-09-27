@@ -35,7 +35,7 @@ const AccountSelector: FC<AccountSelectorProps> & { OptionGroup; Option; Action 
     <>
       <Popover
         place={place}
-        className={cx("okd-w-[343px]", !!className && className)}
+        className={cx("!okd-w-[343px]", !!className && className)}
         trigger={(status) => <Trigger active={status} {...trigger} />}
         {...rest}
       >
