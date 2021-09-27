@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import React, { FC, Fragment } from "react";
 import cx, { Argument } from "classnames";
 
 import Popover from "../Popover";
@@ -20,17 +20,19 @@ export type AccountSelectorProps = {
    * Trigger 的 props
    */
   trigger: TriggerProps;
+  /**
+   * 操作
+   */
+  actions: Array<any>;
 };
 
 const defaultProps = {} as const;
 
-const AccountSelector: FC<AccountSelectorProps> & { OptionGroup; Option; Action } = ({
-  className,
-  place,
-  trigger,
-  children,
-  ...rest
-}) => {
+const AccountSelector: FC<AccountSelectorProps> & {
+  OptionGroup;
+  Option;
+  Action;
+} = ({ className, place, trigger, children, actions, ...rest }) => {
   return (
     <>
       <Popover
@@ -39,7 +41,20 @@ const AccountSelector: FC<AccountSelectorProps> & { OptionGroup; Option; Action 
         trigger={(status) => <Trigger active={status} {...trigger} />}
         {...rest}
       >
-        <div className="okd-py-1 okd-px-3 okd-divide-y okd-divide-gray-200">{children}</div>
+        <div className="okd-py-1 okd-px-3 okd-divide-y okd-divide-gray-200">
+          {children}
+          {!!actions && (
+            <OptionGroup>
+              {actions.map((action, key) => (
+                <Fragment key={key}>
+                  <Action iconName={action.iconName} onAction={action.onAction}>
+                    {action.content}
+                  </Action>
+                </Fragment>
+              ))}
+            </OptionGroup>
+          )}
+        </div>
       </Popover>
     </>
   );
