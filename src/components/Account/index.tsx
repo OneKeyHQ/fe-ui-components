@@ -57,7 +57,7 @@ const Account: FC<AccountProps> = ({
     <div
       className={cx(
         size === "sm" ? "okd-items-start" : "okd-items-center",
-        "okd-inline-flex",
+        "okd-inline-flex okd-text-left",
         className
       )}
       {...rest}

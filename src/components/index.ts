@@ -46,6 +46,7 @@ export { default as TransactionList } from "./Transaction";
 export { default as AccountListItem } from "./AccountListItem";
 export { default as TextArea } from "./TextArea";
 export { default as Checkbox } from "./Checkbox";
+export { default as AccountSelector } from "./AccountSelector";
 
 export * from "./Updaters";
 export * from "./Hooks";
