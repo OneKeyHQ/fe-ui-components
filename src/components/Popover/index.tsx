@@ -66,7 +66,7 @@ const Popover: FC<PopoverProps> = ({
           >
             <HeadlessPopover.Panel
               className={cx(
-                "okd-absolute okd-z-10 okd-w-64 okd-mt-2",
+                "okd-absolute okd-z-10 okd-min-w-[256px] okd-mt-2",
                 {
                   "okd-origin-top-left okd-left-0": place === "bottom-start",
                   "okd-left-1/2 okd--translate-x-1/2":
