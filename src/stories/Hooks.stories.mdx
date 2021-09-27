@@ -1,4 +1,6 @@
 import { Meta } from '@storybook/addon-docs';
+import { UIProvider } from '../components'
+import { WithDisclosureHook } from './Modal.stories.tsx';
 
 <Meta title="Basic/Hooks" />
 
@@ -105,4 +107,63 @@ const ReactComponent = () => {
   const tokenConfig = useTokens(ERC20ChainIdMap.ETH, 'xxxxxx');
   // contract token config
 }
+```
+
+## useDisclosure
+
+快速构建控制 Modal 的 Props
+
+### 返回值：
+
+| 名称       | 类型       | 默认值  | 描述                                   |
+| ---------- | ---------- | ------- | -------------------------------------- |
+| `isOpen`   | `boolean`  | `false` | 是否打开的 state                       |
+| `onClose`  | `function` |         | 设置 `isOpen` 为 `false` 的回调函数    |
+| `onOpen`   | `function` |         | 设置 `isOpen` 为 `true` 的回调函数     |
+| `onToggle` | `function` |         | 设置 `isOpen` 为 之前相反值 的回调函数 |
+
+### 举例
+
+<UIProvider>
+  <WithDisclosureHook />
+</UIProvider>
+
+```js
+import { useDisclosure } from '@onekeyhq/ui-components';
+
+export const PageView = () => {
+  const { isOpen, onClose, onOpen } = useDisclosure();
+
+  return (
+    <>
+      <div className="okd-space-x-3">
+        <Button onClick={onOpen}>Open Modal</Button>
+      </div>
+
+      <Modal visible={isOpen} onClose={onClose}>
+        <Modal.Header title="Hooked Modal" />
+
+        <Modal.Body>
+          <p className="okd-font-normal okd-text-sm okd-leading-5 okd-text-gray-900">
+            This Modal uses{" "}
+            <span className="okd-bg-gray-300 okd-px-1 okd-rounded-sm okd-font-medium okd-text-black">
+              useDisclosure
+            </span>{" "}
+            hook to reduce the works of setting up control state for Modal, thast great, try it out yourself!
+          </p>
+          <br />
+          <p className="okd-font-normal okd-text-sm okd-leading-5 okd-text-gray-900">
+            这个例子使用了{" "}
+            <span className="okd-bg-gray-300 okd-px-1 okd-rounded-sm okd-font-medium okd-text-black">
+              useDisclosure
+            </span>{" "}
+            hook 来减少编写 控制 Modal State 的时间，太棒了，你也尝试一下吧！
+          </p>
+        </Modal.Body>
+
+        <Modal.Footer />
+      </Modal>
+    </>
+  );
+};
 ```

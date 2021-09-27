@@ -53,7 +53,7 @@ export type ButtonProps = {
   /**
    * 内容更改回调信息
    */
-  onClick?: () => void;
+  onClick?: (event: MouseEvent) => void;
   /**
    * 设置额外的 class
    */

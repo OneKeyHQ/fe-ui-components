@@ -49,6 +49,7 @@ export { default as Checkbox } from "./Checkbox";
 export { default as AccountSelector } from "./AccountSelector";
 
 export * from "./Updaters";
+export * from "./Hooks";
 
 export {
   useConfig,
