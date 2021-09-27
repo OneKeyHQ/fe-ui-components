@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import React, { FC, ReactNode } from "react";
 import cx, { Argument } from "classnames";
 import Icon from "../Icon";
 import { ICON_NAMES } from "../Icon/Icons";
@@ -9,9 +9,13 @@ type ActionProps = {
    */
   className?: Argument;
   /**
-   * icon
+   * icon 名称
    */
-  icon?: ICON_NAMES;
+  iconName?: ICON_NAMES;
+  /**
+   * label
+   */
+  label?: string | ReactNode;
   /**
    * Option 点击回调
    */
@@ -23,8 +27,9 @@ const defaultProps = {} as const;
 const Action: FC<ActionProps> = ({
   className,
   children,
-  icon,
+  iconName,
   onAction,
+  label,
   ...rest
 }) => {
   return (
@@ -37,12 +42,13 @@ const Action: FC<ActionProps> = ({
         onClick={onAction}
         {...rest}
       >
-        {!!icon && (
+        {!!iconName && (
           <Icon
-            name={icon}
+            name={iconName}
             className="okd-h-5 okd-w-5 okd-text-gray-400 okd-mr-3"
           />
         )}
+        {label}
         {children}
       </button>
     </div>

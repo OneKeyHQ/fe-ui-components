@@ -43,7 +43,7 @@ const Option: FC<OptionProps> = ({
     >
       <button
         className={cx(
-          "okd-flex-1 okd-p-2 okd--mx-2 okd-flex okd-rounded hover:okd-bg-gray-50 focus:okd-bg-gray-100 focus:okd-outline-none",
+          "okd-flex-1 okd-p-2 okd--mx-2 okd-flex okd-items-center okd-rounded hover:okd-bg-gray-50 focus:okd-bg-gray-100 focus:okd-outline-none",
           !isSelected ? "okd-pl-10" : ""
         )}
         onClick={onAction}
@@ -54,7 +54,9 @@ const Option: FC<OptionProps> = ({
             className="okd-h-5 okd-w-5 okd-text-brand-500 okd-mr-3"
           />
         )}
-        {children}
+        <div className="okd-flex okd-flex-1 okd-items-center okd-justify-between">
+          {children}
+        </div>
       </button>
       {!!actions && (
         <div className="okd-flex-shrink-0 okd-inline-flex okd-space-x-4 okd-px-2">
@@ -63,7 +65,7 @@ const Option: FC<OptionProps> = ({
               <div className="okd-flex okd-justify-center okd-items-center okd-w-5 okd-h-5">
                 {!item.tooltipContent ? (
                   <Button
-                    leadingIcon={item.icon}
+                    leadingIcon={item.iconName}
                     type="plain"
                     circular
                     size="sm"
@@ -72,7 +74,7 @@ const Option: FC<OptionProps> = ({
                 ) : (
                   <Tooltip content={item.tooltipContent} place="top">
                     <Button
-                      leadingIcon={item.icon}
+                      leadingIcon={item.iconName}
                       type="plain"
                       circular
                       size="sm"
