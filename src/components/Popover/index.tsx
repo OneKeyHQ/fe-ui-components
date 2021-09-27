@@ -13,7 +13,7 @@ type PopoverProps = {
   /**
    * Popover 组件自身外层 button 的 ref
    */
-  triggerButtonRef?: Ref<HTMLButtonElement>;
+  triggerButtonRef?: Ref<HTMLDivElement>;
   /**
    * Menu 的位置，分别对应左下、中下、右下
    */
@@ -49,7 +49,7 @@ const Popover: FC<PopoverProps> = ({
     <HeadlessPopover className="okd-relative okd-inline-block">
       {({ open }) => (
         <>
-          <HeadlessPopover.Button ref={triggerButtonRef}>
+          <HeadlessPopover.Button as="div" ref={triggerButtonRef}>
             {typeof trigger === "function"
               ? trigger(open, defaultTrigger(open))
               : trigger || defaultTrigger(open)}
