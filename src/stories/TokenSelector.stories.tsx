@@ -40,67 +40,85 @@ export const Default = () => {
         onClose={() => handleCancel()}
         list={[
           {
-            src:
-              "https://cdn.jsdelivr.net/gh/atomiclabs/cryptocurrency-icons@d5c68edec1f5eaec59ac77ff2b48144679cebca1/128/color/btc.png",
-            name: "BTC",
+            token: {
+              src:
+                "https://cdn.jsdelivr.net/gh/atomiclabs/cryptocurrency-icons@d5c68edec1f5eaec59ac77ff2b48144679cebca1/128/color/btc.png",
+              name: "BTC",
+            },
             balance: 123,
-            rate: "$333",
+            value: "$333",
           },
           {
-            src:
-              "https://cdn.jsdelivr.net/gh/atomiclabs/cryptocurrency-icons@d5c68edec1f5eaec59ac77ff2b48144679cebca1/128/color/btc.png",
-            name: "BTC",
+            token: {
+              src:
+                "https://cdn.jsdelivr.net/gh/atomiclabs/cryptocurrency-icons@d5c68edec1f5eaec59ac77ff2b48144679cebca1/128/color/btc.png",
+              name: "BTC",
+            },
             balance: 123,
-            rate: "$333",
+            value: "$333",
           },
           {
-            src:
-              "https://cdn.jsdelivr.net/gh/atomiclabs/cryptocurrency-icons@d5c68edec1f5eaec59ac77ff2b48144679cebca1/128/color/btc.png",
-            name: "BTC",
+            token: {
+              src:
+                "https://cdn.jsdelivr.net/gh/atomiclabs/cryptocurrency-icons@d5c68edec1f5eaec59ac77ff2b48144679cebca1/128/color/btc.png",
+              name: "BTC",
+            },
             balance: 123,
-            rate: "$333",
+            value: "$333",
           },
           {
-            src:
-              "https://cdn.jsdelivr.net/gh/atomiclabs/cryptocurrency-icons@d5c68edec1f5eaec59ac77ff2b48144679cebca1/128/color/btc.png",
-            name: "BTC",
+            token: {
+              src:
+                "https://cdn.jsdelivr.net/gh/atomiclabs/cryptocurrency-icons@d5c68edec1f5eaec59ac77ff2b48144679cebca1/128/color/btc.png",
+              name: "BTC",
+            },
             balance: 123,
-            rate: "$333",
+            value: "$333",
           },
           {
-            src:
-              "https://cdn.jsdelivr.net/gh/atomiclabs/cryptocurrency-icons@d5c68edec1f5eaec59ac77ff2b48144679cebca1/128/color/btc.png",
-            name: "BTC",
+            token: {
+              src:
+                "https://cdn.jsdelivr.net/gh/atomiclabs/cryptocurrency-icons@d5c68edec1f5eaec59ac77ff2b48144679cebca1/128/color/btc.png",
+              name: "BTC",
+            },
             balance: 123,
-            rate: "$333",
+            value: "$333",
           },
           {
-            src:
-              "https://cdn.jsdelivr.net/gh/atomiclabs/cryptocurrency-icons@d5c68edec1f5eaec59ac77ff2b48144679cebca1/128/color/btc.png",
-            name: "BTC",
+            token: {
+              src:
+                "https://cdn.jsdelivr.net/gh/atomiclabs/cryptocurrency-icons@d5c68edec1f5eaec59ac77ff2b48144679cebca1/128/color/btc.png",
+              name: "BTC",
+            },
             balance: 123,
-            rate: "$333",
+            value: "$333",
           },
           {
-            src:
-              "https://cdn.jsdelivr.net/gh/atomiclabs/cryptocurrency-icons@d5c68edec1f5eaec59ac77ff2b48144679cebca1/128/color/btc.png",
-            name: "BTC",
+            token: {
+              src:
+                "https://cdn.jsdelivr.net/gh/atomiclabs/cryptocurrency-icons@d5c68edec1f5eaec59ac77ff2b48144679cebca1/128/color/btc.png",
+              name: "BTC",
+            },
             balance: 123,
-            rate: "$333",
+            value: "$333",
           },
           {
-            src:
-              "https://cdn.jsdelivr.net/gh/atomiclabs/cryptocurrency-icons@d5c68edec1f5eaec59ac77ff2b48144679cebca1/128/color/btc.png",
-            name: "BTC",
+            token: {
+              src:
+                "https://cdn.jsdelivr.net/gh/atomiclabs/cryptocurrency-icons@d5c68edec1f5eaec59ac77ff2b48144679cebca1/128/color/btc.png",
+              name: "BTC",
+            },
             balance: 123,
-            rate: "$333",
+            value: "$333",
           },
           {
-            src:
-              "https://cdn.jsdelivr.net/gh/atomiclabs/cryptocurrency-icons@d5c68edec1f5eaec59ac77ff2b48144679cebca1/128/color/btc.png",
-            name: "BTC",
+            token: {
+              src:
+                "https://cdn.jsdelivr.net/gh/atomiclabs/cryptocurrency-icons@d5c68edec1f5eaec59ac77ff2b48144679cebca1/128/color/btc.png",
+              name: "BTC",
+            },
             balance: 123,
-            rate: "$333",
+            value: "$333",
           },
         ]}
       />
