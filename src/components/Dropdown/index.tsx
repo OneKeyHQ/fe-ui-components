@@ -39,6 +39,7 @@ const Dropdown: FC<DropdownProps> & { ItemGroup; Item } = ({
   className,
   menuWidth,
   sections,
+  children,
 }) => {
   const defaultTrigger = useCallback(() => {
     return (
@@ -86,32 +87,37 @@ const Dropdown: FC<DropdownProps> & { ItemGroup; Item } = ({
           )}
           style={{ width: menuWidth }}
         >
-          {sections.map((section) => (
-            <ItemGroup title={section.title}>
-              {section.items.map((item) => (
-                <Menu.Item>
-                  {/* To style the active `Menu.Item` you can read the `active` render prop
-                  argument, which tells you whether or not that menu item is currently
-                  focused via the mouse or keyboard. */}
-                  {({ active }) => (
-                    <Item
-                      onAction={item.onAction}
-                      active={active}
-                      icon={item.icon}
-                    >
-                      {item.content}
-                    </Item>
-                  )}
-                </Menu.Item>
-              ))}
-            </ItemGroup>
-          ))}
+          {!!sections &&
+            sections.map((section, key) => (
+              <Fragment key={key}>
+                <ItemGroup title={section.title}>
+                  {section.items.map((item, key) => (
+                    <Menu.Item key={key}>
+                      {/* To style the active `Menu.Item` you can read the `active` render prop
+                    argument, which tells you whether or not that menu item is currently
+                    focused via the mouse or keyboard. */}
+                      {({ active }) => (
+                        <Item
+                          onAction={item.onAction}
+                          active={active}
+                          icon={item.icon}
+                        >
+                          {item.content}
+                        </Item>
+                      )}
+                    </Menu.Item>
+                  ))}
+                </ItemGroup>
+              </Fragment>
+            ))}
+          {children}
         </Menu.Items>
       </Transition>
     </Menu>
   );
 };
 
+Dropdown.displayName = "Dropdown";
 Dropdown.defaultProps = defaultProps;
 Dropdown.ItemGroup = ItemGroup;
 Dropdown.Item = Item;
