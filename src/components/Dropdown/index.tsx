@@ -2,7 +2,8 @@ import React, { FC, Fragment, useCallback } from "react";
 import cx, { Argument } from "classnames";
 import { Menu, Transition } from "@headlessui/react";
 import Button from "../Button";
-import Icon from "../Icon";
+import ItemGroup from "./ItemGroup";
+import Item from "./Item";
 
 type DropdownProps = {
   /**
@@ -32,12 +33,13 @@ const defaultProps = {
   place: "bottom-end",
 } as const;
 
-const Dropdown: FC<DropdownProps> = ({
+const Dropdown: FC<DropdownProps> & { ItemGroup; Item } = ({
   place,
   trigger,
   className,
   menuWidth,
   sections,
+  children,
 }) => {
   const defaultTrigger = useCallback(() => {
     return (
@@ -85,48 +87,39 @@ const Dropdown: FC<DropdownProps> = ({
           )}
           style={{ width: menuWidth }}
         >
-          {sections.map((section) => (
-            <div className="okd-flex okd-flex-col okd-space-y-1 okd-py-1">
-              {section.title && (
-                <p className="okd-pt-2 okd-text-xs okd-font-medium okd-text-gray-500 okd-tracking-wider okd-uppercase">
-                  {section.title}
-                </p>
-              )}
-              {section.items.map((item) => (
-                <Menu.Item>
-                  {/* To style the active `Menu.Item` you can read the `active` render prop
-                  argument, which tells you whether or not that menu item is currently
-                  focused via the mouse or keyboard. */}
-                  {({ active }) => (
-                    <button
-                      className={cx(
-                        "okd-flex okd-items-center okd--mx-2 okd-p-2 okd-text-sm okd-text-left okd-rounded okd-group",
-                        active
-                          ? "okd-text-gray-900 okd-bg-gray-100"
-                          : "okd-text-gray-700"
+          {!!sections &&
+            sections.map((section, key) => (
+              <Fragment key={key}>
+                <ItemGroup title={section.title}>
+                  {section.items.map((item, key) => (
+                    <Menu.Item key={key}>
+                      {/* To style the active `Menu.Item` you can read the `active` render prop
+                    argument, which tells you whether or not that menu item is currently
+                    focused via the mouse or keyboard. */}
+                      {({ active }) => (
+                        <Item
+                          onAction={item.onAction}
+                          active={active}
+                          icon={item.icon}
+                        >
+                          {item.content}
+                        </Item>
                       )}
-                      onClick={item.onAction}
-                    >
-                      {item.icon && (
-                        <Icon
-                          name={item.icon}
-                          className="okd-w-5 okd-h-5 okd-mr-3 okd-text-gray-400 group-hover:okd-text-gray-500"
-                          aria-hidden="true"
-                        />
-                      )}
-                      {item.content}
-                    </button>
-                  )}
-                </Menu.Item>
-              ))}
-            </div>
-          ))}
+                    </Menu.Item>
+                  ))}
+                </ItemGroup>
+              </Fragment>
+            ))}
+          {children}
         </Menu.Items>
       </Transition>
     </Menu>
   );
 };
 
+Dropdown.displayName = "Dropdown";
 Dropdown.defaultProps = defaultProps;
+Dropdown.ItemGroup = ItemGroup;
+Dropdown.Item = Item;
 
 export default Dropdown;

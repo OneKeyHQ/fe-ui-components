@@ -94,15 +94,15 @@ CustomTrigger.args = {
     {
       items: [
         {
-          content: "Action 1"
+          content: "Action 1",
         },
         {
-          content: "Action 2"
+          content: "Action 2",
         },
         {
-          content: "Action 3"
+          content: "Action 3",
         },
-      ]
-    }
+      ],
+    },
   ],
 };

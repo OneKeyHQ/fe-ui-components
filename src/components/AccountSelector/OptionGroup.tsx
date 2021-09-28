@@ -1,5 +1,6 @@
 import React, { FC, ReactNode } from "react";
 import cx, { Argument } from "classnames";
+import ItemGroup from "../Dropdown/ItemGroup";
 
 type OptionGroupProps = {
   /**
@@ -14,16 +15,20 @@ type OptionGroupProps = {
 
 const defaultProps = {} as const;
 
-const OptionGroup: FC<OptionGroupProps> = ({ className, children, title, ...rest }) => {
+const OptionGroup: FC<OptionGroupProps> = ({
+  className,
+  children,
+  title,
+  ...rest
+}) => {
   return (
-    <div className={cx("okd-py-1 okd-space-y-1", !!className && className)} {...rest}>
-      {!!title && (
-        <div className="okd-pt-1 okd-text-xs okd-uppercase okd-tracking-widest okd-text-gray-500">
-          {title}
-        </div>
-      )}
+    <ItemGroup
+      title={title}
+      className={cx("", !!className && className)}
+      {...rest}
+    >
       {children}
-    </div>
+    </ItemGroup>
   );
 };
 

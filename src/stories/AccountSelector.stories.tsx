@@ -71,15 +71,15 @@ Default.args = {
           />
         </AccountSelectorComponent.Option>
       </AccountSelectorComponent.OptionGroup>
-      <AccountSelectorComponent.OptionGroup>
-        <AccountSelectorComponent.Action
-          iconName="LogoutSolid"
-          label="Disconnect"
-          onAction={handleClick}
-        />
-      </AccountSelectorComponent.OptionGroup>
     </>
   ),
+  actions: [
+    {
+      iconName: "LogoutSolid",
+      content: "Disconnect",
+      onAction: handleClick,
+    },
+  ],
 };
 
 const Template: ComponentStory<typeof AccountSelectorComponent> = (args) => (
@@ -191,20 +191,20 @@ BundledAddress.args = {
           />
         </AccountSelectorComponent.Option>
       </AccountSelectorComponent.OptionGroup>
-      <AccountSelectorComponent.OptionGroup>
-        <AccountSelectorComponent.Action
-          iconName="CogSolid"
-          label="Setting"
-          onAction={handleClick}
-        />
-        <AccountSelectorComponent.Action
-          iconName="LogoutSolid"
-          label="Disconnect"
-          onAction={handleClick}
-        />
-      </AccountSelectorComponent.OptionGroup>
     </>
   ),
+  actions: [
+    {
+      iconName: "CogSolid",
+      content: "Setting",
+      onAction: handleClick,
+    },
+    {
+      iconName: "LogoutSolid",
+      content: "Disconnect",
+      onAction: handleClick,
+    },
+  ],
 };
 
 export const ForExt = Template.bind({});
@@ -270,23 +270,23 @@ ForExt.args = {
           />
         </AccountSelectorComponent.Option>
       </AccountSelectorComponent.OptionGroup>
-      <AccountSelectorComponent.OptionGroup>
-        <AccountSelectorComponent.Action
-          iconName="PlusSolid"
-          label="Add Account"
-          onAction={handleClick}
-        />
-        <AccountSelectorComponent.Action
-          iconName="CogSolid"
-          label="Setting"
-          onAction={handleClick}
-        />
-        <AccountSelectorComponent.Action
-          iconName="LockClosedSolid"
-          label="Lock"
-          onAction={handleClick}
-        />
-      </AccountSelectorComponent.OptionGroup>
     </>
   ),
+  actions: [
+    {
+      iconName: "PlusSolid",
+      content: "Add Account",
+      onAction: handleClick,
+    },
+    {
+      iconName: "CogSolid",
+      content: "Setting",
+      onAction: handleClick,
+    },
+    {
+      iconName: "LockClosedSolid",
+      content: "Lock",
+      onAction: handleClick,
+    },
+  ],
 };
