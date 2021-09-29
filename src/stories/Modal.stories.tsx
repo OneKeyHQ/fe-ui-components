@@ -1,6 +1,14 @@
 import React from "react";
 import { ComponentMeta } from "@storybook/react";
-import { Button, Modal, TradeForm } from "../components";
+import { useIntl } from "react-intl";
+
+import {
+  Button,
+  Modal,
+  TradeForm,
+  UIProvider,
+  useDisclosure,
+} from "../components";
 import { iconColors } from "../components/Modal/ConfirmDialog";
 import ExclamationOutlined from "../components/Icon/react/outline/Exclamation";
 import ConfigBar from "./Base";
@@ -13,17 +21,13 @@ export default {
 
 export const Default = () => {
   const [isModalVisible, setIsModalVisible] = React.useState(false);
-  const [isHeaderVisible, setIsHeaderVisible] = React.useState(false);
-  const [isFooterVisible, setIsFooterVisible] = React.useState(false);
 
   const showModal = () => {
     setIsModalVisible(true);
   };
-
   const handleOk = () => {
     setIsModalVisible(false);
   };
-
   const handleCancel = () => {
     setIsModalVisible(false);
   };
@@ -32,72 +36,70 @@ export const Default = () => {
     <>
       <ConfigBar />
       <div className="okd-space-x-3">
-        <Button
-          onClick={() => {
-            setIsHeaderVisible(true);
-            setIsFooterVisible(false);
-            showModal();
-          }}
-        >
-          Open Header Modal
-        </Button>
-        <Button
-          onClick={() => {
-            setIsHeaderVisible(false);
-            setIsFooterVisible(true);
-            showModal();
-          }}
-        >
-          Open Footer Modal
-        </Button>
-        <Button
-          onClick={() => {
-            setIsHeaderVisible(true);
-            setIsFooterVisible(true);
-            showModal();
-          }}
-        >
-          Open Full Modal
-        </Button>
+        <Button onClick={() => showModal()}>Open Full Modal</Button>
       </div>
 
       <Modal visible={isModalVisible} onClose={() => handleCancel()}>
-        {!!isHeaderVisible && (
-          <Modal.Header
-            // Custom styled title
-            // title={<div className="okd-text-green-200">Create User</div>}
-            // Default title style
-            title="Create User"
-            onClose={() => handleCancel()}
-            actions={
-              <div className="okd-flex okd-space-x-6">
-                <div className="okd-flex okd-w-5 okd-h-5 okd-items-center okd-justify-center">
-                  <Button circular type="plain" leadingIcon="RefreshSolid" />
-                </div>
-                <div className="okd-flex okd-w-5 okd-h-5 okd-items-center okd-justify-center">
-                  <Button circular type="plain" leadingIcon="CogSolid" />
-                </div>
+        <Modal.Header
+          title="Create User"
+          actions={
+            <div className="okd-flex okd-space-x-6">
+              <div className="okd-flex okd-w-5 okd-h-5 okd-items-center okd-justify-center">
+                <Button circular type="plain" leadingIcon="RefreshSolid" />
               </div>
-            }
-          />
-        )}
+              <div className="okd-flex okd-w-5 okd-h-5 okd-items-center okd-justify-center">
+                <Button circular type="plain" leadingIcon="CogSolid" />
+              </div>
+            </div>
+          }
+        />
 
         <Modal.Body>
           <p className="okd-font-normal okd-text-sm okd-leading-5 okd-text-gray-900">
-            <strong className="okd-font-bold">Detach instance to use.</strong>
+            <strong className="okd-font-bold">Detach instance to use.</strong>{" "}
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Odio porta
             risus nec, cursus faucibus libero dolor integer. Cursus sagittis,
             tempus ut cum cursus gravida suspendisse tristique nunc.
           </p>
         </Modal.Body>
 
-        {!!isFooterVisible && (
-          <Modal.Footer
-            onOk={handleOk}
-            onCancel={handleCancel}
-            okText="Create"
-          />
-        )}
+        <Modal.Footer onOk={handleOk} onCancel={handleCancel} okText="Create" />
+      </Modal>
+    </>
+  );
+};
+
+export const WithDisclosureHook = () => {
+  const { isOpen, onClose, onOpen } = useDisclosure();
+
+  return (
+    <>
+      <div className="okd-space-x-3">
+        <Button onClick={onOpen}>Open Modal</Button>
+      </div>
+
+      <Modal visible={isOpen} onClose={onClose}>
+        <Modal.Header title="Hooked Modal" />
+
+        <Modal.Body>
+          <p className="okd-font-normal okd-text-sm okd-leading-5 okd-text-gray-900">
+            This Modal uses{" "}
+            <span className="okd-bg-gray-300 okd-px-1 okd-rounded-sm okd-font-medium okd-text-black">
+              useDisclosure
+            </span>{" "}
+            hook to reduce the works of setting up control state for Modal, thats great, give it a try!
+          </p>
+          <br />
+          <p className="okd-font-normal okd-text-sm okd-leading-5 okd-text-gray-900">
+            这个例子使用了{" "}
+            <span className="okd-bg-gray-300 okd-px-1 okd-rounded-sm okd-font-medium okd-text-black">
+              useDisclosure
+            </span>{" "}
+            hook 来减少编写 控制 Modal State 的时间，太棒了，你也尝试一下吧！
+          </p>
+        </Modal.Body>
+
+        <Modal.Footer />
       </Modal>
     </>
   );
@@ -110,50 +112,48 @@ export const NestedModals = () => {
 
   const NestedModal = ({ onClose, level = 0 }) => {
     let [showChild, setShowChild] = React.useState(false);
+    const { formatMessage } = useIntl();
+    const contentMessage = formatMessage({ id: "hello" });
 
     return (
-      <>
-        <Modal
-          visible={true}
-          onClose={onClose}
-          containerStyle={{
-            transform: `translate(calc(50px * ${level}), calc(50px * ${level}))`,
-            width: "fit-content",
-          }}
-        >
-          <Modal.Body>
-            <div>
-              <p>Level: {level}</p>
-              <div className="okd-space-x-4">
-                <Button
-                  className="okd-bg-gray-200 okd-px-2 okd-py-1 okd-rounded"
-                  onClick={() => setShowChild(true)}
-                >
-                  Open (1)
-                </Button>
-                <Button
-                  className="okd-bg-gray-200 okd-px-2 okd-py-1 okd-rounded"
-                  onClick={() => setShowChild(true)}
-                >
-                  Open (2)
-                </Button>
-                <Button
-                  className="okd-bg-gray-200 okd-px-2 okd-py-1 okd-rounded"
-                  onClick={() => setShowChild(true)}
-                >
-                  Open (3)
-                </Button>
-              </div>
+      <Modal
+        visible={true}
+        onClose={onClose}
+        containerStyle={{
+          transform: `translate(calc(50px * ${level}), calc(50px * ${level}))`,
+          width: "fit-content",
+        }}
+      >
+        <Modal.Body>
+          <div>
+            <p>Level: {level}</p>
+            <p>Content: {contentMessage} </p>
+            <div className="okd-space-x-4">
+              <Button
+                className="okd-bg-gray-200 okd-px-2 okd-py-1 okd-rounded"
+                onClick={() => setShowChild(true)}
+              >
+                Open (1)
+              </Button>
+              <Button
+                className="okd-bg-gray-200 okd-px-2 okd-py-1 okd-rounded"
+                onClick={() => setShowChild(true)}
+              >
+                Open (2)
+              </Button>
+              <Button
+                className="okd-bg-gray-200 okd-px-2 okd-py-1 okd-rounded"
+                onClick={() => setShowChild(true)}
+              >
+                Open (3)
+              </Button>
             </div>
-          </Modal.Body>
-          {showChild && (
-            <NestedModal
-              onClose={() => setShowChild(false)}
-              level={level + 1}
-            />
-          )}
-        </Modal>
-      </>
+          </div>
+        </Modal.Body>
+        {showChild && (
+          <NestedModal onClose={() => setShowChild(false)} level={level + 1} />
+        )}
+      </Modal>
     );
   };
 
@@ -162,7 +162,14 @@ export const NestedModals = () => {
       <Button onClick={() => setOpen(true)}>
         Open deeply nested Dialog components
       </Button>
-      {open && <NestedModal onClose={setOpen} />}
+      <UIProvider
+        messagesMap={{
+          "en-US": { hello: "Hello There👋!" },
+          "zh-CN": { hello: "你好啊👋！" },
+        }}
+      >
+        {open && <NestedModal onClose={setOpen} />}
+      </UIProvider>
 
       <Button onClick={() => setOpenTop(true)}>
         Open one nested top Modal

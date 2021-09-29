@@ -1,10 +1,14 @@
-import React, { CSSProperties, Fragment, PropsWithChildren } from "react";
+import React, {
+  CSSProperties,
+  Fragment,
+  PropsWithChildren,
+  useContext,
+} from "react";
 import cx, { Argument } from "classnames";
 import { Dialog, Transition } from "@headlessui/react";
 
 import ModalHeader from "./ModalHeader";
 import ModalFooter from "./ModalFooter";
-import UIProvider from "../Provider";
 
 type ModalType = "info" | "success" | "error" | "warn" | "warning" | "confirm";
 
@@ -60,6 +64,10 @@ export const ModalBody = ({
   );
 };
 
+export interface IModalContext extends ModalProps {}
+export const ModalContext = React.createContext<IModalContext>(undefined);
+export const useModalContext = () => useContext(ModalContext);
+
 const Modal = (props: PropsWithChildren<ModalProps>) => {
   const {
     visible,
@@ -73,8 +81,12 @@ const Modal = (props: PropsWithChildren<ModalProps>) => {
 
   const contentNode = content ?? children;
 
+  const context = {
+    ...props,
+  };
+
   return (
-    <UIProvider>
+    <ModalContext.Provider value={context}>
       <Transition.Root show={visible} as={Fragment}>
         <Dialog
           as="div"
@@ -126,7 +138,7 @@ const Modal = (props: PropsWithChildren<ModalProps>) => {
           </div>
         </Dialog>
       </Transition.Root>
-    </UIProvider>
+    </ModalContext.Provider>
   );
 };
 
