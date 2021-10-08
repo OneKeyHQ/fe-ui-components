@@ -35,24 +35,34 @@ export const alertIcons = {
 };
 
 export type AlertProps = {
-  /** 标题 */
+  /**
+   * 标题
+   */
   title: ReactNode;
-  /** 内容 */
+  /**
+   * 内容
+   */
   content?: ReactNode;
-  /** Alert 的类型 */
+  /**
+   * Alert 的类型
+   */
   type?: "info" | "warning" | "error" | "success";
-  /** 是否可关闭 */
+  /**
+   * 是否可关闭
+   */
   closable?: boolean;
-  /** 点击关闭按钮的事件 */
+  /**
+   * 点击关闭按钮的事件
+   */
   onClose?: () => void;
   /**
    * 自定义左边的提示 Icon
    */
-  icon?: Argument;
+  icon?: ReactNode;
   /**
    * 自定义右边的按钮
    */
-  action?: Argument;
+  action?: ReactNode;
   /**
    * 设置额外的 class
    */
@@ -79,10 +89,11 @@ const Alert: FC<AlertProps> = ({
   const textContent = content ?? children;
 
   const rightNode = useMemo(() => {
-    if (!!action)
+    if (!!action) {
       return (
         <div className="okd-ml-auto okd-self-center okd-pl-3">{action}</div>
       );
+    }
 
     return (
       closable && (
@@ -124,7 +135,7 @@ const Alert: FC<AlertProps> = ({
           "okd-bg-red-50": type === "error",
           "okd-bg-green-50": type === "success",
         },
-        className && className
+        className
       )}
     >
       <div className="okd-flex">
