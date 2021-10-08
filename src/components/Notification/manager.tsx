@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Notification } from "./notification";
+import { Notification } from "./Notification";
 import type {
   NotificationMessage,
   NotificationOptions,
