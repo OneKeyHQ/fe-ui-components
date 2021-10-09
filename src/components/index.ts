@@ -16,7 +16,6 @@ export { default as Link } from "./Link";
 export { default as Modal } from "./Modal";
 export { default as NFTCard } from "./NFTCard";
 export { default as NFTStackedCard } from "./NFTStackedCard";
-export { default as Notification, NotificationContainer } from "./Notification";
 export { default as Popover } from "./Popover";
 export { default as Progress } from "./Progress";
 export { default as UIProvider } from "./Provider";
@@ -49,6 +48,7 @@ export { default as Checkbox } from "./Checkbox";
 export { default as AccountSelector } from "./AccountSelector";
 
 export * from "./Updaters";
+export * from "./Notification";
 export * from "./Hooks";
 
 export {
