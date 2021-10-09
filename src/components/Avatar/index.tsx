@@ -1,5 +1,5 @@
 import React, { FC } from "react";
-import cx from "classnames";
+import cx, { Argument } from "classnames";
 import JazzIcon from "react-jazzicon";
 import ImageFallback from "react-image-fallback";
 import { CDN_PREFIX } from "../utils/index";
@@ -17,17 +17,21 @@ type AvatarProps = {
    * 图像尺寸大小
    */
   size?: number | "sm" | "md" | "lg" | "xl" | "2xl" | "3xl";
+  /**
+   * className 样式
+   */
+  className?: Argument
 };
 
 const defaultProps = {
   size: "lg",
 } as const;
 
-const Avatar: FC<AvatarProps> = ({ address, size, logoUrl }) => {
+const Avatar: FC<AvatarProps> = ({ address, size, logoUrl, className }) => {
   const seed = parseInt(address.slice(2, 10), 16);
 
   return (
-    <div className={cx("okd-inline-flex okd-overflow-hidden")}>
+    <div className={cx("okd-inline-flex okd-overflow-hidden", className)}>
       <ImageFallback
         src={
           logoUrl ??
