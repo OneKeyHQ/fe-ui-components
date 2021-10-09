@@ -22,7 +22,6 @@ import {
   OK_LOCALE_CACHE_KEY,
   TranslationMap,
 } from "../utils";
-import { NotificationContainer } from "../Notification";
 
 const cache = createIntlCache();
 
@@ -162,7 +161,6 @@ const Provider: FC<UIProviderProps> = ({
           {children}
         </Web3ReactProvider>
       </RawIntlProvider>
-      <NotificationContainer />
     </Context.Provider>
   );
 };

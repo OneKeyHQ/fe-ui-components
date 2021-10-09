@@ -1,68 +1,24 @@
-import { Events } from "./types";
-import { NotificationProps } from "./Notification";
-import { NotificationAction } from "./useNotification";
+import { Key } from "react";
+import type { NotificationOptions, NotificationState } from "./types";
 
-// An event handler will take an event argument
-// and should not return a value
-export type Handler<T = any> = (event: T) => void;
-
-interface Emitter {
-  on<T = any>(event: Events, handler: Handler<T>): void;
-  emit<T = any>(event: Events, args?: T): void;
-  off(): void;
-}
-
-export const emitter = ((): Emitter => {
-  const events = new Map();
-
-  return {
-    /**
-     * Register an event handler for the given event name.
-     * @param {Events} event Type of event to listen for
-     * @param {Handler} callback Handler to call in response to given event
-     */
-    on<T = any>(event: Events, callback: Handler<T>) {
-      if (!events.has(event)) events.set(event, []);
-      events.get(event).push(callback);
-    },
-
-    /**
-     * Invoke all handlers for the given event name.
-     * @param {Events} event The event type to invoke
-     * @param {Any} args Any value passed to each handler
-     */
-    emit<T = any>(event: Events, args: T) {
-      if (!events.has(event)) return;
-      events.get(event).forEach((callback: Handler) => callback(args));
-    },
-
-    /** Remove all events. */
-    off() {
-      events.clear();
-    },
-  };
-})();
-
-interface INotificationDispatcher {
-  dispatch: (value: NotificationAction) => void;
-  duration?: number;
-}
-
-export const notificationDispatcher = ({
-  dispatch,
-  duration,
-}: INotificationDispatcher) => {
-  emitter.on(Events.SHOW, (notification: NotificationProps) => {
-    dispatch({ type: "ADD", notification });
-
-    if (duration) {
-      setTimeout(() => {
-        dispatch({ type: "REMOVE", noticeKey: notification.noticeKey });
-      }, duration);
-    }
-  });
-  emitter.on(Events.HIDE, (id: string) =>
-    dispatch({ type: "REMOVE", noticeKey: id })
+/**
+ * Given the notification manager state, finds the notification that matches
+ * the id and return its index
+ */
+export function findNotificationIndex(
+  notifications: NotificationOptions[],
+  id: Key
+) {
+  return notifications.findIndex(
+    (notification) => String(notification.id) === String(id)
   );
-  emitter.on(Events.HIDE_ALL, () => dispatch({ type: "REMOVE_ALL" }));
-};
+}
+
+/**
+ * Given the notification manager state, checks if a specific notification is
+ * still in the state, which means it is still visible on screen.
+ */
+export const isVisible = (notifications: NotificationState, id: Key) =>
+  !!Object.values(notifications)
+    .flat()
+    .find((notification) => notification.id === id);

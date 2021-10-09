@@ -1,78 +1,138 @@
 import React from "react";
-import { ComponentMeta } from "@storybook/react";
-import { Notification as NotificationComponent } from "../components";
-import { useState } from "react";
-import { Button } from "../components";
+import {
+  Button,
+  useNotification,
+  createStandaloneNotification,
+} from "../components";
 
 export default {
   title: "UI/Notification",
-  component: NotificationComponent,
-} as ComponentMeta<typeof NotificationComponent>;
+  component: React.Fragment,
+};
 
-export const Default = () => {
-  const [successVisibility, setSuccessVisibility] = useState(false);
-  const [errorVisibility, setErrorVisibility] = useState(false);
-  const [
-    processingWithActionVisibility,
-    setProcessingWithActionVisibility,
-  ] = useState(false);
-
-  // 声明式使用方法
+export const NotificationExample = () => {
+  const notification = useNotification();
+  const id = "a custom key";
   return (
-    <div className="okd-block okd-space-x-2">
-      <Button onClick={() => setSuccessVisibility(true)}>
-        Success Notification
+    <div className="okd-space-x-2">
+      <Button
+        onClick={() => {
+          if (notification.isActive(id)) return;
+          notification.error(
+            "You do not have permissions to perform this action.",
+            {
+              id,
+              title: "Error Connecting...",
+            }
+          );
+        }}
+      >
+        Show Notification
       </Button>
-
-      <Button onClick={() => setErrorVisibility(true)}>
-        Error Notification
-      </Button>
-
-      <Button onClick={() => setProcessingWithActionVisibility(true)}>
-        Custom Footer
-      </Button>
-
-      <NotificationComponent
-        title="Successfully added!"
-        content="Added 2.3245 BNB to CAKE/WBNB."
-        show={successVisibility}
-        onClose={() => setSuccessVisibility(false)}
-      />
-
-      <NotificationComponent
-        title="Add failure"
-        type="error"
-        content="Failure to add 2.3245 BNB to CAKE/WBNB."
-        show={errorVisibility}
-        onClose={() => setErrorVisibility(false)}
-      />
-
-      <NotificationComponent
-        title="Processing..."
-        content="Something is happening."
-        show={processingWithActionVisibility}
-        onClose={() => setProcessingWithActionVisibility(false)}
-        type="processing"
-        duration={0}
-        footer={
-          <div className="okd-space-x-3">
-            <Button type="primary">Accept</Button>
-            <Button>Decline</Button>
-          </div>
+      <Button onClick={() => notification.closeAll()}>Close all</Button>
+      <Button
+        onClick={() =>
+          notification.update(id, {
+            title: "Hooray 🥳🥳🥳!!!",
+            content: "You now have permissions to perform this action.",
+            type: "success",
+            duration: 3000,
+          })
         }
-      />
+      >
+        Update
+      </Button>
+      <Button onClick={() => notification.close(id)}>Close One</Button>
     </div>
   );
 };
 
-export const usingStaticMethods = () => {
+export function SuccessNotificationWithCloseCallback() {
+  const notification = useNotification();
   return (
-    // <NotificationContainer /> should declare at the root component
-    // <NotificationContainer /> 应该在根组件声明
+    <Button
+      onClick={() =>
+        notification.success("We've created your account for you.", {
+          title: "Account created.",
+          duration: 3000,
+          closable: true,
+          onCloseComplete: () => {
+            console.log("close");
+          },
+        })
+      }
+    >
+      Show Success Notification
+    </Button>
+  );
+}
+
+export function WarningNotification() {
+  const notification = useNotification();
+  return (
+    <Button
+      onClick={() =>
+        notification.warn("This is a warning.", {
+          title: "Warning.",
+          duration: 9000,
+          closable: true,
+        })
+      }
+    >
+      Show Warning Notification
+    </Button>
+  );
+}
+
+export function ProcessingNotificationWithFooter() {
+  const notification = useNotification();
+  return (
+    <Button
+      onClick={() =>
+        notification.processing("Please wait until transaction success!", {
+          title: "Processing transaction.",
+          duration: 9000,
+          closable: true,
+          footer: (
+            <div className="okd-space-x-3">
+              <Button type="primary">Accept</Button>
+              <Button>Decline</Button>
+            </div>
+          ),
+        })
+      }
+    >
+      Show Processing with Footer Notification
+    </Button>
+  );
+}
+
+export function ErrorNotification() {
+  const notification = useNotification();
+  return (
+    <Button
+      onClick={() =>
+        notification.error("Unable to create user account.", {
+          title: "An error occurred.",
+          duration: 9000,
+          closable: true,
+        })
+      }
+    >
+      Show Error Notification
+    </Button>
+  );
+}
+
+export const usingStaticMethods = () => {
+  // 可以在 scope 外声明
+  const notification = createStandaloneNotification();
+
+  return (
     <div className="okd-space-x-2">
       <Button
         onClick={() => {
-          NotificationComponent.success("Added 2.3245 BNB to CAKE/WBNB.", {
+          notification.success("Added 2.3245 BNB to CAKE/WBNB.", {
             title: "Successfully added!",
           });
         }}
@@ -81,17 +141,16 @@ export const usingStaticMethods = () => {
       </Button>
       <Button
         onClick={() => {
-          NotificationComponent.error(
-            "Failure to add 2.3245 BNB to CAKE/WBNB.",
-            { title: "Add failure" }
-          );
+          notification.error("Failure to add 2.3245 BNB to CAKE/WBNB.", {
+            title: "Add failure",
+          });
         }}
       >
         Error
       </Button>
       <Button
         onClick={() => {
-          NotificationComponent.processing("Something is happening.", {
+          notification.processing("Something is happening.", {
             title: "Processing...",
           });
         }}
@@ -100,7 +159,7 @@ export const usingStaticMethods = () => {
       </Button>
       <Button
         onClick={() => {
-          NotificationComponent.warn("Something is happening.", {
+          notification.warn("Something is happening.", {
             title: "Attention needed",
           });
         }}
@@ -110,7 +169,7 @@ export const usingStaticMethods = () => {
 
       <Button
         onClick={() => {
-          NotificationComponent.warn("Something is happening.", {
+          notification.warn("Something is happening.", {
             title: "Attention needed",
             footer: (
               <div className="okd-space-x-2">
