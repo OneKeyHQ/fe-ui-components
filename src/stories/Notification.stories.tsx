@@ -23,6 +23,8 @@ export const NotificationExample = () => {
             {
               id,
               title: "Error Connecting...",
+              duration: null,
+              closable: false,
             }
           );
         }}
