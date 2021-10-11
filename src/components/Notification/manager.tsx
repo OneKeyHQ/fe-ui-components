@@ -134,7 +134,7 @@ export class NotificationManager extends React.Component<
   ): NotificationOptions => {
     NotificationManager.counter += 1;
     const id = options.id ?? NotificationManager.counter;
-    const duration = options.duration ?? 3000;
+    const duration = options.duration;
     const type = options.type ?? "success";
 
     return {
@@ -201,7 +201,7 @@ export class NotificationManager extends React.Component<
     return (
       <div
         aria-live="assertive"
-        className="okd-fixed okd-inset-0 okd-flex okd-items-end okd-px-4 okd-py-6 okd-pointer-events-none sm:okd-p-6 sm:okd-items-start okd-space-y-4"
+        className="okd-fixed okd-inset-0 okd-flex okd-items-end okd-px-4 okd-py-6 okd-pointer-events-none sm:okd-p-6 sm:okd-items-start okd-space-y-4 okd-z-[9999]"
       >
         <div className="okd-w-full okd-flex okd-flex-col okd-items-center okd-space-y-4 sm:okd-items-end">
           {notifications.map((notification) => (
