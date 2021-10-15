@@ -1,6 +1,6 @@
 import { useMemo, useState } from "react";
 
-export function usePagination<T>(data: T[], pageSize = 3) {
+export function usePagination<T>(data: T[], pageSize = 10) {
   const [from, setFrom] = useState(0);
 
   const total = useMemo(() => data.length, [data]);
