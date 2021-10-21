@@ -21,7 +21,7 @@ const Template: ComponentStory<typeof NFTStackedCardComponent> = (args) => (
   <>
     <ConfigBar />
     <Paint>
-      <NFTStackedCardComponent {...args} />
+      <NFTStackedCardComponent {...args} onImageClick={(idx) => alert(`click image index: ${idx}`)} />
     </Paint>
   </>
 );
