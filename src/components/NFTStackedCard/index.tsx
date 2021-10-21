@@ -12,6 +12,7 @@ type StackImageProps = {
   current: number;
   isHovering: boolean;
   onHover: (i: number) => void;
+  onClick?: (i: number) => void;
   size?: number;
 };
 
@@ -22,6 +23,7 @@ const StackImage: FC<StackImageProps> = ({
   current,
   isHovering,
   onHover,
+  onClick,
   size = 120,
 }) => {
   const space = 66;
@@ -34,6 +36,7 @@ const StackImage: FC<StackImageProps> = ({
   return (
     <div
       className="okd-absolute okd--bottom-8 okd-cursor-pointer"
+      role="img"
       style={{
         right: isHovering ? ref.current * scale : ref.current,
         zIndex: isActive ? total : "initial",
@@ -44,6 +47,7 @@ const StackImage: FC<StackImageProps> = ({
       onMouseLeave={() => {
         onHover(undefined);
       }}
+      onClick={() => onClick(index)}
     >
       <div
         className={cx(
@@ -88,6 +92,10 @@ export type NFTCardProps = {
   action?: ReactNode;
   /** 图片展示尺寸 */
   imageSize?: number;
+  /**
+   * 叠加图被点击时的事件
+   */
+  onImageClick?: (i: number) => void;
 };
 
 /**
@@ -99,6 +107,7 @@ const NFTStackedCard: FC<NFTCardProps> = ({
   subTitle,
   className,
   action,
+  onImageClick,
   imageSize,
 }) => {
   const [isHovering, setIsHovering] = useState(false);
@@ -116,6 +125,7 @@ const NFTStackedCard: FC<NFTCardProps> = ({
           onHover={(index?: number) => {
             setCurrentHoverIndex(index);
           }}
+          onClick={onImageClick}
         />
       );
     }
@@ -132,11 +142,12 @@ const NFTStackedCard: FC<NFTCardProps> = ({
         onHover={(index?: number) => {
           setCurrentHoverIndex(index);
         }}
-      />
+        onClick={onImageClick}
+        />
     ));
 
     return images;
-  }, [currentHoverIndex, imageSize, isHovering, sources]);
+  }, [currentHoverIndex, imageSize, isHovering, onImageClick, sources]);
 
   return (
     <Card
