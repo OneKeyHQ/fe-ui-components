@@ -5,7 +5,7 @@ import cx from "classnames";
 import Icon from "../Icon";
 import { ICON_NAMES } from "../Icon/Icons";
 
-type LevelGrade = "star" | "diamond" | "crown";
+type LevelGrade = "star" | "diamond" | "crown" | "union";
 interface LevelBadgeProps {
   /**
    * 等级，范围在 [1, 9] 内
@@ -21,6 +21,8 @@ const getBadge = (level: number): LevelGrade => {
       return "diamond";
     case level >= 7 && level <= 9:
       return "crown";
+    case level === 10:
+      return "union";
   }
 };
 
@@ -29,7 +31,7 @@ const getBadge = (level: number): LevelGrade => {
  */
 const LevelBadge: FC<LevelBadgeProps> = ({ level }) => {
   // Validation, do we even need it?
-  if (level < 1 || level > 9) {
+  if (level < 1 || level > 10) {
     return null;
   }
 
@@ -45,6 +47,8 @@ const LevelBadge: FC<LevelBadgeProps> = ({ level }) => {
             "okd-bg-[#FFE5CF]": badge === "star",
             "okd-bg-[#E3E7ED]": badge === "diamond",
             "okd-bg-[#FBE3A2]": badge === "crown",
+            "okd-bg-gradient-to-b okd-from-[#686868] okd-to-[#383838]":
+              badge === "union",
           }
         )}
       >
@@ -61,6 +65,7 @@ const LevelBadge: FC<LevelBadgeProps> = ({ level }) => {
             "okd-text-[#C97322]": badge === "star",
             "okd-text-[#687E90]": badge === "diamond",
             "okd-text-[#E78E1B]": badge === "crown",
+            "okd-text-[#F2E0B8]": badge === "union",
           })}
         >
           Lv.{level}

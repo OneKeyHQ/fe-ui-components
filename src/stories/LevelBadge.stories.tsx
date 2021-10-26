@@ -19,5 +19,6 @@ export const Default: ComponentStory<typeof LevelBadge> = () => (
     <LevelBadge level={7} />
     <LevelBadge level={8} />
     <LevelBadge level={9} />
+    <LevelBadge level={10} />
   </div>
 );
