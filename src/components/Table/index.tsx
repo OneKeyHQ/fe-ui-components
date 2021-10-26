@@ -105,17 +105,22 @@ type tableProps = {
    * 表格尺寸，可选 lg 和 sm，默认 lg
    */
   size: "lg" | "sm";
+  /**
+   * 每页展示条数，默认为 10
+   */
+  pageSize?: number;
 };
 
 const defaultProps = {
   rowKey: "address",
   hoverable: true,
   size: "lg",
+  pageSize: 10,
 } as const;
 
 const Table = (props: tableProps) => {
-  const { rowKey, columns, dataSource, hoverable, size } = props;
-  const { paginatedData, ...paginationProps } = usePagination(dataSource);
+  const { rowKey, columns, dataSource, hoverable, size, pageSize } = props;
+  const { paginatedData, ...paginationProps } = usePagination(dataSource, pageSize);
 
   return (
     <>
@@ -160,6 +165,7 @@ const Table = (props: tableProps) => {
                   </th>
                 );
               })}
+
             </tr>
           </thead>
           <tbody className="okd-divide-y okd-divide-gray-200">
