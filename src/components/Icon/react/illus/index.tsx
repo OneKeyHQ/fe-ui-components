@@ -11,3 +11,5 @@ export { default as MetamaskIllusIcon } from './Metamask';
 export { default as NftPegIllusIcon } from './NftPeg';
 
 export { default as StarBadgeIllusIcon } from './StarBadge';
+
+export { default as UnionBadgeIllusIcon } from './UnionBadge';
