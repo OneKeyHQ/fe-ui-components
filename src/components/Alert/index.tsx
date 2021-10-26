@@ -67,6 +67,10 @@ export type AlertProps = {
    * 设置额外的 class
    */
   className?: Argument;
+  /**
+   * 设置内容容器的 class
+   */
+  contentClassName?: Argument;
 };
 
 const defaultProps = {
@@ -82,6 +86,7 @@ const Alert: FC<AlertProps> = ({
   content,
   closable,
   onClose,
+  contentClassName,
   className,
   children,
 }) => {
@@ -138,7 +143,7 @@ const Alert: FC<AlertProps> = ({
         className
       )}
     >
-      <div className="okd-flex">
+      <div className={cx("okd-flex", contentClassName)}>
         <div className="okd-flex-shrink-0">{alertIconNode}</div>
 
         <div
