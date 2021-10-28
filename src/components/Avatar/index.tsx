@@ -1,7 +1,7 @@
 import React, { FC } from "react";
 import cx, { Argument } from "classnames";
 import JazzIcon from "react-jazzicon";
-import ImageFallback from "react-image-fallback";
+import ImageFallback from "../Image/react-image-fallback";
 import { CDN_PREFIX } from "../utils/index";
 
 type AvatarProps = {
