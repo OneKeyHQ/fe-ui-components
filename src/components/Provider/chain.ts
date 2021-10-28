@@ -3,11 +3,11 @@ import { useIntl } from '../Intl';
 /** ERC20 的 chain 映射关系，所有相关的配置均以 chainId 为 key 进行映射 */
 export enum ERC20ChainIdMap {
   ETH = 1,
-  BSC = 51,
-  HECO = 128,
+  BSC = 56,
   OEC = 65,
-  POLYGON = 137,
   xDai = 100,
+  HECO = 128,
+  POLYGON = 137,
 };
 
 type ChainItemConfig = {
