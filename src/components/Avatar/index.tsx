@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 import cx, { Argument } from 'classnames';
 import JazzIcon, { jsNumberForAddress } from 'react-jazzicon';
 import ImageFallback from '../Image/react-image-fallback';
-import { CDN_PREFIX } from '../utils/index';
+import { CDN_PREFIX, stringToHex } from '../utils/index';
 import { add } from 'lodash';
 
 type AvatarProps = {
@@ -35,7 +35,7 @@ const defaultProps = {
 const Avatar: FC<AvatarProps> = ({ address, size, logoUrl, className, isRemote }) => {
   if (!address.startsWith('0x') && !address.startsWith('0X')) {
     // CFX SOL address support, convert to ETH address like
-    address = Buffer.from(address || '', 'utf8').toString('hex');
+    address = stringToHex(address);
     address = `0x${address.slice(-40)}`;
   }
   const seed = jsNumberForAddress(address);
@@ -55,7 +55,7 @@ const Avatar: FC<AvatarProps> = ({ address, size, logoUrl, className, isRemote }
       : size === '3xl'
       ? 56
       : null;
-  const isRemoteImage = logoUrl || isRemote;
+  const isRemoteImage = Boolean(logoUrl || isRemote);
   const jazzIcon = (
     <JazzIcon
       paperStyles={{
