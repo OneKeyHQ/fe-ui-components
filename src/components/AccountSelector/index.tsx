@@ -1,11 +1,11 @@
-import React, { FC, Fragment } from "react";
-import cx, { Argument } from "classnames";
+import React, { FC, Fragment } from 'react';
+import cx, { Argument } from 'classnames';
 
-import Popover from "../Popover";
-import Trigger, { TriggerProps } from "./Trigger";
-import OptionGroup from "./OptionGroup";
-import Option from "./Option";
-import Action from "./Action";
+import Popover from '../Popover';
+import Trigger, { TriggerProps } from './Trigger';
+import OptionGroup from './OptionGroup';
+import Option from './Option';
+import Action from './Action';
 
 export type AccountSelectorProps = {
   /**
@@ -15,7 +15,7 @@ export type AccountSelectorProps = {
   /**
    * Popover 的位置，分别对应左下、中下、右下
    */
-  place?: "bottom-start" | "bottom-center" | "bottom-end";
+  place?: 'bottom-start' | 'bottom-center' | 'bottom-end';
   /**
    * Trigger 的 props
    */
@@ -33,12 +33,15 @@ const AccountSelector: FC<AccountSelectorProps> & {
   Option;
   Action;
 } = ({ className, place, trigger, children, actions, ...rest }) => {
+  const isTriggerElement = React.isValidElement(trigger);
   return (
     <>
       <Popover
         place={place}
-        className={cx("okd-w-[343px]", !!className && className)}
-        trigger={(status) => <Trigger active={status} {...trigger} />}
+        className={cx('okd-w-[320px]', !!className && className)}
+        trigger={(status) =>
+          isTriggerElement ? trigger : <Trigger active={status} {...trigger} />
+        }
         {...rest}
       >
         <div className="okd-py-1 okd-px-3 okd-divide-y okd-divide-gray-200">
