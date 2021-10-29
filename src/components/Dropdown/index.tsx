@@ -78,7 +78,7 @@ const Dropdown: FC<DropdownProps> & { ItemGroup; Item } = ({
       >
         <Menu.Items
           className={cx(
-            "okd-absolute okd-mt-2 okd-w-56 okd-px-3 okd-rounded okd-shadow-lg okd-bg-white okd-ring-1 okd-ring-black/5 okd-divide-y okd-divide-gray-100 focus:okd-outline-none",
+            "okd-z-50 okd-absolute okd-mt-2 okd-w-56 okd-px-3 okd-rounded okd-shadow-lg okd-bg-white okd-ring-1 okd-ring-black/5 okd-divide-y okd-divide-gray-100 focus:okd-outline-none",
             {
               "okd-origin-top-left okd-left-0": place === "bottom-start",
               "okd-left-1/2 okd--translate-x-1/2": place === "bottom-center",
@@ -92,7 +92,8 @@ const Dropdown: FC<DropdownProps> & { ItemGroup; Item } = ({
               <Fragment key={key}>
                 <ItemGroup title={section.title}>
                   {section.items.map((item, key) => (
-                    <Menu.Item key={key}>
+                    // children.onClick will be overwrite by Menu.Item, so should set onClick here
+                    <Menu.Item key={key} onClick={item.onAction || item.onClick}>
                       {/* To style the active `Menu.Item` you can read the `active` render prop
                     argument, which tells you whether or not that menu item is currently
                     focused via the mouse or keyboard. */}

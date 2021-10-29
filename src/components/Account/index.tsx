@@ -72,15 +72,17 @@ const Account: FC<AccountProps> = ({
         )}
       >
         {!!label && (
-          <p
-            className={cx("okd-text-gray-900 okd-font-medium", {
+          <div
+            className={cx(
+              "okd-max-w-[140px] okd-overflow-ellipsis okd-overflow-hidden okd-whitespace-nowrap",
+              "okd-text-gray-900 okd-font-medium", {
               "okd-text-sm": size === "sm" || size === "md" || size === "lg",
               "okd-text-base": size === "xl",
               "okd-text-lg": size === "2xl",
             })}
           >
             {label}
-          </p>
+          </div>
         )}
         {!(label && balance) && (
           <Address
@@ -115,14 +117,14 @@ const Account: FC<AccountProps> = ({
           />
         )}
         {!!balance && (
-          <p
+          <div
             className={cx(
               "okd-text-gray-500",
               size === "sm" ? "okd-text-xs" : "okd-text-sm"
             )}
           >
             {balance} {symbol}
-          </p>
+          </div>
         )}
       </div>
     </div>

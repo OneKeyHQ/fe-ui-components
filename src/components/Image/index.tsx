@@ -1,5 +1,5 @@
 import React, { FC, ComponentProps } from 'react';
-import ReactImageFallback from 'react-image-fallback';
+import ReactImageFallback from './react-image-fallback';
 import Icon from '../Icon';
 
 type ImageProps = ComponentProps<typeof ReactImageFallback>;

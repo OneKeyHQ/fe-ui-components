@@ -111,7 +111,7 @@ const Token: FC<TokenProps> = ({
           )}
         >
           {!!name && (
-            <p
+            <div
               className={cx(
                 size === "xs" ? "okd-text-xs" : "",
                 size === "sm" || size === "md" ? "okd-text-sm" : "",
@@ -127,17 +127,17 @@ const Token: FC<TokenProps> = ({
               )}
             >
               {name}
-            </p>
+            </div>
           )}
           {!!description && (
-            <p
+            <div
               className={cx(
                 size === "xs" || size === "sm" ? "okd-text-xs" : "okd-text-sm",
                 "okd-text-gray-500"
               )}
             >
               {description}
-            </p>
+            </div>
           )}
         </div>
       )}
