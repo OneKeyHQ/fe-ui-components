@@ -1,9 +1,8 @@
-import React, { FC } from 'react';
+import React, { FC, useState } from 'react';
 import cx, { Argument } from 'classnames';
 import JazzIcon, { jsNumberForAddress } from 'react-jazzicon';
 import ImageFallback from '../Image/react-image-fallback';
 import { CDN_PREFIX, stringToHex } from '../utils/index';
-import { add } from 'lodash';
 
 type AvatarProps = {
   /**
@@ -33,6 +32,7 @@ const defaultProps = {
 } as const;
 
 const Avatar: FC<AvatarProps> = ({ address, size, logoUrl, className, isRemote }) => {
+  const [hasImageLoadError, setHasImageLoadError] = useState(false)
   if (!address.startsWith('0x') && !address.startsWith('0X')) {
     // CFX SOL address support, convert to ETH address like
     address = stringToHex(address);
@@ -73,10 +73,11 @@ const Avatar: FC<AvatarProps> = ({ address, size, logoUrl, className, isRemote }
       className={cx('okd-inline-flex okd-overflow-hidden okd-bg-gray-200', className)}
       style={{ width: sizeNum, height: sizeNum, borderRadius: '50%' }}
     >
-      {isRemoteImage ? (
+      {(isRemoteImage && !hasImageLoadError) ? (
         <ImageFallback
           src={logoUrl ?? `${CDN_PREFIX}onekey/avatar/${address}?timestamp=${Date.now()}`}
           fallbackImage={jazzIcon}
+          onError={() => setHasImageLoadError(true)}
           alt="avatar"
         />
       ) : (
