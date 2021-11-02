@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useReducer } from "react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 
 import { Avatar as AvatarComponent } from "../components";
+import { useEffect } from "@storybook/react/node_modules/@storybook/addons";
 
 export default {
   title: "UI/Avatar",
@@ -30,11 +31,24 @@ export const RemoteErrorFallback: ComponentStory<
   />
 );
 
-export const RemoteErrorFallback2: ComponentStory<
+// 哪怕更新了，也不会重新向服务器发起无效请求
+export const RemoteErrorFallbackWithUpdater: ComponentStory<
   typeof AvatarComponent
-> = () => (
-  <AvatarComponent
-    logoUrl="Wrong logo url"
-    address="0x0000000000000000000000000000000000000000"
-  />
-);
+> = () => {
+  const [count, update] = useReducer((c) => c + 1, 0);
+
+  useEffect(() => {
+    const id = setInterval(() => update(), 1000);
+    return () => clearInterval(id);
+  }, []);
+
+  return (
+    <div className="okd-flex okd-items-center okd-space-x-2">
+      <AvatarComponent
+        logoUrl="Wrong logo url"
+        address="0x0000000000000000000000000000000000000000"
+      />
+      <p>{count}</p>
+    </div>
+  );
+};
