@@ -35,9 +35,8 @@ export type Props = {
 };
 
 const defaultProps = {
-  href: "",
+  href: undefined,
   color: false,
-  pure: false,
   icon: false,
   underline: false,
   block: false,
