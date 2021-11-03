@@ -5,17 +5,16 @@ import Icon from '../Icon';
 type ImageProps = ComponentProps<typeof ReactImageFallback>;
 
 const Image: FC<ImageProps> = (props) => {
+  const fallbackSrc = [].concat(props?.fallbackSrc);
   return (
     <ReactImageFallback
-      fallbackImage={
-        <Icon
-          className="okd-w-full okd-h-full okd-text-gray-400"
-          name="QuestionMarkOutline"
-        />
-      }
+      fallbackImage={[
+        ...fallbackSrc,
+        <Icon className="okd-w-full okd-h-full okd-text-gray-400" name="QuestionMarkOutline" />,
+      ]}
       {...props}
     />
   );
-}
+};
 
 export default Image;

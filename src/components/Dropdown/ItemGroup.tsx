@@ -24,9 +24,9 @@ const ItemGroup: FC<ItemGroupProps> = ({ className, children, title, ...rest }) 
       {...rest}
     >
       {!!title && (
-        <p className="okd-pt-1 okd-text-xs okd-font-medium okd-text-gray-500 okd-tracking-wider okd-uppercase">
+        <div className="okd-pt-1 okd-text-xs okd-font-medium okd-text-gray-500 okd-tracking-wider okd-uppercase okd-top-0 okd-sticky okd-bg-white">
           {title}
-        </p>
+        </div>
       )}
       {children}
     </div>

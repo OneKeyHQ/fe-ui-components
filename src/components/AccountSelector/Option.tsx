@@ -43,7 +43,7 @@ const Option: FC<OptionProps> = ({
     >
       <button
         className={cx(
-          "okd-flex-1 okd-p-2 okd--mx-2 okd-flex okd-items-center okd-rounded hover:okd-bg-gray-50 focus:okd-bg-gray-100 focus:okd-outline-none",
+          "okd-flex-1 okd-p-2 okd-flex okd-items-center okd-rounded hover:okd-bg-gray-50 focus:okd-bg-gray-100 focus:okd-outline-none okd-max-w-full",
           !isSelected ? "okd-pl-10" : ""
         )}
         onClick={onAction}

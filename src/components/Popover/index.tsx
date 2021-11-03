@@ -1,5 +1,5 @@
 import React, { FC, ReactNode, Ref, Fragment, useCallback } from "react";
-import { Popover as HeadlessPopover, Transition } from "@headlessui/react";
+import { Popover as HeadlessPopover, Transition, Portal } from "@headlessui/react";
 import cx from "classnames";
 import Button from "../Button";
 
@@ -54,6 +54,8 @@ const Popover: FC<PopoverProps> = ({
               ? trigger(open, defaultTrigger(open))
               : trigger || defaultTrigger(open)}
           </HeadlessPopover.Button>
+          {/* Portal not working */}
+          {/* <Portal></Portal> */}
           <Transition
             show={open}
             as={Fragment}
