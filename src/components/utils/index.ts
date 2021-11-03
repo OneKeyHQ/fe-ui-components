@@ -41,7 +41,7 @@ export const shortenAddress = (address, chars = 4) => {
   if (!address) {
     throw Error(`Invalid 'address' parameter '${address}'.`);
   }
-  return `${address.substring(0, chars + 2)}...${address.substring(42 - chars)}`;
+  return `${address.substring(0, chars + 2)}...${address.substring(address.length - chars)}`;
 }
 
 export const stringToHex = (str = '') => {
