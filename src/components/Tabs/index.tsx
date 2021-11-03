@@ -12,6 +12,7 @@ type TabsProps = {
    * TabItem 自适应宽度
    */
   fitted?: boolean;
+  reversed?: boolean;
   /**
    * 设置tab的图标
    */
@@ -39,18 +40,21 @@ interface TabListProps {
    * TabItem 自适应宽度
    */
   fitted?: boolean;
+  reversed?: boolean;
   /**
    * children 子元素。
    */
   children?: React.ReactNode;
+  className?: string;
 }
 
-const TabList = ({ fitted, children }: TabListProps) => {
+const TabList = ({ fitted, reversed, children, className }: TabListProps) => {
   const classes = cx(
-    "okd-relative okd-flex okd-flex-none okd-items-center okd-border-b okd-border-gray-200",
-    { "okd-space-x-8": !fitted }
+    "okd-relative okd-flex okd-flex-none okd-items-center  okd-border-gray-200",
+    { "okd-space-x-8": !fitted },
+    reversed?"okd-border-t":"okd-border-b"
   );
-  return <Tab.List className={classes}>{children}</Tab.List>;
+  return <Tab.List className={cx(classes, className)}>{children}</Tab.List>;
 };
 
 interface TabItemProps {
@@ -62,6 +66,7 @@ interface TabItemProps {
    * TabItem 自适应宽度
    */
   fitted?: boolean;
+  reversed?: boolean;
   /**
    * 设置tab的图标
    */
@@ -82,6 +87,7 @@ interface TabItemProps {
 
 const TabItem = ({
   fitted,
+  reversed,
   children,
   icon,
   tabBadge,
@@ -92,8 +98,9 @@ const TabItem = ({
       {({ selected }) => (
         <button
           className={cx(
-            "okd-inline-flex okd-items-center okd-justify-center okd-py-4 okd-px-1 okd-font-medium okd-text-sm okd-border-b-2 okd--mb-px",
+            "okd-inline-flex okd-items-center okd-justify-center okd-py-4 okd-px-1 okd-font-medium okd-text-sm  ",
             { "okd-flex-1": fitted },
+            reversed ? "okd-border-t-2 okd--mt-px" : "okd-border-b-2 okd--mb-px",
             selected
               ? "okd-text-brand-600 okd-border-brand-500"
               : "okd-border-transparent okd-text-gray-500 hover:okd-text-gray-700 hover:okd-border-gray-300"
