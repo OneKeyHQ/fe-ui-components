@@ -11,6 +11,10 @@ export type TokenProps = {
    */
   src?: string;
   /**
+   * Token fallback src
+   */
+  fallbackSrc?: string;
+  /**
    * 尺寸大小，分别对应 `16px` `20px` `24px` `32px` `40px` `48px` `56px`
    */
   size?: number | "xs" | "sm" | "md" | "lg" | "xl" | "2xl" | "3xl";
@@ -41,16 +45,18 @@ const defaultProps = {
 } as const;
 
 const buildSrc = (src?: string, _chain = '', _address = '') => {
-  const chain = _chain.toLocaleLowerCase();
-  const address = _address.toLocaleLowerCase();
   if (src) return src;
-  if (!chain) return null;
-  if (chain && !address) return `${CDN_PREFIX}assets/${chain}/${chain}.png`;
+  const chain = _chain.toLocaleLowerCase();
+  // const address = _address.toLocaleLowerCase();
+  const address = _address; // address is case-sensitive
+  if (!chain) return '';
+  if (!address) return `${CDN_PREFIX}assets/${chain}/${chain}.png`;
   return `${CDN_PREFIX}assets/${chain}/${address}.png`
 }
 
 const Token: FC<TokenProps> = ({
   src,
+  fallbackSrc='',
   size,
   className,
   chain,
@@ -62,6 +68,8 @@ const Token: FC<TokenProps> = ({
   console.log(imageSrc);
   return (
     <div
+      data-img-src={imageSrc||''}
+      data-img-fallback-src={fallbackSrc||''}
       className={cx(
         size === "xs" || size === "sm" ? "" : "okd-items-center",
         "okd-inline-flex"
@@ -69,7 +77,7 @@ const Token: FC<TokenProps> = ({
     >
       <div
         className={cx(
-          "okd-inline-flex okd-rounded-full",
+          "okd-inline-flex okd-rounded-full okd-overflow-hidden",
           size === "xs" ? "okd-w-4 okd-h-4" : "",
           size === "sm" ? "okd-w-5 okd-h-5" : "",
           size === "md" ? "okd-w-6 okd-h-6" : "",
@@ -89,17 +97,12 @@ const Token: FC<TokenProps> = ({
             : {}
         }
       >
-        {!!imageSrc ? (
-          <Image
-            src={imageSrc}
-            alt="Token"
-          />
-        ) : (
-          <Icon
-            className="okd-w-full okd-h-full okd-text-gray-400"
-            name="QuestionMarkOutline"
-          />
-        )}
+        <Image
+          key={(imageSrc||'')+(fallbackSrc||'')}
+          src={imageSrc}
+          fallbackSrc={fallbackSrc}
+          alt="Token"
+        />
       </div>
       {!!(name || description) && (
         <div
