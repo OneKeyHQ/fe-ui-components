@@ -58,6 +58,7 @@ export type ButtonProps = {
    * 设置额外的 class
    */
   as?: "button" | "a";
+  ring?: boolean | null;
 } & Omit<React.HTMLProps<HTMLButtonElement>, "size"> &
   Omit<React.HTMLProps<HTMLAnchorElement>, "size">;
 
@@ -66,6 +67,7 @@ const defaultProps = {
   disabled: false,
   loading: false,
   circular: false,
+  ring: true,
   size: "base",
   type: "basic",
   as: "button",
@@ -87,6 +89,7 @@ const Button: FC<ButtonProps> = (props) => {
     href,
     className,
     as,
+    ring,
     ...rest
   } = props;
 
@@ -110,7 +113,7 @@ const Button: FC<ButtonProps> = (props) => {
     { "okd-border": type !== "plain" },
     // The width and offset of ring
     {
-      "focus:okd-ring-2 focus:okd-ring-offset-2 focus:okd-ring-offset-white": !loading,
+      "focus:okd-ring-2 focus:okd-ring-offset-2 focus:okd-ring-offset-white": !loading && ring,
     },
     // Text's color, background's color, border's color and ring's color
     type === "primary" && {

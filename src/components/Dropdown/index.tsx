@@ -14,6 +14,7 @@ type DropdownProps = {
    * 触发元素。当为空时，则为图标按钮；当为字段时，则为 Basic 按钮；使用 HTML 来自定义；
    */
   trigger?: JSX.Element | string;
+  triggerProps?: object,
   /**
    * 设置额外的 class
    */
@@ -36,6 +37,7 @@ const defaultProps = {
 const Dropdown: FC<DropdownProps> & { ItemGroup; Item } = ({
   place,
   trigger,
+  triggerProps,
   className,
   menuWidth,
   sections,
@@ -43,12 +45,12 @@ const Dropdown: FC<DropdownProps> & { ItemGroup; Item } = ({
 }) => {
   const defaultTrigger = useCallback(() => {
     return (
-      <Button circular leadingIcon="DotsVerticalSolid" type="plain">
+      <Button circular leadingIcon="DotsVerticalSolid" type="plain" {...triggerProps} >
         {/* TODO i18n */}
         <span className="okd-sr-only">Open options</span>
       </Button>
     );
-  }, []);
+  }, [ triggerProps ]);
   return (
     <Menu
       as="div"
@@ -62,7 +64,7 @@ const Dropdown: FC<DropdownProps> & { ItemGroup; Item } = ({
       automatically navigable via the keyboard. */}
       <Menu.Button as="div">
         {typeof trigger === "string" ? (
-          <Button trailingIcon="ChevronDownSolid">{trigger}</Button>
+          <Button trailingIcon="ChevronDownSolid" {...triggerProps} >{trigger}</Button>
         ) : (
           trigger || defaultTrigger
         )}
