@@ -83,6 +83,7 @@ interface TabItemProps {
    * children 子元素。
    */
   children?: React.ReactNode;
+  className?: string;
 }
 
 const TabItem = ({
@@ -92,6 +93,7 @@ const TabItem = ({
   icon,
   tabBadge,
   badgeContent,
+  className,
 }: TabItemProps) => {
   return (
     <Tab as={Fragment}>
@@ -103,7 +105,8 @@ const TabItem = ({
             reversed ? "okd-border-t-2 okd--mt-px" : "okd-border-b-2 okd--mb-px",
             selected
               ? "okd-text-brand-600 okd-border-brand-500"
-              : "okd-border-transparent okd-text-gray-500 hover:okd-text-gray-700 hover:okd-border-gray-300"
+              : "okd-border-transparent okd-text-gray-500 hover:okd-text-gray-700 hover:okd-border-gray-300",
+            className
           )}
         >
           {React.isValidElement(icon) && (
