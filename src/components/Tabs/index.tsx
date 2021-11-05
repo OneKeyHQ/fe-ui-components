@@ -1,5 +1,5 @@
 import React, { Fragment } from "react";
-import cx from "classnames";
+import cx, { Argument } from "classnames";
 import { Tab } from "@headlessui/react";
 import Badge from "../Badge";
 
@@ -45,7 +45,7 @@ interface TabListProps {
    * children 子元素。
    */
   children?: React.ReactNode;
-  className?: string;
+  className?: Argument;
 }
 
 const TabList = ({ fitted, reversed, children, className }: TabListProps) => {
@@ -83,7 +83,7 @@ interface TabItemProps {
    * children 子元素。
    */
   children?: React.ReactNode;
-  className?: string;
+  className?: Argument;
 }
 
 const TabItem = ({
@@ -129,7 +129,7 @@ const TabPanels = ({
   className,
 }: {
   children: React.ReactNode;
-  className?: string;
+  className?: Argument;
 }) => {
   return <Tab.Panels className={cx(className)}>{children}</Tab.Panels>;
 };
@@ -139,7 +139,7 @@ const TabPanel = ({
   className,
 }: {
   children: React.ReactNode;
-  className?: string;
+  className?: Argument;
 }) => {
   return <Tab.Panel className={cx(className)}>{children}</Tab.Panel>;
 };
