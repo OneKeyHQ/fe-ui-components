@@ -58,6 +58,9 @@ export type ButtonProps = {
    * 设置额外的 class
    */
   as?: "button" | "a";
+  /**
+   * 是否显示聚焦的样式，默认为显示
+   */
   ring?: boolean | null;
 } & Omit<React.HTMLProps<HTMLButtonElement>, "size"> &
   Omit<React.HTMLProps<HTMLAnchorElement>, "size">;

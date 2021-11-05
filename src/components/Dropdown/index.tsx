@@ -1,7 +1,7 @@
 import React, { FC, Fragment, useCallback } from "react";
 import cx, { Argument } from "classnames";
 import { Menu, Transition } from "@headlessui/react";
-import Button from "../Button";
+import Button, { ButtonProps } from "../Button";
 import ItemGroup from "./ItemGroup";
 import Item from "./Item";
 
@@ -14,7 +14,10 @@ type DropdownProps = {
    * 触发元素。当为空时，则为图标按钮；当为字段时，则为 Basic 按钮；使用 HTML 来自定义；
    */
   trigger?: JSX.Element | string;
-  triggerProps?: object,
+  /**
+   * 触发的属性，同于 Button
+   */
+  triggerProps?: ButtonProps,
   /**
    * 设置额外的 class
    */
