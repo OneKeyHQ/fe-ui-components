@@ -14,6 +14,9 @@ type DropdownProps = {
    * 触发元素。当为空时，则为图标按钮；当为字段时，则为 Basic 按钮；使用 HTML 来自定义；
    */
   trigger?: JSX.Element | string;
+  /**
+   * 触发的属性，同于 Button
+   */
   triggerProps?: ButtonProps,
   /**
    * 设置额外的 class
