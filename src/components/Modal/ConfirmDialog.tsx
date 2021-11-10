@@ -130,7 +130,7 @@ const ConfirmDialog: FC<ConfirmDialogProps> = (props) => {
             leaveFrom="okd-opacity-100 okd-translate-y-0 sm:okd-scale-100"
             leaveTo="okd-opacity-0 okd-translate-y-4 sm:okd-translate-y-0 sm:okd-scale-95"
           >
-            <div className="okd-inline-block okd-align-bottom okd-bg-white okd-rounded-lg okd-px-4 okd-pt-5 okd-pb-4 okd-text-left okd-overflow-hidden okd-ring-1 okd-ring-black okd-ring-opacity-5 okd-shadow-xl okd-rounded-lg okd-transform okd-transition-all sm:okd-my-8 sm:okd-align-middle sm:okd-max-w-lg sm:okd-w-full sm:okd-p-6">
+            <div className="okd-inline-block okd-align-bottom okd-bg-white okd-rounded-lg okd-px-4 okd-pt-5 okd-pb-4 okd-text-left okd-overflow-hidden okd-ring-1 okd-ring-black okd-ring-opacity-5 okd-shadow-xl okd-transform okd-transition-all sm:okd-my-8 sm:okd-align-middle sm:okd-max-w-lg sm:okd-w-full sm:okd-p-6">
               <div>
                 <div
                   className={cx(
@@ -163,7 +163,7 @@ const ConfirmDialog: FC<ConfirmDialogProps> = (props) => {
               >
                 {cancelActionNode}
                 <button
-                  className="okd-w-full okd-inline-flex okd-justify-center okd-rounded okd-border okd-border-transparent okd-shadow-sm okd-px-4 okd-py-2 okd-bg-brand-500 okd-text-base okd-font-medium okd-text-white hover:okd-bg-brand-600 focus:okd-outline-none focus:okd-ring-2 focus:okd-ring-offset-2 focus:okd-ring-brand-500 sm:okd-text-sm"
+                  className="okd-mt-2 sm:okd-mt-0 okd-w-full okd-inline-flex okd-justify-center okd-rounded okd-border okd-border-transparent okd-shadow-sm okd-px-4 okd-py-2 okd-bg-brand-500 okd-text-base okd-font-medium okd-text-white hover:okd-bg-brand-600 focus:okd-outline-none focus:okd-ring-2 focus:okd-ring-offset-2 focus:okd-ring-brand-500 sm:okd-text-sm"
                   onClick={handleOkClick}
                 >
                   {okText}
