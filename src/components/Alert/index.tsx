@@ -96,35 +96,35 @@ const Alert: FC<AlertProps> = ({
   const rightNode = useMemo(() => {
     if (!!action) {
       return (
-        <div className="okd-ml-auto okd-self-center okd-pl-3">{action}</div>
+        <div className="sm:okd-ml-auto okd-w-full okd-flex sm:okd-w-auto okd-self-center okd-pl-3">
+          {action}
+        </div>
       );
     }
 
     return (
       closable && (
         <div className="okd-ml-auto okd-pl-3">
-          <div className="okd--mx-1.5 okd--my-1.5">
-            <button
-              type="button"
-              className={cx(
-                "okd-inline-flex okd-justify-center okd-items-center okd-rounded okd-p-1.5 focus:okd-outline-none focus:okd-ring-2 focus:okd-ring-offset-1",
-                {
-                  "okd-text-gray-400 focus:okd-ring-offset-gray-50 focus:okd-ring-gray-600":
-                    type === "info",
-                  "okd-text-yellow-500 focus:okd-ring-offset-yellow-50 focus:okd-ring-yellow-600":
-                    type === "warning",
-                  "okd-text-red-500 focus:okd-ring-offset-red-50 focus:okd-ring-red-600":
-                    type === "error",
-                  "okd-text-green-500 focus:okd-ring-offset-green-50 focus:okd-ring-green-600":
-                    type === "success",
-                }
-              )}
-              onClick={onClose}
-            >
-              <span className="okd-sr-only">Dismiss</span>
-              <XSolid className="okd-h-5 okd-w-5" okd-aria-hidden="true" />
-            </button>
-          </div>
+          <button
+            type="button"
+            className={cx(
+              "okd-inline-flex okd-justify-center okd-items-center okd-rounded okd-p-1.5 focus:okd-outline-none focus:okd-ring-2 focus:okd-ring-offset-1",
+              {
+                "okd-text-gray-400 focus:okd-ring-offset-gray-50 focus:okd-ring-gray-600":
+                  type === "info",
+                "okd-text-yellow-500 focus:okd-ring-offset-yellow-50 focus:okd-ring-yellow-600":
+                  type === "warning",
+                "okd-text-red-500 focus:okd-ring-offset-red-50 focus:okd-ring-red-600":
+                  type === "error",
+                "okd-text-green-500 focus:okd-ring-offset-green-50 focus:okd-ring-green-600":
+                  type === "success",
+              }
+            )}
+            onClick={onClose}
+          >
+            <span className="okd-sr-only">Dismiss</span>
+            <XSolid className="okd-h-5 okd-w-5" okd-aria-hidden="true" />
+          </button>
         </div>
       )
     );
@@ -143,7 +143,12 @@ const Alert: FC<AlertProps> = ({
         className
       )}
     >
-      <div className={cx("okd-flex", contentClassName)}>
+      <div
+        className={cx(
+          "okd-flex okd-flex-col okd-items-center sm:okd-items-start okd-space-y-2 sm:okd-space-y-0 sm:okd-flex-row",
+          contentClassName
+        )}
+      >
         <div className="okd-flex-shrink-0">{alertIconNode}</div>
 
         <div
