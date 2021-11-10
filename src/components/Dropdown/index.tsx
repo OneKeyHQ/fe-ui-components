@@ -17,7 +17,7 @@ type DropdownProps = {
   /**
    * 触发的属性，同于 Button
    */
-  triggerProps?: ButtonProps,
+  triggerProps?: ButtonProps;
   /**
    * 设置额外的 class
    */
@@ -48,12 +48,17 @@ const Dropdown: FC<DropdownProps> & { ItemGroup; Item } = ({
 }) => {
   const defaultTrigger = useCallback(() => {
     return (
-      <Button circular leadingIcon="DotsVerticalSolid" type="plain" {...triggerProps} >
+      <Button
+        circular
+        leadingIcon="DotsVerticalSolid"
+        type="plain"
+        {...triggerProps}
+      >
         {/* TODO i18n */}
         <span className="okd-sr-only">Open options</span>
       </Button>
     );
-  }, [ triggerProps ]);
+  }, [triggerProps]);
   return (
     <Menu
       as="div"
@@ -67,7 +72,9 @@ const Dropdown: FC<DropdownProps> & { ItemGroup; Item } = ({
       automatically navigable via the keyboard. */}
       <Menu.Button as="div">
         {typeof trigger === "string" ? (
-          <Button trailingIcon="ChevronDownSolid" {...triggerProps} >{trigger}</Button>
+          <Button trailingIcon="ChevronDownSolid" {...triggerProps}>
+            {trigger}
+          </Button>
         ) : (
           trigger || defaultTrigger
         )}
@@ -98,7 +105,10 @@ const Dropdown: FC<DropdownProps> & { ItemGroup; Item } = ({
                 <ItemGroup title={section.title}>
                   {section.items.map((item, key) => (
                     // children.onClick will be overwrite by Menu.Item, so should set onClick here
-                    <Menu.Item key={key} onClick={item.onAction || item.onClick}>
+                    <Menu.Item
+                      key={key}
+                      onClick={item.onAction || item.onClick}
+                    >
                       {/* To style the active `Menu.Item` you can read the `active` render prop
                     argument, which tells you whether or not that menu item is currently
                     focused via the mouse or keyboard. */}
