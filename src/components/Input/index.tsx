@@ -90,6 +90,10 @@ type InputProps = {
    * 最大长度，超出部分不显示
    */
   maxLength?: number;
+  /**
+   * 原生input的props
+   */
+  inputProps?: object;
 };
 
 const defaultProps = {
@@ -120,6 +124,7 @@ const Input: FC<InputProps> = ({
   innerRef,
   maxLength,
   rule,
+  inputProps,
 }) => {
   const [defaultValue, setInitialValue] = useState(initialValue ?? "");
   const [errorValue, setErrorValue] = useState(error ?? false);
@@ -214,6 +219,8 @@ const Input: FC<InputProps> = ({
             paddingRight: addonAfter ? paddingRight : "",
           }}
           ref={innerRef}
+          autoComplete='off'
+          {...inputProps}
         />
         {/* addOnAfter */}
         {!!addonAfter && (
