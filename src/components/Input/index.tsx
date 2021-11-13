@@ -1,4 +1,14 @@
-import React, { useState, LegacyRef, FC, useCallback, useEffect } from "react";
+import React, {
+  useState,
+  LegacyRef,
+  FC,
+  useCallback,
+  useEffect,
+  FocusEvent,
+  KeyboardEvent,
+  ChangeEvent,
+  ChangeEventHandler,
+} from "react";
 import cx, { Argument } from "classnames";
 import Tooltip from "../Tooltip/index";
 import Icon from "../Icon/index";
@@ -65,7 +75,15 @@ type InputProps = {
   /**
    * 内容更改回调信息
    */
-  onChange?: (content: string) => void;
+  onChange?: (content: string, event: ChangeEvent<HTMLInputElement>) => void;
+  /**
+   * 点击 Enter 后调用的事件
+   */
+  onEnter?: (event?: KeyboardEvent<HTMLInputElement>) => void;
+  /**
+   * 鼠标退出聚焦 focus 后调用的事件
+   */
+  onBlur?: (event?: FocusEvent<HTMLInputElement>) => void;
   /**
    * Label for input
    */
@@ -107,6 +125,8 @@ const Input: FC<InputProps> = ({
   value,
   initialValue,
   onChange,
+  onBlur,
+  onEnter,
   helpText,
   placeholder,
   addonBefore,
@@ -128,7 +148,7 @@ const Input: FC<InputProps> = ({
     ? value?.slice(0, maxLength) ?? defaultValue?.slice(0, maxLength)
     : value ?? defaultValue;
 
-  const handleChange = useCallback(
+  const handleChange = useCallback<ChangeEventHandler<HTMLInputElement>>(
     (e) => {
       const content = e.target.value;
       const { required, message, pattern } = rule || {};
@@ -143,10 +163,19 @@ const Input: FC<InputProps> = ({
         setErrorValue(false);
         setHelptextValue("");
       }
-      onChange?.(content);
+      onChange?.(content, e);
       setInitialValue(content);
     },
     [onChange, rule]
+  );
+
+  const handleKeyDown = useCallback(
+    (e: KeyboardEvent<HTMLInputElement>) => {
+      if (e.code === "Enter") {
+        onEnter(e);
+      }
+    },
+    [onEnter]
   );
 
   useEffect(() => {
@@ -199,6 +228,8 @@ const Input: FC<InputProps> = ({
           name="inputID"
           value={currentValue}
           onChange={handleChange}
+          onBlur={onBlur}
+          onKeyDown={handleKeyDown}
           type={type}
           className={cx(
             "form-input okd-block okd-w-full sm:okd-text-sm okd-rounded okd-bg-white okd-shadow-sm okd-placeholder-gray-400 disabled:okd-text-gray-700 disabled:okd-bg-gray-100 disabled:okd-cursor-not-allowed",
