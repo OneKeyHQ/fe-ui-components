@@ -75,11 +75,11 @@ const TokenGroup: FC<TokenGroupProps> = ({
               <Fragment key={i}>
                 <Token
                   className="okd-ring-2 okd-ring-white"
+                  size={size}
                   { ...tokenItem }
                   src={tokenItem.src}
                   chain={tokenItem.chain}
                   address={tokenItem.address}
-                  size={size}
                 />
               </Fragment>
             ))}
