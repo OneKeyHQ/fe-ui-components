@@ -65,7 +65,7 @@ const Token: FC<TokenProps> = ({
   address,
 }) => {
   const imageSrc = buildSrc(src, chain, address);
-  console.log(imageSrc);
+  // console.log(imageSrc);
   return (
     <div
       data-img-src={imageSrc||''}

@@ -108,6 +108,10 @@ type InputProps = {
    * 最大长度，超出部分不显示
    */
   maxLength?: number;
+  /**
+   * 原生input的props
+   */
+  inputProps?: object;
 };
 
 const defaultProps = {
@@ -140,6 +144,7 @@ const Input: FC<InputProps> = ({
   innerRef,
   maxLength,
   rule,
+  inputProps,
 }) => {
   const [defaultValue, setInitialValue] = useState(initialValue ?? "");
   const [errorValue, setErrorValue] = useState(error ?? false);
@@ -232,7 +237,8 @@ const Input: FC<InputProps> = ({
           onKeyDown={handleKeyDown}
           type={type}
           className={cx(
-            "form-input okd-block okd-w-full sm:okd-text-sm okd-rounded okd-bg-white okd-shadow-sm okd-placeholder-gray-400 disabled:okd-text-gray-700 disabled:okd-bg-gray-100 disabled:okd-cursor-not-allowed",
+            "form-input okd-block okd-w-full sm:okd-text-sm okd-rounded  okd-shadow-sm okd-placeholder-gray-400 disabled:okd-text-gray-700 disabled:okd-bg-gray-100 disabled:okd-cursor-not-allowed",
+            readOnly ? 'okd-bg-gray-100' : 'okd-bg-white',
             errorValue
               ? "okd-border-red-300 focus:okd-ring-red-500 focus:okd-border-red-500 okd-text-red-900"
               : "okd-border-gray-300 focus:okd-ring-brand-500 focus:okd-border-brand-500 okd-text-gray-900"
@@ -245,6 +251,8 @@ const Input: FC<InputProps> = ({
             paddingRight: addonAfter ? paddingRight : "",
           }}
           ref={innerRef}
+          autoComplete='off'
+          {...inputProps}
         />
         {/* addOnAfter */}
         {!!addonAfter && (

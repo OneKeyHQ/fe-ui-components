@@ -216,6 +216,7 @@ const Button: FC<ButtonProps> = (props) => {
   return (
     <button
       type="button"
+      data-onekey="true"
       className={cx(btnClasses, !!className && className)}
       onClick={handleClick}
       disabled={!!disabled}
