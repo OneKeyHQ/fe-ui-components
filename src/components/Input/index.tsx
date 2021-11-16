@@ -206,7 +206,8 @@ const Input: FC<InputProps> = ({
           onChange={handleChange}
           type={type}
           className={cx(
-            "form-input okd-block okd-w-full sm:okd-text-sm okd-rounded okd-bg-white okd-shadow-sm okd-placeholder-gray-400 disabled:okd-text-gray-700 disabled:okd-bg-gray-100 disabled:okd-cursor-not-allowed",
+            "form-input okd-block okd-w-full sm:okd-text-sm okd-rounded  okd-shadow-sm okd-placeholder-gray-400 disabled:okd-text-gray-700 disabled:okd-bg-gray-100 disabled:okd-cursor-not-allowed",
+            readOnly ? 'okd-bg-gray-100' : 'okd-bg-white',
             errorValue
               ? "okd-border-red-300 focus:okd-ring-red-500 focus:okd-border-red-500 okd-text-red-900"
               : "okd-border-gray-300 focus:okd-ring-brand-500 focus:okd-border-brand-500 okd-text-gray-900"

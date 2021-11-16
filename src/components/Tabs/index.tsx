@@ -137,11 +137,22 @@ const TabPanels = ({
 const TabPanel = ({
   children,
   className,
+  unmount,
+  ...rest
 }: {
   children: React.ReactNode;
   className?: Argument;
+  unmount?: boolean | undefined;
 }) => {
-  return <Tab.Panel className={cx(className)}>{children}</Tab.Panel>;
+  return (
+    <Tab.Panel 
+      unmount={unmount} 
+      className={cx(className)} 
+      {...rest}
+    >
+      {children}
+    </Tab.Panel>
+  );
 };
 
 const Tabs = (props: TabsProps) => {
