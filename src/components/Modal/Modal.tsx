@@ -105,7 +105,7 @@ const Modal = (props: PropsWithChildren<ModalProps>) => {
               leaveFrom="okd-opacity-100"
               leaveTo="okd-opacity-0"
             >
-              <Dialog.Overlay className="okd-fixed okd-inset-0 okd-bg-gray-500/75 okd-transition-opacity" />
+              <Dialog.Overlay className="okd-fixed okd-inset-0 okd-bg-gray-400/75 dark:okd-bg-gray-200/75 okd-transition-opacity" />
             </Transition.Child>
 
             {/* This element is to trick the browser into centering the modal contents. */}
@@ -134,7 +134,7 @@ const Modal = (props: PropsWithChildren<ModalProps>) => {
             >
               {contentNode}
             </Transition.Child>
-            <button className="h-0 w-0 overflow-hidden" />
+            <button className="w-0 h-0 overflow-hidden" />
           </div>
         </Dialog>
       </Transition.Root>
