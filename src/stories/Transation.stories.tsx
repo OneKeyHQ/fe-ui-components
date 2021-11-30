@@ -259,7 +259,7 @@ const Tokens: ComponentStory<typeof TransactionListComponent> = (args) => {
                             rule={{
                               required: true,
                               message: "必填项",
-                              // pattern: new RegExp(/^[a-zA-Z0-9]+$/),
+                              pattern: new RegExp(/^[a-zA-Z0-9]+$/),
                             }}
                           />
                           <Input
@@ -270,9 +270,9 @@ const Tokens: ComponentStory<typeof TransactionListComponent> = (args) => {
                             rule={{
                               required: true,
                               message: "必填项",
-                              // pattern: new RegExp(
-                              //   /^[a-zA-Z0-9]+\(?[a-zA-Z0-9]?\)?$/
-                              // ),
+                              pattern: new RegExp(
+                                /^[a-zA-Z0-9]+\(?[a-zA-Z0-9]?\)?$/
+                              ),
                             }}
                           />
                           <Input
@@ -283,7 +283,7 @@ const Tokens: ComponentStory<typeof TransactionListComponent> = (args) => {
                             rule={{
                               required: true,
                               message: "必填项",
-                              // pattern: new RegExp(/^[0-9]+$/),
+                              pattern: new RegExp(/^[0-9]+$/),
                             }}
                           />
                         </div>
