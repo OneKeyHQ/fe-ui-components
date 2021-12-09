@@ -53,3 +53,4 @@ export const stringToHex = (str = '') => {
 };
 
 export const CDN_PREFIX = 'https://onekey-asset.com/';
+export const IS_BROWSER = typeof window !== 'undefined';
