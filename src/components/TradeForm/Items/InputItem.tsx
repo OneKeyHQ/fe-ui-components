@@ -1,4 +1,4 @@
-import React, { LegacyRef } from "react";
+import React, { ChangeEventHandler, LegacyRef } from "react";
 import cx, { Argument } from "classnames";
 import ItemWrapper from "./ItemWrapper";
 import Button from "../../Button";
@@ -36,6 +36,10 @@ type InputItemProps = {
    * Reference
    */
   innerRef?: LegacyRef<HTMLInputElement>;
+  /**
+   * Input onChange 输入事件
+   */
+  onChange?: ChangeEventHandler<HTMLInputElement>
 };
 
 const defaultProps = {} as const;
@@ -51,6 +55,7 @@ const InputItem = React.forwardRef<HTMLInputElement, InputItemProps>(
       showRate,
       showBalance,
       innerRef,
+      onChange,
       ...rest
     },
     ref
@@ -76,6 +81,7 @@ const InputItem = React.forwardRef<HTMLInputElement, InputItemProps>(
                 placeholder={placeholder}
                 value={value}
                 ref={innerRef}
+                onChange={onChange}
               />
             </div>
             {!!valueType && (
